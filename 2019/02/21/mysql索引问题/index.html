@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="mysql,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="mysql索引问题索引用于快速找出在某个列中有一特定值的行。不使用索引，MySQL必须从第1条记录开始然后读完整个表直到找出相关的行，还需要考虑每次读入数据页的IO开销。而如果采取索引，则可以根据索引指向的页以及记录在页中的位置，迅速地读取目标页进而获取目标记录。 大多数情况下都（默认）采用B树来构建索引。只是空间列类型的索引使用R-树，并且MEMORY表还支持hash索引。B树是平衡多叉树，每个">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql索引问题">
+<meta property="og:url" content="http://yoursite.com/2019/02/21/mysql索引问题/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="mysql索引问题索引用于快速找出在某个列中有一特定值的行。不使用索引，MySQL必须从第1条记录开始然后读完整个表直到找出相关的行，还需要考虑每次读入数据页的IO开销。而如果采取索引，则可以根据索引指向的页以及记录在页中的位置，迅速地读取目标页进而获取目标记录。 大多数情况下都（默认）采用B树来构建索引。只是空间列类型的索引使用R-树，并且MEMORY表还支持hash索引。B树是平衡多叉树，每个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img0.ph.126.net/fWsA1uLa_kJCxVEph7JIQQ==/6597240190959961370.jpg">
+<meta property="og:updated_time" content="2019-06-30T13:56:34.919Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql索引问题">
+<meta name="twitter:description" content="mysql索引问题索引用于快速找出在某个列中有一特定值的行。不使用索引，MySQL必须从第1条记录开始然后读完整个表直到找出相关的行，还需要考虑每次读入数据页的IO开销。而如果采取索引，则可以根据索引指向的页以及记录在页中的位置，迅速地读取目标页进而获取目标记录。 大多数情况下都（默认）采用B树来构建索引。只是空间列类型的索引使用R-树，并且MEMORY表还支持hash索引。B树是平衡多叉树，每个">
+<meta name="twitter:image" content="http://img0.ph.126.net/fWsA1uLa_kJCxVEph7JIQQ==/6597240190959961370.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/21/mysql索引问题/">
+
+
+
+
+
+  <title>mysql索引问题 | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/mysql索引问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql索引问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T16:12:22+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="mysql索引问题"><a href="#mysql索引问题" class="headerlink" title="mysql索引问题"></a>mysql索引问题</h3><p>索引用于快速找出在某个列中有一特定值的行。不使用索引，MySQL必须从第1条记录开始然后读完整个表直到找出相关的行，还需要考虑每次读入数据页的IO开销。而如果采取索引，则可以根据索引指向的页以及记录在页中的位置，迅速地读取目标页进而获取目标记录。</p>
+<p>大多数情况下都（默认）采用B树来构建索引。只是空间列类型的索引使用R-树，并且MEMORY表还支持hash索引。B树是平衡多叉树，每个节点存放多少个值取决于值所占的空间，这与每一张数据页存放多少条记录与记录信息量有关同理。节点中的值是以非降序进行排列的，节点中的值总是小于等于指向它的结点中的值。</p>
+<p>MySQL使用B树构造索引的情况下，是由叶子指向具体的页和记录的。并且一个叶子有一个指针指向下一个叶子。</p>
+<p>使用索引需要注意：</p>
+<p>⑴只对WHERE和ORDER BY需要查询的字段设置索引，避免无意义的硬盘开销；</p>
+<p>⑵组合索引支持前缀索引；</p>
+<p>⑶更新表的时候，如增删记录，MySQL会自动更新索引，保持树的平衡；因此更多的索引意味着更多的维护成本</p>
+<p> 索引的字段类型问题</p>
+<p>text类型，也可建索引（需指定长度）<br>myisam存储引擎索引键长度综合不能超过1000字节<br>用来筛选的值尽量保持和索引列同样的数据类型<br>索引分四类：</p>
+<p>index —-普通的索引,数据可以重复</p>
+<p>fulltext—-全文索引，用来对大表的文本域(char，varchar，text)进行索引。语法和普通索引一样。 </p>
+<p>unique —-唯一索引,唯一索引,要求所有记录都唯一</p>
+<p>primary key —-主键索引,也就是在唯一索引的基础上相应的列必须为主键</p>
+<p>like 不能用索引？</p>
+<p>尽量减少like，但不是绝对不可用，”xxxx%” 是可以用到索引的，<br>想象一下，你在看一本成语词典，目录是按成语拼音顺序建立，查询需求是，你想找以 “一”字开头的成语（”一%“），和你想找包含一字的成语（“%一%”）</p>
+<p>除了like，以下操作符也可用到索引：<br>&lt;，&lt;=，=，&gt;，&gt;=，BETWEEN，IN</p>
+<p>&lt;&gt;，not in ，！=则不行</p>
+<p>原则</p>
+<p>　　 1，单表数据太少，索引反而会影响速度；更新非常频繁的数据不适宜建索引</p>
+<p>　　 2，where后的条件，order by ,group by 等这样过滤时，后面的字段最好加上索引。根据实际情况，选择PRIMARY KEY、UNIQUE、INDEX等索引，但是不是越多越好，要适度</p>
+<p>   　3，联合查询，子查询等多表操作时关连字段要加索引</p>
+<p>ps：数据量特别大的时候，最好不要用联合查询，即使你做了索引</p>
+<p>多列查询该如何建索引?<br>一次查询只能用到一个索引，所以 首先枪毙 a，b各建索引方案</p>
+<p>a还是b？ 谁的区分度更高（同值的最少），建谁！</p>
+<p>当然，联合索引也是个不错的方案，ab，还是ba，则同上，区分度高者，在前</p>
+<p>联合索引的问题?<br>where a = “xxx” 可以使用 AB 联合索引<br>where b = “xxx” 则不可 （再想象一下，这是书的目录？）</p>
+<p>所以，大多数情况下，有AB索引了，就可以不用在去建一个A索引了</p>
+<p>详解：</p>
+<p>联合索引又叫复合索引。对于复合索引:Mysql从左到右的使用索引中的字段，一个查询可以只使用索引中的一部份，但只能是最左侧部分。例如索引是key index (a,b,c). 可以支持a | a,b| a,b,c 3种组合进行查找，但不支持 b,c进行查找 .当最左侧字段是常量引用时，索引就十分有效。</p>
+<p>两个或更多个列上的索引被称作复合索引。<br>利用索引中的附加列，您可以缩小搜索的范围，但使用一个具有两列的索引 不同于使用两个单独的索引。复合索引的结构与电话簿类似，人名由姓和名构成，电话簿首先按姓氏对进行排序，然后按名字对有相同姓氏的人进行排序。如果您知 道姓，电话簿将非常有用；如果您知道姓和名，电话簿则更为有用，但如果您只知道名不姓，电话簿将没有用处。<br>所以说创建复合索引时，应该仔细考虑列的顺序。对索引中的所有列执行搜索或仅对前几列执行搜索时，复合索引非常有用；仅对后面的任意列执行搜索时，复合索引则没有用处。<br>如：建立 姓名、年龄、性别的复合索引。</p>
+<p>create table test(<br>a int,<br>b int,<br>c int,<br>KEY a(a,b,c)<br>);</p>
+<p>优: select * from test where a=10 and b&gt;50<br>差: select * from test where a50</p>
+<p>优: select * from test order by a<br>差: select * from test order by b<br>差: select * from test order by c</p>
+<p>优: select * from test where a=10 order by a<br>优: select * from test where a=10 order by b<br>差: select * from test where a=10 order by c</p>
+<p>优: select * from test where a&gt;10 order by a<br>差: select * from test where a&gt;10 order by b<br>差: select * from test where a&gt;10 order by c</p>
+<p>优: select * from test where a=10 and b=10 order by a<br>优: select * from test where a=10 and b=10 order by b<br>优: select * from test where a=10 and b=10 order by c</p>
+<p>优: select * from test where a=10 and b=10 order by a<br>优: select * from test where a=10 and b&gt;10 order by b<br>差: select * from test where a=10 and b&gt;10 order by c</p>
+<p><img src="http://img0.ph.126.net/fWsA1uLa_kJCxVEph7JIQQ==/6597240190959961370.jpg" alt="avatar"></p>
+<p>1.索引越少越好<br>原因：主要在修改数据时，第个索引都要进行更新，降低写速度。<br>2.最窄的字段放在键的左边<br>3.避免file sort排序，临时表和表扫描.<br>哪些常见情况不能用索引?<br>like “%xxx”<br>not in ， ！=<br>对列进行函数运算的情况（如 where md5(password) = “xxxx”）<br>WHERE index=1 OR A=10<br>存了数值的字符串类型字段（如手机号），查询时记得不要丢掉值的引号，否则无法用到该字段相关索引，反之则没关系<br>也即</p>
+<p>select * from test where mobile = 13711112222;</p>
+<p>可是无法用到mobile字段的索引的哦（如果mobile是char 或 varchar类型的话）</p>
+<p>btw，千万不要尝试用int来存手机号（为什么？自己想！要不自己试试）</p>
+<p>覆盖索引(Covering Indexes)拥有更高效率<br>索引包含了所需的全部值的话，就只select 他们，换言之，只select 需要用到的字段，如无必要，可尽量避免select *</p>
+<p>NULL 的问题<br>NULL会导致索引形同虚设，所以在设计表结构时应避免NULL 的存在（用其他方式表达你想表达的NULL，比如 -1？）</p>
+<p>如何查看索引信息，如何分析是否正确用到索引?<br>show index from tablename;<br>explain select ……;</p>
+<p>关于explain，改天可以找个时间专门写一篇入门帖，在此之前，可以尝试 google</p>
+<p>了解自己的系统，不要过早优化!
+过早优化，一直是个非常讨厌而又时刻存在的问题，大多数时候就是因为不了解自己的系统，不知道自己系统真正的承载能力</p>
+<p>比如：几千条数据的新闻表，每天几百几千次的正文搜索，大多数时候我们可以放心的去like，而不要又去建一套全文搜索什么的，毕竟cpu还是比人脑厉害太多</p>
+<p>最后：永远别忘记的关键词 sql注入</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/08/(转)深入理解javascript连续赋值表达式/" rel="next" title="(转)深入理解javascript连续赋值表达式">
+                <i class="fa fa-chevron-left"></i> (转)深入理解javascript连续赋值表达式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/28/centos7+mysql5.7.11实现主从复制/" rel="prev" title="centos7+mysql5.7.11实现主从复制">
+                centos7+mysql5.7.11实现主从复制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql索引问题"><span class="nav-number">1.</span> <span class="nav-text">mysql索引问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

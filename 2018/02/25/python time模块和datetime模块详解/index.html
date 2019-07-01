@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="python time模块和datetime模块详解time模块 time模块中时间表现的格式主要有三种： 　　a、timestamp时间戳，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量 　　b、struct_time时间元组，共有九个元素组。 　　c、format time 格式化时间，已格式化的结构使时间更具可读性。包括自定义格式和固定格式。 1、时间格式转换图： 2">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python time模块和datetime模块详解">
+<meta property="og:url" content="http://yoursite.com/2018/02/25/python time模块和datetime模块详解/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="python time模块和datetime模块详解time模块 time模块中时间表现的格式主要有三种： 　　a、timestamp时间戳，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量 　　b、struct_time时间元组，共有九个元素组。 　　c、format time 格式化时间，已格式化的结构使时间更具可读性。包括自定义格式和固定格式。 1、时间格式转换图： 2">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/996085/201610/996085-20161026171443546-488752980.png">
+<meta property="og:updated_time" content="2019-06-30T10:57:23.839Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python time模块和datetime模块详解">
+<meta name="twitter:description" content="python time模块和datetime模块详解time模块 time模块中时间表现的格式主要有三种： 　　a、timestamp时间戳，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量 　　b、struct_time时间元组，共有九个元素组。 　　c、format time 格式化时间，已格式化的结构使时间更具可读性。包括自定义格式和固定格式。 1、时间格式转换图： 2">
+<meta name="twitter:image" content="https://images2015.cnblogs.com/blog/996085/201610/996085-20161026171443546-488752980.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/25/python time模块和datetime模块详解/">
+
+
+
+
+
+  <title>python time模块和datetime模块详解 | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/25/python time模块和datetime模块详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python time模块和datetime模块详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T00:21:57+08:00">
+                2018-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="python-time模块和datetime模块详解"><a href="#python-time模块和datetime模块详解" class="headerlink" title="python time模块和datetime模块详解"></a>python time模块和datetime模块详解</h3><h2 id="time模块"><a href="#time模块" class="headerlink" title="time模块"></a>time模块</h2><p> time模块中时间表现的格式主要有三种：</p>
+<p>　　a、timestamp时间戳，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量</p>
+<p>　　b、struct_time时间元组，共有九个元素组。</p>
+<p>　　c、format time 格式化时间，已格式化的结构使时间更具可读性。包括自定义格式和固定格式。</p>
+<p>1、时间格式转换图：<br><img src="https://images2015.cnblogs.com/blog/996085/201610/996085-20161026171443546-488752980.png" alt="avatar"></p>
+<p>2、主要time生成方法和time格式转换方法实例：</p>
+<p>#! /usr/bin/env python</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding:utf-8 --"></a>-<em>- coding:utf-8 -</em>-</h1><h1 id="author-“TKQ”"><a href="#author-“TKQ”" class="headerlink" title="author = “TKQ”"></a><strong>author</strong> = “TKQ”</h1><p>import time</p>
+<h1 id="生成timestamp"><a href="#生成timestamp" class="headerlink" title="生成timestamp"></a>生成timestamp</h1><p>time.time()</p>
+<h1 id="1477471508-05"><a href="#1477471508-05" class="headerlink" title="1477471508.05"></a>1477471508.05</h1><p>#struct_time to timestamp<br>time.mktime(time.localtime())</p>
+<p>#生成struct_time</p>
+<h1 id="timestamp-to-struct-time-本地时间"><a href="#timestamp-to-struct-time-本地时间" class="headerlink" title="timestamp to struct_time 本地时间"></a>timestamp to struct_time 本地时间</h1><p>time.localtime()<br>time.localtime(time.time())</p>
+<h1 id="time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-16-tm-min-45-tm-sec-8-tm-wday-2-tm-yday-300-tm-isdst-0"><a href="#time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-16-tm-min-45-tm-sec-8-tm-wday-2-tm-yday-300-tm-isdst-0" class="headerlink" title="time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=16, tm_min=45, tm_sec=8, tm_wday=2, tm_yday=300, tm_isdst=0)"></a>time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=16, tm_min=45, tm_sec=8, tm_wday=2, tm_yday=300, tm_isdst=0)</h1><h1 id="timestamp-to-struct-time-格林威治时间"><a href="#timestamp-to-struct-time-格林威治时间" class="headerlink" title="timestamp to struct_time 格林威治时间"></a>timestamp to struct_time 格林威治时间</h1><p>time.gmtime()<br>time.gmtime(time.time())</p>
+<h1 id="time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-8-tm-min-45-tm-sec-8-tm-wday-2-tm-yday-300-tm-isdst-0"><a href="#time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-8-tm-min-45-tm-sec-8-tm-wday-2-tm-yday-300-tm-isdst-0" class="headerlink" title="time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=8, tm_min=45, tm_sec=8, tm_wday=2, tm_yday=300, tm_isdst=0)"></a>time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=8, tm_min=45, tm_sec=8, tm_wday=2, tm_yday=300, tm_isdst=0)</h1><p>#format_time to struct_time<br>time.strptime(‘2011-05-05 16:37:06’, ‘%Y-%m-%d %X’)</p>
+<h1 id="time-struct-time-tm-year-2011-tm-mon-5-tm-mday-5-tm-hour-16-tm-min-37-tm-sec-6-tm-wday-3-tm-yday-125-tm-isdst-1"><a href="#time-struct-time-tm-year-2011-tm-mon-5-tm-mday-5-tm-hour-16-tm-min-37-tm-sec-6-tm-wday-3-tm-yday-125-tm-isdst-1" class="headerlink" title="time.struct_time(tm_year=2011, tm_mon=5, tm_mday=5, tm_hour=16, tm_min=37, tm_sec=6, tm_wday=3, tm_yday=125, tm_isdst=-1)"></a>time.struct_time(tm_year=2011, tm_mon=5, tm_mday=5, tm_hour=16, tm_min=37, tm_sec=6, tm_wday=3, tm_yday=125, tm_isdst=-1)</h1><p>#生成format_time</p>
+<p>#struct_time to format_time<br>time.strftime(“%Y-%m-%d %X”)<br>time.strftime(“%Y-%m-%d %X”,time.localtime())</p>
+<h1 id="2016-10-26-16-48-41"><a href="#2016-10-26-16-48-41" class="headerlink" title="2016-10-26 16:48:41"></a>2016-10-26 16:48:41</h1><p>#生成固定格式的时间表示格式<br>time.asctime(time.localtime())<br>time.ctime(time.time())</p>
+<h1 id="Wed-Oct-26-16-45-08-2016"><a href="#Wed-Oct-26-16-45-08-2016" class="headerlink" title="Wed Oct 26 16:45:08 2016"></a>Wed Oct 26 16:45:08 2016</h1><p>struct_time元组元素结构</p>
+<p>属性                            值<br>tm_year（年）                  比如2011<br>tm_mon（月）                   1 - 12<br>tm_mday（日）                  1 - 31<br>tm_hour（时）                  0 - 23<br>tm_min（分）                   0 - 59<br>tm_sec（秒）                   0 - 61<br>tm_wday（weekday）             0 - 6（0表示周日）<br>tm_yday（一年中的第几天）        1 - 366<br>tm_isdst（是否是夏令时）        默认为-1</p>
+<p>format time结构化表示</p>
+<p>格式    含义<br>%a    本地（locale）简化星期名称<br>%A    本地完整星期名称<br>%b    本地简化月份名称<br>%B    本地完整月份名称<br>%c    本地相应的日期和时间表示<br>%d    一个月中的第几天（01 - 31）<br>%H    一天中的第几个小时（24小时制，00 - 23）<br>%I    第几个小时（12小时制，01 - 12）<br>%j    一年中的第几天（001 - 366）<br>%m    月份（01 - 12）<br>%M    分钟数（00 - 59）<br>%p    本地am或者pm的相应符<br>%S    秒（01 - 61）<br>%U    一年中的星期数。（00 - 53星期天是一个星期的开始。）第一个星期天之前的所有天数都放在第0周。<br>%w    一个星期中的第几天（0 - 6，0是星期天）<br>%W    和%U基本相同，不同的是%W以星期一为一个星期的开始。<br>%x    本地相应日期<br>%X    本地相应时间<br>%y    去掉世纪的年份（00 - 99）<br>%Y    完整的年份<br>%Z    时区的名字（如果不存在为空字符）<br>%%    ‘%’字符</p>
+<p>常见结构化时间组合：</p>
+<p>print time.strftime(“%Y-%m-%d %X”)</p>
+<p>#2016-10-26 20:50:13<br> 3、time加减</p>
+<p>#timestamp加减单位以秒为单位<br>import time<br>t1 = time.time()<br>t2=t1+10</p>
+<p>print time.ctime(t1)#Wed Oct 26 21:15:30 2016<br>print time.ctime(t2)#Wed Oct 26 21:15:40 2016</p>
+<p>二、datetime模块<br>datatime模块重新封装了time模块，提供更多接口，提供的类有：date,time,datetime,timedelta,tzinfo。</p>
+<p>1、date类</p>
+<p>datetime.date(year, month, day)</p>
+<p>静态方法和字段</p>
+<p>date.max、date.min：date对象所能表示的最大、最小日期；<br>date.resolution：date对象表示日期的最小单位。这里是天。<br>date.today()：返回一个表示当前本地日期的date对象；<br>date.fromtimestamp(timestamp)：根据给定的时间戮，返回一个date对象；</p>
+<p>from datetime import *
+import time</p>
+<p>print   ‘date.max:’, date.max<br>print   ‘date.min:’, date.min<br>print   ‘date.today():’, date.today()<br>print   ‘date.fromtimestamp():’, date.fromtimestamp(time.time())</p>
+<p>#Output======================</p>
+<h1 id="date-max-9999-12-31"><a href="#date-max-9999-12-31" class="headerlink" title="date.max: 9999-12-31"></a>date.max: 9999-12-31</h1><h1 id="date-min-0001-01-01"><a href="#date-min-0001-01-01" class="headerlink" title="date.min: 0001-01-01"></a>date.min: 0001-01-01</h1><h1 id="date-today-2016-10-26"><a href="#date-today-2016-10-26" class="headerlink" title="date.today(): 2016-10-26"></a>date.today(): 2016-10-26</h1><h1 id="date-fromtimestamp-2016-10-26"><a href="#date-fromtimestamp-2016-10-26" class="headerlink" title="date.fromtimestamp(): 2016-10-26"></a>date.fromtimestamp(): 2016-10-26</h1><p>方法和属性</p>
+<p>d1 = date(2011,06,03)#date对象<br>d1.year、date.month、date.day：年、月、日；<br>d1.replace(year, month, day)：生成一个新的日期对象，用参数指定的年，月，日代替原有对象中的属性。（原有对象仍保持不变）<br>d1.timetuple()：返回日期对应的time.struct_time对象；<br>d1.weekday()：返回weekday，如果是星期一，返回0；如果是星期2，返回1，以此类推；<br>d1.isoweekday()：返回weekday，如果是星期一，返回1；如果是星期2，返回2，以此类推；<br>d1.isocalendar()：返回格式如(year，month，day)的元组；<br>d1.isoformat()：返回格式如’YYYY-MM-DD’的字符串；<br>d1.strftime(fmt)：和time模块format相同。</p>
+<p>from datetime import *</p>
+<p>now = date(2016, 10, 26)<br>tomorrow = now.replace(day = 27)<br>print ‘now:’, now, ‘, tomorrow:’, tomorrow<br>print ‘timetuple():’, now.timetuple()<br>print ‘weekday():’, now.weekday()<br>print ‘isoweekday():’, now.isoweekday()<br>print ‘isocalendar():’, now.isocalendar()<br>print ‘isoformat():’, now.isoformat()<br>print ‘strftime():’, now.strftime(“%Y-%m-%d”)</p>
+<p>#Output========================</p>
+<h1 id="now-2016-10-26-tomorrow-2016-10-27"><a href="#now-2016-10-26-tomorrow-2016-10-27" class="headerlink" title="now: 2016-10-26 , tomorrow: 2016-10-27"></a>now: 2016-10-26 , tomorrow: 2016-10-27</h1><h1 id="timetuple-time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-0-tm-min-0-tm-sec-0-tm-wday-2-tm-yday-300-tm-isdst-1"><a href="#timetuple-time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-0-tm-min-0-tm-sec-0-tm-wday-2-tm-yday-300-tm-isdst-1" class="headerlink" title="timetuple(): time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=2, tm_yday=300, tm_isdst=-1)"></a>timetuple(): time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=2, tm_yday=300, tm_isdst=-1)</h1><h1 id="weekday-2"><a href="#weekday-2" class="headerlink" title="weekday(): 2"></a>weekday(): 2</h1><h1 id="isoweekday-3"><a href="#isoweekday-3" class="headerlink" title="isoweekday(): 3"></a>isoweekday(): 3</h1><h1 id="isocalendar-2016-43-3"><a href="#isocalendar-2016-43-3" class="headerlink" title="isocalendar(): (2016, 43, 3)"></a>isocalendar(): (2016, 43, 3)</h1><h1 id="isoformat-2016-10-26"><a href="#isoformat-2016-10-26" class="headerlink" title="isoformat(): 2016-10-26"></a>isoformat(): 2016-10-26</h1><h1 id="strftime-2016-10-26"><a href="#strftime-2016-10-26" class="headerlink" title="strftime(): 2016-10-26"></a>strftime(): 2016-10-26</h1><p>2、time类</p>
+<p>datetime.time(hour[ , minute[ , second[ , microsecond[ , tzinfo] ] ] ] ) </p>
+<p>静态方法和字段</p>
+<p>time.min、time.max：time类所能表示的最小、最大时间。其中，time.min = time(0, 0, 0, 0)， time.max = time(23, 59, 59, 999999)；<br>time.resolution：时间的最小单位，这里是1微秒；</p>
+<p>方法和属性</p>
+<p>t1 = datetime.time(10,23,15)#time对象<br>t1.hour、t1.minute、t1.second、t1.microsecond：时、分、秒、微秒；<br>t1.tzinfo：时区信息；<br>t1.replace([ hour[ , minute[ , second[ , microsecond[ , tzinfo] ] ] ] ] )：创建一个新的时间对象，用参数指定的时、分、秒、微秒代替原有对象中的属性（原有对象仍保持不变）；<br>t1.isoformat()：返回型如”HH:MM:SS”格式的字符串表示；<br>t1.strftime(fmt)：同time模块中的format；</p>
+<p>from  datetime import *</p>
+<p>tm = time(23, 46, 10)<br>print   ‘tm:’, tm<br>print   ‘hour: %d, minute: %d, second: %d, microsecond: %d’ % (tm.hour, tm.minute, tm.second, tm.microsecond)<br>tm1 = tm.replace(hour=20)<br>print   ‘tm1:’, tm1<br>print   ‘isoformat():’, tm.isoformat()<br>print   ‘strftime()’, tm.strftime(“%X”)</p>
+<p>#Output==============================================</p>
+<h1 id="tm-23-46-10"><a href="#tm-23-46-10" class="headerlink" title="tm: 23:46:10"></a>tm: 23:46:10</h1><h1 id="hour-23-minute-46-second-10-microsecond-0"><a href="#hour-23-minute-46-second-10-microsecond-0" class="headerlink" title="hour: 23, minute: 46, second: 10, microsecond: 0"></a>hour: 23, minute: 46, second: 10, microsecond: 0</h1><h1 id="tm1-20-46-10"><a href="#tm1-20-46-10" class="headerlink" title="tm1: 20:46:10"></a>tm1: 20:46:10</h1><h1 id="isoformat-23-46-10"><a href="#isoformat-23-46-10" class="headerlink" title="isoformat(): 23:46:10"></a>isoformat(): 23:46:10</h1><h1 id="strftime-23-46-10"><a href="#strftime-23-46-10" class="headerlink" title="strftime() 23:46:10"></a>strftime() 23:46:10</h1><p>3、datetime类</p>
+<p>datetime相当于date和time结合起来。<br>datetime.datetime (year, month, day[ , hour[ , minute[ , second[ , microsecond[ , tzinfo] ] ] ] ] )</p>
+<p>静态方法和字段</p>
+<p>datetime.today()：返回一个表示当前本地时间的datetime对象；<br>datetime.now([tz])：返回一个表示当前本地时间的datetime对象，如果提供了参数tz，则获取tz参数所指时区的本地时间；<br>datetime.utcnow()：返回一个当前utc时间的datetime对象；#格林威治时间<br>datetime.fromtimestamp(timestamp[, tz])：根据时间戮创建一个datetime对象，参数tz指定时区信息；<br>datetime.utcfromtimestamp(timestamp)：根据时间戮创建一个datetime对象；<br>datetime.combine(date, time)：根据date和time，创建一个datetime对象；<br>datetime.strptime(date_string, format)：将格式字符串转换为datetime对象；</p>
+<p>from  datetime import *
+import time</p>
+<p>print   ‘datetime.max:’, datetime.max<br>print   ‘datetime.min:’, datetime.min<br>print   ‘datetime.resolution:’, datetime.resolution<br>print   ‘today():’, datetime.today()<br>print   ‘now():’, datetime.now()<br>print   ‘utcnow():’, datetime.utcnow()<br>print   ‘fromtimestamp(tmstmp):’, datetime.fromtimestamp(time.time())<br>print   ‘utcfromtimestamp(tmstmp):’, datetime.utcfromtimestamp(time.time())</p>
+<p>#output======================</p>
+<h1 id="datetime-max-9999-12-31-23-59-59-999999"><a href="#datetime-max-9999-12-31-23-59-59-999999" class="headerlink" title="datetime.max: 9999-12-31 23:59:59.999999"></a>datetime.max: 9999-12-31 23:59:59.999999</h1><h1 id="datetime-min-0001-01-01-00-00-00"><a href="#datetime-min-0001-01-01-00-00-00" class="headerlink" title="datetime.min: 0001-01-01 00:00:00"></a>datetime.min: 0001-01-01 00:00:00</h1><h1 id="datetime-resolution-0-00-00-000001"><a href="#datetime-resolution-0-00-00-000001" class="headerlink" title="datetime.resolution: 0:00:00.000001"></a>datetime.resolution: 0:00:00.000001</h1><h1 id="today-2016-10-26-23-12-51-307000"><a href="#today-2016-10-26-23-12-51-307000" class="headerlink" title="today(): 2016-10-26 23:12:51.307000"></a>today(): 2016-10-26 23:12:51.307000</h1><h1 id="now-2016-10-26-23-12-51-307000"><a href="#now-2016-10-26-23-12-51-307000" class="headerlink" title="now(): 2016-10-26 23:12:51.307000"></a>now(): 2016-10-26 23:12:51.307000</h1><h1 id="utcnow-2016-10-26-15-12-51-307000"><a href="#utcnow-2016-10-26-15-12-51-307000" class="headerlink" title="utcnow(): 2016-10-26 15:12:51.307000"></a>utcnow(): 2016-10-26 15:12:51.307000</h1><h1 id="fromtimestamp-tmstmp-2016-10-26-23-12-51-307000"><a href="#fromtimestamp-tmstmp-2016-10-26-23-12-51-307000" class="headerlink" title="fromtimestamp(tmstmp): 2016-10-26 23:12:51.307000"></a>fromtimestamp(tmstmp): 2016-10-26 23:12:51.307000</h1><h1 id="utcfromtimestamp-tmstmp-2016-10-26-15-12-51-307000"><a href="#utcfromtimestamp-tmstmp-2016-10-26-15-12-51-307000" class="headerlink" title="utcfromtimestamp(tmstmp): 2016-10-26 15:12:51.307000"></a>utcfromtimestamp(tmstmp): 2016-10-26 15:12:51.307000</h1><p>方法和属性</p>
+<p>dt=datetime.now()#datetime对象<br>dt.year、month、day、hour、minute、second、microsecond、tzinfo：<br>dt.date()：获取date对象；<br>dt.time()：获取time对象；<br>dt. replace ([ year[ , month[ , day[ , hour[ , minute[ , second[ , microsecond[ , tzinfo] ] ] ] ] ] ] ])：<br>dt. timetuple ()<br>dt. utctimetuple ()<br>dt. toordinal ()<br>dt. weekday ()<br>dt. isocalendar ()<br>dt. isoformat ([ sep] )<br>dt. ctime ()：返回一个日期时间的C格式字符串，等效于time.ctime(time.mktime(dt.timetuple()))；<br>dt. strftime (format)</p>
+<p>4.timedelta类，时间加减</p>
+<p>使用timedelta可以很方便的在日期上做天days，小时hour，分钟，秒，毫秒，微妙的时间计算，如果要计算月份则需要另外的办法。</p>
+<p>#coding:utf-8<br>from  datetime import *</p>
+<p>dt = datetime.now()</p>
+<p>#日期减一天<br>dt1 = dt + timedelta(days=-1)#昨天<br>dt2 = dt - timedelta(days=1)#昨天<br>dt3 = dt + timedelta(days=1)#明天<br>delta_obj = dt3-dt<br>print type(delta_obj),delta_obj#&lt;type ‘datetime.timedelta’&gt; 1 day, 0:00:00<br>print delta_obj.days ,delta_obj.total_seconds()#1 86400.0</p>
+<p> 5、tzinfo时区类</p>
+<p>#! /usr/bin/python</p>
+<h1 id="coding-utf-8-1"><a href="#coding-utf-8-1" class="headerlink" title="coding=utf-8"></a>coding=utf-8</h1><p>from datetime import datetime, tzinfo,timedelta</p>
+<p>“””<br>tzinfo是关于时区信息的类<br>tzinfo是一个抽象类，所以不能直接被实例化<br>“””<br>class UTC(tzinfo):<br>    “””UTC”””<br>    def <strong>init</strong>(self,offset = 0):<br>        self._offset = offset</p>
+<pre><code>def utcoffset(self, dt):
+    return timedelta(hours=self._offset)
+
+def tzname(self, dt):
+    return &quot;UTC +%s&quot; % self._offset
+
+def dst(self, dt):
+    return timedelta(hours=self._offset)</code></pre><p>#北京时间<br>beijing = datetime(2011,11,11,0,0,0,tzinfo = UTC(8))<br>print “beijing time:”,beijing</p>
+<p>#曼谷时间<br>bangkok = datetime(2011,11,11,0,0,0,tzinfo = UTC(7))<br>print “bangkok time”,bangkok</p>
+<p>#北京时间转成曼谷时间<br>print “beijing-time to bangkok-time:”,beijing.astimezone(UTC(7))</p>
+<p>#计算时间差时也会考虑时区的问题<br>timespan = beijing - bangkok<br>print “时差:”,timespan</p>
+<p>#Output==================</p>
+<h1 id="beijing-time-2011-11-11-00-00-00-08-00"><a href="#beijing-time-2011-11-11-00-00-00-08-00" class="headerlink" title="beijing time: 2011-11-11 00:00:00+08:00"></a>beijing time: 2011-11-11 00:00:00+08:00</h1><h1 id="bangkok-time-2011-11-11-00-00-00-07-00"><a href="#bangkok-time-2011-11-11-00-00-00-07-00" class="headerlink" title="bangkok time 2011-11-11 00:00:00+07:00"></a>bangkok time 2011-11-11 00:00:00+07:00</h1><h1 id="beijing-time-to-bangkok-time-2011-11-10-23-00-00-07-00"><a href="#beijing-time-to-bangkok-time-2011-11-10-23-00-00-07-00" class="headerlink" title="beijing-time to bangkok-time: 2011-11-10 23:00:00+07:00"></a>beijing-time to bangkok-time: 2011-11-10 23:00:00+07:00</h1><h1 id="时差-1-day-23-00-00"><a href="#时差-1-day-23-00-00" class="headerlink" title="时差: -1 day, 23:00:00"></a>时差: -1 day, 23:00:00</h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/18/Django之Model（一）--基础篇/" rel="next" title="Django之Model（一）--基础篇">
+                <i class="fa fa-chevron-left"></i> Django之Model（一）--基础篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/09/拥有root权限却报错Access denied/" rel="prev" title="拥有root权限却报错Access denied">
+                拥有root权限却报错Access denied <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python-time模块和datetime模块详解"><span class="nav-number">1.</span> <span class="nav-text">python time模块和datetime模块详解</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#time模块"><span class="nav-number"></span> <span class="nav-text">time模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#coding-utf-8"><span class="nav-number"></span> <span class="nav-text">-- coding:utf-8 --</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#author-“TKQ”"><span class="nav-number"></span> <span class="nav-text">author = “TKQ”</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成timestamp"><span class="nav-number"></span> <span class="nav-text">生成timestamp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1477471508-05"><span class="nav-number"></span> <span class="nav-text">1477471508.05</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#timestamp-to-struct-time-本地时间"><span class="nav-number"></span> <span class="nav-text">timestamp to struct_time 本地时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-16-tm-min-45-tm-sec-8-tm-wday-2-tm-yday-300-tm-isdst-0"><span class="nav-number"></span> <span class="nav-text">time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=16, tm_min=45, tm_sec=8, tm_wday=2, tm_yday=300, tm_isdst=0)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#timestamp-to-struct-time-格林威治时间"><span class="nav-number"></span> <span class="nav-text">timestamp to struct_time 格林威治时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-8-tm-min-45-tm-sec-8-tm-wday-2-tm-yday-300-tm-isdst-0"><span class="nav-number"></span> <span class="nav-text">time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=8, tm_min=45, tm_sec=8, tm_wday=2, tm_yday=300, tm_isdst=0)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#time-struct-time-tm-year-2011-tm-mon-5-tm-mday-5-tm-hour-16-tm-min-37-tm-sec-6-tm-wday-3-tm-yday-125-tm-isdst-1"><span class="nav-number"></span> <span class="nav-text">time.struct_time(tm_year=2011, tm_mon=5, tm_mday=5, tm_hour=16, tm_min=37, tm_sec=6, tm_wday=3, tm_yday=125, tm_isdst=-1)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2016-10-26-16-48-41"><span class="nav-number"></span> <span class="nav-text">2016-10-26 16:48:41</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Wed-Oct-26-16-45-08-2016"><span class="nav-number"></span> <span class="nav-text">Wed Oct 26 16:45:08 2016</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#date-max-9999-12-31"><span class="nav-number"></span> <span class="nav-text">date.max: 9999-12-31</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#date-min-0001-01-01"><span class="nav-number"></span> <span class="nav-text">date.min: 0001-01-01</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#date-today-2016-10-26"><span class="nav-number"></span> <span class="nav-text">date.today(): 2016-10-26</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#date-fromtimestamp-2016-10-26"><span class="nav-number"></span> <span class="nav-text">date.fromtimestamp(): 2016-10-26</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#now-2016-10-26-tomorrow-2016-10-27"><span class="nav-number"></span> <span class="nav-text">now: 2016-10-26 , tomorrow: 2016-10-27</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#timetuple-time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-0-tm-min-0-tm-sec-0-tm-wday-2-tm-yday-300-tm-isdst-1"><span class="nav-number"></span> <span class="nav-text">timetuple(): time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=2, tm_yday=300, tm_isdst=-1)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#weekday-2"><span class="nav-number"></span> <span class="nav-text">weekday(): 2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#isoweekday-3"><span class="nav-number"></span> <span class="nav-text">isoweekday(): 3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#isocalendar-2016-43-3"><span class="nav-number"></span> <span class="nav-text">isocalendar(): (2016, 43, 3)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#isoformat-2016-10-26"><span class="nav-number"></span> <span class="nav-text">isoformat(): 2016-10-26</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#strftime-2016-10-26"><span class="nav-number"></span> <span class="nav-text">strftime(): 2016-10-26</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tm-23-46-10"><span class="nav-number"></span> <span class="nav-text">tm: 23:46:10</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hour-23-minute-46-second-10-microsecond-0"><span class="nav-number"></span> <span class="nav-text">hour: 23, minute: 46, second: 10, microsecond: 0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tm1-20-46-10"><span class="nav-number"></span> <span class="nav-text">tm1: 20:46:10</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#isoformat-23-46-10"><span class="nav-number"></span> <span class="nav-text">isoformat(): 23:46:10</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#strftime-23-46-10"><span class="nav-number"></span> <span class="nav-text">strftime() 23:46:10</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#datetime-max-9999-12-31-23-59-59-999999"><span class="nav-number"></span> <span class="nav-text">datetime.max: 9999-12-31 23:59:59.999999</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#datetime-min-0001-01-01-00-00-00"><span class="nav-number"></span> <span class="nav-text">datetime.min: 0001-01-01 00:00:00</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#datetime-resolution-0-00-00-000001"><span class="nav-number"></span> <span class="nav-text">datetime.resolution: 0:00:00.000001</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#today-2016-10-26-23-12-51-307000"><span class="nav-number"></span> <span class="nav-text">today(): 2016-10-26 23:12:51.307000</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#now-2016-10-26-23-12-51-307000"><span class="nav-number"></span> <span class="nav-text">now(): 2016-10-26 23:12:51.307000</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#utcnow-2016-10-26-15-12-51-307000"><span class="nav-number"></span> <span class="nav-text">utcnow(): 2016-10-26 15:12:51.307000</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fromtimestamp-tmstmp-2016-10-26-23-12-51-307000"><span class="nav-number"></span> <span class="nav-text">fromtimestamp(tmstmp): 2016-10-26 23:12:51.307000</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#utcfromtimestamp-tmstmp-2016-10-26-15-12-51-307000"><span class="nav-number"></span> <span class="nav-text">utcfromtimestamp(tmstmp): 2016-10-26 15:12:51.307000</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#coding-utf-8-1"><span class="nav-number"></span> <span class="nav-text">coding=utf-8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#beijing-time-2011-11-11-00-00-00-08-00"><span class="nav-number"></span> <span class="nav-text">beijing time: 2011-11-11 00:00:00+08:00</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bangkok-time-2011-11-11-00-00-00-07-00"><span class="nav-number"></span> <span class="nav-text">bangkok time 2011-11-11 00:00:00+07:00</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#beijing-time-to-bangkok-time-2011-11-10-23-00-00-07-00"><span class="nav-number"></span> <span class="nav-text">beijing-time to bangkok-time: 2011-11-10 23:00:00+07:00</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#时差-1-day-23-00-00"><span class="nav-number"></span> <span class="nav-text">时差: -1 day, 23:00:00</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

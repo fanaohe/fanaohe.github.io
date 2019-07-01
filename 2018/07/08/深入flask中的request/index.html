@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="flask,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="深入flask中的request缘起　　在使用flask的时候一直比较纳闷request是什么原理，他是如何保证多线程情况下对不同请求参数的隔离的。 准备知识　　在讲request之前首先需要先理解一下werkzeug.local中的几个类，因为request就是基于这几个类来搞事情的。 -- coding: utf-8 --import copyfrom werkzeug._compat imp">
+<meta name="keywords" content="flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入flask中的request">
+<meta property="og:url" content="http://yoursite.com/2018/07/08/深入flask中的request/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="深入flask中的request缘起　　在使用flask的时候一直比较纳闷request是什么原理，他是如何保证多线程情况下对不同请求参数的隔离的。 准备知识　　在讲request之前首先需要先理解一下werkzeug.local中的几个类，因为request就是基于这几个类来搞事情的。 -- coding: utf-8 --import copyfrom werkzeug._compat imp">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-30T12:54:47.141Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入flask中的request">
+<meta name="twitter:description" content="深入flask中的request缘起　　在使用flask的时候一直比较纳闷request是什么原理，他是如何保证多线程情况下对不同请求参数的隔离的。 准备知识　　在讲request之前首先需要先理解一下werkzeug.local中的几个类，因为request就是基于这几个类来搞事情的。 -- coding: utf-8 --import copyfrom werkzeug._compat imp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/08/深入flask中的request/">
+
+
+
+
+
+  <title>深入flask中的request | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/深入flask中的request/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入flask中的request</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-08T00:21:57+08:00">
+                2018-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="深入flask中的request"><a href="#深入flask中的request" class="headerlink" title="深入flask中的request"></a>深入flask中的request</h3><p>缘起<br>　　在使用flask的时候一直比较纳闷request是什么原理，他是如何保证多线程情况下对不同请求参数的隔离的。</p>
+<p>准备知识<br>　　在讲request之前首先需要先理解一下werkzeug.local中的几个类，因为request就是基于这几个类来搞事情的。</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import copy<br>from werkzeug._compat import PY2, implements_bool</p>
+<h1 id="since-each-thread-has-its-own-greenlet-we-can-just-use-those-as-identifiers"><a href="#since-each-thread-has-its-own-greenlet-we-can-just-use-those-as-identifiers" class="headerlink" title="since each thread has its own greenlet we can just use those as identifiers"></a>since each thread has its own greenlet we can just use those as identifiers</h1><h1 id="for-the-context-If-greenlets-are-not-available-we-fall-back-to-the"><a href="#for-the-context-If-greenlets-are-not-available-we-fall-back-to-the" class="headerlink" title="for the context.  If greenlets are not available we fall back to the"></a>for the context.  If greenlets are not available we fall back to the</h1><h1 id="current-thread-ident-depending-on-where-it-is"><a href="#current-thread-ident-depending-on-where-it-is" class="headerlink" title="current thread ident depending on where it is."></a>current thread ident depending on where it is.</h1><p>try:<br>    from greenlet import getcurrent as get_ident<br>except ImportError:<br>    try:<br>        from thread import get_ident<br>    except ImportError:<br>        from _thread import get_ident</p>
+<p>def release_local(local):<br>    “””Releases the contents of the local for the current context.<br>    This makes it possible to use locals without a manager.</p>
+<pre><code>Example::
+
+    &gt;&gt;&gt; loc = Local()
+    &gt;&gt;&gt; loc.foo = 42
+    &gt;&gt;&gt; release_local(loc)
+    &gt;&gt;&gt; hasattr(loc, &apos;foo&apos;)
+    False
+
+With this function one can release :class:`Local` objects as well
+as :class:`LocalStack` objects.  However it is not possible to
+release data held by proxies that way, one always has to retain
+a reference to the underlying local object in order to be able
+to release it.
+
+.. versionadded:: 0.6.1
+&quot;&quot;&quot;
+local.__release_local__()</code></pre><p>class Local(object):</p>
+<pre><code>&quot;&quot;&quot;
+用一个大字典实现局部上下文
+    不同的线程或者greenlet调用该local对象时获取的值都是本线程或者greenlet独享的
+    实际上就是为每一个线程或者协程在字典里单独开辟出了一个空间(实际上就是一个键值对，键就是线程或者greenlet的唯一标识)，
+    这空间用来存储单个线程(或者greenlet)的私有变量
+
+&quot;&quot;&quot;
+__slots__ = (&apos;__storage__&apos;, &apos;__ident_func__&apos;)
+
+def __init__(self):
+    object.__setattr__(self, &apos;__storage__&apos;, {})
+    object.__setattr__(self, &apos;__ident_func__&apos;, get_ident)
+
+def __iter__(self):
+    return iter(self.__storage__.items())
+
+def __call__(self, proxy):
+    &quot;&quot;&quot;Create a proxy for a name.&quot;&quot;&quot;
+    return LocalProxy(self, proxy)
+
+def __release_local__(self):
+    self.__storage__.pop(self.__ident_func__(), None)
+
+def __getattr__(self, name):
+    try:
+        return self.__storage__[self.__ident_func__()][name]
+    except KeyError:
+        raise AttributeError(name)
+
+def __setattr__(self, name, value):
+    ident = self.__ident_func__()
+    storage = self.__storage__
+    try:
+        storage[ident][name] = value
+    except KeyError:
+        storage[ident] = {name: value}
+
+def __delattr__(self, name):
+    try:
+        del self.__storage__[self.__ident_func__()][name]
+    except KeyError:
+        raise AttributeError(name)</code></pre><p>class LocalStack(object):</p>
+<pre><code>&quot;&quot;&quot;
+LocalStack也是一个栈相关的局部上下文，底层实现是基于Local类。
+    注意一下他的pop方法，如果当前栈的长度为1，pop时会清空当前线程(greenlet)在底层的Local中所对应的&quot;键值对&quot;的
+&quot;&quot;&quot;
+
+def __init__(self):
+    self._local = Local()
+
+def __release_local__(self):
+    self._local.__release_local__()
+
+def _get__ident_func__(self):
+    return self._local.__ident_func__
+
+def _set__ident_func__(self, value):
+    object.__setattr__(self._local, &apos;__ident_func__&apos;, value)
+__ident_func__ = property(_get__ident_func__, _set__ident_func__)
+del _get__ident_func__, _set__ident_func__
+
+def __call__(self):
+    def _lookup():
+        rv = self.top
+        if rv is None:
+            raise RuntimeError(&apos;object unbound&apos;)
+        return rv
+    return LocalProxy(_lookup)
+
+def push(self, obj):
+    &quot;&quot;&quot;Pushes a new item to the stack&quot;&quot;&quot;
+    rv = getattr(self._local, &apos;stack&apos;, None)
+    if rv is None:
+        self._local.stack = rv = []
+    rv.append(obj)
+    return rv
+
+def pop(self):
+    &quot;&quot;&quot;Removes the topmost item from the stack, will return the
+    old value or `None` if the stack was already empty.
+    &quot;&quot;&quot;
+    stack = getattr(self._local, &apos;stack&apos;, None)
+    if stack is None:
+        return None
+    elif len(stack) == 1:
+        release_local(self._local)
+        return stack[-1]
+    else:
+        return stack.pop()
+
+@property
+def top(self):
+    &quot;&quot;&quot;The topmost item on the stack.  If the stack is empty,
+    `None` is returned.
+    &quot;&quot;&quot;
+    try:
+        return self._local.stack[-1]
+    except (AttributeError, IndexError):
+        return None</code></pre><p>@implements_bool<br>class LocalProxy(object):<br>    “””<br>    代理模式: 给目标对象提供一个代理对象，并由代理对象控制对目标对象的引用<br>    “””</p>
+<pre><code>&quot;&quot;&quot;Acts as a proxy for a werkzeug local.  Forwards all operations to
+a proxied object.  The only operations not supported for forwarding
+are right handed operands and any kind of assignment.
+
+Example usage::
+
+    from werkzeug.local import Local
+    l = Local()
+
+    # these are proxies
+    request = l(&apos;request&apos;)
+    user = l(&apos;user&apos;)
+
+
+    from werkzeug.local import LocalStack
+    _response_local = LocalStack()
+
+    # this is a proxy
+    response = _response_local()
+
+Whenever something is bound to l.user / l.request the proxy objects
+will forward all operations.  If no object is bound a :exc:`RuntimeError`
+will be raised.
+
+To create proxies to :class:`Local` or :class:`LocalStack` objects,
+call the object as shown above.  If you want to have a proxy to an
+object looked up by a function, you can (as of Werkzeug 0.6.1) pass
+a function to the :class:`LocalProxy` constructor::
+
+    session = LocalProxy(lambda: get_current_request().session)
+
+.. versionchanged:: 0.6.1
+   The class can be instantiated with a callable as well now.
+&quot;&quot;&quot;
+__slots__ = (&apos;__local&apos;, &apos;__dict__&apos;, &apos;__name__&apos;, &apos;__wrapped__&apos;)
+
+def __init__(self, local, name=None):
+    # __local 会被重命名为 _LocalProxy__local
+    object.__setattr__(self, &apos;_LocalProxy__local&apos;, local)
+    object.__setattr__(self, &apos;__name__&apos;, name)
+    if callable(local) and not hasattr(local, &apos;__release_local__&apos;):
+        # &quot;local&quot; is a callable that is not an instance of Local or
+        # LocalManager: mark it as a wrapped function.
+        object.__setattr__(self, &apos;__wrapped__&apos;, local)
+
+def _get_current_object(self):
+    &quot;&quot;&quot;Return the current object.  This is useful if you want the real
+    object behind the proxy at a time for performance reasons or because
+    you want to pass the object into a different context.
+    &quot;&quot;&quot;
+    if not hasattr(self.__local, &apos;__release_local__&apos;):
+        return self.__local()
+    try:
+        return getattr(self.__local, self.__name__)
+    except AttributeError:
+        raise RuntimeError(&apos;no object bound to %s&apos; % self.__name__)
+
+@property
+def __dict__(self):
+    try:
+        return self._get_current_object().__dict__
+    except RuntimeError:
+        raise AttributeError(&apos;__dict__&apos;)
+
+def __repr__(self):
+    try:
+        obj = self._get_current_object()
+    except RuntimeError:
+        return &apos;&lt;%s unbound&gt;&apos; % self.__class__.__name__
+    return repr(obj)
+
+def __bool__(self):
+    try:
+        return bool(self._get_current_object())
+    except RuntimeError:
+        return False
+
+def __unicode__(self):
+    try:
+        return unicode(self._get_current_object())  # noqa
+    except RuntimeError:
+        return repr(self)
+
+def __dir__(self):
+    try:
+        return dir(self._get_current_object())
+    except RuntimeError:
+        return []
+
+def __getattr__(self, name):
+    if name == &apos;__members__&apos;:
+        return dir(self._get_current_object())
+    return getattr(self._get_current_object(), name)
+
+def __setitem__(self, key, value):
+    self._get_current_object()[key] = value
+
+def __delitem__(self, key):
+    del self._get_current_object()[key]
+
+if PY2:
+    __getslice__ = lambda x, i, j: x._get_current_object()[i:j]
+
+    def __setslice__(self, i, j, seq):
+        self._get_current_object()[i:j] = seq
+
+    def __delslice__(self, i, j):
+        del self._get_current_object()[i:j]
+
+__setattr__ = lambda x, n, v: setattr(x._get_current_object(), n, v)
+__delattr__ = lambda x, n: delattr(x._get_current_object(), n)
+__str__ = lambda x: str(x._get_current_object())
+__lt__ = lambda x, o: x._get_current_object() &lt; o
+__le__ = lambda x, o: x._get_current_object() &lt;= o
+__eq__ = lambda x, o: x._get_current_object() == o
+__ne__ = lambda x, o: x._get_current_object() != o
+__gt__ = lambda x, o: x._get_current_object() &gt; o
+__ge__ = lambda x, o: x._get_current_object() &gt;= o
+__cmp__ = lambda x, o: cmp(x._get_current_object(), o)  # noqa
+__hash__ = lambda x: hash(x._get_current_object())
+__call__ = lambda x, *a, **kw: x._get_current_object()(*a, **kw)
+__len__ = lambda x: len(x._get_current_object())
+__getitem__ = lambda x, i: x._get_current_object()[i]
+__iter__ = lambda x: iter(x._get_current_object())
+__contains__ = lambda x, i: i in x._get_current_object()
+__add__ = lambda x, o: x._get_current_object() + o
+__sub__ = lambda x, o: x._get_current_object() - o
+__mul__ = lambda x, o: x._get_current_object() * o
+__floordiv__ = lambda x, o: x._get_current_object() // o
+__mod__ = lambda x, o: x._get_current_object() % o
+__divmod__ = lambda x, o: x._get_current_object().__divmod__(o)
+__pow__ = lambda x, o: x._get_current_object() ** o
+__lshift__ = lambda x, o: x._get_current_object() &lt;&lt; o
+__rshift__ = lambda x, o: x._get_current_object() &gt;&gt; o
+__and__ = lambda x, o: x._get_current_object() &amp; o
+__xor__ = lambda x, o: x._get_current_object() ^ o
+__or__ = lambda x, o: x._get_current_object() | o
+__div__ = lambda x, o: x._get_current_object().__div__(o)
+__truediv__ = lambda x, o: x._get_current_object().__truediv__(o)
+__neg__ = lambda x: -(x._get_current_object())
+__pos__ = lambda x: +(x._get_current_object())
+__abs__ = lambda x: abs(x._get_current_object())
+__invert__ = lambda x: ~(x._get_current_object())
+__complex__ = lambda x: complex(x._get_current_object())
+__int__ = lambda x: int(x._get_current_object())
+__long__ = lambda x: long(x._get_current_object())  # noqa
+__float__ = lambda x: float(x._get_current_object())
+__oct__ = lambda x: oct(x._get_current_object())
+__hex__ = lambda x: hex(x._get_current_object())
+__index__ = lambda x: x._get_current_object().__index__()
+__coerce__ = lambda x, o: x._get_current_object().__coerce__(x, o)
+__enter__ = lambda x: x._get_current_object().__enter__()
+__exit__ = lambda x, *a, **kw: x._get_current_object().__exit__(*a, **kw)
+__radd__ = lambda x, o: o + x._get_current_object()
+__rsub__ = lambda x, o: o - x._get_current_object()
+__rmul__ = lambda x, o: o * x._get_current_object()
+__rdiv__ = lambda x, o: o / x._get_current_object()
+if PY2:
+    __rtruediv__ = lambda x, o: x._get_current_object().__rtruediv__(o)
+else:
+    __rtruediv__ = __rdiv__
+__rfloordiv__ = lambda x, o: o // x._get_current_object()
+__rmod__ = lambda x, o: o % x._get_current_object()
+__rdivmod__ = lambda x, o: x._get_current_object().__rdivmod__(o)
+__copy__ = lambda x: copy.copy(x._get_current_object())
+__deepcopy__ = lambda x, memo: copy.deepcopy(x._get_current_object(), memo)</code></pre><p>先来讲Local对象<br>1 创建一个Local对象</p>
+<p>local = Local()<br>刚创建后, 这个local_context中负责存储局部上下文变量的storage是一个空字典</p>
+<p>local.<strong>storage</strong> = {}<br>我们用iden1, inde2 …. indeN 来表示n个同属于一个进程的线程(或者greenlet), 假如当前的线程(或者greenlet)的id为iden1, 我们来操作一下local</p>
+<p>local.name = “iden1_name”<br>实际执行的代码是:</p>
+<p>local.<strong>storage</strong>.setdefault(“iden1”, {})[“name”] = “iden1_name”<br>这个local中负责存储局部上下文变量的storage就变成了这样:</p>
+<p>local.<strong>storage</strong> = {<br>    “iden1”: {<br>        “name”: “iden1_name”<br>    }<br>}
+当我们在不同的线程(或者greenlet)中操作后，local就可能会变成这样</p>
+<p>local.<strong>storage</strong> = {<br>    “iden1”: {…},<br>    “iden2”: {…},<br>    …<br>    “idenN”: {…}<br>}
+local对象有一个<strong>release_local</strong>方法, 执行该方法会清理掉当前线程(或者greenlet)对应的存储空间, 假如当前的线程(或者greenlet)的id为iden1,<br>当我们执行完<strong>release_local</strong>方法后, local的存储空间就会变成这样:</p>
+<h1 id="已经没有iden1了"><a href="#已经没有iden1了" class="headerlink" title="已经没有iden1了"></a>已经没有iden1了</h1><p>local.<strong>storage</strong> = {<br>    “iden2”: {…},<br>    …<br>    “idenN”: {…}<br>}
+local还定义了<strong>call</strong>方法, 当我们执行local()后会返回一个LocalStack对象</p>
+<p>LocalStack对象<br>LocalStack底层使用的是Local，然后在Local实例中实现了一个栈</p>
+<p>创建一个LocalStack对象</p>
+<p>local_stack = LocalStack()<br>该对象的local属性就是一个Local实例</p>
+<p>isinstance(local_stack.local, Local) is True<br>local_stack的栈存储在他的local属性中, 当我们调用local_stack.push(some_obj)的时候, 实际上是执行了</p>
+<p>local_stack.local.stack.append(some_obj) if hasattr(local_stack.local, “stack”) else local_stack.local.stack = [some_obj]<br>假如当前的线程(或者greenlet)的id为iden1, 我们push一个对象request_ctx_obj, 然后又push一个对象request_ctx_obj2, 那么local_stack.local就会是这样:</p>
+<p>local_stack.local.<strong>storage</strong> = {<br>    “iden1”: {<br>        “stack”: [request_ctx_obj, request_ctx_obj2]<br>    }<br>}
+假如当前的线程(或者greenlet)的id为iden1，我们在调用local_stack.top()方法时，实际上执行的是:</p>
+<p>return local_stack.local.stack[-1]<br>需要注意的是:</p>
+<p>　　如果我们当前所处的线程(或者greenlet)中之前并没有进行过push的话，那么我们调用local_stack.top()方法返回的结果是None</p>
+<p>当我们执行local_stack.pop()时, 实际上执行的是</p>
+<p>local_stack.local.stack.pop()<br>需要注意两点:<br>　　1 如果当前线程(或者greenlet)中之前没有push过, 那么pop()方法会返回None<br>　　2 如果当前线程(或者greenlet)中的栈中只有一个对象, 那么本次pop()还会清理掉stack(实际上执行了local_stack.local.<strong>release_local</strong>方法),<br>　　假如当前的线程(或者greenlet)的id为iden2的话，没有pop()之前是这样的:</p>
+<p>local_stack.local.<strong>storage</strong> = {<br>    “iden1”: {<br>        “stack”: [request_ctx_obj, request_ctx_obj2]<br>    }<br>    “iden2”: {<br>        “stack”: [request_ctx_obj3]<br>    }<br>}</p>
+<p>执行pop()则会将当前线程(或者greenlet)的局部上下文存储空间清理掉, 变为这样:</p>
+<p>local_stack.local.<strong>storage</strong> = {<br>    “iden1”: {<br>        “stack”: [request_ctx_obj, request_ctx_obj2]<br>    }<br>}
+LocalStack也提供了<strong>call</strong>方法, 执行该方法会生成一个LocalProxy对象</p>
+<p>LocalProxy<br>LocalProxy实现了代理模式, 给目标对象提供一个代理对象，并由代理对象控制对目标对象的引用。<br>根据传入参数的类型以及数量的不同他会有两种表现形式.<br>第一种，第一个参数传入一个Local实例, 然后第二个参数传入想要代理的对象的名称:<br>　　我们执行下面的语句:</p>
+<p>local_1 = Local()<br>local_proxy1 = LocalProxy(local_1, “age”)<br>　　local_proxy1所代理的实际上就是local_1实例中的age属性了。<br>　　假如当前的线程(或者greenlet)的id为iden1，那么我们执行local_proxy1 = 12, 实际执行的就是local_1.age = 12</p>
+<p>第二种，只传入一个函数，通过该函数可以获取到想要代理的对象:<br>　　我们执行下面的语句:</p>
+<p>local_2 = Local()</p>
+<p>def _find_raw_obj():<br>    return local_2.name</p>
+<p>local_proxy2 = LocalProxy(_find_raw_obj)<br>　　local_proxy2所代理的实际上就是local_2实例中的name属性</p>
+<p>flask源码剖析<br>request源码</p>
+<p>def _lookup_req_object(name):<br>    top = _request_ctx_stack.top<br>    if top is None:<br>        raise RuntimeError(_request_ctx_err_msg)<br>    return getattr(top, name)</p>
+<h1 id="context-locals"><a href="#context-locals" class="headerlink" title="context locals"></a>context locals</h1><p>_request_ctx_stack = LocalStack()<br>request = LocalProxy(partial(_lookup_req_object, ‘request’))</p>
+<p>只要看懂了文章上半部分的local，这里实际上很简单，</p>
+<p>　　_request_ctx_stack是一个LocalStack实例，而我们每次调用request.some_attr 的时候实际上是执行_request_ctx_stack.top.some_attr</p>
+<p>再来看一下当请求过来的时候，flask是如何处理的：</p>
+<h1 id="flask-app"><a href="#flask-app" class="headerlink" title="flask.app"></a>flask.app</h1><p>class Flask(_PackageBoundObject):</p>
+<pre><code>request_class = Request
+
+def request_context(self, environ):
+    return RequestContext(self, environ)
+
+def wsgi_app(self, environ, start_response):
+    # self.request_context是一个RequestContext实例
+    ctx = self.request_context(environ)
+    error = None
+    try:
+        try:
+            # 2 执行了request_ctx_stack.push(ctx)
+            ctx.push()
+            # 3 处理请求得到响应
+            response = self.full_dispatch_request()
+        except Exception as e:
+            error = e
+            response = self.handle_exception(e)
+        except:
+            error = sys.exc_info()[1]
+            raise
+        return response(environ, start_response)
+    finally:
+        if self.should_ignore_error(error):
+            error = None
+        # 4 request_ctx_stack.pop(ctx)
+        ctx.auto_pop(error)
+
+# 1 当请求来的时候会执行app.__call__()方法
+def __call__(self, environ, start_response):
+    &quot;&quot;&quot;The WSGI server calls the Flask application object as the
+    WSGI application. This calls :meth:`wsgi_app` which can be
+    wrapped to applying middleware.&quot;&quot;&quot;
+    return self.wsgi_app(environ, start_response)</code></pre><h1 id="flask-ctx"><a href="#flask-ctx" class="headerlink" title="flask.ctx"></a>flask.ctx</h1><p>class RequestContext(object):</p>
+<pre><code>def __init__(self, app, environ, request=None):
+    self.app = app
+    if request is None:</code></pre><p>　　　　　　　# request是一个Request对象<br>            request = app.request_class(environ)<br>        self.request = request<br>        self._implicit_app_ctx_stack = []</p>
+<pre><code>def push(self):
+    top = _request_ctx_stack.top
+    if top is not None and top.preserved:
+        top.pop(top._preserved_exc)
+
+    # Before we push the request context we have to ensure that there
+    # is an application context.
+    app_ctx = _app_ctx_stack.top
+    if app_ctx is None or app_ctx.app != self.app:
+        app_ctx = self.app.app_context()
+        app_ctx.push()
+        self._implicit_app_ctx_stack.append(app_ctx)
+    else:
+        self._implicit_app_ctx_stack.append(None)
+
+    if hasattr(sys, &apos;exc_clear&apos;):
+        sys.exc_clear()
+
+    # 2.1 这里是重点
+    _request_ctx_stack.push(self)
+
+def pop(self, exc=_sentinel):
+    app_ctx = self._implicit_app_ctx_stack.pop()
+
+    try:</code></pre><p>if not self._implicit_app_ctx_stack:<br>                self.preserved = False<br>                self._preserved_exc = None<br>                if exc is _sentinel:<br>                    exc = sys.exc_info()[1]<br>                self.app.do_teardown_request(exc)<br>                request_close = getattr(self.request, ‘close’, None)<br>                if request_close is not None:<br>                    request_close()<br>finally:<br>            rv = _request_ctx_stack.pop()# Get rid of the app as well if necessary.<br>            if app_ctx is not None:<br>                app_ctx.pop(exc)</p>
+<pre><code>assert rv is self, &apos;Popped wrong request context.  &apos; \
+                   &apos;(%r instead of %r)&apos; % (rv, self)</code></pre><p> 当请求过来时：</p>
+<p>　　1 将请求封装为一个RequestContext实例</p>
+<p>　　2 然后将请求的environ封装成Request对象</p>
+<p>　　3 执行_request_ctx_stack.push(RequestContext实例)</p>
+<p>　　4 处理请求得到响应</p>
+<p>　　5 执行_request_ctx_stack.pop()</p>
+<p>　　6 返回结果</p>
+<p>看到这里，大体原理我们也就懂了。</p>
+<p>来点深入的高级用法<br>需求<br>工作中使用到flask flask-restful，有这样的场景：</p>
+<p>　　1 首先是遵循restful</p>
+<p>　　2 我希望所有接口有统一的参数传递格式，类似于这样:　　　　</p>
+<p>　　　　timestamp: int 　　　　　　　　　　　　　　　　　　　　# 以秒为单位<br>　　　　token:  str     　　　　　　　　　　　　　　　　　　　　  # 这个就不用说了<br>　　　　data: str 　　　　　　　　　　　　　　　　　　　　　　   # base64.encode(json.dumps(原始参数数据))<br>　　　　signature: md5(data + string(timestamp) + key) 　　　　   # 签名,注：key为加密密钥<br>假如是登陆接口，客户端需要给我传递手机号以及验证码，我希望格式是json，所以原始参数数据大概是这样:</p>
+<p>{“mobile”: “12377776666”, “code”: “1234”}<br>　　3 我希望所有接口有统一的响应格式，类似于这样：</p>
+<p>{
+    “code”: 0, # 这成功。 1 -9999 错误<br>    “message”: “”,<br>    “data”: {<br>     “mobile”: “sdfasdf”,<br>     “code”: “”<br>    }<br>}</p>
+<p>　　4 我希望请求参数数据经过统一的参数检测之后, request的args(如果请求方式为get) 或者form(如果请求方式为post) 或者values属性变为原始参数数据.这样就可以正常使用RequestParser()</p>
+<p>实现<br>以下是本人的实现源码(生产环境测试无问题，但有几处需要改进的地方):</p>
+<p> 统一参数解析处理</p>
+<p>参考：<br>　　<a href="https://blog.tonyseek.com/post/the-context-mechanism-of-flask/" target="_blank" rel="noopener">https://blog.tonyseek.com/post/the-context-mechanism-of-flask/</a></p>
+<p>　　flask源码</p>
+<p>　　flask-restful源码</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/flask/" rel="tag"># flask</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/28/jwt安全认证/" rel="next" title="jwt安全认证">
+                <i class="fa fa-chevron-left"></i> jwt安全认证
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/08/python2中的ascii code can't encode/" rel="prev" title="python2中的ascii code can't encode">
+                python2中的ascii code can't encode <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#深入flask中的request"><span class="nav-number">1.</span> <span class="nav-text">深入flask中的request</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#coding-utf-8"><span class="nav-number"></span> <span class="nav-text">-- coding: utf-8 --</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#since-each-thread-has-its-own-greenlet-we-can-just-use-those-as-identifiers"><span class="nav-number"></span> <span class="nav-text">since each thread has its own greenlet we can just use those as identifiers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#for-the-context-If-greenlets-are-not-available-we-fall-back-to-the"><span class="nav-number"></span> <span class="nav-text">for the context.  If greenlets are not available we fall back to the</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#current-thread-ident-depending-on-where-it-is"><span class="nav-number"></span> <span class="nav-text">current thread ident depending on where it is.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#已经没有iden1了"><span class="nav-number"></span> <span class="nav-text">已经没有iden1了</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#context-locals"><span class="nav-number"></span> <span class="nav-text">context locals</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flask-app"><span class="nav-number"></span> <span class="nav-text">flask.app</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flask-ctx"><span class="nav-number"></span> <span class="nav-text">flask.ctx</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="python多进程首先进程是资源调度的一个最小集合，通常起一个进程，然后通过操作系统完成资源的调度。具体的细节还需要进修。。。。。 总之，通过python也可以实现多进程的。 通常，我们启动一个进程的时候，都是通过父进程来启动这个对应的子进程，在python中，我们可以通过os模块，通过os.getpid()&amp;amp;os.getppid()来查看当前进程以及父进程的进程ID。或者我们可以通过mu">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python多进程">
+<meta property="og:url" content="http://yoursite.com/2018/01/28/python多进程/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="python多进程首先进程是资源调度的一个最小集合，通常起一个进程，然后通过操作系统完成资源的调度。具体的细节还需要进修。。。。。 总之，通过python也可以实现多进程的。 通常，我们启动一个进程的时候，都是通过父进程来启动这个对应的子进程，在python中，我们可以通过os模块，通过os.getpid()&amp;amp;os.getppid()来查看当前进程以及父进程的进程ID。或者我们可以通过mu">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-30T03:18:01.998Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python多进程">
+<meta name="twitter:description" content="python多进程首先进程是资源调度的一个最小集合，通常起一个进程，然后通过操作系统完成资源的调度。具体的细节还需要进修。。。。。 总之，通过python也可以实现多进程的。 通常，我们启动一个进程的时候，都是通过父进程来启动这个对应的子进程，在python中，我们可以通过os模块，通过os.getpid()&amp;amp;os.getppid()来查看当前进程以及父进程的进程ID。或者我们可以通过mu">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/28/python多进程/">
+
+
+
+
+
+  <title>python多进程 | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/28/python多进程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python多进程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T00:21:57+08:00">
+                2018-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="python多进程"><a href="#python多进程" class="headerlink" title="python多进程"></a>python多进程</h3><p>首先进程是资源调度的一个最小集合，通常起一个进程，然后通过操作系统完成资源的调度。具体的细节还需要进修。。。。。</p>
+<p>总之，通过python也可以实现多进程的。</p>
+<p>通常，我们启动一个进程的时候，都是通过父进程来启动这个对应的子进程，在python中，我们可以通过os模块，通过os.getpid()&amp;os.getppid()来查看当前进程以及父进程的进程ID。或者我们可以通过multiprocessing模块中的创建一个进程的实例化对象后，通过调用pid这个方法来查看这个进程的进程ID。</p>
+<p>当我们利用多进程的时候，就可以实现同一时间内做多件事情。在python中，如果我们启动多个子进程，主进程的执行和子进程的执行是没有影响的，但是，如果你想实现等待子进程执行完毕后才允许主进程执行完毕，可以利用join()方法，这里的join就相当于wait，就是，等待这个进程执行完毕，才进行下一步。   同样，当主进程执行完毕后，程序并不会退出，而是等待子进程也执行完毕才会退出，这时候，如果我们想实现主进程执行完毕后，某些子进程必须跟随者主进程的结束而结束，就可以设置某个子进程p，令其p.daemon = True，使这个进程变成守护进程，这样，当主进程执行完毕后，守护进程便会跟着退出（不管它执行完毕与否）。  更直白一点，就像古代皇帝死后，一些妃子需要陪葬，大臣不需要陪葬，这时候，这些妃子就相当于守护进程。。。</p>
+<p>插入一段代码。。研究一下。</p>
+<p>from multiprocessing import Process<br>import time</p>
+<p>def func():<br>    time.sleep(5)<br>    print(‘^^’*5)</p>
+<p>def run():<br>    time.sleep(1)<br>    print(‘i am running’)</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    p1 = Process(target=run)<br>    p1.daemon = True</p>
+<pre><code>p1.start()
+p2 = Process(target=func)
+p2.start()
+print(p2.pid)
+for i in range(5):
+    time.sleep(0.1)
+    print(&apos;i am chief process&apos;)</code></pre><p>除了这些之外，多进程还有某些特性。假设你要实现一个抢票功能，这时候，你想着so easy，每个人抢票的行为作为一个进程，不就可以实现同时抢票了吗？于是开始bangbangbang敲好了代码，测试的时候发现为什么只放出去一张票，好几个人抢到了，这是因为，起多个进程，他们有可能同时读入这个数据，导致疯狂被投诉。。。这时候，不要慌，进程里面还有进程锁这个东西，什么意思呢，就是好比你去拉屎，拉屎的时候肯定只能一人一个坑位，你进去了把门锁住，防止别人进来（除非你不是在拉屎，里面有俩人。。咳咳）。进程所就是，你要获取这个数据，你刚刚得到这个数据要进行处理，这个时候，你就把门反锁住，等你处理完了再把门打开，钥匙挂到门上，这样就避免了bug。 如果你说，一次只能进一个人这样太不友好了，我就是喜欢群P，怎么办？你可以在门上挂多点钥匙啊，这样不就可以好多人进去，限制了进去的人的数量。。。。这种可以有多个钥匙的锁称为“信号量”（semaphore）。</p>
+<p>给你一个抢票的游戏：</p>
+<p>from multiprocessing import Process<br>from multiprocessing import Lock<br>import time<br>import random<br>import json</p>
+<p>def search_ticket():<br>    with open(‘ticket’) as f:<br>        ticket = (json.load(f)[‘count’])<br>        print(‘there is %s tickets’%ticket)<br>        return ticket<br>def get_ticket(i,lock):<br>    count_ticket = search_ticket()<br>    lock.acquire()<br>    if count_ticket:<br>        print(‘%s has gotten a ticket’%i)<br>        count_ticket -= 1<br>        with open(‘ticket’,’w’) as f:<br>            json.dump({‘count’:count_ticket},f)<br>    else:<br>        print(‘there is no ticket’)<br>    lock.release()<br>if <strong>name</strong> == “<strong>main</strong>“:<br>    lock = Lock()<br>    for i in range(10):<br>        time.sleep(random.randint(0,1))<br>        p = Process(target=get_ticket,args=(i,lock))<br>        p.start()</p>
+<p>这里用json文件代表抢票的数据库，插入random和time模块模拟实际抢票过程中的网络时延。</p>
+<p>接下来用信号量来模拟一下拉屎这个环节，每个人都有0-3秒的时间，毕竟超过三秒都是病。。。</p>
+<p>from multiprocessing import Process<br>from multiprocessing import Semaphore<br>import time<br>import random<br>def toilet(i,sem):<br>    sem.acquire()<br>    print(‘%s 进去拉屎了’%i)<br>    time.sleep(random.randint(0,3))<br>    sem.release()<br>    print(‘%s 已经拉完出来了，很饱’%i)</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    sem = Semaphore(4)<br>    for i in range(10):<br>        p = Process(target=toilet,args=(i,sem))<br>        p.start()</p>
+<p>除了锁这个概念外，进程还有一些小知识点需要掌握，队列和事件。队列很简单，无非就是先进先出，进去出去的原则，除此之外，还有qsize这个用法，但是再多进程中，这个方法有可能不准确，因为如果你读取一个数据的size的同时，又put进去了一个数据，通过队列可以实现子进程和主进程以及子进程和子进程之间的通信。</p>
+<p>事件的话，就是可以模拟红绿灯，Event只需要记住这几个就行，clear/set/wait/is_set，当is_set为True的时候，程序是不阻塞的，默认情况下，wait是阻塞的，这样说也不大明白，还是插入一段红绿灯的例子：</p>
+<p>from multiprocessing import Event<br>from multiprocessing import Process<br>import time</p>
+<p>def traffic_light(e):<br>    while True:<br>        if e.is_set():<br>            print(‘绿灯，可以通过’)<br>            time.sleep(2)<br>            e.clear()<br>        else:<br>            print(‘红灯，不能通过’)<br>            time.sleep(3)<br>            e.set()<br>def car(i,e):<br>    e.wait()<br>    print(‘%s 车可以通过’%i)</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    e = Event()<br>    p1 = Process(target=traffic_light,args=(e,))<br>    p1.start()<br>    for i in range(20):<br>        if i % 3 == 0:<br>            time.sleep(3)<br>        else:<br>            p = Process(target=car,args=(i,e))<br>            p.start()<br>此例中，假设车流量比较小，每三秒过来两辆车，红绿灯启用一个进程，每辆车也视为一个进程，通过事件e的is_set的布尔值的变化实现了进程间的通信。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/13/异常处理/" rel="next" title="异常处理">
+                <i class="fa fa-chevron-left"></i> 异常处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/13/修改sqlarchemy源码使其支持jdbc连接mysql/" rel="prev" title="修改sqlarchemy源码使其支持jdbc连接mysql">
+                修改sqlarchemy源码使其支持jdbc连接mysql <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python多进程"><span class="nav-number">1.</span> <span class="nav-text">python多进程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

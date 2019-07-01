@@ -1,0 +1,2717 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Python全栈开发">
+<meta property="og:type" content="website">
+<meta property="og:title" content="范澳河技术博客">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="Python全栈开发">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="范澳河技术博客">
+<meta name="twitter:description" content="Python全栈开发">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/page/3/">
+
+
+
+
+
+  <title>范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/04/Python：generator的send()方法流程分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/04/Python：generator的send()方法流程分析/" itemprop="url">Python：generator的send()方法流程分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-04T00:21:57+08:00">
+                2018-10-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Python：generator的send-方法流程分析"><a href="#Python：generator的send-方法流程分析" class="headerlink" title="Python：generator的send()方法流程分析"></a>Python：generator的send()方法流程分析</h3><p>先来一个简单地例子：</p>
+<p>def foo():<br>    print(‘starting’)<br>    while True:<br>        r = yield 2<br>        print(r)</p>
+<p>f = foo()<br>print(f.send(None))<br>print(f.send(1))</p>
+<p>结果如下：</p>
+<p>starting</p>
+<p>讲解：</p>
+<p>1   f = foo()  这句表示生成一个generator对象</p>
+<p>f = foo()<br>print(type(f))  #&lt;class ‘generator’&gt;<br>2   f.send(None) 的作用与 next(f) 的作用相同：运行代码到  r = yield 2 处。 r = yield 2 主要分两步：</p>
+<p>　　第一步： yield 2 ，也就是先返回2</p>
+<p>　　第二步： r = (yield) 这里用括号把yield包起来是为了突出yield是一个表达式expression：可以用来表示某个值。</p>
+<p> f.send(None) 或者说 next(f) 仅仅运行到了第一步，也就是返回了2，然后被print()函数打印到屏幕</p>
+<p>3   f.send(1) 运行第二步，将1赋值给r ，然后运行print(r)，再一次运行到 r = yield 2 处时，也仅仅只运行第一步，也就是返回2，然后由print()函数打印到屏幕。</p>
+<p>注意以下情况不会报错：</p>
+<p>def foo():<br>    yield 1<br>    yield 2<br>    yield 3</p>
+<p>f = foo()<br>r = next(f)<br>print(r)<br>for i in range(2):<br>    r = f.send(‘hello world’)<br>    print(r)</p>
+<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p>也就是说send非空值时，即使yield语句前没有变量接收send的值，程序不会报错</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/21/深入python中的self/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/21/深入python中的self/" itemprop="url">深入python中的self</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T00:21:57+08:00">
+                2018-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="深入python中的self"><a href="#深入python中的self" class="headerlink" title="深入python中的self"></a>深入python中的self</h3><p>在Python中一切皆对象，不太清楚为什么请看：深刻理解Python中的元类(metaclass)</p>
+<p>一句话概括：self表示类的实例对象，而非类对象。</p>
+<p>class Foo(object):<br>    def <strong>init</strong>(self):<br>        print(‘Foo is %s, self is %s’%(Foo,self))</p>
+<pre><code>def prt(self):
+    print(&apos;----------&apos;)</code></pre><p>r = Foo()</p>
+<h1 id="结果如下"><a href="#结果如下" class="headerlink" title="结果如下"></a>结果如下</h1><h1 id="Foo-is-lt-class-‘main-Foo’-gt-self-is-lt-main-Foo-object-at-0x02833C50-gt"><a href="#Foo-is-lt-class-‘main-Foo’-gt-self-is-lt-main-Foo-object-at-0x02833C50-gt" class="headerlink" title="Foo is &lt;class ‘main.Foo’&gt;, self is &lt;main.Foo object at 0x02833C50&gt;"></a>Foo is &lt;class ‘<strong>main</strong>.Foo’&gt;, self is &lt;<strong>main</strong>.Foo object at 0x02833C50&gt;</h1><p>当我们执行 r.prt() 时，Python解释器默认会调用Foo.prt()并将r作为第一个参数传入，也就是Foo.prt(r)</p>
+<p>当然self不用非得写成self，this或者其他都可以。</p>
+<p>当调用某个方法时，可以通过<strong>self</strong>来查看其调用者，<strong>self</strong>是一个只读属性，不可修改。</p>
+<p>class Bar(object):<br>    def prt(self):<br>        print(‘bar’)</p>
+<p>b = Bar()<br>p = b.prt<br>print(p.<strong>self</strong>)</p>
+<h1 id="lt-main-Bar-object-at-0x017AF970-gt"><a href="#lt-main-Bar-object-at-0x017AF970-gt" class="headerlink" title="&lt;main.Bar object at 0x017AF970&gt;"></a>&lt;<strong>main</strong>.Bar object at 0x017AF970&gt;</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/07/简单递归算法题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/07/简单递归算法题/" itemprop="url">简单递归算法题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-07T00:21:57+08:00">
+                2018-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="简单递归算法题"><a href="#简单递归算法题" class="headerlink" title="简单递归算法题"></a>简单递归算法题</h3><p>递归题解决思路：</p>
+<p>　　1 找到出口</p>
+<p>　　2 找到f(n)与f(n-1)之间的关系</p>
+<p>最近看了一些递归题，都很简单。根据上面的思路很容易就做出来。下面来看Python的实现：</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><h1 id="Time-2017-4-28-16-41"><a href="#Time-2017-4-28-16-41" class="headerlink" title="@Time    : 2017/4/28 16:41"></a>@Time    : 2017/4/28 16:41</h1><h1 id="Author-MnCu"><a href="#Author-MnCu" class="headerlink" title="@Author  : MnCu"></a>@Author  : MnCu</h1><h1 id="Site"><a href="#Site" class="headerlink" title="@Site    :"></a>@Site    :</h1><h1 id="File-fbnq-py"><a href="#File-fbnq-py" class="headerlink" title="@File    : fbnq.py"></a>@File    : fbnq.py</h1><h1 id="Software-PyCharm"><a href="#Software-PyCharm" class="headerlink" title="@Software: PyCharm"></a>@Software: PyCharm</h1><h1 id="一对兔子从出生到可繁殖需两个月，然后每月都能繁殖一对兔子，问n月后共有多少兔子"><a href="#一对兔子从出生到可繁殖需两个月，然后每月都能繁殖一对兔子，问n月后共有多少兔子" class="headerlink" title="一对兔子从出生到可繁殖需两个月，然后每月都能繁殖一对兔子，问n月后共有多少兔子"></a>一对兔子从出生到可繁殖需两个月，然后每月都能繁殖一对兔子，问n月后共有多少兔子</h1><p>def fbnc_func(n):<br>    ‘’’<br>    1 出口：<br>        当月份小于等于2月时，则返回1<br>    2 f(n)与f(n-1)的关系：<br>        当月的兔子数 = 上个月的兔子数 + 上个月可以繁殖的兔子数<br>    ‘’’<br>    if n &lt;= 2:<br>        return 1<br>    else:<br>        return fbnc_func(n-1) + fbnc_func(n-2)</p>
+<h1 id="num-fbnc-func-12"><a href="#num-fbnc-func-12" class="headerlink" title="num = fbnc_func(12)"></a>num = fbnc_func(12)</h1><h1 id="print-num"><a href="#print-num" class="headerlink" title="print(num)"></a>print(num)</h1><h1 id="楼梯有20阶，每次可以走一阶或者走两阶，问共有多少种走法"><a href="#楼梯有20阶，每次可以走一阶或者走两阶，问共有多少种走法" class="headerlink" title="楼梯有20阶，每次可以走一阶或者走两阶，问共有多少种走法"></a>楼梯有20阶，每次可以走一阶或者走两阶，问共有多少种走法</h1><p>def louti(n):<br>    ‘’’<br>    1 出口：<br>        当楼梯数为1时，返回1<br>        当楼梯数位2时，返回2<br>    2 关系：<br>        n层楼梯走法 = (n-1)层楼梯走法 + (n-2)层楼梯走法<br>    ‘’’<br>    assert n &gt; 0<br>    if n == 1:<br>        return 1<br>    elif n == 2:<br>        return 2<br>    else:<br>        return louti(n-1) + louti(n-2)</p>
+<h1 id="r-louti-20"><a href="#r-louti-20" class="headerlink" title="r = louti(20)"></a>r = louti(20)</h1><h1 id="print-r"><a href="#print-r" class="headerlink" title="print(r)"></a>print(r)</h1><h1 id="一列数的规则如下-1、12、123、1234、12345、123456……-求第n个数的递归算法（n-lt-9）"><a href="#一列数的规则如下-1、12、123、1234、12345、123456……-求第n个数的递归算法（n-lt-9）" class="headerlink" title="一列数的规则如下: 1、12、123、1234、12345、123456……,求第n个数的递归算法（n&lt;=9）"></a>一列数的规则如下: 1、12、123、1234、12345、123456……,求第n个数的递归算法（n&lt;=9）</h1><p>def tran(n):<br>    ‘’’<br>    1 出口：<br>        如果n为1，则返回1<br>    2 关系：<br>        当前的数 = int(前一个数的字符串格式 + n的字符串格式)</p>
+<pre><code>&apos;&apos;&apos;
+n = int(n)
+if n == 1:
+    return 1
+else:
+    return int(str(tran(n-1)) + str(n))</code></pre><h1 id="r-tran-6"><a href="#r-tran-6" class="headerlink" title="r = tran(6)"></a>r = tran(6)</h1><h1 id="print-r-1"><a href="#print-r-1" class="headerlink" title="print(r)"></a>print(r)</h1><h1 id="将一整数逆序，如987654321变为123456789。"><a href="#将一整数逆序，如987654321变为123456789。" class="headerlink" title="将一整数逆序，如987654321变为123456789。"></a>将一整数逆序，如987654321变为123456789。</h1><p>def reverse(num):<br>    ‘’’<br>    1 出口： (首先讲num转换为字符串)<br>        num为空，返回’’<br>        num长度为1,返回num<br>    2 关系：<br>        当前被反转后的数 = 当前未被反转的数的末尾(字符串格式) + 前面的数(字符串格式)</p>
+<pre><code>&apos;&apos;&apos;
+num = str(num)
+if len(num) == 0:
+    return &apos;&apos;
+elif len(num) == 1:
+    return num
+else:
+    return num[-1] + reverse(num[:-1])</code></pre><h1 id="r-reverse-123456"><a href="#r-reverse-123456" class="headerlink" title="r = reverse(123456)"></a>r = reverse(123456)</h1><h1 id="print-r-2"><a href="#print-r-2" class="headerlink" title="print(r)"></a>print(r)</h1><h1 id="请写一段代码来计算给定文本内字符“A”的个数。用递归方式。"><a href="#请写一段代码来计算给定文本内字符“A”的个数。用递归方式。" class="headerlink" title="请写一段代码来计算给定文本内字符“A”的个数。用递归方式。"></a>请写一段代码来计算给定文本内字符“A”的个数。用递归方式。</h1><p>def count(chr):<br>    ‘’’<br>    1 出口：<br>        当字符串长度为0返回0<br>        当字符串长度为1且该字符是‘A’则返回1，否则返回0<br>    2 关系：<br>        当前字符串中‘A’的个数 = 上一个字符串(也就是当前字符串减去最后一项)中‘A’的个数 + 最后一个字符中‘A’的个数</p>
+<pre><code>&apos;&apos;&apos;
+if len(chr) == 0:
+    return 0
+elif len(chr) == 1:
+    if chr == &apos;A&apos;:
+        return 1
+    return 0
+else:
+    return count(chr[:-1]) + count(chr[-1])</code></pre><h1 id="r-count-‘AALKSJDFK’"><a href="#r-count-‘AALKSJDFK’" class="headerlink" title="r = count(‘AALKSJDFK’)"></a>r = count(‘AALKSJDFK’)</h1><h1 id="print-r-3"><a href="#print-r-3" class="headerlink" title="print(r)"></a>print(r)</h1><h1 id="一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。"><a href="#一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。" class="headerlink" title="一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。"></a>一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</h1><p>def taijie(n):<br>    ‘’’<br>    1 出口;<br>        台阶数为1，则有1种跳法<br>        台阶数为2，有2种跳法<br>    2 关系：<br>        分析：用Fib(n)表示青蛙跳上n阶台阶的跳法数，青蛙一次性跳上n阶台阶的跳法数1(n阶跳)，设定Fib(0) = 1；<br>       当n = 1 时， 只有一种跳法，即1阶跳：Fib(1) = 1;<br>       当n = 2 时， 有两种跳的方式，一阶跳和二阶跳：Fib(2) = Fib(1) + Fib(0) = 2;<br>       当n = 3 时，有三种跳的方式，第一次跳出一阶后，后面还有Fib(3-1)中跳法； 第一次跳出二阶后，后面还有Fib(3-2)中跳法；第一次跳出三阶后，后面还有Fib(3-3)中跳法<br>        Fib(3) = Fib(2) + Fib(1)+Fib(0)=4;<br>       当n = n 时，共有n种跳的方式，第一次跳出一阶后，后面还有Fib(n-1)中跳法； 第一次跳出二阶后，后面还有Fib(n-2)中跳法……………………..第一次跳出n阶后，后面还有 Fib(n-n)中跳法.<br>       Fib(n) = Fib(n-1)+Fib(n-2)+Fib(n-3)+……….+Fib(n-n)=Fib(0)+Fib(1)+Fib(2)+…….+Fib(n-1)<br>      又因为Fib(n-1)=Fib(0)+Fib(1)+Fib(2)+…….+Fib(n-2)<br>      两式相减得：Fib(n)-Fib(n-1)=Fib(n-1)         =====》  Fib(n) = 2*Fib(n-1)     n &gt;= 2<br>    ‘’’<br>    if n == 1:<br>        return 1<br>    elif n == 2:<br>        return 2<br>    else:<br>        return 2 * taijie(n-1)<br>r = taijie(20)<br>print(r)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/21/使用python自己实现的一个简单Orm框架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/21/使用python自己实现的一个简单Orm框架/" itemprop="url">使用python自己实现的一个简单Orm框架</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-21T00:21:57+08:00">
+                2018-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="使用python自己实现的一个简单Orm框架"><a href="#使用python自己实现的一个简单Orm框架" class="headerlink" title="使用python自己实现的一个简单Orm框架"></a>使用python自己实现的一个简单Orm框架</h3><p>一个小型ORM框架，基于pymysql实现，较为简单。</p>
+<p>  1 #!/usr/bin/env python<br>  2 # -<em>- coding: utf-8 -</em>-
+  3<br>  4 import pymysql<br>  5 from utils import NotImplementedError<br>  6<br>  7 ‘’’<br>  8 本文件是基于mysql实现的一个ORM框架<br>  9 ‘’’<br> 10<br> 11 class MysqlConnector(object):<br> 12     ‘’’Python与mysql的连接器’’’<br> 13<br> 14     def <strong>init</strong>(self, host, port, username, password, db):<br> 15         conn = pymysql.connect(host=host, port=port, user=username,<br> 16                                passwd=password, db=db, use_unicode=True, charset=”utf8”)<br> 17         self.conn = conn<br> 18         self.cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)<br> 19<br> 20     def execute(self, sql_msg):<br> 21         ‘’’<br> 22         执行sql语句<br> 23         :param sql_msg:  sql语句，字符串格式<br> 24         :return:<br> 25         ‘’’<br> 26         ret = self.cursor.execute(sql_msg)<br> 27         self.conn.commit()<br> 28         return ret<br> 29<br> 30     def close(self):<br> 31         ‘’’关闭连接器’’’<br> 32         self.cursor.close()<br> 33         self.conn.close()<br> 34<br> 35 class BaseModel(object):<br> 36     ‘’’<br> 37     实现将Python语句转换为sql语句，配合MysqlConnector实现表的创建以及数据的增删查改等操作。<br> 38     创建表时： 支持主键PRIMARY KEY，索引INDEX，唯一索引UNIQUE，自增AUTO INCREMENT 外键语句<br> 39         创建的表引擎指定为InnoDB，字符集为 utf-8<br> 40     增删查改： 支持WHERE [LIKE] LIMIT语句<br> 41     其子类必须设置initialize方法，并在该方法中创建字段对象<br> 42     ‘’’<br> 43     def <strong>new</strong>(cls, <em>args, **kwargs):<br> 44         <em>instance = super().<em>_new</em></em>(cls)<br> 45         <em>instance.initialize()<br> 46         return <em>instance<br> 47<br> 48     def __init</em></em>(self, table_name, sql_connector):<br> 49         ‘’’<br> 50         :param table_name: 要建立的表名<br> 51         :param sql_connector: MysqlConnector实例对象<br> 52         ‘’’<br> 53         self.table_name = table_name<br> 54         self.fields = []<br> 55         self.primary_key_field = None<br> 56         self.uniques_fields = []<br> 57         self.index_fields = []<br> 58         self.is_foreign_key_fields = []<br> 59         self.sql_connector = sql_connector<br> 60         self.<em>create_fields_list()<br> 61         self.create_table()<br> 62<br> 63     def initialize(self):<br> 64         ‘’’BaseModel的每个子类中必需包含该方法，且在该方法中定义字段’’’<br> 65         raise NotImplementedError(“Method or function hasn’t been implemented yet.”)<br> 66<br> 67     def <em>create_fields_list(self):<br> 68         ‘’’创建list用来存储表的字段对象’’’<br> 69         for k, v in self.__dict</em></em>.items():<br> 70             if isinstance(v, BaseField):<br> 71                 self.fields.append(v)<br> 72                 v.full_column = ‘%s.%s’ % (self.table_name, v.db_column)<br> 73                 v.table_name = self.table_name<br> 74         for field in self.fields:<br> 75             if field.primary_key:<br> 76                 self.primary_key_field = field<br> 77             if field.unique:<br> 78                 self.uniques_fields.append(field)<br> 79             if field.db_index:<br> 80                 self.index_fields.append(field)<br> 81             if field.is_foreign_key:<br> 82                 self.is_foreign_key_fields.append(field)<br> 83<br> 84     def _has_created(self):<br> 85         ‘’’检测表有没有被创建’’’<br> 86         self.sql_connector.cursor.execute(‘SHOW TABLES;’)<br> 87         ret = self.sql_connector.cursor.fetchall()<br> 88         for table in ret:<br> 89             for k, v in table.items():<br> 90                 if v == self.table_name:<br> 91                     return True<br> 92<br> 93     def _create_table(self):<br> 94         ret = ‘CREATE TABLE %s (‘ % self.table_name<br> 95         for v in self.fields:<br> 96             ret += v.generate_field_sql()<br> 97         ret = ‘%s%s%s%s%s’ % (ret, self._generate_primary_key(),<br> 98                              self._generate_unique(), self._generate_index(),<br> 99                              self._generate_is_foreign_key())<br>100         ret = ret[:-1] + ‘)ENGINE=InnoDB DEFAULT CHARSET=utf8;’<br>101         return ret<br>102<br>103     def create_table(self):<br>104         ‘’’创建表’’’<br>105         if not self._has_created():<br>106             print(‘创建表：%s’ % self.table_name)<br>107             sql_msg = self._create_table()<br>108             # print(sql_msg)<br>109             self.sql_connector.execute(sql_msg)<br>110<br>111     def _generate_primary_key(self):<br>112         ‘’’生成sql语句中的 primary key 语句’’’<br>113         ret = ‘’<br>114         if self.primary_key_field:<br>115             ret = ‘PRIMARY KEY(%s),’ % self.primary_key_field.db_column<br>116         return ret<br>117<br>118     def _generate_is_foreign_key(self):<br>119         ret = ‘’<br>120         if self.is_foreign_key_fields:<br>121             for field in self.is_foreign_key_fields:<br>122                 ret += ‘FOREIGN KEY(%s) REFERENCES %s(%s) ON DELETE %s  ON UPDATE %s,’ % (field.db_column,<br>123                                                   field.model_obj.table_name,<br>124                                                   field.model_obj.primary_key_field.db_column,<br>125                                                   field.on_delete,<br>126                                                   field.on_delete )<br>127         return ret<br>128<br>129     def _generate_unique(self):<br>130         ‘’’生成sql语句中的 unique 语句’’’<br>131         ret = ‘’<br>132         if self.uniques_fields:<br>133             ret = ‘UNIQUE (‘<br>134             for field in self.uniques_fields:<br>135                 ret += ‘%s,’ % field.db_column<br>136             ret = ret[:-1]<br>137             ret += ‘),’<br>138         return ret<br>139<br>140     def _generate_index(self):<br>141         index = ‘’<br>142         if self.index_fields:<br>143             index = ‘INDEX (‘<br>144             for field in self.index_fields:<br>145                 index += ‘%s,’ % field.db_column<br>146             index = index[:-1]<br>147             index += ‘),’<br>148         return index<br>149<br>150     def _generate_where(self, condition={}):<br>151         ‘’’<br>152         根据条件生成 where 语句<br>153         :param condition: 一个dict，key是字段对象，value是条件(比如 ‘WHERE ID=3’,那么value就是’=3’)<br>154         :return:<br>155         ‘’’<br>156         where = ‘’<br>157         if condition:<br>158             where = ‘ WHERE ‘<br>159             for k, v in condition.items():<br>160                 v = v.strip()<br>161                 offset = 1<br>162                 if v.startswith(‘l’):<br>163                     offset = 4<br>164                 if not k.is_str:<br>165                     where += ‘%s %s and’ % (k.db_column, v)<br>166                 else:<br>167                     where += ‘%s %s “%s” and’ % (k.db_column, v[:offset], v[offset:].strip())<br>168             where = where[:-3]<br>169         return where<br>170<br>171     def select_items(self, counts=0, select_fields=[], condition={}, join_conditions=[]):<br>172         ‘’’<br>173         根据condition 对表进行select，并 LIMIT counts<br>174         :param counts:<br>175         :param condition:<br>176         :return:<br>177         ‘’’<br>178         join_length = len(join_conditions)<br>179         counts_sql = ‘’<br>180         join_sql = ‘’<br>181         select_fields_sql = ‘’<br>182         where = self._generate_where(condition)<br>183         if counts:<br>184             counts_sql = ‘LIMIT %s’ % counts<br>185         if not select_fields:<br>186             select_fields_sql = ‘</em> ‘<br>187         if join_conditions:<br>188             tables_order = list(list(zip(<em>join_conditions))[0])<br>189             tables_order.insert(0, self)<br>190             for i in select_fields:<br>191                 select_fields_sql += ‘%s,’ % i.full_column<br>192             for n in range(join_length):<br>193                 one_join_condition = join_conditions[n]<br>194                 if n == 0:<br>195                     base_table = tables_order[0].table_name<br>196                 else:<br>197                     base_table = ‘’<br>198                 bracket_counts = join_length - n - 1<br>199                 join_sql += ‘%s %s LEFT JOIN %s on %s=%s%s’ % (<br>200                     bracket_counts</em>‘(‘, base_table, tables_order[n+1].table_name,<br>201                     one_join_condition[1].full_column, one_join_condition[2].full_column,<br>202                     bracket_counts * ‘)’, )<br>203         else:<br>204             for i in select_fields:<br>205                 select_fields_sql += ‘%s,’ % i.db_column<br>206             join_sql = self.table_name<br>207         select_fields_sql = select_fields_sql[:-1]<br>208         select = ‘SELECT %s FROM %s %s %s;’ % (select_fields_sql, join_sql, where, counts_sql)<br>209         # print(‘—————-‘, select)<br>210         self.sql_connector.execute(select)<br>211         result = self.sql_connector.cursor.fetchall()<br>212         return result<br>213<br>214     def insert_item(self, data={}):<br>215         ‘’’<br>216         向表中插入一行<br>217         :param data: 一个dict，key是字段对象，value则是值<br>218         :return:<br>219         ‘’’<br>220         insert = ‘INSERT INTO %s (‘ % self.table_name<br>221         value = ‘(‘<br>222         if data:<br>223             for k, v in data.items():<br>224                 insert += ‘%s,’ % k.db_column<br>225                 if k.is_str:<br>226                     value += ‘“%s”,’ % v<br>227                 else:<br>228                     value += ‘%s,’ % v<br>229                 # print(‘value is ‘,value)<br>230             insert = insert[:-1] + ‘)  VALUES ‘<br>231             value = value[:-1] + ‘);’<br>232             insert += value<br>233         # print(‘……’,insert)<br>234         self.sql_connector.execute(insert)<br>235<br>236     def delete_item(self, condition={}):<br>237         ‘’’删除符合condition的条目’’’<br>238         delete = ‘DELETE FROM %s ‘ % self.table_name<br>239         where = self.<em>generate_where(condition)<br>240         delete += where<br>241         # print(delete)<br>242         self.sql_connector.execute(delete)<br>243<br>244     def update_item(self, data={}, condition={}):<br>245         ‘’’将符合condition的条目修改为data’’’<br>246         update = ‘UPDATE %s’ % self.table_name<br>247         data_statement = ‘’<br>248         if data:<br>249             data_statement = ‘ SET ‘<br>250             for k, v in data.items():<br>251                 if not k.is_str:<br>252                     data_statement += ‘%s=%s,’ % (k.db_column, v)<br>253                 else:<br>254                     data_statement += ‘%s=”%s”,’ % (k.db_column, v)<br>255             data_statement = data_statement[:-1]<br>256         where = self.<em>generate_where(condition)<br>257         update += data_statement + where<br>258         # print(‘———‘,update)<br>259         self.sql_connector.execute(update)<br>260<br>261     def get_field_value(self, field, condition={}):<br>262         ret = self.select_items(condition=condition)<br>263         # print(ret)<br>264         if len(ret) == 1:<br>265             value = ret[0][field.db_column]<br>266         elif len(ret) &gt; 1:<br>267             value = []<br>268             for i in ret:<br>269                 value.append(i[field.db_column])<br>270         else:<br>271             value = ‘’<br>272         # print(‘value is ‘,value)<br>273         return value<br>274<br>275 class BaseField(object):<br>276     def __init</em></em>(self, db_column, null=True, blank=None, choice={},<br>277                  db_index=False, default=None, primary_key=False,<br>278                  unique=False, max_length=0, auto_increment=False,<br>279                  ):<br>280         ‘’’<br>281<br>282         :param db_column:  数据库中表的字段名<br>283         :param null:  该字段是否可以为空<br>284         :param blank: 如果该字段为空，存储什么值<br>285         :param choice: 该字段的值只能是choice的一个<br>286         :param db_index: 是否为该字段设置索引<br>287         :param default: 该字段的默认值<br>288         :param primary_key: 是否为该字段设置主键<br>289         :param unique: 该字段值是否可以重复<br>290         :param max_length： 该字段的最大长度<br>291         :param auto_increment: 是否自增<br>292         ‘’’<br>293         self.db_column = db_column<br>294         self.null = null<br>295         self.blank = blank<br>296         self.choice = choice<br>297         self.db_index = db_index<br>298         self.default = default<br>299         self.primary_key = primary_key<br>300         if self.primary_key:<br>301             self.null = False<br>302         self.unique = unique<br>303         self.max_length = max_length<br>304         self.auto_increment = auto_increment<br>305         self.is_foreign_key = False<br>306<br>307     def generate_field_sql(self):<br>308         pass<br>309<br>310     def <em>generate_null(self):<br>311         if not self.null:<br>312             null = ‘NOT NULL’<br>313         else:<br>314             null = ‘NULL’<br>315         return null<br>316<br>317     def <em>generate_default(self):<br>318         default = ‘’<br>319         if self.default is not None:<br>320             if self.is_str:<br>321                 default = ‘ DEFAULT “%s”‘ % self.default<br>322             else:<br>323                 default = ‘ DEFAULT %s’ % self.default<br>324         return default<br>325<br>326     def _generate_auto_increment(self):<br>327         ret = ‘’<br>328         if self.auto_increment:<br>329             ret = ‘AUTO_INCREMENT’<br>330         return ret<br>331<br>332 class CharField(BaseField):<br>333     def __init</em></em>(self, <em>args, **kwargs):<br>334         super().<strong>init</strong>(</em>args, <em><em>kwargs)<br>335         kwargs[‘blank’] = ‘’<br>336         if not self.max_length:<br>337             self.max_length = 128<br>338         if not self.default:<br>339             self.default = self.blank<br>340         self.is_str = True<br>341         self.field_type = ‘CHAR’<br>342<br>343     def generate_field_sql(self):<br>344         null = self.<em>generate_null()<br>345         default = self.<em>generate_default()<br>346         return ‘%s CHAR(%s) %s %s,’ % (self.db_column, self.max_length, null, default)<br>347<br>348 class IntField(BaseField):<br>349     def __init</em></em>(self, *args, *</em>kwargs):<br>350         super().<strong>init</strong>(</em>args, **kwargs)<br>351         self.is_str = False<br>352         self.field_type = ‘INT’<br>353<br>354     def generate_field_sql(self):<br>355         null = self.<em>generate_null()<br>356         default = self.<em>generate_default()<br>357         auto_increment = self._generate_auto_increment()<br>358         return ‘%s INT %s %s %s,’ % (self.db_column, null, default, auto_increment)<br>359<br>360 class ForeignKeyField(BaseField):<br>361     def __init</em></em>(self, db_column, model_obj, null=True, default=None, on_delete=’CASCADE’):<br>362         self.db_column = db_column<br>363         self.model_obj = model_obj<br>364         self.null = null<br>365         self.default = default<br>366         self.is_str = model_obj.primary_key_field.is_str<br>367         self.reference = model_obj.primary_key_field<br>368         self.on_delete = on_delete<br>369         self.is_foreign_key = True<br>370         self.primary_key = False<br>371         self.unique = False<br>372         self.db_index = False<br>373<br>374     def generate_field_sql(self):<br>375         null = self.<em>generate_null()<br>376         default = self.<em>generate_default()<br>377         return ‘%s %s %s %s,’ % (self.db_column, self.model_obj.primary_key_field.field_type, null, default)<br>378<br>379<br>380 Connector = MysqlConnector(‘127.0.0.1’, 3306, ‘root’, ‘’, ‘test1’)<br>381<br>382<br>383 if __name</em></em> == ‘<strong>main</strong>‘:<br>384     class UserModel(BaseModel):<br>385         def initialize(self):<br>386             self.uid = IntField(‘uid’, primary_key=True, auto_increment=True)<br>387             self.account = IntField(‘account’, unique=True, null=False)<br>388             self.password = CharField(‘password’, null=False)<br>389             self.name = CharField(‘name’, null=False)<br>390             self.class_name = CharField(‘class_name’, null=False)<br>391             self.profession = CharField(‘profession’, null=False)<br>392             self.out_date_counts = IntField(‘out_date_counts’, default=0)<br>393<br>394     u = UserModel(‘user’, Connector)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/01/Python中的requests模块注意事项/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/01/Python中的requests模块注意事项/" itemprop="url">Python中的requests模块注意事项</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-01T00:21:57+08:00">
+                2018-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Python中的requests模块注意事项"><a href="#Python中的requests模块注意事项" class="headerlink" title="Python中的requests模块注意事项"></a>Python中的requests模块注意事项</h3><p>主要是说requests.post()方法，</p>
+<p>　　参数：</p>
+<p>　　　　url ：  这就不解释了</p>
+<p>　　　　data：  如果传入的是字典类型，则字典在发出请求时会自动编码为表单形式，表单形式会将字典中的键和值进行一些操作： key1=value1&amp;key2=value2</p>
+<p>　　　　　　如果传入的是字符串类型，则数据会被直接发送出去。</p>
+<p>　　　　　　2.4.2版本开始提供了json参数，默认会执行json.dumps()</p>
+<p>　　　　headers</p>
+<p>　　　　　　我们可以自定义请求头部。</p>
+<p>　　　　　　　　content-type: application/json   application/json用来告诉服务端消息主体是序列化后的 JSON 字符串</p>
+<p>　　　　　　　　　　               application/x-www-form-urlencoded  浏览器的原生 form 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。<br>　　　　　　　　　　　　　　　　　　他会按照原始的表单编码方式，也就是将键值对按照以下方式编码：title=test&amp;sub%5B%5D=1&amp;sub%5B%5D=2&amp;sub%5B%5D=3</p>
+<p>　　　　　　　　　　　　　　multipart/form-data   浏览器如果要在表单上传文件必须指定该首部</p>
+<p>　　　　　　　　　　　　　　text/xml  xml格式，相对于json来说xml更重量级。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/Python变量类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/26/Python变量类型/" itemprop="url">python变量类型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-26T00:21:57+08:00">
+                2018-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Python中的变量赋值不需要类型声明。<br>每个变量在内存中创建，都包括变量的标识，名称和数据。<br>每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建。</p>
+<p>Python有五个标准的数据类型：</p>
+<p>Numbers（数字）<br>String（字符串）<br>List（列表）<br>Tuple（元组）<br>Dictionary（字典）<br>Python数字<br>Python支持四种不同的数字类型：</p>
+<p>int（有符号整型）<br>long（长整型[也可以代表八进制和十六进制]）<br>float（浮点型）<br>complex（复数）<br>Python字符串<br>Python的字符串列表有两种取值顺序：</p>
+<p>正向：从左导右索引默认从0开始，最大范围是字符串长度减1<br>反向：从右到左索引默认从-1开始，最大范围是字符串开头<br>如果需要取得一段子串，可以使用 变量[头下标 : 尾下标]，就可以截取到相应的字符串。其中下标是从0开始算起的，可以是整数或负数，下标可以为空，表示取到头或尾。</p>
+<p>str = ‘Hello World!’</p>
+<p>print str              # 输出完整字符串<br>print str[0]           # 输出字符串中的第一个字符<br>print str[2:5]         # 输出字符串中的第三个到第五个之间的字符串<br>print str[2:]          # 输出从第三个字符开始的字符串<br>print str *2           # 输出字符串两次<br>print str + “TEST”     # 输出连接的字符串</p>
+<p>以上例子输出的结果为：<br>Hello World!
+H<br>llo<br>llo World!
+Hello World!Hello World!
+Hello World!TEST</p>
+<p>Python列表<br>List（列表）是Python中使用最频繁的数据类型。<br>列表用 “[]” 标识。可以完成大多数集合类数据结构实现。是Python最通用的复合数据类型。</p>
+<p>列表中的值的分割也可以用到变量 [头下标 : 尾下标]，就可以截取相应的列表。</p>
+<p>list = [‘jesse’, 786, 2.23, ‘john’, 70.2]<br>tinylist = [123, ‘john’]</p>
+<p>print list                    # 输出完整列表<br>print list[0]                 # 输出列表的第一个元素<br>print list[1:3]               # 输出第二个至第三个的元素<br>print list[2:]                # 输出从第三个开始至列表末尾的所有元素<br>print tinylist *2             # 输出列表两次<br>print list + tinylist         # 打印组合的列表</p>
+<p>以上实例输出结果：<br>[‘jesse’, 786, 2.23, ‘jhon’, 70.2]<br>jesse<br>[786, 2.23]<br>[123, ‘jhon’, 70.2]<br>[123, ‘jhon’, 123, ‘jhon’]<br>[‘jesse’, 786, 2.23, ‘jhon’, 70.2, 123, ‘jhon’]</p>
+<p>Python元组<br>元组类似于List（列表）。<br>元组用 “()” 标识。内部元素用逗号隔开。元组不能二次赋值，相当于只读列表。</p>
+<p>tuple = (‘jesse’, 786, 2.23, ‘jhon’, 70.2)<br>tinytuple = (123, ‘jhon’)</p>
+<p>print tuple                 # 输出完整元组<br>print tuple[0]              # 输出元组的第一个元素<br>print tuple[1:3]            # 输出第二到第三个的元素<br>print tuple[2:]             # 输出从第三个开始至元组末尾的所有元素<br>print tinytuple *2          # 输出元组两次<br>print tuple + tinytuple     # 打印组合的元组</p>
+<p>以上例子输出结果：<br>(‘jesse’, 786, 2.23, ‘john’, 70.2)<br>jesse<br>(786, 2.23)<br>(2.23, ‘john’, 70.2)<br>(123, ‘john’, 123, ‘john’)<br>(‘jesse’, 786, 2.23, ‘john’, 70.2, 123, ‘john’)</p>
+<p>Python元字典<br>字典（dictionary）是除列表以外Python中最灵活的内置数据结构类型。列表是有序的对象集合，字典是无序的对象集合。<br>两者的区别在于：字典当中的元素是通过键来存取的，而不是通过偏移存取的。<br>字典由索引（key）和它对应的值（value）组成。用“{ }”标识。</p>
+<p>dict = {}<br>dict[‘one’] = “This is one”<br>dict[2] = “This is two”</p>
+<p>tinydict = {‘name’:’jone’,’code’:1234,’dept’:’sales’}</p>
+<p>print dict[‘one’]           #输出键为’one’的值<br>print dict[2]               #输出键为 2 的值<br>print tinydict              #输出完整的字典<br>print tinydict.keys()       #输出所有键<br>print tinydict.values()     #输出所有值</p>
+<p>以上例子输出结果为：<br>This is one<br>This is two<br>{‘dept’:’sales’,’code’:1234,’name’:’john’}<br>[‘dept’,’code’,’name’]<br>[‘sales’,1234,’john’]</p>
+<p>Python数据类型转换<br>数据类型转换，只需要将数据类型作为函数名即可。<br>函数会返回一个新的对象，表示转换的值。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/(转)flask的context机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/21/(转)flask的context机制/" itemprop="url">(转)flask的context机制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T00:21:57+08:00">
+                2018-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="转-flask的context机制"><a href="#转-flask的context机制" class="headerlink" title="(转)flask的context机制"></a>(转)flask的context机制</h3><p>本文转自：<a href="https://blog.tonyseek.com/post/the-context-mechanism-of-flask/" target="_blank" rel="noopener">https://blog.tonyseek.com/post/the-context-mechanism-of-flask/</a></p>
+<p>作者：无知的 TonySeek</p>
+<p>注意：本文仅仅作为个人mark，所以排版不如原文，另本文对于原文做了部分的修改，但由于个人技术能力尚浅，可能会误导读者，建议到原文查看。</p>
+<p>　　用过 Flask 做 Web 开发的同学应该不会不记得 App Context 和 Request Context 这两个名字——这两个 Context 算是 Flask 中比较特色的设计。[1]</p>
+<p>　　从一个 Flask App 读入配置并启动开始，就进入了 App Context，在其中我们可以访问配置文件、打开资源文件、通过路由规则反向构造 URL。[2] 当一个请求进入开始被处理时，就进入了 Request Context，在其中我们可以访问请求携带的信息，比如 HTTP Method、表单域等。[3]</p>
+<p>　　所以，这两个 Context 也成了 Flask 框架复杂度比较集中的地方，对此有评价认为 Flask 的这种设计比 Django、Tornado 等框架的设计更为晦涩。[4] 我不认同这种评价。对于一个 Web 应用来说，“应用” 和 “请求” 的两级上下文在理念上是现实存在的，如果理解了它们，那么使用 Flask 并不会晦涩；即使是使用 Django、Tornado，理解了它们的 Context 也非常有利于做比官网例子更多的事情（例如编写 Middleware）。</p>
+<p>我因为开发 Flask 扩展，对这两个 Context 的具体实现也研究了一番，同时还解决了一些自己之前“知道结论不知道过程”的疑惑，所以撰写本文记录下来。</p>
+<p>Thread Local 的概念</p>
+<p>　　从面向对象设计的角度看，对象是保存“状态”的地方。Python 也是如此，一个对象的状态都被保存在对象携带的一个特殊字典中，可以通过 vars 函数拿到它。</p>
+<p>　　Thread Local 则是一种特殊的对象，它的“状态”对线程隔离 —— 也就是说每个线程对一个 Thread Local 对象的修改都不会影响其他线程。这种对象的实现原理也非常简单，只要以线程的 ID 来保存多份状态字典即可，就像按照门牌号隔开的一格一格的信箱。</p>
+<p>在 Python 中获得一个这样的 Thread Local 最简单的方法是 threading.local()：</p>
+<p>Python Shell</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import threading<br>storage = threading.local()<br>storage.foo = 1<br>print(storage.foo)<br>1
+class AnotherThread(threading.Thread):<br>… def run(self):<br>… storage.foo = 2<br>… print(storage.foo) # 这这个线程里已经修改了</p>
+<p>another = AnotherThread()<br>another.start()<br>2
+print(storage.foo) # 但是在主线程里并没有修改<br>1
+　　这样来说，只要能构造出 Thread Local 对象，就能够让同一个对象在多个线程下做到状态隔离。这个“线程”不一定要是系统线程，也可以是用户代码中的其他调度单元，例如 Greenlet。[5]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Werkzeug 实现的 Local Stack 和 Local Proxy<br>　　Werkzeug 没有直接使用 threading.local，而是自己实现了 werkzeug.local.Local 类。后者和前者有一些区别：</p>
+<p>　　　　后者会在 Greenlet 可用的情况下优先使用 Greenlet 的 ID 而不是线程 ID 以支持 Gevent 或 Eventlet 的调度，前者只支持多线程调度；<br>　　　　后者实现了 Werkzeug 定义的协议方法 <strong>release_local</strong>，可以被 Werkzeug 自己的 release_pool 函数释放（析构）掉当前线程下的状态，前者没有这个能力。<br>　　除 Local 外，Werkzeug 还实现了两种数据结构：LocalStack 和 LocalProxy。</p>
+<p>　　LocalStack 是用 Local 实现的栈结构，可以将对象推入、弹出，也可以快速拿到栈顶对象。当然，所有的修改都只在本线程可见。和 Local 一样，LocalStack 也同样实现了支持 release_pool 的接口。</p>
+<p>　　LocalProxy 则是一个典型的代理模式实现，它在构造时接受一个 callable 的参数（比如一个函数），这个参数被调用后的返回值本身应该是一个 Thread Local 对象。对一个 LocalProxy 对象的所有操作，包括属性访问、方法调用（当然方法调用就是属性访问）甚至是二元操作 [6] 都会转发到那个 callable 参数返回的 Thread Local 对象上。</p>
+<p>　　LocalProxy 的一个使用场景是 LocalStack 的 <strong>call</strong> 方法。比如 my_local_stack 是一个 LocalStack 实例，那么 my_local_stack() 能返回一个 LocalProxy 对象，这个对象始终指向 my_local_stack 的栈顶元素。如果栈顶元素不存在，访问这个 LocalProxy 的时候会抛出 RuntimeError。</p>
+<p>Flask 基于 Local Stack 的 Context<br>　　Flask 是一个基于 Werkzeug 实现的框架，所以 Flask 的 App Context 和 Request Context 也理所当然地基于 Werkzeug 的 Local Stack 实现。</p>
+<p>　　在概念上，App Context 代表了“应用级别的上下文”，比如配置文件中的数据库连接信息；Request Context 代表了“请求级别的上下文”，比如当前访问的 URL。</p>
+<p>　　这两种上下文对象的类定义在 flask.ctx 中，它们的用法是推入 flask.globals 中创建的 _app_ctx_stack 和 _request_ctx_stack 这两个单例 Local Stack 中。因为 Local Stack 的状态是线程隔离的，而 Web 应用中每个线程（或 Greenlet）同时只处理一个请求，所以 App Context 对象和 Request Context 对象也是请求间隔离的。</p>
+<p>　　当 app = Flask(<strong>name</strong>) 构造出一个 Flask App 时，App Context 并不会被自动推入 Stack 中。所以此时 Local Stack 的栈顶是空的，current_app 也是 unbound 状态。</p>
+<p>Python Shell</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from flask import Flask<br>from flask.globals import _app_ctx_stack, _request_ctx_stack</p>
+<p>app = Flask(<strong>name</strong>)
+_app_ctx_stack.top<br>_request_ctx_stack.top<br>_app_ctx_stack()<br><localproxy unbound></localproxy></p>
+<p>from flask import current_app<br>current_app<br><localproxy unbound><br>　　这也是一些 Flask 用户可能被坑的地方 —— 比如编写一个离线脚本时，如果直接在一个 Flask-SQLAlchemy 写成的 Model 上调用 User.query.get(user_id)，就会遇到 RuntimeError。因为此时 App Context 还没被推入栈中，而 Flask-SQLAlchemy 需要数据库连接信息时就会去取 current_app.config，current_app 指向的却是 _app_ctx_stack 为空的栈顶。</localproxy></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>　　解决的办法是运行脚本正文之前，先将 App 的 App Context 推入栈中，栈顶不为空后 current_app 这个 Local Proxy 对象就自然能将“取 config 属性” 的动作转发到当前 App 上了：</p>
+<p>Python Shell</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>ctx = app.app_context()<br>ctx.push()<br><em>app_ctx_stack.top<br>&lt;flask.ctx.AppContext object at 0x102eac7d0&gt;<br><em>app_ctx_stack.top is ctx<br>True<br>current_app<br>&lt;Flask ‘__main</em></em>‘&gt;</p>
+<p>ctx.pop()<br>_app_ctx_stack.top<br>current_app<br><localproxy unbound><br>　　那么为什么在应用运行时不需要手动 app_context().push() 呢？因为 Flask App 在作为 WSGI Application 运行时，会在每个请求进入的时候将请求上下文推入 _request_ctx_stack 中，而请求上下文一定是 App 上下文之中，所以推入部分的逻辑有这样一条：如果发现 _app_ctx_stack 为空，则隐式地推入一个 App 上下文。</localproxy></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>　　所以，请求中是不需要手动推上下文入栈的，但是离线脚本需要手动推入 App Context。如果没有什么特殊困难，我更建议用 Flask-Script 来写离线任务。[7]</p>
+<p>两个疑问<br>　　到此为止，就出现两个疑问：</p>
+<p>　　　　为什么 App Context 要独立出来：既然在 Web 应用运行时里，App Context 和 Request Context 都是 Thread Local 的，那么为什么还要独立二者？<br>　　　　为什么要放在“栈”里：在 Web 应用运行时中，一个线程同时只处理一个请求，那么 _req_ctx_stack 和 _app_ctx_stack 肯定都是只有一个栈顶元素的。那么为什么还要用“栈”这种结构？<br>我最初也被这两个疑问困惑过。后来看了一些资料，就明白了 Flask 为何要设计成这样。这两个做法给予我们 多个 Flask App 共存 和 非 Web Runtime 中灵活控制 Context 的可能性。</p>
+<p>　　我们知道对一个 Flask App 调用 app.run() 之后，进程就进入阻塞模式并开始监听请求。此时是不可能再让另一个 Flask App 在主线程运行起来的。那么还有哪些场景需要多个 Flask App 共存呢？前面提到了，一个 Flask App 实例就是一个 WSGI Application，那么 WSGI Middleware 是允许使用组合模式的，比如：</p>
+<p>from werkzeug.wsgi import DispatcherMiddleware<br>from biubiu.app import create_app<br>from biubiu.admin.app import create_app as create_admin_app</p>
+<p>application = DispatcherMiddleware(create_app(), {<br>‘/admin’: create_admin_app()<br>})<br>　　这个例子就利用 Werkzeug 内置的 Middleware 将两个 Flask App 组合成一个一个 WSGI Application。这种情况下两个 App 都同时在运行，只是根据 URL 的不同而将请求分发到不同的 App 上处理。</p>
+<p>Note</p>
+<p>　　需要注意的是，这种用法和 Flask 的 Blueprint 是有区别的。Blueprint 虽然和这种用法很类似，但前者自己没有 App Context，只是同一个 Flask App 内部整理资源的一种方式，所以多个 Blueprint 可能共享了同一个 Flask App；后者面向的是所有 WSGI Application，而不仅仅是 Flask App，即使是把一个 Django App 和一个 Flask App 用这种用法整合起来也是可行的。</p>
+<p>　　如果仅仅在 Web Runtime 中，多个 Flask App 同时工作倒不是问题。毕竟每个请求被处理的时候是身处不同的 Thread Local 中的。但是 Flask App 不一定仅仅在 Web Runtime 中被使用 —— 有两个典型的场景是在非 Web 环境需要访问上下文代码的，一个是离线脚本（前面提到过），另一个是测试。这两个场景即所谓的“Running code outside of a request”。在非 Web 环境运行 Flask 关联的代码，离线脚本或者测试这类非 Web 环境和和 Web 环境不同 —— 前者一般只在主线程运行。</p>
+<p>设想，一个离线脚本需要操作两个 Flask App 关联的上下文，应该怎么办呢？这时候栈结构的 App Context 优势就发挥出来了。</p>
+<h1 id="offline-script-py"><a href="#offline-script-py" class="headerlink" title="offline_script.py"></a>offline_script.py</h1><p>from biubiu.app import create_app<br>from biubiu.admin.app import create_app as create_admin_app</p>
+<p>app = create_app()<br>admin_app = create_admin_app()</p>
+<p>def copy_data():<br>    with app.app_context():<br>        data = read_data() # fake function for demo<br>        with admin_app.app_context():<br>            write_data(data) # fake function for demo<br>        mark_data_copied() # fake function for demo</p>
+<p>无论有多少个 App，只要主动去 Push 它的 App Context，Context Stack 中就会累积起来。这样，栈顶永远是当前操作的 App Context。当一个 App Context 结束的时候，相应的栈顶元素也随之出栈。如果在执行过程中抛出了异常，对应的 App Context 中注册的 teardown 函数被传入带有异常信息的参数。</p>
+<p>这么一来就解释了两个疑问 —— 在这种单线程运行环境中，只有栈结构才能保存多个 Context 并在其中定位出哪个才是“当前”。而离线脚本只需要 App 关联的上下文，不需要构造出请求，所以 App Context 也应该和 Request Context 分离。</p>
+<p>另一个手动推入 Context 的场景是测试。测试中我们可能会需要构造一个请求，并验证相关的状态是否符合预期。例如：</p>
+<h1 id="tests-py"><a href="#tests-py" class="headerlink" title="tests.py"></a>tests.py</h1><p>def test_app():<br>    app = create_app()<br>    client = app.test_client()<br>    resp = client.get(‘/‘)<br>    assert ‘Home’ in resp.data<br>这里调用 client.get 时，Request Context 就被推入了。其特点和 App Context 非常类似，这里不再赘述。</p>
+<p>为何建议使用 App Factory 模式<br>从官方文档来看，Flask 有 Singleton 和 App Factory 两种用法。前一种用法和其他的一些 Web 框架（如 Bottle、Sinatra）的门面广告很相似，因为代码精简，所以显得非常的“帅”：</p>
+<h1 id="app-py"><a href="#app-py" class="headerlink" title="app.py"></a>app.py</h1><p>from flask import Flask, render_template<br>from flask.ext.sqlalchemy import SQLAlchemy<br>from flask.ext.login import LoginManager</p>
+<p>app = Flask(<strong>name</strong>)
+db = SQLAlchemy(app)<br>login_manager = LoginManager()</p>
+<p>@app.route(‘/‘)<br>def home():<br>    return render_template(‘home.html’)</p>
+<p>但是这种“帅”是有代价的。一个最麻烦的问题就是编写测试的时候：</p>
+<p>test_app.py<br>class TestApp(unittest.TestCase):</p>
+<p>DEBUG = False<br>TESTING = True<br>SQLALCHEMY_DATABASE_URI = None</p>
+<p>def setUp(self):<br>self.app = create_app()<br>self.app.config.from_object(self)<br>self.client = self.app.test_client()</p>
+<p>def test_app(self):<br>@self.app.route(‘/test/<a href="int:id_" target="_blank" rel="noopener">int:id_</a>‘)<br>def my_view(id_):<br>return ‘#%d’ % id_<br>resp = self.client.get(‘/test/42’)<br>self.assertEqual(resp.data, ‘#42’)</p>
+<p>def test_home(self):<br>resp = self.client.get(‘/‘)<br>self.assertIn(‘Welcome’, resp.data)<br>在上面的例子中，我为了测试给 App 新挂载了一个 View 函数。这是很常见的一个测试需求。但是如果 Flask App 实例是单例的，这种做法就会“弄脏”下一个测试的运行。更加麻烦的是，上述例子中如果 test_home 在 test_app 之前运行了，Flask 的开发者防御机制会认为这是一个“已经开始处理 Web 请求了，又挂载了视图” [8] 的失误，从而抛出 RuntimeError。</p>
+<p>所以除非是应用简单到不需要 Web 层测试，否则还是尽量使用 App Factory 模式比较好。况且配合 Blueprint 的情况下，App Factory 还能帮助我们良好地组织应用结构：</p>
+<p>happytree/app.py<br>from flask import Flask<br>from werkzeug.utils import import_string</p>
+<p>extensions = [<br>‘happytree.ext:db’,<br>‘happytree.ext:login_manager’,<br>]
+blueprints = [<br>‘happytree.views:bp’,<br>]</p>
+<p>def create_app():<br>app = Flask(<strong>name</strong>)
+for ext_name in extensions:<br>ext = import_string(ext_name)<br>ext.init_app(app)<br>for bp_name in blueprints:<br>bp = import_string(bp_name)<br>app.register_blueprint(bp)<br>return app<br>这样就能彻底摆脱 app.py 和 View 模块“互相 Import”的纠结了。</p>
+<p>好吧其实这一节和 Context 没啥关系……</p>
+<p>拖延不好<br>这篇文章动笔开始写是 6 月 21 日，到今天发布出来，已经过去了整整一个月。而事实上我开始列提纲准备写这篇文章已经是三四月份的事情了。</p>
+<p><em>(:з」∠)</em></p>
+<p>[1]    Flask 文档对 Application Context 和 Request Context 作出了详尽的解释；<br>[2]    通过访问 flask.current_app；<br>[3]    通过访问 flask.request；<br>[4]    Flask(Werkzeug) 的 Context 基于 Thread Local 和代理模式实现，只要身处 Context 中就能用近似访问全局变量的的方式访问到上下文信息，例如 flask.current_app 和 flask.request；Django 和 Tornado 则将上下文封装在对象中，只有明确获取了相关上下文对象才能访问其中的信息，例如在视图函数中或按照规定模板实现的 Middleware 中；<br>[5]    基于 Flask 的 Web 应用可以在 Gevent 或 Eventlet 异步网络库 patch 过的 Python 环境中正常工作。这二者都使用 Greenlet 而不是系统线程作为调度单元，而 Werkzeug 考虑到了这点，在 Greenlet 可用时用 Greenlet ID 代替线程 ID。<br>[6]    Python 的对象方法是 Descriptior 实现的，所以方法就是一种属性；而 Python 的二元操作可以用双下划线开头和结尾的一系列协议，所以 foo + bar 等同于 foo.<strong>add</strong>(bar)，本质还是属性访问。<br>[7]    Flask-Script 是一个用来写 manage.py 管理脚本的 Flask 扩展，用它运行的任务会在开始前自动推入 App Context。将来这个“运行任务”的功能将被整合到 Flask 内部。<br>[8]    详见 Flask 源码中的 setup_method 装饰器。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/python2中的ascii code can't encode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/08/python2中的ascii code can't encode/" itemprop="url">python2中的ascii code can't encode</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-08T16:12:22+08:00">
+                2018-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="python2中的ascii-code-can’t-encode"><a href="#python2中的ascii-code-can’t-encode" class="headerlink" title="python2中的ascii code can’t encode"></a>python2中的ascii code can’t encode</h3><p>准备知识：</p>
+<p>　　1 字符集，字符集实际上就是字符与数字之间的相互映射， 比如unicode字符集  ASCII字符集  GB2312字符集等等，</p>
+<p>　　2 字符编码，仅仅有字符集是不够的，因为实际工作中我们需要将某些字保存在计算机上，计算机上保存的数据只能是0以及1的排列，还是拿字符集unicode来说，如果我们要将字符保存在计算机上那么就必须有某种规则将unicode字符转换为0以及1，同时这种规则还能让计算机区分出相邻字符的分隔位置，utf32就是一种规则，简单粗暴的用4个字节表示一个字符，以为unicode中最大的数远远小于2的32次方，所以这个规则保证了转码的可靠性，但是对于那些只使用英文的国家来说一个字符就要4字节有点浪费空间啊有木有！于是出现了utf8，可变长的且适用于unicode的一种编码方式，这种方式有效的降低了空间浪费。</p>
+<p>用Python 2.x会经常碰到一个错误:</p>
+<p>UnicodeEncodeError: ‘ascii’ codec can’t encode character … : ordinal not in range(128)</p>
+<p>搞清这个问题之前要先理解三个知识点:</p>
+<p>UTF-8 vs Unicode<br>Encoding vs Decoding<br>Python 2.7里的 str 和 unicode</p>
+<ol>
+<li>UTF-8 vs Unicode<br>这一点已经在[之前的博文]里解释过了(<a href="http://cheng.logdown.com/posts/2015/01/14/utf-8-vs-unicode:)，这里我来总结一下" target="_blank" rel="noopener">http://cheng.logdown.com/posts/2015/01/14/utf-8-vs-unicode:)，这里我来总结一下</a></li>
+</ol>
+<p>Unicode 只是一个文字与数字之间的映射。比如，’汉’ 这个字在Unicode里的代码是 ‘6C49’，想对应的数字就是 27721。地球上每种语言里的每一个文字都有这样一个相对应的数字标识。这个文字与数字的映射表就是 Unicode。<br>当我们把这个映射后的数字存储在计算机上时，需要把它转换成 0 和 1. 我们可以简单的把 27721 转换成二进制代码 ’01101100 01001001‘ 来存储。但问题是计算机怎么能够知道这个两个字节是代表一个文字而不是两个文字? 这个时候就需要再有一种编码形式来告诉计算机将这个字节视为一个文字。这个编码就是UTF-8 (当然，UTF-8只是众多编码中的一种)<br>可以用这个顺序来理解：</p>
+<p>屏幕上看到的文字     Unicode代码     根据UTF-8规范存在计算机内存或者硬盘里的模样<br>       汉      -&gt;     6C49     -&gt;       11100110 10110001 10001001</p>
+<ol start="2">
+<li>Encoding vs Decoding<br>在Python2中把一个Unicode类转化为 0 和 1 的过程叫做Encoding。 把 0 和 1 反转为Unicode类的过程叫做Decoding。Python3已经没有unicode和str的区别了，取而代之的是byte和str</li>
+</ol>
+<p>在Python 2.7版本里，ASCII是默认的Encoding和Decoding的方法。</p>
+<ol start="3">
+<li>Python 2.7里的 str 和 unicode<br>当你把一个字符(不管该字符是英文字母还是ASCII里不能包含的字符)赋值给一个变量时:</li>
+</ol>
+<p>han = ‘汉’<br>这个变量的类型都会是str:</p>
+<p>In [113]:han = ‘汉’<br>         type(han)<br>Out[113]:str<br>但这里有很重要的一点需要理解：</p>
+<p>In [124]:han = ‘汉’<br>         bin_han = ‘\xe6\xb1\x89’<br>         han == bin_han # 虽然在界面里我们看到的是’汉’这个字，但其实它是一堆字符，并不是我们看到的文字</p>
+<p>Out[124]:True<br>str这个类的本质其实就是原始字符数据（raw byte data）。它并不是我们所看到的’汉’！</p>
+<p>那么Unicode类也是这样吗？</p>
+<p>In [114]:uni_han= u’汉’<br>         type(uni_han)<br>Out[114]:unicode</p>
+<p>In [131]:uni_han= u’汉’<br>         u_han = u’\u6c49’<br>         uni_han == u_han # 在Unicode中存储的是u’\u6c49’而不是你所看到的u’汉’</p>
+<p>Out[131]:True<br>理解了以上三个知识点，我们就可以很容易的解释 ‘ascii’ codec can’t encode character 这个错误的缘由了。</p>
+<p>用示例来解释 ‘ascii’ codec can’t encode character<br>In [117]:han = ‘汉’<br>         print type(han)<br>         print len(han)<br>         str(han) </p>
+<p>Out[117]:&lt;type ‘str’&gt;<br>         3              &lt;- ‘汉’的长度是3，明明是一个字，为什么长度是3?<br>         ‘\xe6\xb1\x89’ &lt;- 答案在这里<br>当’汉’这个字被存储在内存中时，它会被转为三个字符’\xe6\xb1\x89’。所以len()给出的长度是3，而不是1. 那么为了让’汉’变成一个真正的字，我们就需要对它进行Decoding。（参看2. 把 0 和 1 转换为Unicode的过程叫Decoding）</p>
+<h2 id="In-125-str-decode-han"><a href="#In-125-str-decode-han" class="headerlink" title="In [125]:str.decode(han)"></a>In [125]:str.decode(han)</h2><p>UnicodeDecodeError                        Traceback (most recent call last)<br><ipython-input-125-3ff96a3a19da> in <module>()<br>—-&gt; 1 str.encode(han)</module></ipython-input-125-3ff96a3a19da></p>
+<p>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe6 in position 0: ordinal not in range(128)<br>这里Python抛出了异常。因为默认的ASCII编码无法Decode这个文字。因为这个文字的数值已经超过了0 - 127这个范围。所以我们需要使用UTF-8编码来Decode：</p>
+<p>In [127]:str.decode(han, ‘utf8’)<br>Out[127]:u’\u6c49’<br>这里han这个变量被成功Decode为 u’\u6c49</p>
+<p>In [142]:uni_han = u’\u6c49’<br>         len(uni_han)<br>Out[142]:1              &lt;- 长度变为了正确的1<br>再来个示例作为结尾<br>猜猜这段代码的输出是什么：</p>
+<p>uni_han = u’\u6c49’<br>print ‘&#39;{0}&#39;的长度是{1}’.format(uni_han, len(uni_han))<br>结果是:</p>
+<hr>
+<p>UnicodeEncodeError                        Traceback (most recent call last)<br><ipython-input-143-9bec6fa25583> in <module>()<br>      1 uni_han = u’\u6c49’<br>—-&gt; 2 print ‘&#39;{0}&#39;的长度是{1}’.format(uni_han, len(uni_han))</module></ipython-input-143-9bec6fa25583></p>
+<p>UnicodeEncodeError: ‘ascii’ codec can’t encode character u’\u6c49’ in position 0: ordinal not in range(128)<br>好伤心啊，本以为再也不会碰到这个问题了。那么问题出在哪呢？这部分代码’&#39;{0}&#39;的长度是{1}’是str，也就是原始的字符数据。我们想把一个Unicode （uni_han）混到它们里一起打印。这时，Python信心满满的用了默认的ASCII编码来Encode uni_han。结果可想而知，又是再次超出0 - 127的范围，无法Encode。这时，我们就需要告诉Python放弃ASCII吧，请使用UTF-8：</p>
+<p>In [145]:uni_han = u’\u6c49’<br>         print ‘&#39;{0}&#39;的长度是{1}’.format(unicode.encode(uni_han,’utf8’), len(uni_han))<br>         ‘汉’的长度是1<br>另一种方法是让前半部分的str变为Unicode：</p>
+<p>In [150]:uni_han = u’\u6c49’<br>         print u’&#39;{0}&#39;的长度是{1}’.format(uni_han, len(uni_han))<br>         ‘汉’的长度是1<br>总结<br>在Python 2.x里str就是原始的010101， Unicode是Unicode，这两个东西不能混着用。当一个文字被写到硬盘上时，或者打印到屏幕上时，需要使用正确的Encoding编码。Python默认使用ASCII，但其实应该用UTF-8。这个问题以后还会经常碰到。关键是要理解ASCII，UTF8，Unicode, Encoding和Decoding的定义和关系。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/深入flask中的request/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/08/深入flask中的request/" itemprop="url">深入flask中的request</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-08T00:21:57+08:00">
+                2018-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="深入flask中的request"><a href="#深入flask中的request" class="headerlink" title="深入flask中的request"></a>深入flask中的request</h3><p>缘起<br>　　在使用flask的时候一直比较纳闷request是什么原理，他是如何保证多线程情况下对不同请求参数的隔离的。</p>
+<p>准备知识<br>　　在讲request之前首先需要先理解一下werkzeug.local中的几个类，因为request就是基于这几个类来搞事情的。</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import copy<br>from werkzeug._compat import PY2, implements_bool</p>
+<h1 id="since-each-thread-has-its-own-greenlet-we-can-just-use-those-as-identifiers"><a href="#since-each-thread-has-its-own-greenlet-we-can-just-use-those-as-identifiers" class="headerlink" title="since each thread has its own greenlet we can just use those as identifiers"></a>since each thread has its own greenlet we can just use those as identifiers</h1><h1 id="for-the-context-If-greenlets-are-not-available-we-fall-back-to-the"><a href="#for-the-context-If-greenlets-are-not-available-we-fall-back-to-the" class="headerlink" title="for the context.  If greenlets are not available we fall back to the"></a>for the context.  If greenlets are not available we fall back to the</h1><h1 id="current-thread-ident-depending-on-where-it-is"><a href="#current-thread-ident-depending-on-where-it-is" class="headerlink" title="current thread ident depending on where it is."></a>current thread ident depending on where it is.</h1><p>try:<br>    from greenlet import getcurrent as get_ident<br>except ImportError:<br>    try:<br>        from thread import get_ident<br>    except ImportError:<br>        from _thread import get_ident</p>
+<p>def release_local(local):<br>    “””Releases the contents of the local for the current context.<br>    This makes it possible to use locals without a manager.</p>
+<pre><code>Example::
+
+    &gt;&gt;&gt; loc = Local()
+    &gt;&gt;&gt; loc.foo = 42
+    &gt;&gt;&gt; release_local(loc)
+    &gt;&gt;&gt; hasattr(loc, &apos;foo&apos;)
+    False
+
+With this function one can release :class:`Local` objects as well
+as :class:`LocalStack` objects.  However it is not possible to
+release data held by proxies that way, one always has to retain
+a reference to the underlying local object in order to be able
+to release it.
+
+.. versionadded:: 0.6.1
+&quot;&quot;&quot;
+local.__release_local__()</code></pre><p>class Local(object):</p>
+<pre><code>&quot;&quot;&quot;
+用一个大字典实现局部上下文
+    不同的线程或者greenlet调用该local对象时获取的值都是本线程或者greenlet独享的
+    实际上就是为每一个线程或者协程在字典里单独开辟出了一个空间(实际上就是一个键值对，键就是线程或者greenlet的唯一标识)，
+    这空间用来存储单个线程(或者greenlet)的私有变量
+
+&quot;&quot;&quot;
+__slots__ = (&apos;__storage__&apos;, &apos;__ident_func__&apos;)
+
+def __init__(self):
+    object.__setattr__(self, &apos;__storage__&apos;, {})
+    object.__setattr__(self, &apos;__ident_func__&apos;, get_ident)
+
+def __iter__(self):
+    return iter(self.__storage__.items())
+
+def __call__(self, proxy):
+    &quot;&quot;&quot;Create a proxy for a name.&quot;&quot;&quot;
+    return LocalProxy(self, proxy)
+
+def __release_local__(self):
+    self.__storage__.pop(self.__ident_func__(), None)
+
+def __getattr__(self, name):
+    try:
+        return self.__storage__[self.__ident_func__()][name]
+    except KeyError:
+        raise AttributeError(name)
+
+def __setattr__(self, name, value):
+    ident = self.__ident_func__()
+    storage = self.__storage__
+    try:
+        storage[ident][name] = value
+    except KeyError:
+        storage[ident] = {name: value}
+
+def __delattr__(self, name):
+    try:
+        del self.__storage__[self.__ident_func__()][name]
+    except KeyError:
+        raise AttributeError(name)</code></pre><p>class LocalStack(object):</p>
+<pre><code>&quot;&quot;&quot;
+LocalStack也是一个栈相关的局部上下文，底层实现是基于Local类。
+    注意一下他的pop方法，如果当前栈的长度为1，pop时会清空当前线程(greenlet)在底层的Local中所对应的&quot;键值对&quot;的
+&quot;&quot;&quot;
+
+def __init__(self):
+    self._local = Local()
+
+def __release_local__(self):
+    self._local.__release_local__()
+
+def _get__ident_func__(self):
+    return self._local.__ident_func__
+
+def _set__ident_func__(self, value):
+    object.__setattr__(self._local, &apos;__ident_func__&apos;, value)
+__ident_func__ = property(_get__ident_func__, _set__ident_func__)
+del _get__ident_func__, _set__ident_func__
+
+def __call__(self):
+    def _lookup():
+        rv = self.top
+        if rv is None:
+            raise RuntimeError(&apos;object unbound&apos;)
+        return rv
+    return LocalProxy(_lookup)
+
+def push(self, obj):
+    &quot;&quot;&quot;Pushes a new item to the stack&quot;&quot;&quot;
+    rv = getattr(self._local, &apos;stack&apos;, None)
+    if rv is None:
+        self._local.stack = rv = []
+    rv.append(obj)
+    return rv
+
+def pop(self):
+    &quot;&quot;&quot;Removes the topmost item from the stack, will return the
+    old value or `None` if the stack was already empty.
+    &quot;&quot;&quot;
+    stack = getattr(self._local, &apos;stack&apos;, None)
+    if stack is None:
+        return None
+    elif len(stack) == 1:
+        release_local(self._local)
+        return stack[-1]
+    else:
+        return stack.pop()
+
+@property
+def top(self):
+    &quot;&quot;&quot;The topmost item on the stack.  If the stack is empty,
+    `None` is returned.
+    &quot;&quot;&quot;
+    try:
+        return self._local.stack[-1]
+    except (AttributeError, IndexError):
+        return None</code></pre><p>@implements_bool<br>class LocalProxy(object):<br>    “””<br>    代理模式: 给目标对象提供一个代理对象，并由代理对象控制对目标对象的引用<br>    “””</p>
+<pre><code>&quot;&quot;&quot;Acts as a proxy for a werkzeug local.  Forwards all operations to
+a proxied object.  The only operations not supported for forwarding
+are right handed operands and any kind of assignment.
+
+Example usage::
+
+    from werkzeug.local import Local
+    l = Local()
+
+    # these are proxies
+    request = l(&apos;request&apos;)
+    user = l(&apos;user&apos;)
+
+
+    from werkzeug.local import LocalStack
+    _response_local = LocalStack()
+
+    # this is a proxy
+    response = _response_local()
+
+Whenever something is bound to l.user / l.request the proxy objects
+will forward all operations.  If no object is bound a :exc:`RuntimeError`
+will be raised.
+
+To create proxies to :class:`Local` or :class:`LocalStack` objects,
+call the object as shown above.  If you want to have a proxy to an
+object looked up by a function, you can (as of Werkzeug 0.6.1) pass
+a function to the :class:`LocalProxy` constructor::
+
+    session = LocalProxy(lambda: get_current_request().session)
+
+.. versionchanged:: 0.6.1
+   The class can be instantiated with a callable as well now.
+&quot;&quot;&quot;
+__slots__ = (&apos;__local&apos;, &apos;__dict__&apos;, &apos;__name__&apos;, &apos;__wrapped__&apos;)
+
+def __init__(self, local, name=None):
+    # __local 会被重命名为 _LocalProxy__local
+    object.__setattr__(self, &apos;_LocalProxy__local&apos;, local)
+    object.__setattr__(self, &apos;__name__&apos;, name)
+    if callable(local) and not hasattr(local, &apos;__release_local__&apos;):
+        # &quot;local&quot; is a callable that is not an instance of Local or
+        # LocalManager: mark it as a wrapped function.
+        object.__setattr__(self, &apos;__wrapped__&apos;, local)
+
+def _get_current_object(self):
+    &quot;&quot;&quot;Return the current object.  This is useful if you want the real
+    object behind the proxy at a time for performance reasons or because
+    you want to pass the object into a different context.
+    &quot;&quot;&quot;
+    if not hasattr(self.__local, &apos;__release_local__&apos;):
+        return self.__local()
+    try:
+        return getattr(self.__local, self.__name__)
+    except AttributeError:
+        raise RuntimeError(&apos;no object bound to %s&apos; % self.__name__)
+
+@property
+def __dict__(self):
+    try:
+        return self._get_current_object().__dict__
+    except RuntimeError:
+        raise AttributeError(&apos;__dict__&apos;)
+
+def __repr__(self):
+    try:
+        obj = self._get_current_object()
+    except RuntimeError:
+        return &apos;&lt;%s unbound&gt;&apos; % self.__class__.__name__
+    return repr(obj)
+
+def __bool__(self):
+    try:
+        return bool(self._get_current_object())
+    except RuntimeError:
+        return False
+
+def __unicode__(self):
+    try:
+        return unicode(self._get_current_object())  # noqa
+    except RuntimeError:
+        return repr(self)
+
+def __dir__(self):
+    try:
+        return dir(self._get_current_object())
+    except RuntimeError:
+        return []
+
+def __getattr__(self, name):
+    if name == &apos;__members__&apos;:
+        return dir(self._get_current_object())
+    return getattr(self._get_current_object(), name)
+
+def __setitem__(self, key, value):
+    self._get_current_object()[key] = value
+
+def __delitem__(self, key):
+    del self._get_current_object()[key]
+
+if PY2:
+    __getslice__ = lambda x, i, j: x._get_current_object()[i:j]
+
+    def __setslice__(self, i, j, seq):
+        self._get_current_object()[i:j] = seq
+
+    def __delslice__(self, i, j):
+        del self._get_current_object()[i:j]
+
+__setattr__ = lambda x, n, v: setattr(x._get_current_object(), n, v)
+__delattr__ = lambda x, n: delattr(x._get_current_object(), n)
+__str__ = lambda x: str(x._get_current_object())
+__lt__ = lambda x, o: x._get_current_object() &lt; o
+__le__ = lambda x, o: x._get_current_object() &lt;= o
+__eq__ = lambda x, o: x._get_current_object() == o
+__ne__ = lambda x, o: x._get_current_object() != o
+__gt__ = lambda x, o: x._get_current_object() &gt; o
+__ge__ = lambda x, o: x._get_current_object() &gt;= o
+__cmp__ = lambda x, o: cmp(x._get_current_object(), o)  # noqa
+__hash__ = lambda x: hash(x._get_current_object())
+__call__ = lambda x, *a, **kw: x._get_current_object()(*a, **kw)
+__len__ = lambda x: len(x._get_current_object())
+__getitem__ = lambda x, i: x._get_current_object()[i]
+__iter__ = lambda x: iter(x._get_current_object())
+__contains__ = lambda x, i: i in x._get_current_object()
+__add__ = lambda x, o: x._get_current_object() + o
+__sub__ = lambda x, o: x._get_current_object() - o
+__mul__ = lambda x, o: x._get_current_object() * o
+__floordiv__ = lambda x, o: x._get_current_object() // o
+__mod__ = lambda x, o: x._get_current_object() % o
+__divmod__ = lambda x, o: x._get_current_object().__divmod__(o)
+__pow__ = lambda x, o: x._get_current_object() ** o
+__lshift__ = lambda x, o: x._get_current_object() &lt;&lt; o
+__rshift__ = lambda x, o: x._get_current_object() &gt;&gt; o
+__and__ = lambda x, o: x._get_current_object() &amp; o
+__xor__ = lambda x, o: x._get_current_object() ^ o
+__or__ = lambda x, o: x._get_current_object() | o
+__div__ = lambda x, o: x._get_current_object().__div__(o)
+__truediv__ = lambda x, o: x._get_current_object().__truediv__(o)
+__neg__ = lambda x: -(x._get_current_object())
+__pos__ = lambda x: +(x._get_current_object())
+__abs__ = lambda x: abs(x._get_current_object())
+__invert__ = lambda x: ~(x._get_current_object())
+__complex__ = lambda x: complex(x._get_current_object())
+__int__ = lambda x: int(x._get_current_object())
+__long__ = lambda x: long(x._get_current_object())  # noqa
+__float__ = lambda x: float(x._get_current_object())
+__oct__ = lambda x: oct(x._get_current_object())
+__hex__ = lambda x: hex(x._get_current_object())
+__index__ = lambda x: x._get_current_object().__index__()
+__coerce__ = lambda x, o: x._get_current_object().__coerce__(x, o)
+__enter__ = lambda x: x._get_current_object().__enter__()
+__exit__ = lambda x, *a, **kw: x._get_current_object().__exit__(*a, **kw)
+__radd__ = lambda x, o: o + x._get_current_object()
+__rsub__ = lambda x, o: o - x._get_current_object()
+__rmul__ = lambda x, o: o * x._get_current_object()
+__rdiv__ = lambda x, o: o / x._get_current_object()
+if PY2:
+    __rtruediv__ = lambda x, o: x._get_current_object().__rtruediv__(o)
+else:
+    __rtruediv__ = __rdiv__
+__rfloordiv__ = lambda x, o: o // x._get_current_object()
+__rmod__ = lambda x, o: o % x._get_current_object()
+__rdivmod__ = lambda x, o: x._get_current_object().__rdivmod__(o)
+__copy__ = lambda x: copy.copy(x._get_current_object())
+__deepcopy__ = lambda x, memo: copy.deepcopy(x._get_current_object(), memo)</code></pre><p>先来讲Local对象<br>1 创建一个Local对象</p>
+<p>local = Local()<br>刚创建后, 这个local_context中负责存储局部上下文变量的storage是一个空字典</p>
+<p>local.<strong>storage</strong> = {}<br>我们用iden1, inde2 …. indeN 来表示n个同属于一个进程的线程(或者greenlet), 假如当前的线程(或者greenlet)的id为iden1, 我们来操作一下local</p>
+<p>local.name = “iden1_name”<br>实际执行的代码是:</p>
+<p>local.<strong>storage</strong>.setdefault(“iden1”, {})[“name”] = “iden1_name”<br>这个local中负责存储局部上下文变量的storage就变成了这样:</p>
+<p>local.<strong>storage</strong> = {<br>    “iden1”: {<br>        “name”: “iden1_name”<br>    }<br>}
+当我们在不同的线程(或者greenlet)中操作后，local就可能会变成这样</p>
+<p>local.<strong>storage</strong> = {<br>    “iden1”: {…},<br>    “iden2”: {…},<br>    …<br>    “idenN”: {…}<br>}
+local对象有一个<strong>release_local</strong>方法, 执行该方法会清理掉当前线程(或者greenlet)对应的存储空间, 假如当前的线程(或者greenlet)的id为iden1,<br>当我们执行完<strong>release_local</strong>方法后, local的存储空间就会变成这样:</p>
+<h1 id="已经没有iden1了"><a href="#已经没有iden1了" class="headerlink" title="已经没有iden1了"></a>已经没有iden1了</h1><p>local.<strong>storage</strong> = {<br>    “iden2”: {…},<br>    …<br>    “idenN”: {…}<br>}
+local还定义了<strong>call</strong>方法, 当我们执行local()后会返回一个LocalStack对象</p>
+<p>LocalStack对象<br>LocalStack底层使用的是Local，然后在Local实例中实现了一个栈</p>
+<p>创建一个LocalStack对象</p>
+<p>local_stack = LocalStack()<br>该对象的local属性就是一个Local实例</p>
+<p>isinstance(local_stack.local, Local) is True<br>local_stack的栈存储在他的local属性中, 当我们调用local_stack.push(some_obj)的时候, 实际上是执行了</p>
+<p>local_stack.local.stack.append(some_obj) if hasattr(local_stack.local, “stack”) else local_stack.local.stack = [some_obj]<br>假如当前的线程(或者greenlet)的id为iden1, 我们push一个对象request_ctx_obj, 然后又push一个对象request_ctx_obj2, 那么local_stack.local就会是这样:</p>
+<p>local_stack.local.<strong>storage</strong> = {<br>    “iden1”: {<br>        “stack”: [request_ctx_obj, request_ctx_obj2]<br>    }<br>}
+假如当前的线程(或者greenlet)的id为iden1，我们在调用local_stack.top()方法时，实际上执行的是:</p>
+<p>return local_stack.local.stack[-1]<br>需要注意的是:</p>
+<p>　　如果我们当前所处的线程(或者greenlet)中之前并没有进行过push的话，那么我们调用local_stack.top()方法返回的结果是None</p>
+<p>当我们执行local_stack.pop()时, 实际上执行的是</p>
+<p>local_stack.local.stack.pop()<br>需要注意两点:<br>　　1 如果当前线程(或者greenlet)中之前没有push过, 那么pop()方法会返回None<br>　　2 如果当前线程(或者greenlet)中的栈中只有一个对象, 那么本次pop()还会清理掉stack(实际上执行了local_stack.local.<strong>release_local</strong>方法),<br>　　假如当前的线程(或者greenlet)的id为iden2的话，没有pop()之前是这样的:</p>
+<p>local_stack.local.<strong>storage</strong> = {<br>    “iden1”: {<br>        “stack”: [request_ctx_obj, request_ctx_obj2]<br>    }<br>    “iden2”: {<br>        “stack”: [request_ctx_obj3]<br>    }<br>}</p>
+<p>执行pop()则会将当前线程(或者greenlet)的局部上下文存储空间清理掉, 变为这样:</p>
+<p>local_stack.local.<strong>storage</strong> = {<br>    “iden1”: {<br>        “stack”: [request_ctx_obj, request_ctx_obj2]<br>    }<br>}
+LocalStack也提供了<strong>call</strong>方法, 执行该方法会生成一个LocalProxy对象</p>
+<p>LocalProxy<br>LocalProxy实现了代理模式, 给目标对象提供一个代理对象，并由代理对象控制对目标对象的引用。<br>根据传入参数的类型以及数量的不同他会有两种表现形式.<br>第一种，第一个参数传入一个Local实例, 然后第二个参数传入想要代理的对象的名称:<br>　　我们执行下面的语句:</p>
+<p>local_1 = Local()<br>local_proxy1 = LocalProxy(local_1, “age”)<br>　　local_proxy1所代理的实际上就是local_1实例中的age属性了。<br>　　假如当前的线程(或者greenlet)的id为iden1，那么我们执行local_proxy1 = 12, 实际执行的就是local_1.age = 12</p>
+<p>第二种，只传入一个函数，通过该函数可以获取到想要代理的对象:<br>　　我们执行下面的语句:</p>
+<p>local_2 = Local()</p>
+<p>def _find_raw_obj():<br>    return local_2.name</p>
+<p>local_proxy2 = LocalProxy(_find_raw_obj)<br>　　local_proxy2所代理的实际上就是local_2实例中的name属性</p>
+<p>flask源码剖析<br>request源码</p>
+<p>def _lookup_req_object(name):<br>    top = _request_ctx_stack.top<br>    if top is None:<br>        raise RuntimeError(_request_ctx_err_msg)<br>    return getattr(top, name)</p>
+<h1 id="context-locals"><a href="#context-locals" class="headerlink" title="context locals"></a>context locals</h1><p>_request_ctx_stack = LocalStack()<br>request = LocalProxy(partial(_lookup_req_object, ‘request’))</p>
+<p>只要看懂了文章上半部分的local，这里实际上很简单，</p>
+<p>　　_request_ctx_stack是一个LocalStack实例，而我们每次调用request.some_attr 的时候实际上是执行_request_ctx_stack.top.some_attr</p>
+<p>再来看一下当请求过来的时候，flask是如何处理的：</p>
+<h1 id="flask-app"><a href="#flask-app" class="headerlink" title="flask.app"></a>flask.app</h1><p>class Flask(_PackageBoundObject):</p>
+<pre><code>request_class = Request
+
+def request_context(self, environ):
+    return RequestContext(self, environ)
+
+def wsgi_app(self, environ, start_response):
+    # self.request_context是一个RequestContext实例
+    ctx = self.request_context(environ)
+    error = None
+    try:
+        try:
+            # 2 执行了request_ctx_stack.push(ctx)
+            ctx.push()
+            # 3 处理请求得到响应
+            response = self.full_dispatch_request()
+        except Exception as e:
+            error = e
+            response = self.handle_exception(e)
+        except:
+            error = sys.exc_info()[1]
+            raise
+        return response(environ, start_response)
+    finally:
+        if self.should_ignore_error(error):
+            error = None
+        # 4 request_ctx_stack.pop(ctx)
+        ctx.auto_pop(error)
+
+# 1 当请求来的时候会执行app.__call__()方法
+def __call__(self, environ, start_response):
+    &quot;&quot;&quot;The WSGI server calls the Flask application object as the
+    WSGI application. This calls :meth:`wsgi_app` which can be
+    wrapped to applying middleware.&quot;&quot;&quot;
+    return self.wsgi_app(environ, start_response)</code></pre><h1 id="flask-ctx"><a href="#flask-ctx" class="headerlink" title="flask.ctx"></a>flask.ctx</h1><p>class RequestContext(object):</p>
+<pre><code>def __init__(self, app, environ, request=None):
+    self.app = app
+    if request is None:</code></pre><p>　　　　　　　# request是一个Request对象<br>            request = app.request_class(environ)<br>        self.request = request<br>        self._implicit_app_ctx_stack = []</p>
+<pre><code>def push(self):
+    top = _request_ctx_stack.top
+    if top is not None and top.preserved:
+        top.pop(top._preserved_exc)
+
+    # Before we push the request context we have to ensure that there
+    # is an application context.
+    app_ctx = _app_ctx_stack.top
+    if app_ctx is None or app_ctx.app != self.app:
+        app_ctx = self.app.app_context()
+        app_ctx.push()
+        self._implicit_app_ctx_stack.append(app_ctx)
+    else:
+        self._implicit_app_ctx_stack.append(None)
+
+    if hasattr(sys, &apos;exc_clear&apos;):
+        sys.exc_clear()
+
+    # 2.1 这里是重点
+    _request_ctx_stack.push(self)
+
+def pop(self, exc=_sentinel):
+    app_ctx = self._implicit_app_ctx_stack.pop()
+
+    try:</code></pre><p>if not self._implicit_app_ctx_stack:<br>                self.preserved = False<br>                self._preserved_exc = None<br>                if exc is _sentinel:<br>                    exc = sys.exc_info()[1]<br>                self.app.do_teardown_request(exc)<br>                request_close = getattr(self.request, ‘close’, None)<br>                if request_close is not None:<br>                    request_close()<br>finally:<br>            rv = _request_ctx_stack.pop()# Get rid of the app as well if necessary.<br>            if app_ctx is not None:<br>                app_ctx.pop(exc)</p>
+<pre><code>assert rv is self, &apos;Popped wrong request context.  &apos; \
+                   &apos;(%r instead of %r)&apos; % (rv, self)</code></pre><p> 当请求过来时：</p>
+<p>　　1 将请求封装为一个RequestContext实例</p>
+<p>　　2 然后将请求的environ封装成Request对象</p>
+<p>　　3 执行_request_ctx_stack.push(RequestContext实例)</p>
+<p>　　4 处理请求得到响应</p>
+<p>　　5 执行_request_ctx_stack.pop()</p>
+<p>　　6 返回结果</p>
+<p>看到这里，大体原理我们也就懂了。</p>
+<p>来点深入的高级用法<br>需求<br>工作中使用到flask flask-restful，有这样的场景：</p>
+<p>　　1 首先是遵循restful</p>
+<p>　　2 我希望所有接口有统一的参数传递格式，类似于这样:　　　　</p>
+<p>　　　　timestamp: int 　　　　　　　　　　　　　　　　　　　　# 以秒为单位<br>　　　　token:  str     　　　　　　　　　　　　　　　　　　　　  # 这个就不用说了<br>　　　　data: str 　　　　　　　　　　　　　　　　　　　　　　   # base64.encode(json.dumps(原始参数数据))<br>　　　　signature: md5(data + string(timestamp) + key) 　　　　   # 签名,注：key为加密密钥<br>假如是登陆接口，客户端需要给我传递手机号以及验证码，我希望格式是json，所以原始参数数据大概是这样:</p>
+<p>{“mobile”: “12377776666”, “code”: “1234”}<br>　　3 我希望所有接口有统一的响应格式，类似于这样：</p>
+<p>{
+    “code”: 0, # 这成功。 1 -9999 错误<br>    “message”: “”,<br>    “data”: {<br>     “mobile”: “sdfasdf”,<br>     “code”: “”<br>    }<br>}</p>
+<p>　　4 我希望请求参数数据经过统一的参数检测之后, request的args(如果请求方式为get) 或者form(如果请求方式为post) 或者values属性变为原始参数数据.这样就可以正常使用RequestParser()</p>
+<p>实现<br>以下是本人的实现源码(生产环境测试无问题，但有几处需要改进的地方):</p>
+<p> 统一参数解析处理</p>
+<p>参考：<br>　　<a href="https://blog.tonyseek.com/post/the-context-mechanism-of-flask/" target="_blank" rel="noopener">https://blog.tonyseek.com/post/the-context-mechanism-of-flask/</a></p>
+<p>　　flask源码</p>
+<p>　　flask-restful源码</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/28/jwt安全认证/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/28/jwt安全认证/" itemprop="url">jwt安全认证</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-28T00:21:57+08:00">
+                2018-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>安装：pip install djangorestframework-jwt</p>
+<h4 id="1-settings中配置"><a href="#1-settings中配置" class="headerlink" title="1.settings中配置"></a>1.settings中配置</h4><pre><code>INSTALLED_APPS = [
+     <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;rest_framework.authtoken&apos;,</span><br></pre></td></tr></table></figure>
+
+]</code></pre><h4 id="2、配置jwt验证"><a href="#2、配置jwt验证" class="headerlink" title="2、配置jwt验证"></a>2、配置jwt验证</h4><pre><code>REST_FRAMEWORK = {
+
+    #身份认证
+
+    &apos;DEFAULT_AUTHENTICATION_CLASSES&apos;:(
+
+        &apos;rest_framework_jwt.authentication.JSONWebTokenAuthentication&apos;,
+
+        &apos;rest_framework.authentication.SessionAuthentication&apos;,
+
+        &apos;rest_framework.authentication.BasicAuthentication&apos;,
+
+    ),
+
+}
+
+import datetime
+
+JWT_AUTH = {
+
+    &apos;JWT_AUTH_HEADER_PREFIX&apos;: &apos;JWT&apos;,
+
+    &apos;JWT_EXPIRATION_DELTA&apos;: datetime.timedelta(days=1),
+
+}
+
+AUTH_USER_MODEL=&apos;users.User&apos;   #指定使用users APP中的 model User进行验证</code></pre><h4 id="2-models-py添加认证User表"><a href="#2-models-py添加认证User表" class="headerlink" title="2.models.py添加认证User表"></a>2.models.py添加认证User表</h4><pre><code>from django.db import models
+
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+
+    username = models.CharField(max_length=64, unique=True)
+
+    password = models.CharField(max_length=64)
+
+    phone = models.CharField(max_length=64)
+
+    token = models.CharField(max_length=255)</code></pre><h4 id="3-serializers-py-create创建token"><a href="#3-serializers-py-create创建token" class="headerlink" title="3.serializers.py create创建token"></a>3.serializers.py create创建token</h4><pre><code>from rest_framework_jwt.settings import api_settings
+
+from rest_framework import serializers
+
+from users.models import User
+
+class UserSerializer(serializers.Serializer):
+
+    username = serializers.CharField()
+
+    password = serializers.CharField()
+
+    phone = serializers.CharField()
+
+    token = serializers.CharField(read_only=True)
+
+    def create(self, data):
+
+        user = User.objects.create(**data)
+
+        user.set_password(data.get(&apos;password&apos;))
+
+        user.save()
+
+        #补充生成记录登录状态的token
+
+        jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+
+        jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+        payload = jwt_payload_handler(user)
+
+        token = jwt_encode_handler(payload)
+
+        user.token = token
+
+        return user</code></pre><h4 id="4-urls-py"><a href="#4-urls-py" class="headerlink" title="4.urls.py"></a>4.urls.py</h4><pre><code>from django.contrib import admin
+
+from django.urls import path,re_path,include
+
+from users import views
+
+from rest_framework_jwt.views import obtain_jwt_token   #验证密码后返回token
+
+urlpatterns = [
+
+    path(&apos;admin/&apos;, admin.site.urls),
+
+    path(&apos;register/&apos;, views.RegisterView.as_view(), name=&apos;register&apos;),   #注册用户
+
+    path(&apos;login/&apos;, obtain_jwt_token,name=&apos;login&apos;),   用户登录后返回token
+
+    path(&apos;user/list/&apos;, views.UserList.as_view(), name=&apos;register&apos;),   #测试需要携带token才能访问
+
+]
+
+urls.py</code></pre><h4 id="5-viws-py"><a href="#5-viws-py" class="headerlink" title="5.viws.py"></a>5.viws.py</h4><pre><code>import json
+
+from rest_framework.views import APIView
+
+from rest_framework.views import Response
+
+from rest_framework.permissions import IsAuthenticated
+
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+
+from users.serializers import UserSerializer
+
+#用户注册
+
+class RegisterView(APIView):
+
+    def post(self, request, *args, **kwargs):
+
+        serializer = UserSerializer(data=request.data)
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(serializer.data, status=201)
+
+        return Response(serializer.error, status=400)
+
+#测试必须携带token才能访问接口
+
+class UserList(APIView):
+
+    permission_classes = [IsAuthenticated]  # 接口中加权限
+
+    authentication_classes = [JSONWebTokenAuthentication]
+
+    def get(self,request, *args, **kwargs):
+
+        print(request.META.get(&apos;HTTP_AUTHORIZATION&apos;, None))
+
+        return Response({&apos;name&apos;:&apos;zhangsan&apos;})
+
+    def post(self,request, *args, **kwargs):
+
+        return Response({&apos;name&apos;:&apos;zhangsan&apos;})
+
+users/views.py</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

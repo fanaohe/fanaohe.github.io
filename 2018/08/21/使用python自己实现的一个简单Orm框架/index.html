@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="使用python自己实现的一个简单Orm框架一个小型ORM框架，基于pymysql实现，较为简单。   1 #!/usr/bin/env python  2 # -- coding: utf-8 --   3  4 import pymysql  5 from utils import NotImplementedError  6  7 ‘’’  8 本文件是基于mysql实现的一个ORM框架">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用python自己实现的一个简单Orm框架">
+<meta property="og:url" content="http://yoursite.com/2018/08/21/使用python自己实现的一个简单Orm框架/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="使用python自己实现的一个简单Orm框架一个小型ORM框架，基于pymysql实现，较为简单。   1 #!/usr/bin/env python  2 # -- coding: utf-8 --   3  4 import pymysql  5 from utils import NotImplementedError  6  7 ‘’’  8 本文件是基于mysql实现的一个ORM框架">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-30T12:59:57.687Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用python自己实现的一个简单Orm框架">
+<meta name="twitter:description" content="使用python自己实现的一个简单Orm框架一个小型ORM框架，基于pymysql实现，较为简单。   1 #!/usr/bin/env python  2 # -- coding: utf-8 --   3  4 import pymysql  5 from utils import NotImplementedError  6  7 ‘’’  8 本文件是基于mysql实现的一个ORM框架">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/21/使用python自己实现的一个简单Orm框架/">
+
+
+
+
+
+  <title>使用python自己实现的一个简单Orm框架 | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/21/使用python自己实现的一个简单Orm框架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用python自己实现的一个简单Orm框架</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-21T00:21:57+08:00">
+                2018-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="使用python自己实现的一个简单Orm框架"><a href="#使用python自己实现的一个简单Orm框架" class="headerlink" title="使用python自己实现的一个简单Orm框架"></a>使用python自己实现的一个简单Orm框架</h3><p>一个小型ORM框架，基于pymysql实现，较为简单。</p>
+<p>  1 #!/usr/bin/env python<br>  2 # -<em>- coding: utf-8 -</em>-
+  3<br>  4 import pymysql<br>  5 from utils import NotImplementedError<br>  6<br>  7 ‘’’<br>  8 本文件是基于mysql实现的一个ORM框架<br>  9 ‘’’<br> 10<br> 11 class MysqlConnector(object):<br> 12     ‘’’Python与mysql的连接器’’’<br> 13<br> 14     def <strong>init</strong>(self, host, port, username, password, db):<br> 15         conn = pymysql.connect(host=host, port=port, user=username,<br> 16                                passwd=password, db=db, use_unicode=True, charset=”utf8”)<br> 17         self.conn = conn<br> 18         self.cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)<br> 19<br> 20     def execute(self, sql_msg):<br> 21         ‘’’<br> 22         执行sql语句<br> 23         :param sql_msg:  sql语句，字符串格式<br> 24         :return:<br> 25         ‘’’<br> 26         ret = self.cursor.execute(sql_msg)<br> 27         self.conn.commit()<br> 28         return ret<br> 29<br> 30     def close(self):<br> 31         ‘’’关闭连接器’’’<br> 32         self.cursor.close()<br> 33         self.conn.close()<br> 34<br> 35 class BaseModel(object):<br> 36     ‘’’<br> 37     实现将Python语句转换为sql语句，配合MysqlConnector实现表的创建以及数据的增删查改等操作。<br> 38     创建表时： 支持主键PRIMARY KEY，索引INDEX，唯一索引UNIQUE，自增AUTO INCREMENT 外键语句<br> 39         创建的表引擎指定为InnoDB，字符集为 utf-8<br> 40     增删查改： 支持WHERE [LIKE] LIMIT语句<br> 41     其子类必须设置initialize方法，并在该方法中创建字段对象<br> 42     ‘’’<br> 43     def <strong>new</strong>(cls, <em>args, **kwargs):<br> 44         <em>instance = super().<em>_new</em></em>(cls)<br> 45         <em>instance.initialize()<br> 46         return <em>instance<br> 47<br> 48     def __init</em></em>(self, table_name, sql_connector):<br> 49         ‘’’<br> 50         :param table_name: 要建立的表名<br> 51         :param sql_connector: MysqlConnector实例对象<br> 52         ‘’’<br> 53         self.table_name = table_name<br> 54         self.fields = []<br> 55         self.primary_key_field = None<br> 56         self.uniques_fields = []<br> 57         self.index_fields = []<br> 58         self.is_foreign_key_fields = []<br> 59         self.sql_connector = sql_connector<br> 60         self.<em>create_fields_list()<br> 61         self.create_table()<br> 62<br> 63     def initialize(self):<br> 64         ‘’’BaseModel的每个子类中必需包含该方法，且在该方法中定义字段’’’<br> 65         raise NotImplementedError(“Method or function hasn’t been implemented yet.”)<br> 66<br> 67     def <em>create_fields_list(self):<br> 68         ‘’’创建list用来存储表的字段对象’’’<br> 69         for k, v in self.__dict</em></em>.items():<br> 70             if isinstance(v, BaseField):<br> 71                 self.fields.append(v)<br> 72                 v.full_column = ‘%s.%s’ % (self.table_name, v.db_column)<br> 73                 v.table_name = self.table_name<br> 74         for field in self.fields:<br> 75             if field.primary_key:<br> 76                 self.primary_key_field = field<br> 77             if field.unique:<br> 78                 self.uniques_fields.append(field)<br> 79             if field.db_index:<br> 80                 self.index_fields.append(field)<br> 81             if field.is_foreign_key:<br> 82                 self.is_foreign_key_fields.append(field)<br> 83<br> 84     def _has_created(self):<br> 85         ‘’’检测表有没有被创建’’’<br> 86         self.sql_connector.cursor.execute(‘SHOW TABLES;’)<br> 87         ret = self.sql_connector.cursor.fetchall()<br> 88         for table in ret:<br> 89             for k, v in table.items():<br> 90                 if v == self.table_name:<br> 91                     return True<br> 92<br> 93     def _create_table(self):<br> 94         ret = ‘CREATE TABLE %s (‘ % self.table_name<br> 95         for v in self.fields:<br> 96             ret += v.generate_field_sql()<br> 97         ret = ‘%s%s%s%s%s’ % (ret, self._generate_primary_key(),<br> 98                              self._generate_unique(), self._generate_index(),<br> 99                              self._generate_is_foreign_key())<br>100         ret = ret[:-1] + ‘)ENGINE=InnoDB DEFAULT CHARSET=utf8;’<br>101         return ret<br>102<br>103     def create_table(self):<br>104         ‘’’创建表’’’<br>105         if not self._has_created():<br>106             print(‘创建表：%s’ % self.table_name)<br>107             sql_msg = self._create_table()<br>108             # print(sql_msg)<br>109             self.sql_connector.execute(sql_msg)<br>110<br>111     def _generate_primary_key(self):<br>112         ‘’’生成sql语句中的 primary key 语句’’’<br>113         ret = ‘’<br>114         if self.primary_key_field:<br>115             ret = ‘PRIMARY KEY(%s),’ % self.primary_key_field.db_column<br>116         return ret<br>117<br>118     def _generate_is_foreign_key(self):<br>119         ret = ‘’<br>120         if self.is_foreign_key_fields:<br>121             for field in self.is_foreign_key_fields:<br>122                 ret += ‘FOREIGN KEY(%s) REFERENCES %s(%s) ON DELETE %s  ON UPDATE %s,’ % (field.db_column,<br>123                                                   field.model_obj.table_name,<br>124                                                   field.model_obj.primary_key_field.db_column,<br>125                                                   field.on_delete,<br>126                                                   field.on_delete )<br>127         return ret<br>128<br>129     def _generate_unique(self):<br>130         ‘’’生成sql语句中的 unique 语句’’’<br>131         ret = ‘’<br>132         if self.uniques_fields:<br>133             ret = ‘UNIQUE (‘<br>134             for field in self.uniques_fields:<br>135                 ret += ‘%s,’ % field.db_column<br>136             ret = ret[:-1]<br>137             ret += ‘),’<br>138         return ret<br>139<br>140     def _generate_index(self):<br>141         index = ‘’<br>142         if self.index_fields:<br>143             index = ‘INDEX (‘<br>144             for field in self.index_fields:<br>145                 index += ‘%s,’ % field.db_column<br>146             index = index[:-1]<br>147             index += ‘),’<br>148         return index<br>149<br>150     def _generate_where(self, condition={}):<br>151         ‘’’<br>152         根据条件生成 where 语句<br>153         :param condition: 一个dict，key是字段对象，value是条件(比如 ‘WHERE ID=3’,那么value就是’=3’)<br>154         :return:<br>155         ‘’’<br>156         where = ‘’<br>157         if condition:<br>158             where = ‘ WHERE ‘<br>159             for k, v in condition.items():<br>160                 v = v.strip()<br>161                 offset = 1<br>162                 if v.startswith(‘l’):<br>163                     offset = 4<br>164                 if not k.is_str:<br>165                     where += ‘%s %s and’ % (k.db_column, v)<br>166                 else:<br>167                     where += ‘%s %s “%s” and’ % (k.db_column, v[:offset], v[offset:].strip())<br>168             where = where[:-3]<br>169         return where<br>170<br>171     def select_items(self, counts=0, select_fields=[], condition={}, join_conditions=[]):<br>172         ‘’’<br>173         根据condition 对表进行select，并 LIMIT counts<br>174         :param counts:<br>175         :param condition:<br>176         :return:<br>177         ‘’’<br>178         join_length = len(join_conditions)<br>179         counts_sql = ‘’<br>180         join_sql = ‘’<br>181         select_fields_sql = ‘’<br>182         where = self._generate_where(condition)<br>183         if counts:<br>184             counts_sql = ‘LIMIT %s’ % counts<br>185         if not select_fields:<br>186             select_fields_sql = ‘</em> ‘<br>187         if join_conditions:<br>188             tables_order = list(list(zip(<em>join_conditions))[0])<br>189             tables_order.insert(0, self)<br>190             for i in select_fields:<br>191                 select_fields_sql += ‘%s,’ % i.full_column<br>192             for n in range(join_length):<br>193                 one_join_condition = join_conditions[n]<br>194                 if n == 0:<br>195                     base_table = tables_order[0].table_name<br>196                 else:<br>197                     base_table = ‘’<br>198                 bracket_counts = join_length - n - 1<br>199                 join_sql += ‘%s %s LEFT JOIN %s on %s=%s%s’ % (<br>200                     bracket_counts</em>‘(‘, base_table, tables_order[n+1].table_name,<br>201                     one_join_condition[1].full_column, one_join_condition[2].full_column,<br>202                     bracket_counts * ‘)’, )<br>203         else:<br>204             for i in select_fields:<br>205                 select_fields_sql += ‘%s,’ % i.db_column<br>206             join_sql = self.table_name<br>207         select_fields_sql = select_fields_sql[:-1]<br>208         select = ‘SELECT %s FROM %s %s %s;’ % (select_fields_sql, join_sql, where, counts_sql)<br>209         # print(‘—————-‘, select)<br>210         self.sql_connector.execute(select)<br>211         result = self.sql_connector.cursor.fetchall()<br>212         return result<br>213<br>214     def insert_item(self, data={}):<br>215         ‘’’<br>216         向表中插入一行<br>217         :param data: 一个dict，key是字段对象，value则是值<br>218         :return:<br>219         ‘’’<br>220         insert = ‘INSERT INTO %s (‘ % self.table_name<br>221         value = ‘(‘<br>222         if data:<br>223             for k, v in data.items():<br>224                 insert += ‘%s,’ % k.db_column<br>225                 if k.is_str:<br>226                     value += ‘“%s”,’ % v<br>227                 else:<br>228                     value += ‘%s,’ % v<br>229                 # print(‘value is ‘,value)<br>230             insert = insert[:-1] + ‘)  VALUES ‘<br>231             value = value[:-1] + ‘);’<br>232             insert += value<br>233         # print(‘……’,insert)<br>234         self.sql_connector.execute(insert)<br>235<br>236     def delete_item(self, condition={}):<br>237         ‘’’删除符合condition的条目’’’<br>238         delete = ‘DELETE FROM %s ‘ % self.table_name<br>239         where = self.<em>generate_where(condition)<br>240         delete += where<br>241         # print(delete)<br>242         self.sql_connector.execute(delete)<br>243<br>244     def update_item(self, data={}, condition={}):<br>245         ‘’’将符合condition的条目修改为data’’’<br>246         update = ‘UPDATE %s’ % self.table_name<br>247         data_statement = ‘’<br>248         if data:<br>249             data_statement = ‘ SET ‘<br>250             for k, v in data.items():<br>251                 if not k.is_str:<br>252                     data_statement += ‘%s=%s,’ % (k.db_column, v)<br>253                 else:<br>254                     data_statement += ‘%s=”%s”,’ % (k.db_column, v)<br>255             data_statement = data_statement[:-1]<br>256         where = self.<em>generate_where(condition)<br>257         update += data_statement + where<br>258         # print(‘———‘,update)<br>259         self.sql_connector.execute(update)<br>260<br>261     def get_field_value(self, field, condition={}):<br>262         ret = self.select_items(condition=condition)<br>263         # print(ret)<br>264         if len(ret) == 1:<br>265             value = ret[0][field.db_column]<br>266         elif len(ret) &gt; 1:<br>267             value = []<br>268             for i in ret:<br>269                 value.append(i[field.db_column])<br>270         else:<br>271             value = ‘’<br>272         # print(‘value is ‘,value)<br>273         return value<br>274<br>275 class BaseField(object):<br>276     def __init</em></em>(self, db_column, null=True, blank=None, choice={},<br>277                  db_index=False, default=None, primary_key=False,<br>278                  unique=False, max_length=0, auto_increment=False,<br>279                  ):<br>280         ‘’’<br>281<br>282         :param db_column:  数据库中表的字段名<br>283         :param null:  该字段是否可以为空<br>284         :param blank: 如果该字段为空，存储什么值<br>285         :param choice: 该字段的值只能是choice的一个<br>286         :param db_index: 是否为该字段设置索引<br>287         :param default: 该字段的默认值<br>288         :param primary_key: 是否为该字段设置主键<br>289         :param unique: 该字段值是否可以重复<br>290         :param max_length： 该字段的最大长度<br>291         :param auto_increment: 是否自增<br>292         ‘’’<br>293         self.db_column = db_column<br>294         self.null = null<br>295         self.blank = blank<br>296         self.choice = choice<br>297         self.db_index = db_index<br>298         self.default = default<br>299         self.primary_key = primary_key<br>300         if self.primary_key:<br>301             self.null = False<br>302         self.unique = unique<br>303         self.max_length = max_length<br>304         self.auto_increment = auto_increment<br>305         self.is_foreign_key = False<br>306<br>307     def generate_field_sql(self):<br>308         pass<br>309<br>310     def <em>generate_null(self):<br>311         if not self.null:<br>312             null = ‘NOT NULL’<br>313         else:<br>314             null = ‘NULL’<br>315         return null<br>316<br>317     def <em>generate_default(self):<br>318         default = ‘’<br>319         if self.default is not None:<br>320             if self.is_str:<br>321                 default = ‘ DEFAULT “%s”‘ % self.default<br>322             else:<br>323                 default = ‘ DEFAULT %s’ % self.default<br>324         return default<br>325<br>326     def _generate_auto_increment(self):<br>327         ret = ‘’<br>328         if self.auto_increment:<br>329             ret = ‘AUTO_INCREMENT’<br>330         return ret<br>331<br>332 class CharField(BaseField):<br>333     def __init</em></em>(self, <em>args, **kwargs):<br>334         super().<strong>init</strong>(</em>args, <em><em>kwargs)<br>335         kwargs[‘blank’] = ‘’<br>336         if not self.max_length:<br>337             self.max_length = 128<br>338         if not self.default:<br>339             self.default = self.blank<br>340         self.is_str = True<br>341         self.field_type = ‘CHAR’<br>342<br>343     def generate_field_sql(self):<br>344         null = self.<em>generate_null()<br>345         default = self.<em>generate_default()<br>346         return ‘%s CHAR(%s) %s %s,’ % (self.db_column, self.max_length, null, default)<br>347<br>348 class IntField(BaseField):<br>349     def __init</em></em>(self, *args, *</em>kwargs):<br>350         super().<strong>init</strong>(</em>args, **kwargs)<br>351         self.is_str = False<br>352         self.field_type = ‘INT’<br>353<br>354     def generate_field_sql(self):<br>355         null = self.<em>generate_null()<br>356         default = self.<em>generate_default()<br>357         auto_increment = self._generate_auto_increment()<br>358         return ‘%s INT %s %s %s,’ % (self.db_column, null, default, auto_increment)<br>359<br>360 class ForeignKeyField(BaseField):<br>361     def __init</em></em>(self, db_column, model_obj, null=True, default=None, on_delete=’CASCADE’):<br>362         self.db_column = db_column<br>363         self.model_obj = model_obj<br>364         self.null = null<br>365         self.default = default<br>366         self.is_str = model_obj.primary_key_field.is_str<br>367         self.reference = model_obj.primary_key_field<br>368         self.on_delete = on_delete<br>369         self.is_foreign_key = True<br>370         self.primary_key = False<br>371         self.unique = False<br>372         self.db_index = False<br>373<br>374     def generate_field_sql(self):<br>375         null = self.<em>generate_null()<br>376         default = self.<em>generate_default()<br>377         return ‘%s %s %s %s,’ % (self.db_column, self.model_obj.primary_key_field.field_type, null, default)<br>378<br>379<br>380 Connector = MysqlConnector(‘127.0.0.1’, 3306, ‘root’, ‘’, ‘test1’)<br>381<br>382<br>383 if __name</em></em> == ‘<strong>main</strong>‘:<br>384     class UserModel(BaseModel):<br>385         def initialize(self):<br>386             self.uid = IntField(‘uid’, primary_key=True, auto_increment=True)<br>387             self.account = IntField(‘account’, unique=True, null=False)<br>388             self.password = CharField(‘password’, null=False)<br>389             self.name = CharField(‘name’, null=False)<br>390             self.class_name = CharField(‘class_name’, null=False)<br>391             self.profession = CharField(‘profession’, null=False)<br>392             self.out_date_counts = IntField(‘out_date_counts’, default=0)<br>393<br>394     u = UserModel(‘user’, Connector)</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/01/Python中的requests模块注意事项/" rel="next" title="Python中的requests模块注意事项">
+                <i class="fa fa-chevron-left"></i> Python中的requests模块注意事项
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/07/简单递归算法题/" rel="prev" title="简单递归算法题">
+                简单递归算法题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用python自己实现的一个简单Orm框架"><span class="nav-number">1.</span> <span class="nav-text">使用python自己实现的一个简单Orm框架</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="mysql,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="修改sqlarchemy源码使其支持jdbc连接mysql注意：本文不会将所有完整源码贴出，只是将具体的思路以及部分源码贴出，需要感兴趣的读者自己实验然后实现吆。  缘起　　公司最近的项目需要将之前的部分业务的数据库连接方式改为jdbc，但由于之前的项目都使用sqlarchemy作为orm框架，该框架似乎没有支持jdbc，为了能做最小的修改并满足需求，所以需要修改sqlarchemy的源码。 基本">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修改sqlarchemy源码使其支持jdbc连接mysql">
+<meta property="og:url" content="http://yoursite.com/2018/02/13/修改sqlarchemy源码使其支持jdbc连接mysql/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="修改sqlarchemy源码使其支持jdbc连接mysql注意：本文不会将所有完整源码贴出，只是将具体的思路以及部分源码贴出，需要感兴趣的读者自己实验然后实现吆。  缘起　　公司最近的项目需要将之前的部分业务的数据库连接方式改为jdbc，但由于之前的项目都使用sqlarchemy作为orm框架，该框架似乎没有支持jdbc，为了能做最小的修改并满足需求，所以需要修改sqlarchemy的源码。 基本">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-01T00:27:02.587Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="修改sqlarchemy源码使其支持jdbc连接mysql">
+<meta name="twitter:description" content="修改sqlarchemy源码使其支持jdbc连接mysql注意：本文不会将所有完整源码贴出，只是将具体的思路以及部分源码贴出，需要感兴趣的读者自己实验然后实现吆。  缘起　　公司最近的项目需要将之前的部分业务的数据库连接方式改为jdbc，但由于之前的项目都使用sqlarchemy作为orm框架，该框架似乎没有支持jdbc，为了能做最小的修改并满足需求，所以需要修改sqlarchemy的源码。 基本">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/13/修改sqlarchemy源码使其支持jdbc连接mysql/">
+
+
+
+
+
+  <title>修改sqlarchemy源码使其支持jdbc连接mysql | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/修改sqlarchemy源码使其支持jdbc连接mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">修改sqlarchemy源码使其支持jdbc连接mysql</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-13T16:12:22+08:00">
+                2018-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="修改sqlarchemy源码使其支持jdbc连接mysql"><a href="#修改sqlarchemy源码使其支持jdbc连接mysql" class="headerlink" title="修改sqlarchemy源码使其支持jdbc连接mysql"></a>修改sqlarchemy源码使其支持jdbc连接mysql</h3><p>注意：本文不会将所有完整源码贴出，只是将具体的思路以及部分源码贴出，需要感兴趣的读者自己实验然后实现吆。 </p>
+<p>缘起<br>　　公司最近的项目需要将之前的部分业务的数据库连接方式改为jdbc，但由于之前的项目都使用sqlarchemy作为orm框架，该框架似乎没有支持jdbc，为了能做最小的修改并满足需求，所以需要修改sqlarchemy的源码。</p>
+<p>基本配置介绍</p>
+<p>　　sqlalchemy 版本：1.1.15</p>
+<p>　　使用jaydebeapi模块调用jdbc连接mysql</p>
+<p>前提：</p>
+<p>　　1 学会使用jaydebeapi模块，使用方法具体可以参考：</p>
+<p>　　　　<a href="https://pypi.python.org/pypi/JayDeBeApi" target="_blank" rel="noopener">https://pypi.python.org/pypi/JayDeBeApi</a></p>
+<p>　　　　介绍的比较详细的可以参考：<a href="http://shuaizki.github.io/language_related/2013/06/22/introduction-to-jpype.html" target="_blank" rel="noopener">http://shuaizki.github.io/language_related/2013/06/22/introduction-to-jpype.html</a></p>
+<pre><code>jaydebeapi是一个基于jpype的在Cpython中可以通过jdbc连接数据库的模块。该模块的python代码很少，基本上可以分为连接部分、游标部分、结果转换部分这三个。一般来说我们可能需要修改的就是结果转换部分，比如说sqlalchemy查询时如果某条记录中含TIME字段，那么该字段一般要表现为timedelta对象。而在jaydebeapi中则返回的是字符串对象，这样在sqlalchemy中会报错的。</code></pre><p>sqlarchemy为我们实现了ORM对象与语句的转换，连接池，session(包括对线程的支持scope_session)等较为上层的逻辑，但这些东西在这里我们不需要考虑(当然创建一个连接，生成curcor还是要考虑的)，我们要考虑的仅仅是当sqlarchemy把sql语句以及参数传过来的时候我们该怎么做，以及当sql语句执行后如何对结果进行转换。</p>
+<p>所需注意的问题<br>1 sql语句以及参数传过来的时候我们该怎么做：</p>
+<p>　　1.1 对参数进行转义，防止sql注入</p>
+<p>2 执行完sql语句后对结果如何处理：</p>
+<p>　　2.1 我们知道python的基础sql模块会对结果进行处理，比如说把NUll转换为None，把数据库中的date字段转换为python的date对象等等</p>
+<p>　　2.2 一些不知道该怎么形容的数据：</p>
+<p>　　　　当我们查询时，获取的数据对应字段的元信息</p>
+<p>　　　　当我们update或者delete等操作时需要获取影响了多少行</p>
+<p>　　　　当我们插入数据后，如果主键是自增字段，我们一般(可以说在sqlarchemy中这是必须)需要获取该记录的主键值　　　　</p>
+<p>3 sqlalchemy增加代码，使其支持我们修改后的jaydebeapi</p>
+<p>如何解决<br>1.1解决方案：</p>
+<p>　　人家pymysql咋搞，我就咋搞！</p>
+<p>　　在pymysql.corsors文件中Cursor类中有一个叫做mogrify的方法，这个方法不仅对参数转义，而且会将参数放置到sql语句中组成完整的可执行sql语句。所以偷一些代码然后稍加修改就是这样：</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>from functools import partial<br>from pymysql.converters import escape_item, escape_string<br>import sys</p>
+<p>PY2 = sys.version_info[0] == 2</p>
+<p>if PY2:<br>    import <strong>builtin</strong><br>    range_type = xrange<br>    text_type = unicode<br>    long_type = long<br>    str_type = basestring<br>    unichr = <strong>builtin</strong>.unichr<br>else:<br>    range_type = range<br>    text_type = str<br>    long_type = int<br>    str_type = str<br>    unichr = chr</p>
+<p>def _ensure_bytes(x, encoding=”utf8”):<br>    if isinstance(x, text_type):<br>        x = x.encode(encoding)<br>    return x</p>
+<p>def _escape_args(args, encoding):<br>    ensure_bytes = partial(_ensure_bytes, encoding=encoding)</p>
+<pre><code>if isinstance(args, (tuple, list)):
+    if PY2:
+        args = tuple(map(ensure_bytes, args))
+    return tuple(escape(arg, encoding) for arg in args)
+elif isinstance(args, dict):
+    if PY2:
+        args = dict((ensure_bytes(key), ensure_bytes(val)) for
+                    (key, val) in args.items())
+    return dict((key, escape(val, encoding)) for (key, val) in args.items())</code></pre><p>def escape(obj, charset, mapping=None):<br>    if isinstance(obj, str_type):<br>        return “‘“ + escape_string(obj) + “‘“<br>    return escape_item(obj, charset, mapping=mapping)</p>
+<p>def mogrify(query, encoding, args=None):<br>    if PY2:  # Use bytes on Python 2 always<br>        query = _ensure_bytes(query, encoding=encoding)<br>    if args is not None:</p>
+<pre><code>    # r = _escape_args(args, encoding)
+    query = query % _escape_args(args, encoding)
+return query</code></pre><h1 id="调用一下mogrigy函数"><a href="#调用一下mogrigy函数" class="headerlink" title="调用一下mogrigy函数"></a>调用一下mogrigy函数</h1><h1 id="print-mogrify-“select-from-ll-where-a-in-s-and-b-s”-“utf8”-2-1-3"><a href="#print-mogrify-“select-from-ll-where-a-in-s-and-b-s”-“utf8”-2-1-3" class="headerlink" title="print(mogrify(“select * from ll where a in %s and b = %s”, “utf8”, [[2, 1], 3]))"></a>print(mogrify(“select * from ll where a in %s and b = %s”, “utf8”, [[2, 1], 3]))</h1><p>2.1解决方案：</p>
+<p>　　人家pymysql咋搞，我就咋搞！</p>
+<p>　　在pymysql.converters中有一个名为decoders的字典，这里面存放了mysql字段与python对象的转换关系！大概是这样</p>
+<p>def _convert_second_fraction(s):<br>    if not s:<br>        return 0</p>
+<pre><code># Pad zeros to ensure the fraction length in microseconds
+s = s.ljust(6, &apos;0&apos;)
+return int(s[:6])</code></pre><p>DATETIME_RE = re.compile(r”(\d{1,4})-(\d{1,2})-(\d{1,2})<a href="\d{1,2}">T </a>:(\d{1,2}):(\d{1,2})(?:.(\d{1,6}))?”)</p>
+<p>def convert_datetime(obj):<br>    “””Returns a DATETIME or TIMESTAMP column value as a datetime object:</p>
+<pre><code>  &gt;&gt;&gt; datetime_or_None(&apos;2007-02-25 23:06:20&apos;)
+  datetime.datetime(2007, 2, 25, 23, 6, 20)
+  &gt;&gt;&gt; datetime_or_None(&apos;2007-02-25T23:06:20&apos;)
+  datetime.datetime(2007, 2, 25, 23, 6, 20)
+
+Illegal values are returned as None:
+
+  &gt;&gt;&gt; datetime_or_None(&apos;2007-02-31T23:06:20&apos;) is None
+  True
+  &gt;&gt;&gt; datetime_or_None(&apos;0000-00-00 00:00:00&apos;) is None
+  True
+
+&quot;&quot;&quot;
+if not PY2 and isinstance(obj, (bytes, bytearray)):
+    obj = obj.decode(&apos;ascii&apos;)
+
+m = DATETIME_RE.match(obj)
+if not m:
+    return convert_date(obj)
+
+try:
+    groups = list(m.groups())
+    groups[-1] = _convert_second_fraction(groups[-1])
+    return datetime.datetime(*[ int(x) for x in groups ])
+except ValueError:
+    return convert_date(obj)</code></pre><p>TIMEDELTA_RE = re.compile(r”(-)?(\d{1,3}):(\d{1,2}):(\d{1,2})(?:.(\d{1,6}))?”)</p>
+<p>def convert_timedelta(obj):<br>    “””Returns a TIME column as a timedelta object:</p>
+<pre><code>  &gt;&gt;&gt; timedelta_or_None(&apos;25:06:17&apos;)
+  datetime.timedelta(1, 3977)
+  &gt;&gt;&gt; timedelta_or_None(&apos;-25:06:17&apos;)
+  datetime.timedelta(-2, 83177)
+
+Illegal values are returned as None:
+
+  &gt;&gt;&gt; timedelta_or_None(&apos;random crap&apos;) is None
+  True
+
+Note that MySQL always returns TIME columns as (+|-)HH:MM:SS, but
+can accept values as (+|-)DD HH:MM:SS. The latter format will not
+be parsed correctly by this function.
+&quot;&quot;&quot;
+if not PY2 and isinstance(obj, (bytes, bytearray)):
+    obj = obj.decode(&apos;ascii&apos;)
+
+m = TIMEDELTA_RE.match(obj)
+if not m:
+    return None
+
+try:
+    groups = list(m.groups())
+    groups[-1] = _convert_second_fraction(groups[-1])
+    negate = -1 if groups[0] else 1
+    hours, minutes, seconds, microseconds = groups[1:]
+
+    tdelta = datetime.timedelta(
+        hours = int(hours),
+        minutes = int(minutes),
+        seconds = int(seconds),
+        microseconds = int(microseconds)
+        ) * negate
+    return tdelta
+except ValueError:
+    return None</code></pre><p>TIME_RE = re.compile(r”(\d{1,2}):(\d{1,2}):(\d{1,2})(?:.(\d{1,6}))?”)</p>
+<p>def convert_time(obj):<br>    “””Returns a TIME column as a time object:</p>
+<pre><code>  &gt;&gt;&gt; time_or_None(&apos;15:06:17&apos;)
+  datetime.time(15, 6, 17)
+
+Illegal values are returned as None:
+
+  &gt;&gt;&gt; time_or_None(&apos;-25:06:17&apos;) is None
+  True
+  &gt;&gt;&gt; time_or_None(&apos;random crap&apos;) is None
+  True
+
+Note that MySQL always returns TIME columns as (+|-)HH:MM:SS, but
+can accept values as (+|-)DD HH:MM:SS. The latter format will not
+be parsed correctly by this function.
+
+Also note that MySQL&apos;s TIME column corresponds more closely to
+Python&apos;s timedelta and not time. However if you want TIME columns
+to be treated as time-of-day and not a time offset, then you can
+use set this function as the converter for FIELD_TYPE.TIME.
+&quot;&quot;&quot;
+if not PY2 and isinstance(obj, (bytes, bytearray)):
+    obj = obj.decode(&apos;ascii&apos;)
+
+m = TIME_RE.match(obj)
+if not m:
+    return None
+
+try:
+    groups = list(m.groups())
+    groups[-1] = _convert_second_fraction(groups[-1])
+    hours, minutes, seconds, microseconds = groups
+    return datetime.time(hour=int(hours), minute=int(minutes),
+                         second=int(seconds), microsecond=int(microseconds))
+except ValueError:
+    return None</code></pre><p>def convert_date(obj):<br>    “””Returns a DATE column as a date object:</p>
+<pre><code>  &gt;&gt;&gt; date_or_None(&apos;2007-02-26&apos;)
+  datetime.date(2007, 2, 26)
+
+Illegal values are returned as None:
+
+  &gt;&gt;&gt; date_or_None(&apos;2007-02-31&apos;) is None
+  True
+  &gt;&gt;&gt; date_or_None(&apos;0000-00-00&apos;) is None
+  True
+
+&quot;&quot;&quot;
+if not PY2 and isinstance(obj, (bytes, bytearray)):
+    obj = obj.decode(&apos;ascii&apos;)
+try:
+    return datetime.date(*[ int(x) for x in obj.split(&apos;-&apos;, 2) ])
+except ValueError:
+    return None</code></pre><p>def convert_mysql_timestamp(timestamp):<br>    “””Convert a MySQL TIMESTAMP to a Timestamp object.</p>
+<pre><code>MySQL &gt;= 4.1 returns TIMESTAMP in the same format as DATETIME:
+
+  &gt;&gt;&gt; mysql_timestamp_converter(&apos;2007-02-25 22:32:17&apos;)
+  datetime.datetime(2007, 2, 25, 22, 32, 17)
+
+MySQL &lt; 4.1 uses a big string of numbers:
+
+  &gt;&gt;&gt; mysql_timestamp_converter(&apos;20070225223217&apos;)
+  datetime.datetime(2007, 2, 25, 22, 32, 17)
+
+Illegal values are returned as None:
+
+  &gt;&gt;&gt; mysql_timestamp_converter(&apos;2007-02-31 22:32:17&apos;) is None
+  True
+  &gt;&gt;&gt; mysql_timestamp_converter(&apos;00000000000000&apos;) is None
+  True
+
+&quot;&quot;&quot;
+if not PY2 and isinstance(timestamp, (bytes, bytearray)):
+    timestamp = timestamp.decode(&apos;ascii&apos;)
+if timestamp[4] == &apos;-&apos;:
+    return convert_datetime(timestamp)
+timestamp += &quot;0&quot;*(14-len(timestamp)) # padding
+year, month, day, hour, minute, second = \
+    int(timestamp[:4]), int(timestamp[4:6]), int(timestamp[6:8]), \
+    int(timestamp[8:10]), int(timestamp[10:12]), int(timestamp[12:14])
+try:
+    return datetime.datetime(year, month, day, hour, minute, second)
+except ValueError:
+    return None</code></pre><p>def convert_set(s):<br>    if isinstance(s, (bytes, bytearray)):<br>        return set(s.split(b”,”))<br>    return set(s.split(“,”))</p>
+<p>def through(x):<br>    return x</p>
+<p>#def convert_bit(b):</p>
+<h1 id="b-“-x00”-8-len-b-b-pad-w-zeroes"><a href="#b-“-x00”-8-len-b-b-pad-w-zeroes" class="headerlink" title="b = “\x00” * (8 - len(b)) + b # pad w/ zeroes"></a>b = “\x00” * (8 - len(b)) + b # pad w/ zeroes</h1><h1 id="return-struct-unpack-“-gt-Q”-b-0"><a href="#return-struct-unpack-“-gt-Q”-b-0" class="headerlink" title="return struct.unpack(“&gt;Q”, b)[0]"></a>return struct.unpack(“&gt;Q”, b)[0]</h1><p>#</p>
+<h1 id="the-snippet-above-is-right-but-MySQLdb-doesn’t-process-bits"><a href="#the-snippet-above-is-right-but-MySQLdb-doesn’t-process-bits" class="headerlink" title="the snippet above is right, but MySQLdb doesn’t process bits,"></a>the snippet above is right, but MySQLdb doesn’t process bits,</h1><h1 id="so-we-shouldn’t-either"><a href="#so-we-shouldn’t-either" class="headerlink" title="so we shouldn’t either"></a>so we shouldn’t either</h1><p>convert_bit = through</p>
+<p>def convert_characters(connection, field, data):<br>    field_charset = charset_by_id(field.charsetnr).name<br>    encoding = charset_to_encoding(field_charset)<br>    if field.flags &amp; FLAG.SET:<br>        return convert_set(data.decode(encoding))<br>    if field.flags &amp; FLAG.BINARY:<br>        return data</p>
+<pre><code>if connection.use_unicode:
+    data = data.decode(encoding)
+elif connection.charset != field_charset:
+    data = data.decode(encoding)
+    data = data.encode(connection.encoding)
+return data</code></pre><p>encoders = {<br>    bool: escape_bool,<br>    int: escape_int,<br>    long_type: escape_int,<br>    float: escape_float,<br>    str: escape_str,<br>    text_type: escape_unicode,<br>    tuple: escape_sequence,<br>    list: escape_sequence,<br>    set: escape_sequence,<br>    frozenset: escape_sequence,<br>    dict: escape_dict,<br>    bytearray: escape_bytes,<br>    type(None): escape_None,<br>    datetime.date: escape_date,<br>    datetime.datetime: escape_datetime,<br>    datetime.timedelta: escape_timedelta,<br>    datetime.time: escape_time,<br>    time.struct_time: escape_struct_time,<br>    Decimal: escape_object,<br>}</p>
+<p>if not PY2 or JYTHON or IRONPYTHON:<br>    encoders[bytes] = escape_bytes</p>
+<p>decoders = {<br>    FIELD_TYPE.BIT: convert_bit,<br>    FIELD_TYPE.TINY: int,<br>    FIELD_TYPE.SHORT: int,<br>    FIELD_TYPE.LONG: int,<br>    FIELD_TYPE.FLOAT: float,<br>    FIELD_TYPE.DOUBLE: float,<br>    FIELD_TYPE.LONGLONG: int,<br>    FIELD_TYPE.INT24: int,<br>    FIELD_TYPE.YEAR: int,<br>    FIELD_TYPE.TIMESTAMP: convert_mysql_timestamp,<br>    FIELD_TYPE.DATETIME: convert_datetime,<br>    FIELD_TYPE.TIME: convert_timedelta,<br>    FIELD_TYPE.DATE: convert_date,<br>    FIELD_TYPE.SET: convert_set,<br>    FIELD_TYPE.BLOB: through,<br>    FIELD_TYPE.TINY_BLOB: through,<br>    FIELD_TYPE.MEDIUM_BLOB: through,<br>    FIELD_TYPE.LONG_BLOB: through,<br>    FIELD_TYPE.STRING: through,<br>    FIELD_TYPE.VAR_STRING: through,<br>    FIELD_TYPE.VARCHAR: through,<br>    FIELD_TYPE.DECIMAL: Decimal,<br>    FIELD_TYPE.NEWDECIMAL: Decimal,<br>}</p>
+<p>　　而在jaydebeapi中也有一些相似的代码：</p>
+<p>def _to_datetime(rs, col):<br>    java_val = rs.getTimestamp(col)<br>    if not java_val:<br>        return<br>    d = datetime.datetime.strptime(str(java_val)[:19], “%Y-%m-%d %H:%M:%S”)<br>    d = d.replace(microsecond=int(str(java_val.getNanos())[:6]))<br>    return str(d)</p>
+<p>def _to_time(rs, col):<br>    java_val = rs.getTime(col)<br>    if not java_val:<br>        return<br>    return str(java_val)</p>
+<p>def _to_date(rs, col):<br>    java_val = rs.getDate(col)<br>    if not java_val:<br>        return</p>
+<pre><code># The following code requires Python 3.3+ on dates before year 1900.
+# d = datetime.datetime.strptime(str(java_val)[:10], &quot;%Y-%m-%d&quot;)
+# return d.strftime(&quot;%Y-%m-%d&quot;)
+# Workaround / simpler soltution (see
+# https://github.com/baztian/jaydebeapi/issues/18):
+return str(java_val)[:10]</code></pre><p>def _to_binary(rs, col):<br>    java_val = rs.getObject(col)<br>    if java_val is None:<br>        return<br>    return str(java_val)</p>
+<p>def _java_to_py(java_method):<br>    def to_py(rs, col):<br>        java_val = rs.getObject(col)<br>        if java_val is None:<br>            return<br>        if PY2 and isinstance(java_val, (string_type, int, long, float, bool)):<br>            return java_val<br>        elif isinstance(java_val, (string_type, int, float, bool)):<br>            return java_val<br>        return getattr(java_val, java_method)()<br>    return to_py</p>
+<p>_to_double = _java_to_py(‘doubleValue’)</p>
+<p>_to_int = _java_to_py(‘intValue’)</p>
+<p>_to_boolean = _java_to_py(‘booleanValue’)</p>
+<p>_DEFAULT_CONVERTERS = {</p>
+<pre><code># see
+# http://download.oracle.com/javase/8/docs/api/java/sql/Types.html
+# for possible keys
+&apos;TIMESTAMP&apos;: _to_datetime,
+&apos;TIME&apos;: _to_time,
+&apos;DATE&apos;: _to_date,
+&apos;BINARY&apos;: _to_binary,
+&apos;DECIMAL&apos;: _to_double,
+&apos;NUMERIC&apos;: _to_double,
+&apos;DOUBLE&apos;: _to_double,
+&apos;FLOAT&apos;: _to_double,
+&apos;TINYINT&apos;: _to_int,
+&apos;INTEGER&apos;: _to_int,
+&apos;SMALLINT&apos;: _to_int,
+&apos;BOOLEAN&apos;: _to_boolean,
+&apos;BIT&apos;: _to_boolean</code></pre><p>}</p>
+<p>　　然后我们稍微修改一下即可。 </p>
+<p>2.2解决方案</p>
+<p>　　在jaydebeapi中的Cursor类中，有一个属性叫做description这个属性，通过他我们就能获取查询时表的字段的元信息</p>
+<p>　　在jaydebeapi中的Cursor类中，是有rowcount这个属性的，他表示当我们进行插入更新删除操作时受影响的行数。</p>
+<p>　　而在pymysql的cursors文件中的Cursor类中的_do_get_result方法中不仅仅有受影响的行数rowcount，还有lastrowid这个属性，他表示当我们插入数据且对应主键是自增字段时，最后一条数据的主键值。但是在jaydebeapi中是没有的，而这个属性在sqlalchemy中恰恰是需要的，所以我们要为jaydebeapi的Cursor类加上这个属性。代码如下：</p>
+<p>class Cursor(object):</p>
+<pre><code>lastrowid = None
+rowcount = -1
+_meta = None
+_prep = None
+_rs = None
+_description = None</code></pre><p>   …此处省略部分不相关代码…<br>def execute(self, operation, parameters=None):<br>        if self._connection._closed:<br>            raise Error()<br>        if not parameters:<br>            parameters = ()<br>        self._close_last()<br>        self._prep = self._connection.jconn.prepareStatement(operation)<br>        self._set_stmt_parms(self._prep, parameters)<br>        try:<br>            is_rs = self._prep.execute()</p>
+<pre><code>    # print is_rs
+except:
+    _handle_sql_exception()
+# print(dir(self._prep))
+# 如果是查询的话 is_rs就是1
+if is_rs:
+    self._rs = self._prep.getResultSet()
+    self._meta = self._rs.getMetaData()
+    self.rowcount = -1
+    self.lastrowid = None
+# 插入/修改/删除时 is_rs都为0
+else:
+    self.rowcount = self._prep.getUpdateCount()
+    self.lastrowid = int(self._prep.lastInsertID)</code></pre><p>注意：上面的代码中红色的代码是我新增的</p>
+<p>3解决方案</p>
+<pre><code>sqlarchemy中底层数据库连接模块都放在dialects这个包中，这个包里面有多个包分别是mysql oracle等数据库的基本数据库连接类，因为公司只使用mysql数据库，所以仅仅做了mysql的jdbc扩展，就放到了mysql包中。</code></pre><p>大体介绍一下我们将要修改的或者用到的类：</p>
+<p>　　MySQLDialect</p>
+<p>　　　　位置：sqlarchemy.dialects.mysql.base </p>
+<p>　　　　描述：它是一个提供了对mysql数据库的连接、语句的执行等操作的基类，所以我们需要新写一个jdbcdialect类并继承它，然后重写某些方法。</p>
+<p>　　　　为什么会用到：这个就不用多说了</p>
+<p>　　ExecutionContext</p>
+<p>　　　　位置：sqlarchemy.engine.interface</p>
+<p>　　　　描述：通过这个东西我们可以获取当前游标的执行环境，比如说本次sql语句的执行影响了多少行，我们刚插入的一行的自增主键值是多少。他也负责把我们所写的python ORM语句转换为可以被底层数据库模块比如pymysql可以执行的东西。</p>
+<p>创建dialect类：</p>
+<p>我们知道使用sqlalchemy时首先需要创建一个engine，engine的第一个参数是一个URL，就像这样：mysql+pymysql://user:password@host:port/db?charset=utf8</p>
+<p>　　这段URL主要配置了三项：</p>
+<p>　　　　配置1 首先声明了我们要连接mysql数据库</p>
+<p>　　　　配置2 然后配置了底层连接数据库的dialect(这个单词翻译过来叫方言，就好比同是汉语(连接mysql)，我们可以说山东话(pymysql)也可以说湖南话(mysqldb))模块是pymysql</p>
+<p>　　　　配置3 配置了用户名，密码，主机地址，端口，数据库名等信息</p>
+<p>　　通过查看代码我们可以看到：</p>
+<p>　　　　上面中的配置1实际上就是说接下来要在 sqlalchemy.dialects.mysql包中获取提供数据库操作等方法的class了。</p>
+<p>　　　　配置2实际上就是说 配置1想要找的的class我定义在了sqlalcehmy.dialects.mysql.pymysql中</p>
+<p>　　　　配置3会作为URL类包装解析，然后作为参数传入dialect实例的create_connect_args方法，以获取数据库连接参数。</p>
+<p>然后创建engine时还可以指定许多额外的参数，比如说连接池的配置等，这里面有几个我们需要注意的参数：</p>
+<p>　　假如我们没有指定module(数据库连接底层模块)，默认会调用dialect类的类方法dbapi。</p>
+<p>　　假如我们没有指定creator(与数据库建立连接的方法，一般是个函数)这个参数的话默认建立连接时会调用dialect实例的connect方法，并把create_connect_args返回的连接参数传入。</p>
+<p>　　当我们第一次与数据库建立连接时，会调用dialect实例的initialize方法，这个方法会做一系列操作，比如说获取当前数据库的版本信息：dialect实例的_get_server_version_info方法；获取当前isolation级别：dialect实例的get_isolation_level方法</p>
+<p>然后就很简单了：在sqlalchemy中找到sqlalchemy.dialects.mysql这个目录，然后新建一个名叫jaydebeapi的文件，并找到该目录下的pymysql文件，你会看到：</p>
+<p>from .mysqldb import MySQLDialect_mysqldb<br>from …util import langhelpers, py3k</p>
+<p>class MySQLDialect_pymysql(MySQLDialect_mysqldb):<br>    driver = ‘pymysql’</p>
+<pre><code>description_encoding = None
+
+# generally, these two values should be both True
+# or both False.   PyMySQL unicode tests pass all the way back
+# to 0.4 either way.  See [ticket:3337]
+supports_unicode_statements = True
+supports_unicode_binds = True
+
+def __init__(self, server_side_cursors=False, **kwargs):
+    super(MySQLDialect_pymysql, self).__init__(**kwargs)
+    self.server_side_cursors = server_side_cursors
+
+@langhelpers.memoized_property
+def supports_server_side_cursors(self):
+    try:
+        cursors = __import__(&apos;pymysql.cursors&apos;).cursors
+        self._sscursor = cursors.SSCursor
+        return True
+    except (ImportError, AttributeError):
+        return False
+
+@classmethod
+def dbapi(cls):
+    return __import__(&apos;pymysql&apos;)
+
+if py3k:
+    def _extract_error_code(self, exception):
+        if isinstance(exception.args[0], Exception):
+            exception = exception.args[0]
+        return exception.args[0]</code></pre><p>dialect = MySQLDialect_pymysql</p>
+<p>就这一个类，我们只需要继承这个类并重写某些方法就是了。就像这样：</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8-1"><a href="#coding-utf-8-1" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import re<br>from .pymysql import MySQLDialect_mysqldb</p>
+<p>class MySQLDialect_jaydebeapi(MySQLDialect_mysqldb):<br>    driver = ‘jaydebeapi’</p>
+<pre><code>@classmethod
+def dbapi(cls):
+    return __import__(&apos;jaydebeapi&apos;)
+
+def connect(self, *cargs, **cparams):
+    # get_jdbc_conn这个方法就自己写吧，实际上就是用jaydebeapi生成一个连接，但需要注意，连接的autocommit要设置为False
+    return get_jdbc_conn(self.dbapi, **cparams)
+
+def _get_server_version_info(self, connection):
+    dbapi_con = connection.connection
+    cursor = dbapi_con.cursor()
+    cursor.execute(&quot;select version()&quot;)
+    version = str(cursor.fetchone()[0])
+    cursor.close()
+    version_list = []
+    r = re.compile(r&apos;[.\-]&apos;)
+    for n in r.split(version):
+        try:
+            version_list.append(int(n))
+        except ValueError:
+            version_list.append(n)
+    return tuple(version_list)
+
+def _detect_charset(self, connection):
+    &quot;&quot;&quot;Sniff out the character set in use for connection results.&quot;&quot;&quot;
+
+    try:
+        # note: the SQL here would be
+        # &quot;SHOW VARIABLES LIKE &apos;character_set%%&apos;&quot;
+        # print dir(connection.connection)
+        cset_name = connection.connection.character_set_name
+    except AttributeError:
+        return &apos;utf8&apos;
+    else:
+        return cset_name()</code></pre><p>个人在修改源码中获取的知识点<br>点1：</p>
+<p>　　com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException: Can’t call rollback when autocommit=true</p>
+<p>　　1. 当开启autocommit=true时，回滚没有意义，无论成功/失败都已经已经将事务提交<br>　　2. autocommit=false，我们需要运行conn.commit()执行事务, 如果失败则需要conn.rollback()对事务进行回滚;</p>
+<p>点2：</p>
+<p>　　 尝试连接mysql时报错：Unknown system variable ‘transaction_isolation’</p>
+<p>　　这是因为我的MySQLDialect_jaydebeapi类中的_get_server_version_info方法返回写死为5.7.21版本，而在mysql的Mysqldialect类的get_isolation_level中，会判断如果版本大于等于5.7.20的话执行SELECT @@transaction_isolation，反之会执行SELECT @@tx_isolation。</p>
+<p>　　于是看了看自己的mysql版本是5.7.11 ，遂改变版本号。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/28/python多进程/" rel="next" title="python多进程">
+                <i class="fa fa-chevron-left"></i> python多进程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/18/Django之Model（一）--基础篇/" rel="prev" title="Django之Model（一）--基础篇">
+                Django之Model（一）--基础篇 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改sqlarchemy源码使其支持jdbc连接mysql"><span class="nav-number">1.</span> <span class="nav-text">修改sqlarchemy源码使其支持jdbc连接mysql</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#coding-utf-8"><span class="nav-number"></span> <span class="nav-text">-- coding: utf-8 --</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调用一下mogrigy函数"><span class="nav-number"></span> <span class="nav-text">调用一下mogrigy函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#print-mogrify-“select-from-ll-where-a-in-s-and-b-s”-“utf8”-2-1-3"><span class="nav-number"></span> <span class="nav-text">print(mogrify(“select * from ll where a in %s and b = %s”, “utf8”, [[2, 1], 3]))</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#b-“-x00”-8-len-b-b-pad-w-zeroes"><span class="nav-number"></span> <span class="nav-text">b = “\x00” * (8 - len(b)) + b # pad w/ zeroes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#return-struct-unpack-“-gt-Q”-b-0"><span class="nav-number"></span> <span class="nav-text">return struct.unpack(“&gt;Q”, b)[0]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#the-snippet-above-is-right-but-MySQLdb-doesn’t-process-bits"><span class="nav-number"></span> <span class="nav-text">the snippet above is right, but MySQLdb doesn’t process bits,</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#so-we-shouldn’t-either"><span class="nav-number"></span> <span class="nav-text">so we shouldn’t either</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#coding-utf-8-1"><span class="nav-number"></span> <span class="nav-text">-- coding: utf-8 --</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

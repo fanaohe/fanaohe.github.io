@@ -1,0 +1,2887 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Python全栈开发">
+<meta property="og:type" content="website">
+<meta property="og:title" content="范澳河技术博客">
+<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="Python全栈开发">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="范澳河技术博客">
+<meta name="twitter:description" content="Python全栈开发">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/page/5/">
+
+
+
+
+
+  <title>范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/25/python time模块和datetime模块详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/25/python time模块和datetime模块详解/" itemprop="url">python time模块和datetime模块详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T00:21:57+08:00">
+                2018-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="python-time模块和datetime模块详解"><a href="#python-time模块和datetime模块详解" class="headerlink" title="python time模块和datetime模块详解"></a>python time模块和datetime模块详解</h3><h2 id="time模块"><a href="#time模块" class="headerlink" title="time模块"></a>time模块</h2><p> time模块中时间表现的格式主要有三种：</p>
+<p>　　a、timestamp时间戳，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量</p>
+<p>　　b、struct_time时间元组，共有九个元素组。</p>
+<p>　　c、format time 格式化时间，已格式化的结构使时间更具可读性。包括自定义格式和固定格式。</p>
+<p>1、时间格式转换图：<br><img src="https://images2015.cnblogs.com/blog/996085/201610/996085-20161026171443546-488752980.png" alt="avatar"></p>
+<p>2、主要time生成方法和time格式转换方法实例：</p>
+<p>#! /usr/bin/env python</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding:utf-8 --"></a>-<em>- coding:utf-8 -</em>-</h1><h1 id="author-“TKQ”"><a href="#author-“TKQ”" class="headerlink" title="author = “TKQ”"></a><strong>author</strong> = “TKQ”</h1><p>import time</p>
+<h1 id="生成timestamp"><a href="#生成timestamp" class="headerlink" title="生成timestamp"></a>生成timestamp</h1><p>time.time()</p>
+<h1 id="1477471508-05"><a href="#1477471508-05" class="headerlink" title="1477471508.05"></a>1477471508.05</h1><p>#struct_time to timestamp<br>time.mktime(time.localtime())</p>
+<p>#生成struct_time</p>
+<h1 id="timestamp-to-struct-time-本地时间"><a href="#timestamp-to-struct-time-本地时间" class="headerlink" title="timestamp to struct_time 本地时间"></a>timestamp to struct_time 本地时间</h1><p>time.localtime()<br>time.localtime(time.time())</p>
+<h1 id="time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-16-tm-min-45-tm-sec-8-tm-wday-2-tm-yday-300-tm-isdst-0"><a href="#time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-16-tm-min-45-tm-sec-8-tm-wday-2-tm-yday-300-tm-isdst-0" class="headerlink" title="time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=16, tm_min=45, tm_sec=8, tm_wday=2, tm_yday=300, tm_isdst=0)"></a>time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=16, tm_min=45, tm_sec=8, tm_wday=2, tm_yday=300, tm_isdst=0)</h1><h1 id="timestamp-to-struct-time-格林威治时间"><a href="#timestamp-to-struct-time-格林威治时间" class="headerlink" title="timestamp to struct_time 格林威治时间"></a>timestamp to struct_time 格林威治时间</h1><p>time.gmtime()<br>time.gmtime(time.time())</p>
+<h1 id="time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-8-tm-min-45-tm-sec-8-tm-wday-2-tm-yday-300-tm-isdst-0"><a href="#time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-8-tm-min-45-tm-sec-8-tm-wday-2-tm-yday-300-tm-isdst-0" class="headerlink" title="time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=8, tm_min=45, tm_sec=8, tm_wday=2, tm_yday=300, tm_isdst=0)"></a>time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=8, tm_min=45, tm_sec=8, tm_wday=2, tm_yday=300, tm_isdst=0)</h1><p>#format_time to struct_time<br>time.strptime(‘2011-05-05 16:37:06’, ‘%Y-%m-%d %X’)</p>
+<h1 id="time-struct-time-tm-year-2011-tm-mon-5-tm-mday-5-tm-hour-16-tm-min-37-tm-sec-6-tm-wday-3-tm-yday-125-tm-isdst-1"><a href="#time-struct-time-tm-year-2011-tm-mon-5-tm-mday-5-tm-hour-16-tm-min-37-tm-sec-6-tm-wday-3-tm-yday-125-tm-isdst-1" class="headerlink" title="time.struct_time(tm_year=2011, tm_mon=5, tm_mday=5, tm_hour=16, tm_min=37, tm_sec=6, tm_wday=3, tm_yday=125, tm_isdst=-1)"></a>time.struct_time(tm_year=2011, tm_mon=5, tm_mday=5, tm_hour=16, tm_min=37, tm_sec=6, tm_wday=3, tm_yday=125, tm_isdst=-1)</h1><p>#生成format_time</p>
+<p>#struct_time to format_time<br>time.strftime(“%Y-%m-%d %X”)<br>time.strftime(“%Y-%m-%d %X”,time.localtime())</p>
+<h1 id="2016-10-26-16-48-41"><a href="#2016-10-26-16-48-41" class="headerlink" title="2016-10-26 16:48:41"></a>2016-10-26 16:48:41</h1><p>#生成固定格式的时间表示格式<br>time.asctime(time.localtime())<br>time.ctime(time.time())</p>
+<h1 id="Wed-Oct-26-16-45-08-2016"><a href="#Wed-Oct-26-16-45-08-2016" class="headerlink" title="Wed Oct 26 16:45:08 2016"></a>Wed Oct 26 16:45:08 2016</h1><p>struct_time元组元素结构</p>
+<p>属性                            值<br>tm_year（年）                  比如2011<br>tm_mon（月）                   1 - 12<br>tm_mday（日）                  1 - 31<br>tm_hour（时）                  0 - 23<br>tm_min（分）                   0 - 59<br>tm_sec（秒）                   0 - 61<br>tm_wday（weekday）             0 - 6（0表示周日）<br>tm_yday（一年中的第几天）        1 - 366<br>tm_isdst（是否是夏令时）        默认为-1</p>
+<p>format time结构化表示</p>
+<p>格式    含义<br>%a    本地（locale）简化星期名称<br>%A    本地完整星期名称<br>%b    本地简化月份名称<br>%B    本地完整月份名称<br>%c    本地相应的日期和时间表示<br>%d    一个月中的第几天（01 - 31）<br>%H    一天中的第几个小时（24小时制，00 - 23）<br>%I    第几个小时（12小时制，01 - 12）<br>%j    一年中的第几天（001 - 366）<br>%m    月份（01 - 12）<br>%M    分钟数（00 - 59）<br>%p    本地am或者pm的相应符<br>%S    秒（01 - 61）<br>%U    一年中的星期数。（00 - 53星期天是一个星期的开始。）第一个星期天之前的所有天数都放在第0周。<br>%w    一个星期中的第几天（0 - 6，0是星期天）<br>%W    和%U基本相同，不同的是%W以星期一为一个星期的开始。<br>%x    本地相应日期<br>%X    本地相应时间<br>%y    去掉世纪的年份（00 - 99）<br>%Y    完整的年份<br>%Z    时区的名字（如果不存在为空字符）<br>%%    ‘%’字符</p>
+<p>常见结构化时间组合：</p>
+<p>print time.strftime(“%Y-%m-%d %X”)</p>
+<p>#2016-10-26 20:50:13<br> 3、time加减</p>
+<p>#timestamp加减单位以秒为单位<br>import time<br>t1 = time.time()<br>t2=t1+10</p>
+<p>print time.ctime(t1)#Wed Oct 26 21:15:30 2016<br>print time.ctime(t2)#Wed Oct 26 21:15:40 2016</p>
+<p>二、datetime模块<br>datatime模块重新封装了time模块，提供更多接口，提供的类有：date,time,datetime,timedelta,tzinfo。</p>
+<p>1、date类</p>
+<p>datetime.date(year, month, day)</p>
+<p>静态方法和字段</p>
+<p>date.max、date.min：date对象所能表示的最大、最小日期；<br>date.resolution：date对象表示日期的最小单位。这里是天。<br>date.today()：返回一个表示当前本地日期的date对象；<br>date.fromtimestamp(timestamp)：根据给定的时间戮，返回一个date对象；</p>
+<p>from datetime import *
+import time</p>
+<p>print   ‘date.max:’, date.max<br>print   ‘date.min:’, date.min<br>print   ‘date.today():’, date.today()<br>print   ‘date.fromtimestamp():’, date.fromtimestamp(time.time())</p>
+<p>#Output======================</p>
+<h1 id="date-max-9999-12-31"><a href="#date-max-9999-12-31" class="headerlink" title="date.max: 9999-12-31"></a>date.max: 9999-12-31</h1><h1 id="date-min-0001-01-01"><a href="#date-min-0001-01-01" class="headerlink" title="date.min: 0001-01-01"></a>date.min: 0001-01-01</h1><h1 id="date-today-2016-10-26"><a href="#date-today-2016-10-26" class="headerlink" title="date.today(): 2016-10-26"></a>date.today(): 2016-10-26</h1><h1 id="date-fromtimestamp-2016-10-26"><a href="#date-fromtimestamp-2016-10-26" class="headerlink" title="date.fromtimestamp(): 2016-10-26"></a>date.fromtimestamp(): 2016-10-26</h1><p>方法和属性</p>
+<p>d1 = date(2011,06,03)#date对象<br>d1.year、date.month、date.day：年、月、日；<br>d1.replace(year, month, day)：生成一个新的日期对象，用参数指定的年，月，日代替原有对象中的属性。（原有对象仍保持不变）<br>d1.timetuple()：返回日期对应的time.struct_time对象；<br>d1.weekday()：返回weekday，如果是星期一，返回0；如果是星期2，返回1，以此类推；<br>d1.isoweekday()：返回weekday，如果是星期一，返回1；如果是星期2，返回2，以此类推；<br>d1.isocalendar()：返回格式如(year，month，day)的元组；<br>d1.isoformat()：返回格式如’YYYY-MM-DD’的字符串；<br>d1.strftime(fmt)：和time模块format相同。</p>
+<p>from datetime import *</p>
+<p>now = date(2016, 10, 26)<br>tomorrow = now.replace(day = 27)<br>print ‘now:’, now, ‘, tomorrow:’, tomorrow<br>print ‘timetuple():’, now.timetuple()<br>print ‘weekday():’, now.weekday()<br>print ‘isoweekday():’, now.isoweekday()<br>print ‘isocalendar():’, now.isocalendar()<br>print ‘isoformat():’, now.isoformat()<br>print ‘strftime():’, now.strftime(“%Y-%m-%d”)</p>
+<p>#Output========================</p>
+<h1 id="now-2016-10-26-tomorrow-2016-10-27"><a href="#now-2016-10-26-tomorrow-2016-10-27" class="headerlink" title="now: 2016-10-26 , tomorrow: 2016-10-27"></a>now: 2016-10-26 , tomorrow: 2016-10-27</h1><h1 id="timetuple-time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-0-tm-min-0-tm-sec-0-tm-wday-2-tm-yday-300-tm-isdst-1"><a href="#timetuple-time-struct-time-tm-year-2016-tm-mon-10-tm-mday-26-tm-hour-0-tm-min-0-tm-sec-0-tm-wday-2-tm-yday-300-tm-isdst-1" class="headerlink" title="timetuple(): time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=2, tm_yday=300, tm_isdst=-1)"></a>timetuple(): time.struct_time(tm_year=2016, tm_mon=10, tm_mday=26, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=2, tm_yday=300, tm_isdst=-1)</h1><h1 id="weekday-2"><a href="#weekday-2" class="headerlink" title="weekday(): 2"></a>weekday(): 2</h1><h1 id="isoweekday-3"><a href="#isoweekday-3" class="headerlink" title="isoweekday(): 3"></a>isoweekday(): 3</h1><h1 id="isocalendar-2016-43-3"><a href="#isocalendar-2016-43-3" class="headerlink" title="isocalendar(): (2016, 43, 3)"></a>isocalendar(): (2016, 43, 3)</h1><h1 id="isoformat-2016-10-26"><a href="#isoformat-2016-10-26" class="headerlink" title="isoformat(): 2016-10-26"></a>isoformat(): 2016-10-26</h1><h1 id="strftime-2016-10-26"><a href="#strftime-2016-10-26" class="headerlink" title="strftime(): 2016-10-26"></a>strftime(): 2016-10-26</h1><p>2、time类</p>
+<p>datetime.time(hour[ , minute[ , second[ , microsecond[ , tzinfo] ] ] ] ) </p>
+<p>静态方法和字段</p>
+<p>time.min、time.max：time类所能表示的最小、最大时间。其中，time.min = time(0, 0, 0, 0)， time.max = time(23, 59, 59, 999999)；<br>time.resolution：时间的最小单位，这里是1微秒；</p>
+<p>方法和属性</p>
+<p>t1 = datetime.time(10,23,15)#time对象<br>t1.hour、t1.minute、t1.second、t1.microsecond：时、分、秒、微秒；<br>t1.tzinfo：时区信息；<br>t1.replace([ hour[ , minute[ , second[ , microsecond[ , tzinfo] ] ] ] ] )：创建一个新的时间对象，用参数指定的时、分、秒、微秒代替原有对象中的属性（原有对象仍保持不变）；<br>t1.isoformat()：返回型如”HH:MM:SS”格式的字符串表示；<br>t1.strftime(fmt)：同time模块中的format；</p>
+<p>from  datetime import *</p>
+<p>tm = time(23, 46, 10)<br>print   ‘tm:’, tm<br>print   ‘hour: %d, minute: %d, second: %d, microsecond: %d’ % (tm.hour, tm.minute, tm.second, tm.microsecond)<br>tm1 = tm.replace(hour=20)<br>print   ‘tm1:’, tm1<br>print   ‘isoformat():’, tm.isoformat()<br>print   ‘strftime()’, tm.strftime(“%X”)</p>
+<p>#Output==============================================</p>
+<h1 id="tm-23-46-10"><a href="#tm-23-46-10" class="headerlink" title="tm: 23:46:10"></a>tm: 23:46:10</h1><h1 id="hour-23-minute-46-second-10-microsecond-0"><a href="#hour-23-minute-46-second-10-microsecond-0" class="headerlink" title="hour: 23, minute: 46, second: 10, microsecond: 0"></a>hour: 23, minute: 46, second: 10, microsecond: 0</h1><h1 id="tm1-20-46-10"><a href="#tm1-20-46-10" class="headerlink" title="tm1: 20:46:10"></a>tm1: 20:46:10</h1><h1 id="isoformat-23-46-10"><a href="#isoformat-23-46-10" class="headerlink" title="isoformat(): 23:46:10"></a>isoformat(): 23:46:10</h1><h1 id="strftime-23-46-10"><a href="#strftime-23-46-10" class="headerlink" title="strftime() 23:46:10"></a>strftime() 23:46:10</h1><p>3、datetime类</p>
+<p>datetime相当于date和time结合起来。<br>datetime.datetime (year, month, day[ , hour[ , minute[ , second[ , microsecond[ , tzinfo] ] ] ] ] )</p>
+<p>静态方法和字段</p>
+<p>datetime.today()：返回一个表示当前本地时间的datetime对象；<br>datetime.now([tz])：返回一个表示当前本地时间的datetime对象，如果提供了参数tz，则获取tz参数所指时区的本地时间；<br>datetime.utcnow()：返回一个当前utc时间的datetime对象；#格林威治时间<br>datetime.fromtimestamp(timestamp[, tz])：根据时间戮创建一个datetime对象，参数tz指定时区信息；<br>datetime.utcfromtimestamp(timestamp)：根据时间戮创建一个datetime对象；<br>datetime.combine(date, time)：根据date和time，创建一个datetime对象；<br>datetime.strptime(date_string, format)：将格式字符串转换为datetime对象；</p>
+<p>from  datetime import *
+import time</p>
+<p>print   ‘datetime.max:’, datetime.max<br>print   ‘datetime.min:’, datetime.min<br>print   ‘datetime.resolution:’, datetime.resolution<br>print   ‘today():’, datetime.today()<br>print   ‘now():’, datetime.now()<br>print   ‘utcnow():’, datetime.utcnow()<br>print   ‘fromtimestamp(tmstmp):’, datetime.fromtimestamp(time.time())<br>print   ‘utcfromtimestamp(tmstmp):’, datetime.utcfromtimestamp(time.time())</p>
+<p>#output======================</p>
+<h1 id="datetime-max-9999-12-31-23-59-59-999999"><a href="#datetime-max-9999-12-31-23-59-59-999999" class="headerlink" title="datetime.max: 9999-12-31 23:59:59.999999"></a>datetime.max: 9999-12-31 23:59:59.999999</h1><h1 id="datetime-min-0001-01-01-00-00-00"><a href="#datetime-min-0001-01-01-00-00-00" class="headerlink" title="datetime.min: 0001-01-01 00:00:00"></a>datetime.min: 0001-01-01 00:00:00</h1><h1 id="datetime-resolution-0-00-00-000001"><a href="#datetime-resolution-0-00-00-000001" class="headerlink" title="datetime.resolution: 0:00:00.000001"></a>datetime.resolution: 0:00:00.000001</h1><h1 id="today-2016-10-26-23-12-51-307000"><a href="#today-2016-10-26-23-12-51-307000" class="headerlink" title="today(): 2016-10-26 23:12:51.307000"></a>today(): 2016-10-26 23:12:51.307000</h1><h1 id="now-2016-10-26-23-12-51-307000"><a href="#now-2016-10-26-23-12-51-307000" class="headerlink" title="now(): 2016-10-26 23:12:51.307000"></a>now(): 2016-10-26 23:12:51.307000</h1><h1 id="utcnow-2016-10-26-15-12-51-307000"><a href="#utcnow-2016-10-26-15-12-51-307000" class="headerlink" title="utcnow(): 2016-10-26 15:12:51.307000"></a>utcnow(): 2016-10-26 15:12:51.307000</h1><h1 id="fromtimestamp-tmstmp-2016-10-26-23-12-51-307000"><a href="#fromtimestamp-tmstmp-2016-10-26-23-12-51-307000" class="headerlink" title="fromtimestamp(tmstmp): 2016-10-26 23:12:51.307000"></a>fromtimestamp(tmstmp): 2016-10-26 23:12:51.307000</h1><h1 id="utcfromtimestamp-tmstmp-2016-10-26-15-12-51-307000"><a href="#utcfromtimestamp-tmstmp-2016-10-26-15-12-51-307000" class="headerlink" title="utcfromtimestamp(tmstmp): 2016-10-26 15:12:51.307000"></a>utcfromtimestamp(tmstmp): 2016-10-26 15:12:51.307000</h1><p>方法和属性</p>
+<p>dt=datetime.now()#datetime对象<br>dt.year、month、day、hour、minute、second、microsecond、tzinfo：<br>dt.date()：获取date对象；<br>dt.time()：获取time对象；<br>dt. replace ([ year[ , month[ , day[ , hour[ , minute[ , second[ , microsecond[ , tzinfo] ] ] ] ] ] ] ])：<br>dt. timetuple ()<br>dt. utctimetuple ()<br>dt. toordinal ()<br>dt. weekday ()<br>dt. isocalendar ()<br>dt. isoformat ([ sep] )<br>dt. ctime ()：返回一个日期时间的C格式字符串，等效于time.ctime(time.mktime(dt.timetuple()))；<br>dt. strftime (format)</p>
+<p>4.timedelta类，时间加减</p>
+<p>使用timedelta可以很方便的在日期上做天days，小时hour，分钟，秒，毫秒，微妙的时间计算，如果要计算月份则需要另外的办法。</p>
+<p>#coding:utf-8<br>from  datetime import *</p>
+<p>dt = datetime.now()</p>
+<p>#日期减一天<br>dt1 = dt + timedelta(days=-1)#昨天<br>dt2 = dt - timedelta(days=1)#昨天<br>dt3 = dt + timedelta(days=1)#明天<br>delta_obj = dt3-dt<br>print type(delta_obj),delta_obj#&lt;type ‘datetime.timedelta’&gt; 1 day, 0:00:00<br>print delta_obj.days ,delta_obj.total_seconds()#1 86400.0</p>
+<p> 5、tzinfo时区类</p>
+<p>#! /usr/bin/python</p>
+<h1 id="coding-utf-8-1"><a href="#coding-utf-8-1" class="headerlink" title="coding=utf-8"></a>coding=utf-8</h1><p>from datetime import datetime, tzinfo,timedelta</p>
+<p>“””<br>tzinfo是关于时区信息的类<br>tzinfo是一个抽象类，所以不能直接被实例化<br>“””<br>class UTC(tzinfo):<br>    “””UTC”””<br>    def <strong>init</strong>(self,offset = 0):<br>        self._offset = offset</p>
+<pre><code>def utcoffset(self, dt):
+    return timedelta(hours=self._offset)
+
+def tzname(self, dt):
+    return &quot;UTC +%s&quot; % self._offset
+
+def dst(self, dt):
+    return timedelta(hours=self._offset)</code></pre><p>#北京时间<br>beijing = datetime(2011,11,11,0,0,0,tzinfo = UTC(8))<br>print “beijing time:”,beijing</p>
+<p>#曼谷时间<br>bangkok = datetime(2011,11,11,0,0,0,tzinfo = UTC(7))<br>print “bangkok time”,bangkok</p>
+<p>#北京时间转成曼谷时间<br>print “beijing-time to bangkok-time:”,beijing.astimezone(UTC(7))</p>
+<p>#计算时间差时也会考虑时区的问题<br>timespan = beijing - bangkok<br>print “时差:”,timespan</p>
+<p>#Output==================</p>
+<h1 id="beijing-time-2011-11-11-00-00-00-08-00"><a href="#beijing-time-2011-11-11-00-00-00-08-00" class="headerlink" title="beijing time: 2011-11-11 00:00:00+08:00"></a>beijing time: 2011-11-11 00:00:00+08:00</h1><h1 id="bangkok-time-2011-11-11-00-00-00-07-00"><a href="#bangkok-time-2011-11-11-00-00-00-07-00" class="headerlink" title="bangkok time 2011-11-11 00:00:00+07:00"></a>bangkok time 2011-11-11 00:00:00+07:00</h1><h1 id="beijing-time-to-bangkok-time-2011-11-10-23-00-00-07-00"><a href="#beijing-time-to-bangkok-time-2011-11-10-23-00-00-07-00" class="headerlink" title="beijing-time to bangkok-time: 2011-11-10 23:00:00+07:00"></a>beijing-time to bangkok-time: 2011-11-10 23:00:00+07:00</h1><h1 id="时差-1-day-23-00-00"><a href="#时差-1-day-23-00-00" class="headerlink" title="时差: -1 day, 23:00:00"></a>时差: -1 day, 23:00:00</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/18/Django之Model（一）--基础篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/18/Django之Model（一）--基础篇/" itemprop="url">Django之Model（一）--基础篇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T00:21:57+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Django之Model（一）–基础篇"><a href="#Django之Model（一）–基础篇" class="headerlink" title="Django之Model（一）–基础篇"></a>Django之Model（一）–基础篇</h3><p> 0、数据库配置<br>django默认支持sqlite，mysql, oracle,postgresql数据库。Django连接数据库默认编码使用UTF8，使用中文不需要特别设置。</p>
+<p>sqlite<br>    django默认使用sqlite的数据库，默认自带sqlite的数据库驱<br>    引擎名称：django.db.backends.sqlite3<br>mysql<br>    引擎名称：django.db.backends.mysql<br>mysql引擎配置：</p>
+<p>‘defaults’: {<br>　　‘ENGINE’: ‘django.db.backends.mysql’,<br>　　‘NAME’:’127.0.0.1’,<br>　　‘USER’:’root’,<br>　　‘PASSWORD’:’’,<br>　　} </p>
+<p>mysql引擎底层驱动的py3支持问题：</p>
+<p>mysql驱动程序<br>    MySQLdb(mysql python),Django默认使用改驱动，但改驱动在python3下存在兼容性问题。因此使用PyMySQL。<br>    PyMySQL(纯python的mysql驱动程序)<br>mysql驱动python3解决方法<br>    找到项目名文件下的<strong>init</strong>,在里面写入：<br>    import pymysql<br>    pymysql.install_as_MySQLdb()    </p>
+<p>一、Model类定义<br>1、Model类创建<br>下面这个模型类将作为本篇博客的基础模型，所有的实例都基于此。</p>
+<p>from django.db import models</p>
+<p>class Publisher(models.Model):<br>    name = models.CharField(max_length=30, verbose_name=”名称”)<br>    website = models.URLField()</p>
+<pre><code># book_set     反向关联一对多字段的Book
+def __unicode__(self):
+    return self.name</code></pre><p>class Author(models.Model):<br>    name = models.CharField(max_length=30)</p>
+<pre><code># authordetail  反向关联一对一字段AuthorDetail表
+# book_set      反向关联一对多字段的Book
+def __unicode__(self):
+    return self.name</code></pre><p>class AuthorDetail(models.Model):<br>    sex = models.BooleanField(max_length=1, choices=((0, ‘男’),(1, ‘女’),))<br>    author = models.OneToOneField(Author)</p>
+<pre><code># author_id隐藏字段，正向关联一对一字段的Author对象的id</code></pre><p>class Book(models.Model):<br>    title = models.CharField(max_length=100)<br>    authors = models.ManyToManyField(Author)<br>    publisher = models.ForeignKey(Publisher,null=True)</p>
+<pre><code># publisher_id隐藏字段，正向关联一对多字段的Publisher对象的id
+price=models.DecimalField(max_digits=5,decimal_places=2,default=10)
+def __unicode__(self):
+    return self.title</code></pre><p> 自定义多对多中间表<br>2、同步数据库<br>模型表创建和更新的时候是要使用数据库迁移命令，使模型类的改变同步到数据库。</p>
+<p>makemigrations    #创建变更记录<br>migrate    #同步到数据库<br>3、Model类（表）关系图：<br><img src="https://images2015.cnblogs.com/blog/996085/201610/996085-20161005200039395-608116909.png" alt="avatar"><br>名词说明：</p>
+<p>　　正向查询，从定义关系字段的类中去查询关系对象的值或值的集合。举个栗子：从AuthorDetail类中查询关联字段author对象的值。</p>
+<p>　　反向查询，从本类中查询被关联对象中的值或值的集合。举个栗子：从Author对象中查询被关联字段AuthorDetail对象的值。</p>
+<p>4、字段类型：</p>
+<p>1、models.AutoField　　自增列 = int(11)<br>　　如果没有的话，默认会生成一个名称为 id 的列，如果要显示的自定义一个自增列，必须将给列设置为主键 primary_key=True。<br>2、models.CharField　　字符串字段<br>　　必须 max_length 参数<br>3、models.BooleanField　　布尔类型=tinyint(1)<br>　　不能为空，Blank=True<br>4、models.ComaSeparatedIntegerField　　用逗号分割的数字=varchar<br>　　继承CharField，所以必须 max_lenght 参数<br>5、models.DateField　　日期类型 date<br>　　对于参数，auto_now = True 则每次更新都会更新这个时间；auto_now_add 则只是第一次创建添加，之后的更新不再改变。<br>6、models.DateTimeField　　日期类型 datetime<br>　　同DateField的参数<br>7、models.Decimal　　十进制小数类型 = decimal<br>　　必须指定整数位max_digits和小数位decimal_places<br>8、models.EmailField　　字符串类型（正则表达式邮箱） =varchar<br>　　对字符串进行正则表达式<br>9、models.FloatField　　浮点类型 = double<br>10、models.IntegerField　　整形<br>11、models.BigIntegerField　　长整形<br>　　integer_field_ranges = {<br>　　　　‘SmallIntegerField’: (-32768, 32767),<br>　　　　‘IntegerField’: (-2147483648, 2147483647),<br>　　　　‘BigIntegerField’: (-9223372036854775808, 9223372036854775807),<br>　　　　‘PositiveSmallIntegerField’: (0, 32767),<br>　　　　‘PositiveIntegerField’: (0, 2147483647),<br>　　}<br>12、models.IPAddressField　　字符串类型（ip4正则表达式）<br>13、models.GenericIPAddressField　　字符串类型（ip4和ip6是可选的）<br>　　参数protocol可以是：both、ipv4、ipv6<br>　　验证时，会根据设置报错<br>14、models.NullBooleanField　　允许为空的布尔类型<br>15、models.PositiveIntegerFiel　　正Integer<br>16、models.PositiveSmallIntegerField　　正smallInteger<br>17、models.SlugField　　减号、下划线、字母、数字<br>18、models.SmallIntegerField　　数字<br>　　数据库中的字段有：tinyint、smallint、int、bigint<br>19、models.TextField　　字符串=longtext<br>20、models.TimeField　　时间 HH:MM[:ss[.uuuuuu]]<br>21、models.URLField　　字符串，地址正则表达式<br>22、models.BinaryField　　二进制<br>23、models.ImageField   图片<br>24、models.FilePathField 文件</p>
+<p>5、字段选项：</p>
+<p>1、null=True<br>　　数据库中字段是否可以为空<br>2、blank=True<br>　　django的 Admin 中添加数据时是否可允许空值<br>3、primary_key = False<br>　　主键，对AutoField设置主键后，就会代替原来的自增 id 列<br>4、auto_now 和 auto_now_add<br>　　auto_now   自动创建—无论添加或修改，都是当前操作的时间<br>　　auto_now_add  自动创建—永远是创建时的时间<br>5、choices    配置可选项<br>GENDER_CHOICE = (<br>        (u’M’, u’Male’),<br>        (u’F’, u’Female’),<br>    )<br>gender = models.CharField(max_length=2,choices = GENDER_CHOICE)<br>6、max_length    最大长度<br>7、default　　默认值<br>8、verbose_name　　Admin中字段的显示名称<br>9、name|db_column　　数据库中的字段名称<br>10、unique=True　　不允许重复<br>11、db_index = True　　数据库索引<br>12、editable=True　　在Admin里是否可编辑<br>13、error_messages=None　　错误提示<br>14、auto_created=False　　自动创建<br>15、help_text　　在Admin中提示帮助信息<br>16、validators=[]    自定义数据格式验证<br>17、upload-to    上传文件路径</p>
+<p>6、Model类的Meta（元数据）选项：</p>
+<p>abstract=False     True就表示模型是抽象基类<br>db_table = ‘music_album’    自定义数库的表名称前缀<br>get_latest_by = “datefield_name”    根据时间字段datefield_name排序，latest()和earliest()方法中使用的默认字段。<br>db_tablespace        当前模型所使用的数据库表空间的名字。默认值是项目设置中的DEFAULT_TABLESPACE。如果后端并不支持表空间，这个选项可以忽略。<br>ordering = [‘-fieldname’]    对象默认的顺序,字段前面带有’-‘符号表示逆序，否则正序。排序会增加查询额外开销。<br>proxy = True    它作为另一个模型的子类，将会作为一个代理模型。<br>unique_together    设置联合唯一。ManyToManyField不能包含在unique_together中。<br>index_together    设置联合索引。<br>        index_together = [<br>            [“pub_date”, “deadline”],<br>        ]<br>        方便起见，处理单一字段的集合时index_together = [“pub_date”, “deadline”]</p>
+<p>verbose_name    在Admin里，个易于理解的表名称，为单数：verbose_name = “pizza”<br>verbose_name_plural        在Admin里显示的表名称，为复数：verbose_name_plural = “stories”，一般同verbose_name一同设置。</p>
+<p>二、对象CURD操作<br>2.1 基础对象CURD（无关联字段）<br>1、增</p>
+<p>方法一：<br>author= Author(name=”鲁迅”)<br>author.save()</p>
+<p>方法二：<br>创建对象并同时保存对象的快捷方法，存在关系字段时无法用此方法创建。<br>create(**kwargs)<br>Author.objects.create(name=u”鲁迅”)</p>
+<p>方法三：<br>批量创建<br>bulk_create(objs, batch_size=None) ret=Blog.objects.bulk_create([ Author(name=”徐志摩”), Author(name=”李白”)]) </p>
+<p>方法四：<br>存在就获取，不存在就创建<br>get_or_create(defaults=None,<strong>kwargs)，<br>defaults必须为一个字典，在创建时生效的默认值；</strong>kwargs为查询条件。<br>创建对象时，使用**kwargs和defaults共同作用，取交集，defaults优先。</p>
+<p>updated_values={“name”:u”美猴王”}<br>a、存在就获取，查询到结果多余一个出错MultipleObjectsReturned<br>ret=Author.objects.get_or_create(name=u’徐志摩’,defaults=updated_values)<br>ret：(&lt;Author: 徐志摩&gt;, False)<br>b、不存在就创建<br>ret=Author.objects.get_or_create(name=u’徐志摩’,defaults=updated_values)<br>ret：(&lt;Author: 美猴王&gt;, True)</p>
+<p>方法五：<br>存在就更新，不存在就创建<br>update_or_create(defaults=None, **kwargs)<br>a、存在就更新<br>updated_values={“name”:u”猴王”}<br>ret=Author.objects.update_or_create(defaults=updated_values,name=u”猴子”)<br>ret：(&lt;Author: 猴王&gt;, False)<br>根据给出的查询条件name=u”猴子”查找对象，查询到结果就使用defaults字典去更新对象。</p>
+<p>b、不存在就创建<br>ret=Author.objects.update_or_create(defaults=updated_values,name=u”猴子1”)<br>ret：(&lt;Author: 猴王&gt;, True)<br>defaults必须为一个字典，在创建时生效的默认值；<strong>kwargs为查询条件。<br>创建对象时，使用</strong>kwargs和defaults共同作用，取交集，defaults优先。</p>
+<p>2、删</p>
+<p>使用delete会查找出相关表中的有关联的数据行一并删除<br>方法一：<br>Author.objects.filter(name=”徐志摩”).delete()<br>(1, {u’otest.Book_authors’: 0, u’otest.AuthorDetail’: 0, u’otest.Author’: 1})<br>方法二：<br>a9=Author.objects.get(name=”鲁迅”)<br>a9.delete()</p>
+<p>3、改</p>
+<p>方法一：<br>update(**kwargs)返回更新的行数，批量修改<br>ret=Author.objects.filter(name=’秋雨’).update(name=”陶渊明”)</p>
+<p>方法二：<br>单条修改<br>a7=Author.objects.get(name=”清风”)<br>a7.name=u”宋清风”<br>a7.save()</p>
+<p>4、查<br>a、查询结果非QuertSet</p>
+<p>get(**kwargs)<br>    在使用 get() 时，如果符合筛选条件的对象超过一个，就会抛出 MultipleObjectsReturned 异常。<br>    在使用 get() 时，如果没有找到符合筛选条件的对象，就会抛出 DoesNotExist 异常。<br>    from django.core.exceptions import ObjectDoesNotExist<br>    try:<br>        e = Entry.objects.get(id=3)<br>        b = Blog.objects.get(id=1)<br>    except ObjectDoesNotExist:<br>        print(“Either the entry or blog doesn’t exist.”)</p>
+<p>in_bulk(id_list)<br>    接收一个主键值列表，然后根据每个主键值所其对应的对象，返回一个主键值与对象的映射字典。<br>    Author.objects.in_bulk([1,2,3])<br>    {1: &lt;Author: 苍松&gt;, 2: &lt;Author: 猴王&gt;, 3: &lt;Author: 宋清风&gt;}</p>
+<p>first()    查询第一条，一般使用前先排序,或者确定其只有一条数据。<br>last()    查询最后一条，同上</p>
+<p>count()        返回数据库中匹配查询(QuerySet)的对象数量。 count() 不会抛出任何异常。</p>
+<p>exists()    如果 QuerySet 包含有数据，就返回 True 否则就返回 False。这可能是最快最简单的查询方法了。</p>
+<p>latest(field_name=None)    ，根据时间字段 field_name 得到最新的对象。<br>earliest(field_name=None)，    根据时间字段 field_name 得到最老的对象。</p>
+<p>#F使用查询条件的值,进行数值计算</p>
+<p>from django.db.models import F<br>Book.objects.filter(id=1).update(price=F(‘price’)+10)<br>b、查询结果为QuerySet</p>
+<p>　常用方法：</p>
+<p>1、filter(**kwargs)<br>    过滤，返回一个新的QuerySet，包含与给定的查询参数匹配的对象。<br>    &gt;&gt;&gt;q=Author.objects.filter(name=u”苍松”)<br>    &gt;&gt;&gt; q<br>    [&lt;Author: 苍松&gt;]</p>
+<p>2、exclude(**kwargs)<br>    反过滤，返回一个新的QuerySet，它包含不满足给定的查找参数的对象。功能与filter相反。</p>
+<p>3、values(*fields)<br>    返回一个新的QuerySet，但迭代时返回字典而不是模型实例对象。<br>    *fields表示需要取哪些字段，空表示取所有字段。<br>    &gt;&gt;&gt; q=Author.objects.values(“id”)<br>    &gt;&gt;&gt; q<br>    [{‘id’: 1}, {‘id’: 2}, {‘id’: 3}, {‘id’: 4}, {‘id’: 18}, {‘id’: 22}, {‘id’: 24}]</p>
+<p>4、values_list(*fields, flat=False)<br>    返回一个新的QuerySet，但迭代时返回元组而不是模型实例对象。<br>    *fields表示需要取哪些字段，空表示取所有字段。flat=True表示返回的结果为单个值而不是元组，多个字段时不能使用flat。<br>    &gt;&gt;&gt; q=Author.objects.values_list(“id”)<br>    &gt;&gt;&gt; q<br>    [(1,), (2,), (3,), (4,), (18,), (22,), (24,)]<br>    &gt;&gt;&gt; q=Author.objects.values_list(“id”,flat=True)<br>    &gt;&gt;&gt; q<br>    [1, 2, 3, 4, 18, 22, 24]    </p>
+<p>5、all()<br>    返回当前 QuerySet所有对象。</p>
+<p>6、select_related(*field)<br>    返回一个QuerySet，使用JOIN语句连表查询。它会在执行查询时自动跟踪外键关系，一次读取所有外键关联的字段，并尽可能地深入遍历外键连接，以减少数据库的查询。但数据关系链复杂的查询需要慎用。仅对外键生效。</p>
+<p>7、prefetch_related(*field)<br>    prefetch_related()的解决方法是，分别查询每个表，然后用Python处理他们之间的关系。外键和多对多都生效。    </p>
+<p>8、order_by(*fields)<br>    排序，返回一个新的QuerySet，隐式的是升序排序，-name表示根据name降序<br>    &gt;&gt;&gt; q=Author.objects.order_by(“name”)<br>    &gt;&gt;&gt; q<br>    [&lt;Author: au&gt;, &lt;Author: 宋清风&gt;, &lt;Author: 猴王&gt;, &lt;Author: 美猴王&gt;, &lt;Author: 苍松&gt;, &lt;Author: 赵清风&gt;, &lt;Author: 陶渊明&gt;]<br>    &gt;&gt;&gt; q=Author.objects.order_by(“-name”)<br>    &gt;&gt;&gt; q<br>    [&lt;Author: 陶渊明&gt;, &lt;Author: 赵清风&gt;, &lt;Author: 苍松&gt;, &lt;Author: 美猴王&gt;, &lt;Author: 猴王&gt;, &lt;Author: 宋清风&gt;, &lt;Author: au&gt;]</p>
+<p>9、reverse()<br>    reverse()方法返回反向排序的QuerySet。<br>    必须对一个已经排序过的queryset(也就是q.ordered=True)执行reverse()才有效果。</p>
+<p>10、distinct([*fields])<br>    去重复。返回一个在SQL 查询中使用SELECT DISTINCT 的新QuerySet。    </p>
+<p> 其他方法<br>特别的：QuerySet可以使用切片限制查询集。</p>
+<p>切片后依旧获得QuerySet，并且不会触发数据库查询。    </p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a=Author.objects.all()[0:2]<br>type(a)<br>&lt;class ‘django.db.models.query.QuerySet’&gt;</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>设置步长值后，获得到List类型值。触发数据库查询</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a=Author.objects.all()[::2]<br>type(a)<br>&lt;type ‘list’&gt;</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>使用索引，数据对象，触发数据库查询</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Author.objects.all()[0]　　#等价于Author.objects.all()[0:1].get()<br>&lt;Author: 苍松&gt;</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>查看QuerySet的原始SQL语句<br>关于查看QuerySet的原始SQL语句，使用查询集的query对象。<br>    &gt;&gt;&gt; q=Author.objects.all()<br>    &gt;&gt;&gt; print q.query<br>    SELECT “otest_author”.”id”, “otest_author”.”name” FROM “otest_author”</p>
+<p> c、查询条件（双下划线）</p>
+<p> 所有使用查询条件的查询和查询集过滤的方法(get,get_or_create,filter,exclude等)都可以使用双下划线组合出更复杂的查询条件。</p>
+<p>另一种使用双下划线的情况就是跨表条件查询单情况，见下一节关联字段中跨表查询。</p>
+<p>查询条件格式<br>    field__条件类型，例如a=Author.objects.get(id__exact=1)<br>    默认为精确匹配<br>    例如：Author.objects.get(id=1)等价于Author.objects.get(id__exact=1)</p>
+<p>一、精确匹配<br>    exact    精确匹配: Blog.objects.get(id__exact=1)<br>    iexact    忽略大小写的精确匹配，Blog.objects.filter(name__iexact=’blog7’)<br>二、模糊匹配<br>（模糊匹配，仅PostgreSQL 和 MySQL支持. SQLite的LIKE 语句不支持大小写敏感特性，因此模糊匹配对于 SQLite无法对大敏感）<br>    contains    大小写敏感的内容包含测试:Blog.objects.filter(name__contains=’blog7’)<br>    icontains    大小写不敏感的内容包含测试:<br>    startswith    大小写敏感的内容开头 Blog.objects.filter(name__startswith=”blog”)<br>    endswith    大小写敏感的内容结尾 endswith.<br>    istartswith    大小写不敏感的内容开头 startswith.<br>    iendswith    大小写不敏感的内容结尾 endswith.</p>
+<p>三、正则匹配<br>regex<br>    大小写敏感的正则表达式匹配。<br>    它要求数据库支持正则表达式语法，而 SQLite 却没有内建正则表达式支持，因此 SQLite 的这个特性是由一个名为 REGEXP 的 Python 方法实现的，所以要用到 Python 的正则库 re.<br>    Entry.objects.get(title__regex=r’^(An?|The) +’)<br>    等价于 SQL：<br>    SELECT … WHERE title REGEXP BINARY ‘^(An?|The) +’; – MySQL<br>    SELECT … WHERE REGEXP_LIKE(title, ‘^(an?|the) +’, ‘c’); – Oracle<br>    SELECT … WHERE title ~ ‘^(An?|The) +’; – PostgreSQL<br>    SELECT … WHERE title REGEXP ‘^(An?|The) +’; – SQLite</p>
+<p>iregex<br>    忽略大小写的正则表达式匹配。</p>
+<p>四、范围匹配<br>    gt    大于: Blog.objects.filter(id__gt=3)<br>    gte    大于等于.<br>    lt    小于.<br>    lte    小于等于.<br>    ne    不等于.<br>    in    位于给定列表中: Blog.objects.filter(id__in=[1,3,5])<br>    range    范围测试: Blog.objects.filter(name__range=(‘blog1’,’blog5’))</p>
+<p>日期匹配：<br>    year    对 date/datetime 字段, 进行精确的 年 匹配:Polls.objects.filter(pub_date__year=2005).<br>    month<br>    day<br>    hour<br>    minute<br>    second</p>
+<p>空值匹配<br>    isnull    True/False; 做 IF NULL/IF NOT NULL 查询:Blog.objects.filter(name__isnull=True)</p>
+<p>d、 复杂查询条件，使用Q 对象进行复杂的查询</p>
+<p>filter() 等方法中的关键字参数查询都是一起进行“AND” 的。 如果需要执行更复杂的查询（例如OR 语句），你可以使用Q 对象。</p>
+<p>Q对象有两种使用方式，一种使用Tree模式。另一种是使用”|”和”&amp;”符号进行与或操作。</p>
+<p>Q构建搜索条件<br>    from django.db.models import Q<br>    con = Q()</p>
+<pre><code>q1 = Q()
+q1.connector = &apos;OR&apos;
+q1.children.append((&apos;id&apos;, 1))
+q1.children.append((&apos;id&apos;, 2))        
+#等价于Q(id=1) | Q(id=2)
+
+q2 = Q()
+q2.connector = &apos;AND&apos;
+q2.children.append((&apos;id&apos;, 1))
+q2.children.append((&apos;name__startswith&apos;, &apos;a&apos;))    
+#等价于Q(id=1) | Q(name__startswith=&apos;a&apos;)
+
+con.add(q1, &apos;AND&apos;)
+con.add(q2, &apos;AND&apos;)</code></pre><p>Q搜索可以和普通查询参数一起使用，但查询参数需要在最后。<br>Author.objects.filter(q1,id=26)</p>
+<p> 2.2关联字段CURD操作（一对一，一对多，多对多表关系操作）</p>
+<p>一对一和多对多的表关系的增删改查<br>    a1 = Author.objects.get(name=”猴子”)<br>    a2 = Author.objects.get(name=”苍松”)<br>    a3 = Author.objects.get(name=”鲁迅”)<br>    p1=Publisher.objects.get(name=”机械出版社”)<br>    p2=Publisher.objects.get(name=”av”)</p>
+<p>==============正向关系操作===================================================<br>增
+    b1=Book(title=”红楼梦”,price=10)<br>    b1.publisher=p1或者b1.publisher_id=1    #一对多<br>    b1.save()    先保存book对象之后才能添加多对多关系<br>    b1.authors.add(a1,a2)或者b1.authors=[a1,a2]    #多对多<br>    b1.save()</p>
+<p>删
+    b1.publisher=None或者b1.publisher_id=None    #一对多<br>    b1.authors.remove(a1,a2)    实际上是删除关系表otest_book_authors中的一条数据    #多对多<br>    b1.authors.clear()            清空所有关系    #多对多</p>
+<p>查询<br>　　Book.objects.filter(publisher__name=u”机械出版社”)　　#一对多，使用双下划线<br>　　Book.objects.filter(authors__name=u”苍松”)　　#多对多，使用双下划线<br>获取字段值对象<br>    b2.publisher    #一对多，对象下面的字段值继续使用.获取。例如b2.publisher.name<br>    b1.authors.all()    #多对多</p>
+<p>==============反向关系操作===================================================<br>增
+    p1.book_set.add(b1)        #一对多，会更新现有的关系。（一个对象只能有一个外键）<br>    a3.book_set.add(b1)        #多对多</p>
+<p>删
+    p1.book_set.remove(b1)    #一对多<br>    a3.book_set.remove(b1)    #多对多<br>    a3.book_set.clear()        #多对多，清空所有关系</p>
+<p>获取字段值对象<br>    a2.book_set.all()    #多对多<br>    p1.book_set.all()    #一对多</p>
+<p>=============自定义中介模型方法===================================================<br>中介模型add、create 、remove方法不可用。但是clear() 方法却是可用的，它可以清空某个实例所有的多对多关系。</p>
+<p> 三、使用原始SQL语句<br> Django提供两种方法使用原始SQL进行查询：一种是使用Manager.raw()方法，进行原始查询并返回模型实例；另一种直接执行自定义的SQL语句。</p>
+<p> 1、使用Manager.raw()方法<br>Manager.raw(raw_query, params=None, translations=None)<br>    raw_query         SQL查询语句。<br>    params             查询条件参数，是list或者dict<br>    translations    字段映射表，是一个dict。<br>Manager.raw()将查询结果映射到类字段，默认情况下映射到同名字段。返回结果是一个RawQuerySet。<br>如果在其他的表中有一些Author数据，你可以很容易地把它们映射成Author实例。</p>
+<p>手动指定字段映射字典。<br>    方法一：使用AS，其他字段自动应设至Author表中的同名字段。<br>    na=Author.objects.raw(“select name AS newname, id  from otest_author”)<br>    &gt;&gt;&gt; na[0]<br>    &lt;Author_Deferred_name: 苍松&gt;<br>.
+    方法二：使用translations<br>    name_map={“name”:”newname}<br>    na=Author.objects.raw(“select * from otest_author”,translations=name_map)</p>
+<p>params参数防止SQL注入<br>    方法一：使用list<br>    &gt;&gt;&gt; na=Author.objects.raw(“select * from otest_author where id =%s”,[id])<br>    &gt;&gt;&gt; na[0]<br>    &lt;Author: 苍松&gt;</p>
+<pre><code>方法二：使用dict
+注意：SQLite后端不支持字典，你必须以列表的形式传递参数。
+字典使用%(key)s占位符（key替换成字典中相应的key值）
+p_dict={&quot;id&quot;:1}
+na=Author.objects.raw(&quot;select * from otest_author where id =%(id)s&quot;,p_dict)</code></pre><p>2.直接执行自定义的SQL<br>有时Manager.raw()方法并不十分好用，你不需要将查询结果映射成模型，或者你需要执行UPDATE、 INSERT以及DELETE查询。</p>
+<p>#单数据库<br>from django.db import connection<br>def my_custom_sql(self):<br>    cursor = connection.cursor()<br>    cursor.execute(“UPDATE bar SET foo = 1 WHERE baz = %s”, [self.baz])<br>    cursor.execute(“SELECT foo FROM bar WHERE baz = %s”, [self.baz])<br>    row = cursor.fetchone()<br>　　 connection.close()<br>    return row</p>
+<p>#多数据库<br>    from django.db import connections<br>    cursor = connections[‘my_db_alias’].cursor()</p>
+<pre><code># Your code here...</code></pre><p>默认情况下，Python DB API会返回不带字段的结果，这意味着你得到的是一个列表，而不是一个字典。<br>def dictfetchall(cursor):<br>    “Returns all rows from a cursor as a dict”<br>    desc = cursor.description<br>    return [
+        dict(zip([col[0] for col in desc], row))<br>        for row in cursor.fetchall()<br>    ]</p>
+<pre><code>&gt;&gt;&gt; cursor.execute(&quot;SELECT id, parent_id FROM test LIMIT 2&quot;);
+&gt;&gt;&gt; cursor.fetchall()
+((54360982L, None), (54360880L, None))
+
+&gt;&gt;&gt; cursor.execute(&quot;SELECT id, parent_id FROM test LIMIT 2&quot;);
+&gt;&gt;&gt; dictfetchall(cursor)
+[{&apos;parent_id&apos;: None, &apos;id&apos;: 54360982L}, {&apos;parent_id&apos;: None, &apos;id&apos;: 54360880L}]</code></pre><p>四、分组和聚合<br>Avg        平均值<br>Count(expression, distinct=False）    计算个数。如果distinct=True，Count将只计算唯一的值。默认值为False。<br>Max        最大值<br>Min        最小值<br>Sum        求和</p>
+<p>方法一：使用annotate方法，先分组(group by)再聚合<br>    from django.db.models import Count, Min, Max, Sum,Avg<br>    &gt;&gt;&gt; Book.objects.values(‘publisher’).annotate(counts_num=Count(“*”))<br>    [{‘publisher’: 1, ‘counts_num’: 2}, {‘publisher’: 3, ‘counts_num’: 1}]</p>
+<pre><code>&gt;&gt;&gt; Book.objects.values(&apos;publisher&apos;).annotate(Avg(&quot;price&quot;))
+[{&apos;publisher&apos;: 1, &apos;price__avg&apos;: 12.5}, {&apos;publisher&apos;: 3, &apos;price__avg&apos;: 11.0}]    #得到分组的多个值列表
+使用values(&apos;publisher&apos;)进行group by分组后，在使用聚合函数才有意义。
+默认聚合名称filedname__聚合函数名,作为聚合字段名。</code></pre><p>方法二：使用aggregate方法，先过滤再聚合<br>    Book.objects.filter(publisher_id=1).aggregate(Count(“id”))<br>    {‘id__count’: 2}    #得到单个值</p>
+<p>参考文档：<br>　　<a href="http://python.usyiyi.cn/django/index.html中文翻译1.8.2版中文不好的同学可以看这个" target="_blank" rel="noopener">http://python.usyiyi.cn/django/index.html中文翻译1.8.2版中文不好的同学可以看这个</a> </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/修改sqlarchemy源码使其支持jdbc连接mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/13/修改sqlarchemy源码使其支持jdbc连接mysql/" itemprop="url">修改sqlarchemy源码使其支持jdbc连接mysql</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-13T16:12:22+08:00">
+                2018-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="修改sqlarchemy源码使其支持jdbc连接mysql"><a href="#修改sqlarchemy源码使其支持jdbc连接mysql" class="headerlink" title="修改sqlarchemy源码使其支持jdbc连接mysql"></a>修改sqlarchemy源码使其支持jdbc连接mysql</h3><p>注意：本文不会将所有完整源码贴出，只是将具体的思路以及部分源码贴出，需要感兴趣的读者自己实验然后实现吆。 </p>
+<p>缘起<br>　　公司最近的项目需要将之前的部分业务的数据库连接方式改为jdbc，但由于之前的项目都使用sqlarchemy作为orm框架，该框架似乎没有支持jdbc，为了能做最小的修改并满足需求，所以需要修改sqlarchemy的源码。</p>
+<p>基本配置介绍</p>
+<p>　　sqlalchemy 版本：1.1.15</p>
+<p>　　使用jaydebeapi模块调用jdbc连接mysql</p>
+<p>前提：</p>
+<p>　　1 学会使用jaydebeapi模块，使用方法具体可以参考：</p>
+<p>　　　　<a href="https://pypi.python.org/pypi/JayDeBeApi" target="_blank" rel="noopener">https://pypi.python.org/pypi/JayDeBeApi</a></p>
+<p>　　　　介绍的比较详细的可以参考：<a href="http://shuaizki.github.io/language_related/2013/06/22/introduction-to-jpype.html" target="_blank" rel="noopener">http://shuaizki.github.io/language_related/2013/06/22/introduction-to-jpype.html</a></p>
+<pre><code>jaydebeapi是一个基于jpype的在Cpython中可以通过jdbc连接数据库的模块。该模块的python代码很少，基本上可以分为连接部分、游标部分、结果转换部分这三个。一般来说我们可能需要修改的就是结果转换部分，比如说sqlalchemy查询时如果某条记录中含TIME字段，那么该字段一般要表现为timedelta对象。而在jaydebeapi中则返回的是字符串对象，这样在sqlalchemy中会报错的。</code></pre><p>sqlarchemy为我们实现了ORM对象与语句的转换，连接池，session(包括对线程的支持scope_session)等较为上层的逻辑，但这些东西在这里我们不需要考虑(当然创建一个连接，生成curcor还是要考虑的)，我们要考虑的仅仅是当sqlarchemy把sql语句以及参数传过来的时候我们该怎么做，以及当sql语句执行后如何对结果进行转换。</p>
+<p>所需注意的问题<br>1 sql语句以及参数传过来的时候我们该怎么做：</p>
+<p>　　1.1 对参数进行转义，防止sql注入</p>
+<p>2 执行完sql语句后对结果如何处理：</p>
+<p>　　2.1 我们知道python的基础sql模块会对结果进行处理，比如说把NUll转换为None，把数据库中的date字段转换为python的date对象等等</p>
+<p>　　2.2 一些不知道该怎么形容的数据：</p>
+<p>　　　　当我们查询时，获取的数据对应字段的元信息</p>
+<p>　　　　当我们update或者delete等操作时需要获取影响了多少行</p>
+<p>　　　　当我们插入数据后，如果主键是自增字段，我们一般(可以说在sqlarchemy中这是必须)需要获取该记录的主键值　　　　</p>
+<p>3 sqlalchemy增加代码，使其支持我们修改后的jaydebeapi</p>
+<p>如何解决<br>1.1解决方案：</p>
+<p>　　人家pymysql咋搞，我就咋搞！</p>
+<p>　　在pymysql.corsors文件中Cursor类中有一个叫做mogrify的方法，这个方法不仅对参数转义，而且会将参数放置到sql语句中组成完整的可执行sql语句。所以偷一些代码然后稍加修改就是这样：</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>from functools import partial<br>from pymysql.converters import escape_item, escape_string<br>import sys</p>
+<p>PY2 = sys.version_info[0] == 2</p>
+<p>if PY2:<br>    import <strong>builtin</strong><br>    range_type = xrange<br>    text_type = unicode<br>    long_type = long<br>    str_type = basestring<br>    unichr = <strong>builtin</strong>.unichr<br>else:<br>    range_type = range<br>    text_type = str<br>    long_type = int<br>    str_type = str<br>    unichr = chr</p>
+<p>def _ensure_bytes(x, encoding=”utf8”):<br>    if isinstance(x, text_type):<br>        x = x.encode(encoding)<br>    return x</p>
+<p>def _escape_args(args, encoding):<br>    ensure_bytes = partial(_ensure_bytes, encoding=encoding)</p>
+<pre><code>if isinstance(args, (tuple, list)):
+    if PY2:
+        args = tuple(map(ensure_bytes, args))
+    return tuple(escape(arg, encoding) for arg in args)
+elif isinstance(args, dict):
+    if PY2:
+        args = dict((ensure_bytes(key), ensure_bytes(val)) for
+                    (key, val) in args.items())
+    return dict((key, escape(val, encoding)) for (key, val) in args.items())</code></pre><p>def escape(obj, charset, mapping=None):<br>    if isinstance(obj, str_type):<br>        return “‘“ + escape_string(obj) + “‘“<br>    return escape_item(obj, charset, mapping=mapping)</p>
+<p>def mogrify(query, encoding, args=None):<br>    if PY2:  # Use bytes on Python 2 always<br>        query = _ensure_bytes(query, encoding=encoding)<br>    if args is not None:</p>
+<pre><code>    # r = _escape_args(args, encoding)
+    query = query % _escape_args(args, encoding)
+return query</code></pre><h1 id="调用一下mogrigy函数"><a href="#调用一下mogrigy函数" class="headerlink" title="调用一下mogrigy函数"></a>调用一下mogrigy函数</h1><h1 id="print-mogrify-“select-from-ll-where-a-in-s-and-b-s”-“utf8”-2-1-3"><a href="#print-mogrify-“select-from-ll-where-a-in-s-and-b-s”-“utf8”-2-1-3" class="headerlink" title="print(mogrify(“select * from ll where a in %s and b = %s”, “utf8”, [[2, 1], 3]))"></a>print(mogrify(“select * from ll where a in %s and b = %s”, “utf8”, [[2, 1], 3]))</h1><p>2.1解决方案：</p>
+<p>　　人家pymysql咋搞，我就咋搞！</p>
+<p>　　在pymysql.converters中有一个名为decoders的字典，这里面存放了mysql字段与python对象的转换关系！大概是这样</p>
+<p>def _convert_second_fraction(s):<br>    if not s:<br>        return 0</p>
+<pre><code># Pad zeros to ensure the fraction length in microseconds
+s = s.ljust(6, &apos;0&apos;)
+return int(s[:6])</code></pre><p>DATETIME_RE = re.compile(r”(\d{1,4})-(\d{1,2})-(\d{1,2})<a href="\d{1,2}">T </a>:(\d{1,2}):(\d{1,2})(?:.(\d{1,6}))?”)</p>
+<p>def convert_datetime(obj):<br>    “””Returns a DATETIME or TIMESTAMP column value as a datetime object:</p>
+<pre><code>  &gt;&gt;&gt; datetime_or_None(&apos;2007-02-25 23:06:20&apos;)
+  datetime.datetime(2007, 2, 25, 23, 6, 20)
+  &gt;&gt;&gt; datetime_or_None(&apos;2007-02-25T23:06:20&apos;)
+  datetime.datetime(2007, 2, 25, 23, 6, 20)
+
+Illegal values are returned as None:
+
+  &gt;&gt;&gt; datetime_or_None(&apos;2007-02-31T23:06:20&apos;) is None
+  True
+  &gt;&gt;&gt; datetime_or_None(&apos;0000-00-00 00:00:00&apos;) is None
+  True
+
+&quot;&quot;&quot;
+if not PY2 and isinstance(obj, (bytes, bytearray)):
+    obj = obj.decode(&apos;ascii&apos;)
+
+m = DATETIME_RE.match(obj)
+if not m:
+    return convert_date(obj)
+
+try:
+    groups = list(m.groups())
+    groups[-1] = _convert_second_fraction(groups[-1])
+    return datetime.datetime(*[ int(x) for x in groups ])
+except ValueError:
+    return convert_date(obj)</code></pre><p>TIMEDELTA_RE = re.compile(r”(-)?(\d{1,3}):(\d{1,2}):(\d{1,2})(?:.(\d{1,6}))?”)</p>
+<p>def convert_timedelta(obj):<br>    “””Returns a TIME column as a timedelta object:</p>
+<pre><code>  &gt;&gt;&gt; timedelta_or_None(&apos;25:06:17&apos;)
+  datetime.timedelta(1, 3977)
+  &gt;&gt;&gt; timedelta_or_None(&apos;-25:06:17&apos;)
+  datetime.timedelta(-2, 83177)
+
+Illegal values are returned as None:
+
+  &gt;&gt;&gt; timedelta_or_None(&apos;random crap&apos;) is None
+  True
+
+Note that MySQL always returns TIME columns as (+|-)HH:MM:SS, but
+can accept values as (+|-)DD HH:MM:SS. The latter format will not
+be parsed correctly by this function.
+&quot;&quot;&quot;
+if not PY2 and isinstance(obj, (bytes, bytearray)):
+    obj = obj.decode(&apos;ascii&apos;)
+
+m = TIMEDELTA_RE.match(obj)
+if not m:
+    return None
+
+try:
+    groups = list(m.groups())
+    groups[-1] = _convert_second_fraction(groups[-1])
+    negate = -1 if groups[0] else 1
+    hours, minutes, seconds, microseconds = groups[1:]
+
+    tdelta = datetime.timedelta(
+        hours = int(hours),
+        minutes = int(minutes),
+        seconds = int(seconds),
+        microseconds = int(microseconds)
+        ) * negate
+    return tdelta
+except ValueError:
+    return None</code></pre><p>TIME_RE = re.compile(r”(\d{1,2}):(\d{1,2}):(\d{1,2})(?:.(\d{1,6}))?”)</p>
+<p>def convert_time(obj):<br>    “””Returns a TIME column as a time object:</p>
+<pre><code>  &gt;&gt;&gt; time_or_None(&apos;15:06:17&apos;)
+  datetime.time(15, 6, 17)
+
+Illegal values are returned as None:
+
+  &gt;&gt;&gt; time_or_None(&apos;-25:06:17&apos;) is None
+  True
+  &gt;&gt;&gt; time_or_None(&apos;random crap&apos;) is None
+  True
+
+Note that MySQL always returns TIME columns as (+|-)HH:MM:SS, but
+can accept values as (+|-)DD HH:MM:SS. The latter format will not
+be parsed correctly by this function.
+
+Also note that MySQL&apos;s TIME column corresponds more closely to
+Python&apos;s timedelta and not time. However if you want TIME columns
+to be treated as time-of-day and not a time offset, then you can
+use set this function as the converter for FIELD_TYPE.TIME.
+&quot;&quot;&quot;
+if not PY2 and isinstance(obj, (bytes, bytearray)):
+    obj = obj.decode(&apos;ascii&apos;)
+
+m = TIME_RE.match(obj)
+if not m:
+    return None
+
+try:
+    groups = list(m.groups())
+    groups[-1] = _convert_second_fraction(groups[-1])
+    hours, minutes, seconds, microseconds = groups
+    return datetime.time(hour=int(hours), minute=int(minutes),
+                         second=int(seconds), microsecond=int(microseconds))
+except ValueError:
+    return None</code></pre><p>def convert_date(obj):<br>    “””Returns a DATE column as a date object:</p>
+<pre><code>  &gt;&gt;&gt; date_or_None(&apos;2007-02-26&apos;)
+  datetime.date(2007, 2, 26)
+
+Illegal values are returned as None:
+
+  &gt;&gt;&gt; date_or_None(&apos;2007-02-31&apos;) is None
+  True
+  &gt;&gt;&gt; date_or_None(&apos;0000-00-00&apos;) is None
+  True
+
+&quot;&quot;&quot;
+if not PY2 and isinstance(obj, (bytes, bytearray)):
+    obj = obj.decode(&apos;ascii&apos;)
+try:
+    return datetime.date(*[ int(x) for x in obj.split(&apos;-&apos;, 2) ])
+except ValueError:
+    return None</code></pre><p>def convert_mysql_timestamp(timestamp):<br>    “””Convert a MySQL TIMESTAMP to a Timestamp object.</p>
+<pre><code>MySQL &gt;= 4.1 returns TIMESTAMP in the same format as DATETIME:
+
+  &gt;&gt;&gt; mysql_timestamp_converter(&apos;2007-02-25 22:32:17&apos;)
+  datetime.datetime(2007, 2, 25, 22, 32, 17)
+
+MySQL &lt; 4.1 uses a big string of numbers:
+
+  &gt;&gt;&gt; mysql_timestamp_converter(&apos;20070225223217&apos;)
+  datetime.datetime(2007, 2, 25, 22, 32, 17)
+
+Illegal values are returned as None:
+
+  &gt;&gt;&gt; mysql_timestamp_converter(&apos;2007-02-31 22:32:17&apos;) is None
+  True
+  &gt;&gt;&gt; mysql_timestamp_converter(&apos;00000000000000&apos;) is None
+  True
+
+&quot;&quot;&quot;
+if not PY2 and isinstance(timestamp, (bytes, bytearray)):
+    timestamp = timestamp.decode(&apos;ascii&apos;)
+if timestamp[4] == &apos;-&apos;:
+    return convert_datetime(timestamp)
+timestamp += &quot;0&quot;*(14-len(timestamp)) # padding
+year, month, day, hour, minute, second = \
+    int(timestamp[:4]), int(timestamp[4:6]), int(timestamp[6:8]), \
+    int(timestamp[8:10]), int(timestamp[10:12]), int(timestamp[12:14])
+try:
+    return datetime.datetime(year, month, day, hour, minute, second)
+except ValueError:
+    return None</code></pre><p>def convert_set(s):<br>    if isinstance(s, (bytes, bytearray)):<br>        return set(s.split(b”,”))<br>    return set(s.split(“,”))</p>
+<p>def through(x):<br>    return x</p>
+<p>#def convert_bit(b):</p>
+<h1 id="b-“-x00”-8-len-b-b-pad-w-zeroes"><a href="#b-“-x00”-8-len-b-b-pad-w-zeroes" class="headerlink" title="b = “\x00” * (8 - len(b)) + b # pad w/ zeroes"></a>b = “\x00” * (8 - len(b)) + b # pad w/ zeroes</h1><h1 id="return-struct-unpack-“-gt-Q”-b-0"><a href="#return-struct-unpack-“-gt-Q”-b-0" class="headerlink" title="return struct.unpack(“&gt;Q”, b)[0]"></a>return struct.unpack(“&gt;Q”, b)[0]</h1><p>#</p>
+<h1 id="the-snippet-above-is-right-but-MySQLdb-doesn’t-process-bits"><a href="#the-snippet-above-is-right-but-MySQLdb-doesn’t-process-bits" class="headerlink" title="the snippet above is right, but MySQLdb doesn’t process bits,"></a>the snippet above is right, but MySQLdb doesn’t process bits,</h1><h1 id="so-we-shouldn’t-either"><a href="#so-we-shouldn’t-either" class="headerlink" title="so we shouldn’t either"></a>so we shouldn’t either</h1><p>convert_bit = through</p>
+<p>def convert_characters(connection, field, data):<br>    field_charset = charset_by_id(field.charsetnr).name<br>    encoding = charset_to_encoding(field_charset)<br>    if field.flags &amp; FLAG.SET:<br>        return convert_set(data.decode(encoding))<br>    if field.flags &amp; FLAG.BINARY:<br>        return data</p>
+<pre><code>if connection.use_unicode:
+    data = data.decode(encoding)
+elif connection.charset != field_charset:
+    data = data.decode(encoding)
+    data = data.encode(connection.encoding)
+return data</code></pre><p>encoders = {<br>    bool: escape_bool,<br>    int: escape_int,<br>    long_type: escape_int,<br>    float: escape_float,<br>    str: escape_str,<br>    text_type: escape_unicode,<br>    tuple: escape_sequence,<br>    list: escape_sequence,<br>    set: escape_sequence,<br>    frozenset: escape_sequence,<br>    dict: escape_dict,<br>    bytearray: escape_bytes,<br>    type(None): escape_None,<br>    datetime.date: escape_date,<br>    datetime.datetime: escape_datetime,<br>    datetime.timedelta: escape_timedelta,<br>    datetime.time: escape_time,<br>    time.struct_time: escape_struct_time,<br>    Decimal: escape_object,<br>}</p>
+<p>if not PY2 or JYTHON or IRONPYTHON:<br>    encoders[bytes] = escape_bytes</p>
+<p>decoders = {<br>    FIELD_TYPE.BIT: convert_bit,<br>    FIELD_TYPE.TINY: int,<br>    FIELD_TYPE.SHORT: int,<br>    FIELD_TYPE.LONG: int,<br>    FIELD_TYPE.FLOAT: float,<br>    FIELD_TYPE.DOUBLE: float,<br>    FIELD_TYPE.LONGLONG: int,<br>    FIELD_TYPE.INT24: int,<br>    FIELD_TYPE.YEAR: int,<br>    FIELD_TYPE.TIMESTAMP: convert_mysql_timestamp,<br>    FIELD_TYPE.DATETIME: convert_datetime,<br>    FIELD_TYPE.TIME: convert_timedelta,<br>    FIELD_TYPE.DATE: convert_date,<br>    FIELD_TYPE.SET: convert_set,<br>    FIELD_TYPE.BLOB: through,<br>    FIELD_TYPE.TINY_BLOB: through,<br>    FIELD_TYPE.MEDIUM_BLOB: through,<br>    FIELD_TYPE.LONG_BLOB: through,<br>    FIELD_TYPE.STRING: through,<br>    FIELD_TYPE.VAR_STRING: through,<br>    FIELD_TYPE.VARCHAR: through,<br>    FIELD_TYPE.DECIMAL: Decimal,<br>    FIELD_TYPE.NEWDECIMAL: Decimal,<br>}</p>
+<p>　　而在jaydebeapi中也有一些相似的代码：</p>
+<p>def _to_datetime(rs, col):<br>    java_val = rs.getTimestamp(col)<br>    if not java_val:<br>        return<br>    d = datetime.datetime.strptime(str(java_val)[:19], “%Y-%m-%d %H:%M:%S”)<br>    d = d.replace(microsecond=int(str(java_val.getNanos())[:6]))<br>    return str(d)</p>
+<p>def _to_time(rs, col):<br>    java_val = rs.getTime(col)<br>    if not java_val:<br>        return<br>    return str(java_val)</p>
+<p>def _to_date(rs, col):<br>    java_val = rs.getDate(col)<br>    if not java_val:<br>        return</p>
+<pre><code># The following code requires Python 3.3+ on dates before year 1900.
+# d = datetime.datetime.strptime(str(java_val)[:10], &quot;%Y-%m-%d&quot;)
+# return d.strftime(&quot;%Y-%m-%d&quot;)
+# Workaround / simpler soltution (see
+# https://github.com/baztian/jaydebeapi/issues/18):
+return str(java_val)[:10]</code></pre><p>def _to_binary(rs, col):<br>    java_val = rs.getObject(col)<br>    if java_val is None:<br>        return<br>    return str(java_val)</p>
+<p>def _java_to_py(java_method):<br>    def to_py(rs, col):<br>        java_val = rs.getObject(col)<br>        if java_val is None:<br>            return<br>        if PY2 and isinstance(java_val, (string_type, int, long, float, bool)):<br>            return java_val<br>        elif isinstance(java_val, (string_type, int, float, bool)):<br>            return java_val<br>        return getattr(java_val, java_method)()<br>    return to_py</p>
+<p>_to_double = _java_to_py(‘doubleValue’)</p>
+<p>_to_int = _java_to_py(‘intValue’)</p>
+<p>_to_boolean = _java_to_py(‘booleanValue’)</p>
+<p>_DEFAULT_CONVERTERS = {</p>
+<pre><code># see
+# http://download.oracle.com/javase/8/docs/api/java/sql/Types.html
+# for possible keys
+&apos;TIMESTAMP&apos;: _to_datetime,
+&apos;TIME&apos;: _to_time,
+&apos;DATE&apos;: _to_date,
+&apos;BINARY&apos;: _to_binary,
+&apos;DECIMAL&apos;: _to_double,
+&apos;NUMERIC&apos;: _to_double,
+&apos;DOUBLE&apos;: _to_double,
+&apos;FLOAT&apos;: _to_double,
+&apos;TINYINT&apos;: _to_int,
+&apos;INTEGER&apos;: _to_int,
+&apos;SMALLINT&apos;: _to_int,
+&apos;BOOLEAN&apos;: _to_boolean,
+&apos;BIT&apos;: _to_boolean</code></pre><p>}</p>
+<p>　　然后我们稍微修改一下即可。 </p>
+<p>2.2解决方案</p>
+<p>　　在jaydebeapi中的Cursor类中，有一个属性叫做description这个属性，通过他我们就能获取查询时表的字段的元信息</p>
+<p>　　在jaydebeapi中的Cursor类中，是有rowcount这个属性的，他表示当我们进行插入更新删除操作时受影响的行数。</p>
+<p>　　而在pymysql的cursors文件中的Cursor类中的_do_get_result方法中不仅仅有受影响的行数rowcount，还有lastrowid这个属性，他表示当我们插入数据且对应主键是自增字段时，最后一条数据的主键值。但是在jaydebeapi中是没有的，而这个属性在sqlalchemy中恰恰是需要的，所以我们要为jaydebeapi的Cursor类加上这个属性。代码如下：</p>
+<p>class Cursor(object):</p>
+<pre><code>lastrowid = None
+rowcount = -1
+_meta = None
+_prep = None
+_rs = None
+_description = None</code></pre><p>   …此处省略部分不相关代码…<br>def execute(self, operation, parameters=None):<br>        if self._connection._closed:<br>            raise Error()<br>        if not parameters:<br>            parameters = ()<br>        self._close_last()<br>        self._prep = self._connection.jconn.prepareStatement(operation)<br>        self._set_stmt_parms(self._prep, parameters)<br>        try:<br>            is_rs = self._prep.execute()</p>
+<pre><code>    # print is_rs
+except:
+    _handle_sql_exception()
+# print(dir(self._prep))
+# 如果是查询的话 is_rs就是1
+if is_rs:
+    self._rs = self._prep.getResultSet()
+    self._meta = self._rs.getMetaData()
+    self.rowcount = -1
+    self.lastrowid = None
+# 插入/修改/删除时 is_rs都为0
+else:
+    self.rowcount = self._prep.getUpdateCount()
+    self.lastrowid = int(self._prep.lastInsertID)</code></pre><p>注意：上面的代码中红色的代码是我新增的</p>
+<p>3解决方案</p>
+<pre><code>sqlarchemy中底层数据库连接模块都放在dialects这个包中，这个包里面有多个包分别是mysql oracle等数据库的基本数据库连接类，因为公司只使用mysql数据库，所以仅仅做了mysql的jdbc扩展，就放到了mysql包中。</code></pre><p>大体介绍一下我们将要修改的或者用到的类：</p>
+<p>　　MySQLDialect</p>
+<p>　　　　位置：sqlarchemy.dialects.mysql.base </p>
+<p>　　　　描述：它是一个提供了对mysql数据库的连接、语句的执行等操作的基类，所以我们需要新写一个jdbcdialect类并继承它，然后重写某些方法。</p>
+<p>　　　　为什么会用到：这个就不用多说了</p>
+<p>　　ExecutionContext</p>
+<p>　　　　位置：sqlarchemy.engine.interface</p>
+<p>　　　　描述：通过这个东西我们可以获取当前游标的执行环境，比如说本次sql语句的执行影响了多少行，我们刚插入的一行的自增主键值是多少。他也负责把我们所写的python ORM语句转换为可以被底层数据库模块比如pymysql可以执行的东西。</p>
+<p>创建dialect类：</p>
+<p>我们知道使用sqlalchemy时首先需要创建一个engine，engine的第一个参数是一个URL，就像这样：mysql+pymysql://user:password@host:port/db?charset=utf8</p>
+<p>　　这段URL主要配置了三项：</p>
+<p>　　　　配置1 首先声明了我们要连接mysql数据库</p>
+<p>　　　　配置2 然后配置了底层连接数据库的dialect(这个单词翻译过来叫方言，就好比同是汉语(连接mysql)，我们可以说山东话(pymysql)也可以说湖南话(mysqldb))模块是pymysql</p>
+<p>　　　　配置3 配置了用户名，密码，主机地址，端口，数据库名等信息</p>
+<p>　　通过查看代码我们可以看到：</p>
+<p>　　　　上面中的配置1实际上就是说接下来要在 sqlalchemy.dialects.mysql包中获取提供数据库操作等方法的class了。</p>
+<p>　　　　配置2实际上就是说 配置1想要找的的class我定义在了sqlalcehmy.dialects.mysql.pymysql中</p>
+<p>　　　　配置3会作为URL类包装解析，然后作为参数传入dialect实例的create_connect_args方法，以获取数据库连接参数。</p>
+<p>然后创建engine时还可以指定许多额外的参数，比如说连接池的配置等，这里面有几个我们需要注意的参数：</p>
+<p>　　假如我们没有指定module(数据库连接底层模块)，默认会调用dialect类的类方法dbapi。</p>
+<p>　　假如我们没有指定creator(与数据库建立连接的方法，一般是个函数)这个参数的话默认建立连接时会调用dialect实例的connect方法，并把create_connect_args返回的连接参数传入。</p>
+<p>　　当我们第一次与数据库建立连接时，会调用dialect实例的initialize方法，这个方法会做一系列操作，比如说获取当前数据库的版本信息：dialect实例的_get_server_version_info方法；获取当前isolation级别：dialect实例的get_isolation_level方法</p>
+<p>然后就很简单了：在sqlalchemy中找到sqlalchemy.dialects.mysql这个目录，然后新建一个名叫jaydebeapi的文件，并找到该目录下的pymysql文件，你会看到：</p>
+<p>from .mysqldb import MySQLDialect_mysqldb<br>from …util import langhelpers, py3k</p>
+<p>class MySQLDialect_pymysql(MySQLDialect_mysqldb):<br>    driver = ‘pymysql’</p>
+<pre><code>description_encoding = None
+
+# generally, these two values should be both True
+# or both False.   PyMySQL unicode tests pass all the way back
+# to 0.4 either way.  See [ticket:3337]
+supports_unicode_statements = True
+supports_unicode_binds = True
+
+def __init__(self, server_side_cursors=False, **kwargs):
+    super(MySQLDialect_pymysql, self).__init__(**kwargs)
+    self.server_side_cursors = server_side_cursors
+
+@langhelpers.memoized_property
+def supports_server_side_cursors(self):
+    try:
+        cursors = __import__(&apos;pymysql.cursors&apos;).cursors
+        self._sscursor = cursors.SSCursor
+        return True
+    except (ImportError, AttributeError):
+        return False
+
+@classmethod
+def dbapi(cls):
+    return __import__(&apos;pymysql&apos;)
+
+if py3k:
+    def _extract_error_code(self, exception):
+        if isinstance(exception.args[0], Exception):
+            exception = exception.args[0]
+        return exception.args[0]</code></pre><p>dialect = MySQLDialect_pymysql</p>
+<p>就这一个类，我们只需要继承这个类并重写某些方法就是了。就像这样：</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8-1"><a href="#coding-utf-8-1" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import re<br>from .pymysql import MySQLDialect_mysqldb</p>
+<p>class MySQLDialect_jaydebeapi(MySQLDialect_mysqldb):<br>    driver = ‘jaydebeapi’</p>
+<pre><code>@classmethod
+def dbapi(cls):
+    return __import__(&apos;jaydebeapi&apos;)
+
+def connect(self, *cargs, **cparams):
+    # get_jdbc_conn这个方法就自己写吧，实际上就是用jaydebeapi生成一个连接，但需要注意，连接的autocommit要设置为False
+    return get_jdbc_conn(self.dbapi, **cparams)
+
+def _get_server_version_info(self, connection):
+    dbapi_con = connection.connection
+    cursor = dbapi_con.cursor()
+    cursor.execute(&quot;select version()&quot;)
+    version = str(cursor.fetchone()[0])
+    cursor.close()
+    version_list = []
+    r = re.compile(r&apos;[.\-]&apos;)
+    for n in r.split(version):
+        try:
+            version_list.append(int(n))
+        except ValueError:
+            version_list.append(n)
+    return tuple(version_list)
+
+def _detect_charset(self, connection):
+    &quot;&quot;&quot;Sniff out the character set in use for connection results.&quot;&quot;&quot;
+
+    try:
+        # note: the SQL here would be
+        # &quot;SHOW VARIABLES LIKE &apos;character_set%%&apos;&quot;
+        # print dir(connection.connection)
+        cset_name = connection.connection.character_set_name
+    except AttributeError:
+        return &apos;utf8&apos;
+    else:
+        return cset_name()</code></pre><p>个人在修改源码中获取的知识点<br>点1：</p>
+<p>　　com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException: Can’t call rollback when autocommit=true</p>
+<p>　　1. 当开启autocommit=true时，回滚没有意义，无论成功/失败都已经已经将事务提交<br>　　2. autocommit=false，我们需要运行conn.commit()执行事务, 如果失败则需要conn.rollback()对事务进行回滚;</p>
+<p>点2：</p>
+<p>　　 尝试连接mysql时报错：Unknown system variable ‘transaction_isolation’</p>
+<p>　　这是因为我的MySQLDialect_jaydebeapi类中的_get_server_version_info方法返回写死为5.7.21版本，而在mysql的Mysqldialect类的get_isolation_level中，会判断如果版本大于等于5.7.20的话执行SELECT @@transaction_isolation，反之会执行SELECT @@tx_isolation。</p>
+<p>　　于是看了看自己的mysql版本是5.7.11 ，遂改变版本号。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/28/python多进程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/28/python多进程/" itemprop="url">python多进程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T00:21:57+08:00">
+                2018-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="python多进程"><a href="#python多进程" class="headerlink" title="python多进程"></a>python多进程</h3><p>首先进程是资源调度的一个最小集合，通常起一个进程，然后通过操作系统完成资源的调度。具体的细节还需要进修。。。。。</p>
+<p>总之，通过python也可以实现多进程的。</p>
+<p>通常，我们启动一个进程的时候，都是通过父进程来启动这个对应的子进程，在python中，我们可以通过os模块，通过os.getpid()&amp;os.getppid()来查看当前进程以及父进程的进程ID。或者我们可以通过multiprocessing模块中的创建一个进程的实例化对象后，通过调用pid这个方法来查看这个进程的进程ID。</p>
+<p>当我们利用多进程的时候，就可以实现同一时间内做多件事情。在python中，如果我们启动多个子进程，主进程的执行和子进程的执行是没有影响的，但是，如果你想实现等待子进程执行完毕后才允许主进程执行完毕，可以利用join()方法，这里的join就相当于wait，就是，等待这个进程执行完毕，才进行下一步。   同样，当主进程执行完毕后，程序并不会退出，而是等待子进程也执行完毕才会退出，这时候，如果我们想实现主进程执行完毕后，某些子进程必须跟随者主进程的结束而结束，就可以设置某个子进程p，令其p.daemon = True，使这个进程变成守护进程，这样，当主进程执行完毕后，守护进程便会跟着退出（不管它执行完毕与否）。  更直白一点，就像古代皇帝死后，一些妃子需要陪葬，大臣不需要陪葬，这时候，这些妃子就相当于守护进程。。。</p>
+<p>插入一段代码。。研究一下。</p>
+<p>from multiprocessing import Process<br>import time</p>
+<p>def func():<br>    time.sleep(5)<br>    print(‘^^’*5)</p>
+<p>def run():<br>    time.sleep(1)<br>    print(‘i am running’)</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    p1 = Process(target=run)<br>    p1.daemon = True</p>
+<pre><code>p1.start()
+p2 = Process(target=func)
+p2.start()
+print(p2.pid)
+for i in range(5):
+    time.sleep(0.1)
+    print(&apos;i am chief process&apos;)</code></pre><p>除了这些之外，多进程还有某些特性。假设你要实现一个抢票功能，这时候，你想着so easy，每个人抢票的行为作为一个进程，不就可以实现同时抢票了吗？于是开始bangbangbang敲好了代码，测试的时候发现为什么只放出去一张票，好几个人抢到了，这是因为，起多个进程，他们有可能同时读入这个数据，导致疯狂被投诉。。。这时候，不要慌，进程里面还有进程锁这个东西，什么意思呢，就是好比你去拉屎，拉屎的时候肯定只能一人一个坑位，你进去了把门锁住，防止别人进来（除非你不是在拉屎，里面有俩人。。咳咳）。进程所就是，你要获取这个数据，你刚刚得到这个数据要进行处理，这个时候，你就把门反锁住，等你处理完了再把门打开，钥匙挂到门上，这样就避免了bug。 如果你说，一次只能进一个人这样太不友好了，我就是喜欢群P，怎么办？你可以在门上挂多点钥匙啊，这样不就可以好多人进去，限制了进去的人的数量。。。。这种可以有多个钥匙的锁称为“信号量”（semaphore）。</p>
+<p>给你一个抢票的游戏：</p>
+<p>from multiprocessing import Process<br>from multiprocessing import Lock<br>import time<br>import random<br>import json</p>
+<p>def search_ticket():<br>    with open(‘ticket’) as f:<br>        ticket = (json.load(f)[‘count’])<br>        print(‘there is %s tickets’%ticket)<br>        return ticket<br>def get_ticket(i,lock):<br>    count_ticket = search_ticket()<br>    lock.acquire()<br>    if count_ticket:<br>        print(‘%s has gotten a ticket’%i)<br>        count_ticket -= 1<br>        with open(‘ticket’,’w’) as f:<br>            json.dump({‘count’:count_ticket},f)<br>    else:<br>        print(‘there is no ticket’)<br>    lock.release()<br>if <strong>name</strong> == “<strong>main</strong>“:<br>    lock = Lock()<br>    for i in range(10):<br>        time.sleep(random.randint(0,1))<br>        p = Process(target=get_ticket,args=(i,lock))<br>        p.start()</p>
+<p>这里用json文件代表抢票的数据库，插入random和time模块模拟实际抢票过程中的网络时延。</p>
+<p>接下来用信号量来模拟一下拉屎这个环节，每个人都有0-3秒的时间，毕竟超过三秒都是病。。。</p>
+<p>from multiprocessing import Process<br>from multiprocessing import Semaphore<br>import time<br>import random<br>def toilet(i,sem):<br>    sem.acquire()<br>    print(‘%s 进去拉屎了’%i)<br>    time.sleep(random.randint(0,3))<br>    sem.release()<br>    print(‘%s 已经拉完出来了，很饱’%i)</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    sem = Semaphore(4)<br>    for i in range(10):<br>        p = Process(target=toilet,args=(i,sem))<br>        p.start()</p>
+<p>除了锁这个概念外，进程还有一些小知识点需要掌握，队列和事件。队列很简单，无非就是先进先出，进去出去的原则，除此之外，还有qsize这个用法，但是再多进程中，这个方法有可能不准确，因为如果你读取一个数据的size的同时，又put进去了一个数据，通过队列可以实现子进程和主进程以及子进程和子进程之间的通信。</p>
+<p>事件的话，就是可以模拟红绿灯，Event只需要记住这几个就行，clear/set/wait/is_set，当is_set为True的时候，程序是不阻塞的，默认情况下，wait是阻塞的，这样说也不大明白，还是插入一段红绿灯的例子：</p>
+<p>from multiprocessing import Event<br>from multiprocessing import Process<br>import time</p>
+<p>def traffic_light(e):<br>    while True:<br>        if e.is_set():<br>            print(‘绿灯，可以通过’)<br>            time.sleep(2)<br>            e.clear()<br>        else:<br>            print(‘红灯，不能通过’)<br>            time.sleep(3)<br>            e.set()<br>def car(i,e):<br>    e.wait()<br>    print(‘%s 车可以通过’%i)</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    e = Event()<br>    p1 = Process(target=traffic_light,args=(e,))<br>    p1.start()<br>    for i in range(20):<br>        if i % 3 == 0:<br>            time.sleep(3)<br>        else:<br>            p = Process(target=car,args=(i,e))<br>            p.start()<br>此例中，假设车流量比较小，每三秒过来两辆车，红绿灯启用一个进程，每辆车也视为一个进程，通过事件e的is_set的布尔值的变化实现了进程间的通信。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/13/异常处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/13/异常处理/" itemprop="url">异常处理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-13T00:21:57+08:00">
+                2018-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><h3 id="一-什么是异常"><a href="#一-什么是异常" class="headerlink" title="一 什么是异常"></a>一 什么是异常</h3><p>异常就是程序运行时发生错误的信号（在程序出现错误时，则会产生一个异常，若程序没有处理它，则会抛出该异常，程序的运行也随之终止），在python中,错误触发的异常如下<br><img src="https://images2015.cnblogs.com/blog/1036857/201612/1036857-20161229161413726-1899748713.png" alt="avatar"><br>而错误分成两种</p>
+<p>#语法错误示范一<br>if</p>
+<p>#语法错误示范二<br>def test:<br>    pass</p>
+<p>#语法错误示范三<br>class Foo<br>    pass</p>
+<p>#语法错误示范四<br>print(haha</p>
+<p>#TypeError:int类型不可迭代<br>for i in 3:<br>    pass</p>
+<p>#ValueError<br>num=input(“&gt;&gt;: “) #输入hello<br>int(num)</p>
+<p>#NameError<br>aaa</p>
+<p>#IndexError<br>l=[‘egon’,’aa’]<br>l[3]</p>
+<p>#KeyError<br>dic={‘name’:’egon’}<br>dic[‘age’]</p>
+<p>#AttributeError<br>class Foo:pass<br>Foo.x</p>
+<p>#ZeroDivisionError:无法完成计算<br>res1=1/0<br>res2=1+’str’</p>
+<p>二 异常的种类<br>在python中不同的异常可以用不同的类型（python中统一了类与类型，类型即类）去标识，一个异常标识一种错误<br>AttributeError 试图访问一个对象没有的树形，比如foo.x，但是foo没有属性x<br>IOError 输入/输出异常；基本上是无法打开文件<br>ImportError 无法引入模块或包；基本上是路径问题或名称错误<br>IndentationError 语法错误（的子类） ；代码没有正确对齐<br>IndexError 下标索引超出序列边界，比如当x只有三个元素，却试图访问x[5]<br>KeyError 试图访问字典里不存在的键<br>KeyboardInterrupt Ctrl+C被按下<br>NameError 使用一个还未被赋予对象的变量<br>SyntaxError Python代码非法，代码不能编译(个人认为这是语法错误，写错了）<br>TypeError 传入对象类型与要求的不符合<br>UnboundLocalError 试图访问一个还未被设置的局部变量，基本上是由于另有一个同名的全局变量，<br>导致你以为正在访问它<br>ValueError 传入一个调用者不期望的值，即使值的类型是正确的</p>
+<p>ArithmeticError<br>AssertionError<br>AttributeError<br>BaseException<br>BufferError<br>BytesWarning<br>DeprecationWarning<br>EnvironmentError<br>EOFError<br>Exception<br>FloatingPointError<br>FutureWarning<br>GeneratorExit<br>ImportError<br>ImportWarning<br>IndentationError<br>IndexError<br>IOError<br>KeyboardInterrupt<br>KeyError<br>LookupError<br>MemoryError<br>NameError<br>NotImplementedError<br>OSError<br>OverflowError<br>PendingDeprecationWarning<br>ReferenceError<br>RuntimeError<br>RuntimeWarning<br>StandardError<br>StopIteration<br>SyntaxError<br>SyntaxWarning<br>SystemError<br>SystemExit<br>TabError<br>TypeError<br>UnboundLocalError<br>UnicodeDecodeError<br>UnicodeEncodeError<br>UnicodeError<br>UnicodeTranslateError<br>UnicodeWarning<br>UserWarning<br>ValueError<br>Warning<br>ZeroDivisionError</p>
+<p>三 异常处理<br>为了保证程序的健壮性与容错性，即在遇到错误时程序不会崩溃，我们需要对异常进行处理，</p>
+<p>如果错误发生的条件是可预知的，我们需要用if进行处理：在错误发生之前进行预防</p>
+<p> View Code<br>如果错误发生的条件是不可预知的，则需要用到try…except：在错误发生之后进行处理</p>
+<p>#基本语法为<br>try:<br>    被检测的代码块<br>except 异常类型：<br>    try中一旦检测到异常，就执行这个位置的逻辑</p>
+<p>#举例<br>try:<br>    f=open(‘a.txt’)<br>    g=(line.strip() for line in f)<br>    print(next(g))<br>    print(next(g))<br>    print(next(g))<br>    print(next(g))<br>    print(next(g))<br>except StopIteration:<br>    f.close()</p>
+<p> #1 异常类只能用来处理指定的异常情况，如果非指定异常则无法处理。<br>s1 = ‘hello’<br>try:<br>    int(s1)<br>except IndexError as e: # 未捕获到异常，程序直接报错<br>    print e</p>
+<p>#2 多分支<br>s1 = ‘hello’<br>try:<br>    int(s1)<br>except IndexError as e:<br>    print(e)<br>except KeyError as e:<br>    print(e)<br>except ValueError as e:<br>    print(e)</p>
+<p>#3 万能异常Exception<br>s1 = ‘hello’<br>try:<br>    int(s1)<br>except Exception as e:<br>    print(e)</p>
+<p>#4 多分支异常与万能异常</p>
+<p>#4.1 如果你想要的效果是，无论出现什么异常，我们统一丢弃，或者使用同一段代码逻辑去处理他们，那么骚年，大胆的去做吧，只有一个Exception就足够了。</p>
+<p>#4.2 如果你想要的效果是，对于不同的异常我们需要定制不同的处理逻辑，那就需要用到多分支了。</p>
+<p>#5 也可以在多分支后来一个Exception<br>s1 = ‘hello’<br>try:<br>    int(s1)<br>except IndexError as e:<br>    print(e)<br>except KeyError as e:<br>    print(e)<br>except ValueError as e:<br>    print(e)<br>except Exception as e:<br>    print(e)</p>
+<p>#6 异常的其他机构<br>s1 = ‘hello’<br>try:<br>    int(s1)<br>except IndexError as e:<br>    print(e)<br>except KeyError as e:<br>    print(e)<br>except ValueError as e:<br>    print(e)</p>
+<p>#except Exception as e:</p>
+<h1 id="print-e"><a href="#print-e" class="headerlink" title="print(e)"></a>print(e)</h1><p>else:<br>    print(‘try内代码块没有异常则执行我’)<br>finally:<br>    print(‘无论异常与否,都会执行该模块,通常是进行清理工作’)</p>
+<p>#7 主动触发异常<br>try:<br>    raise TypeError(‘类型错误’)<br>except Exception as e:<br>    print(e)</p>
+<p>#8 自定义异常<br>class EgonException(BaseException):<br>    def <strong>init</strong>(self,msg):<br>        self.msg=msg<br>    def <strong>str</strong>(self):<br>        return self.msg</p>
+<p>try:<br>    raise EgonException(‘类型错误’)<br>except EgonException as e:<br>    print(e)</p>
+<p>#9 断言:assert 条件<br>assert 1 == 1<br>assert 1 == 2</p>
+<p>#10 总结try..except</p>
+<p>1：把错误处理和真正的工作分开来<br>2：代码更易组织，更清晰，复杂的工作任务更容易实现；<br>3：毫无疑问，更安全了，不至于由于一些小的疏忽而使程序意外崩溃了；<br>四 什么时候用异常处理<br>有的同学会这么想，学完了异常处理后，好强大，我要为我的每一段程序都加上try…except，干毛线去思考它会不会有逻辑错误啊，这样就很好啊，多省脑细胞===》2B青年欢乐多</p>
+<p>首先try…except是你附加给你的程序的一种异常处理的逻辑，与你的主要的工作是没有关系的，这种东西加的多了，会导致你的代码可读性变差</p>
+<p>然后异常处理本就不是你2b逻辑的擦屁股纸，只有在错误发生的条件无法预知的情况下，才应该加上try…except</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/20/Python通过future处理并发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/20/Python通过future处理并发/" itemprop="url">Python通过future处理并发</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T00:21:57+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="future初识"><a href="#future初识" class="headerlink" title="future初识"></a>future初识</h3><p>通过下面脚本来对future进行一个初步了解：<br>例子1：普通通过循环的方式</p>
+<p> 1 import os<br> 2 import time<br> 3 import sys<br> 4<br> 5 import requests<br> 6<br> 7<br> 8 POP20_CC = (<br> 9     “CN IN US ID BR PK NG BD RU JP MX PH VN ET EG DE IR TR CD FR”<br>10 ).split()<br>11<br>12<br>13 BASE_URL = ‘<a href="http://flupy.org/data/flags&#39;" target="_blank" rel="noopener">http://flupy.org/data/flags&#39;</a><br>14<br>15 DEST_DIR = ‘downloads/‘<br>16<br>17<br>18 def save_flag(img,filename):<br>19     path = os.path.join(DEST_DIR,filename)<br>20     with open(path,’wb’) as fp:<br>21         fp.write(img)<br>22<br>23<br>24 def get_flag(cc):<br>25     url = “{}/{cc}/{cc}.gif”.format(BASE_URL,cc=cc.lower())<br>26     resp = requests.get(url)<br>27     return resp.content<br>28<br>29<br>30 def show(text):<br>31     print(text,end=” “)<br>32     sys.stdout.flush()<br>33<br>34<br>35 def download_many(cc_list):<br>36     for cc in sorted(cc_list):<br>37         image = get_flag(cc)<br>38         show(cc)<br>39         save_flag(image,cc.lower()+”.gif”)<br>40<br>41     return len(cc_list)<br>42<br>43<br>44 def main(download_many):<br>45     t0 = time.time()<br>46     count = download_many(POP20_CC)<br>47     elapsed = time.time()-t0<br>48     msg = “\n{} flags downloaded in {:.2f}s”<br>49     print(msg.format(count,elapsed))<br>50<br>51<br>52 if <strong>name</strong> == ‘<strong>main</strong>‘:<br>53     main(download_many)</p>
+<p>例子2：通过future方式实现，这里对上面的部分代码进行了复用</p>
+<p> 1 from concurrent import futures<br> 2<br> 3 from flags import save_flag, get_flag, show, main<br> 4<br> 5<br> 6 MAX_WORKERS = 20<br> 7<br> 8<br> 9 def download_one(cc):<br>10     image = get_flag(cc)<br>11     show(cc)<br>12     save_flag(image, cc.lower()+”.gif”)<br>13     return cc<br>14<br>15<br>16 def download_many(cc_list):<br>17     workers = min(MAX_WORKERS,len(cc_list))<br>18     with futures.ThreadPoolExecutor(workers) as executor:<br>19         res = executor.map(download_one, sorted(cc_list))<br>20<br>21     return len(list(res))<br>22<br>23<br>24 if <strong>name</strong> == ‘<strong>main</strong>‘:<br>25     main(download_many)</p>
+<p>分别运行三次，两者的平均速度：13.67和1.59s，可以看到差别还是非常大的。</p>
+<p>future<br>future是concurrent.futures模块和asyncio模块的重要组件<br>从python3.4开始标准库中有两个名为Future的类：concurrent.futures.Future和asyncio.Future<br>这两个类的作用相同：两个Future类的实例都表示可能完成或者尚未完成的延迟计算。与Twisted中的Deferred类、Tornado框架中的Future类的功能类似</p>
+<p>注意：通常情况下自己不应该创建future，而是由并发框架(concurrent.futures或asyncio)实例化</p>
+<p>原因：future表示终将发生的事情，而确定某件事情会发生的唯一方式是执行的时间已经安排好，因此只有把某件事情交给concurrent.futures.Executor子类处理时，才会创建concurrent.futures.Future实例。<br>如：Executor.submit()方法的参数是一个可调用的对象，调用这个方法后会为传入的可调用对象排定时间，并返回一个future</p>
+<p>客户端代码不能应该改变future的状态，并发框架在future表示的延迟计算结束后会改变期物的状态，我们无法控制计算何时结束。</p>
+<p>这两种future都有.done()方法，这个方法不阻塞，返回值是布尔值，指明future链接的可调用对象是否已经执行。客户端代码通常不会询问future是否运行结束，而是会等待通知。因此两个Future类都有.add_done_callback()方法，这个方法只有一个参数，类型是可调用的对象，future运行结束后会调用指定的可调用对象。</p>
+<p>.result()方法是在两个Future类中的作用相同：返回可调用对象的结果，或者重新抛出执行可调用的对象时抛出的异常。但是如果future没有运行结束，result方法在两个Futrue类中的行为差别非常大。<br>对concurrent.futures.Future实例来说，调用.result()方法会阻塞调用方所在的线程，直到有结果可返回，此时，result方法可以接收可选的timeout参数，如果在指定的时间内future没有运行完毕，会抛出TimeoutError异常。<br>而asyncio.Future.result方法不支持设定超时时间，在获取future结果最好使用yield from结构，但是concurrent.futures.Future不能这样做</p>
+<p>不管是asyncio还是concurrent.futures.Future都会有几个函数是返回future，其他函数则是使用future,在最开始的例子中我们使用的Executor.map就是在使用future，返回值是一个迭代器，迭代器的<strong>next</strong>方法调用各个future的result方法，因此我们得到的是各个futrue的结果，而不是future本身</p>
+<p>关于future.as_completed函数的使用，这里我们用了两个循环，一个用于创建并排定future,另外一个用于获取future的结果</p>
+<p> 1 from concurrent import futures<br> 2<br> 3 from flags import save_flag, get_flag, show, main<br> 4<br> 5<br> 6 MAX_WORKERS = 20<br> 7<br> 8<br> 9 def download_one(cc):<br>10     image = get_flag(cc)<br>11     show(cc)<br>12     save_flag(image, cc.lower()+”.gif”)<br>13     return cc<br>14<br>15<br>16 def download_many(cc_list):<br>17     cc_list = cc_list[:5]<br>18     with futures.ThreadPoolExecutor(max_workers=3) as executor:<br>19         to_do = []<br>20         for cc in sorted(cc_list):<br>21             future = executor.submit(download_one,cc)<br>22             to_do.append(future)<br>23             msg = “Secheduled for {}:{}”<br>24             print(msg.format(cc,future))<br>25<br>26         results = []<br>27         for future in futures.as_completed(to_do):<br>28             res = future.result()<br>29             msg = “{}result:{!r}”<br>30             print(msg.format(future,res))<br>31             results.append(res)<br>32<br>33     return len(results)<br>34<br>35<br>36 if <strong>name</strong> == ‘<strong>main</strong>‘:<br>37     main(download_many)</p>
+<p>结果如下：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171016232748740-283326519.png" alt="avatar"></p>
+<p>注意：Python代码是无法控制GIL，标准库中所有执行阻塞型IO操作的函数，在等待操作系统返回结果时都会释放GIL.运行其他线程执行，也正是因为这样，Python线程可以在IO密集型应用中发挥作用</p>
+<p>以上都是concurrent.futures启动线程，下面通过它启动进程</p>
+<p>concurrent.futures启动进程<br>concurrent.futures中的ProcessPoolExecutor类把工作分配给多个Python进程处理，因此，如果需要做CPU密集型处理，使用这个模块能绕开GIL，利用所有的CPU核心。<br>其原理是一个ProcessPoolExecutor创建了N个独立的Python解释器，N是系统上面可用的CPU核数。<br>使用方法和ThreadPoolExecutor方法一样</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/10/Python协程深入理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/10/Python协程深入理解/" itemprop="url">Python协程深入理解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T00:21:57+08:00">
+                2017-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>从语法上来看，协程和生成器类似，都是定义体中包含yield关键字的函数。<br>yield在协程中的用法：</p>
+<p>在协程中yield通常出现在表达式的右边，例如：datum = yield,可以产出值，也可以不产出–如果yield关键字后面没有表达式，那么生成器产出None.<br>协程可能从调用方接受数据，调用方是通过send(datum)的方式把数据提供给协程使用，而不是next(…)函数，通常调用方会把值推送给协程。<br>协程可以把控制器让给中心调度程序，从而激活其他的协程<br>所以总体上在协程中把yield看做是控制流程的方式。</p>
+<h3 id="了解协程的过程"><a href="#了解协程的过程" class="headerlink" title="了解协程的过程"></a>了解协程的过程</h3><p>先通过一个简单的协程的例子理解：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172548865-1417507638.png" alt="avatar"></p>
+<p>对上述例子的分析：<br>yield 的右边没有表达式，所以这里默认产出的值是None<br>刚开始先调用了next(…)是因为这个时候生成器还没有启动，没有停在yield那里，这个时候也是无法通过send发送数据。所以当我们通过next(…)激活协程后，程序就会运行到x = yield，这里有个问题我们需要注意，x = yield这个表达式的计算过程是先计算等号右边的内容，然后在进行赋值，所以当激活生成器后，程序会停在yield这里，但并没有给x赋值。<br>当我们调用send方法后yield会收到这个值并赋值给x,而当程序运行到协程定义体的末尾时和用生成器的时候一样会抛出StopIteration异常</p>
+<p>如果协程没有通过next(…)激活(同样我们可以通过send(None)的方式激活)，但是我们直接send，会提示如下错误：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172631302-1319856611.png" alt="avatar"></p>
+<p>关于调用next(…)函数这一步通常称为”预激(prime)“协程，即让协程向前执行到第一个yield表达式，准备好作为活跃的协程使用</p>
+<p>协程在运行过程中有四个状态：</p>
+<p>GEN_CREATE:等待开始执行<br>GEN_RUNNING:解释器正在执行，这个状态一般看不到<br>GEN_SUSPENDED:在yield表达式处暂停<br>GEN_CLOSED:执行结束<br>通过下面例子来查看协程的状态：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172658302-1155116402.png" alt="avatar"></p>
+<p>接着再通过一个计算平均值的例子来继续理解：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172714036-1315642655.png" alt="avatar"></p>
+<p>这里是一个死循环，只要不停send值给协程，可以一直计算下去。<br>通过上面的几个例子我们发现，我们如果想要开始使用协程的时候必须通过next(…)方式激活协程，如果不预激，这个协程就无法使用，如果哪天在代码中遗忘了那么就出问题了，所以有一种预激协程的装饰器，可以帮助我们干这件事</p>
+<h3 id="预激协程的装饰器"><a href="#预激协程的装饰器" class="headerlink" title="预激协程的装饰器"></a>预激协程的装饰器</h3><p>下面是预激装饰器的演示例子：</p>
+<p> 1 from functools import wraps<br> 2<br> 3<br> 4 def coroutine(func):<br> 5     @wraps(func)<br> 6     def primer(<em>args,**kwargs):<br> 7         gen = func(</em>args,**kwargs)<br> 8         next(gen)<br> 9         return gen<br>10     return primer<br>11<br>12<br>13 @coroutine<br>14 def averager():<br>15     total = 0.0<br>16     count = 0<br>17     average = None<br>18     while True:<br>19         term = yield average<br>20         total += term<br>21         count += 1<br>22         average = total/count<br>23<br>24<br>25 coro_avg = averager()<br>26 from inspect import getgeneratorstate<br>27 print(getgeneratorstate(coro_avg))<br>28 print(coro_avg.send(10))<br>29 print(coro_avg.send(30))<br>30 print(coro_avg.send(5))</p>
+<p>关于预激，在使用yield from句法调用协程的时候，会自动预激活，这样其实与我们上面定义的coroutine装饰器是不兼容的，在python3.4里面的asyncio.coroutine装饰器不会预激协程，因此兼容yield from</p>
+<h3 id="终止协程和异常处理"><a href="#终止协程和异常处理" class="headerlink" title="终止协程和异常处理"></a>终止协程和异常处理</h3><p>协程中为处理的异常会向上冒泡,传给next函数或send函数的调用方(即触发协程的对象)<br>拿上面的代码举例子，如果我们发送了一个字符串而不是一个整数的时候就会报错，并且这个时候协程是被终止了<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172816302-1637394538.png" alt="avatar"></p>
+<p>从python2.5开始客户端代码在生成器对象上调用两个方法，显示的把异常发送给协程<br>分别为：throw和close<br>generator.throw:会让生成器在暂停的yield表达式处抛出指定的异常，如果生成器处理了抛出的异常，代码会向前执行到下一个yield表达式，而产出的值会成为调用generator.throw方法代码的返回值。如果生成器没有处理抛出的异常，异常会向上冒泡，传到调用方的上下文中。<br>generator.close:会让生成器在暂停的yield表达式处抛出GeneratorExit异常。如果生成器没有处理这个异常，或者抛出了StopIteration异常，调用方不会报错，如果收到GeneratorExit异常，生成器一定不能产出值，否则解释器会抛出RuntimeError异常。生成器抛出的异常会向上冒泡，传给调用方。<br>下面是一个例子：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172838505-562465879.png" alt="avatar"></p>
+<p>当传入我们定义的异常时不会影响协程，协程不会停止，可以继续send,但是如果是没有处理的异常的时候，就会报错，并且协程会被终止</p>
+<h3 id="让协程返回值"><a href="#让协程返回值" class="headerlink" title="让协程返回值"></a>让协程返回值</h3><p>通过下面的例子进行演示如何获取协程的返回值：</p>
+<p> 1 from collections import namedtuple<br> 2<br> 3<br> 4 Result = namedtuple(“Result”,”colunt average”)<br> 5<br> 6<br> 7 def averager():<br> 8     total = 0.0<br> 9     count = 0<br>10     average = None<br>11     while True:<br>12         term = yield<br>13         if term is None:<br>14             break<br>15         total += term<br>16         count+=1<br>17         average = total/count<br>18     return Result(count,average)<br>19<br>20 coro_avg = averager()<br>21 next(coro_avg)<br>22 coro_avg.send(10)<br>23 coro_avg.send(30)<br>24 coro_avg.send(5)<br>25 try:<br>26     coro_avg.send(None)<br>27 except StopIteration as e:<br>28     result = e.value<br>29     print(result)</p>
+<p>这样就可以获取到最后的结果：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172917802-1554422378.png" alt="avatar"></p>
+<p>其实相对来说上面这种方式获取返回值比较麻烦，而yield from 结构会自动捕获StopIteration异常，这种处理方式与for循环处理StopIteration异常的方式一样，循环机制使我们更容易理解处理异常，对于yield from来说，解释器不仅会捕获StopIteration异常，还会把value属性的值变成yield from表达式的值</p>
+<h3 id="关于yield-from"><a href="#关于yield-from" class="headerlink" title="关于yield from"></a>关于yield from</h3><p>在生成器gen中使用yield from subgen()时，subgen会获得控制权，把产出的值传给gen的调用方，即调用方可以直接控制subgen,同时，gen会阻塞，等待subgen终止</p>
+<p>yield from x表达式对x对象所做的第一件事是，调用iter(x),从中获取迭代器，因此x可以是任何可迭代的对象</p>
+<p>下面是yield from可以简化yield表达式的例子：</p>
+<p> 1 def gen():<br> 2     for c in “AB”:<br> 3         yield c<br> 4     for i in range(1,3):<br> 5         yield i<br> 6<br> 7 print(list(gen()))<br> 8<br> 9 def gen2():<br>10     yield from “AB”<br>11     yield from range(1,3)<br>12<br>13 print(list(gen2()))</p>
+<p>这两种的方式的结果是一样的，但是这样看来yield from更加简洁，但是yield from的作用可不仅仅是替代产出值的嵌套for循环。<br>yield from的主要功能是打开双向通道，把最外层的调用方与最内层的子生成器连接起来，这样二者可以直接发送和产出值，还可以直接传入异常，而不用再像之前那样在位于中间的协程中添加大量处理异常的代码</p>
+<p>通过yield from还可以链接可迭代对象<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006173010568-170929297.png" alt="avatar"><br>委派生成器在yield from 表达式处暂停时，调用方可以直接把数据发给子生成器，子生成器再把产出产出值发给调用方，子生成器返回之后，解释器会抛出StopIteration异常，并把返回值附加到异常对象上，此时委派生成器会恢复。</p>
+<p>下面是一个完整的例子代码</p>
+<p> 1 from collections import namedtuple<br> 2<br> 3<br> 4 Result = namedtuple(‘Result’, ‘count average’)<br> 5<br> 6<br> 7 # 子生成器<br> 8 def averager():<br> 9     total = 0.0<br>10     count = 0<br>11     average = None<br>12     while True:<br>13         term = yield<br>14         if term is None:<br>15             break<br>16         total += term<br>17         count += 1<br>18         average = total/count<br>19     return Result(count, average)<br>20<br>21<br>22 # 委派生成器<br>23 def grouper(result, key):<br>24     while True:<br>25         result[key] = yield from averager()<br>26<br>27<br>28 # 客户端代码，即调用方<br>29 def main(data):<br>30     results = {}<br>31     for key,values in data.items():<br>32         group = grouper(results,key)<br>33         next(group)<br>34         for value in values:<br>35             group.send(value)<br>36         group.send(None) #这里表示要终止了<br>37<br>38     report(results)<br>39<br>40<br>41 # 输出报告<br>42 def report(results):<br>43     for key, result in sorted(results.items()):<br>44         group, unit = key.split(‘;’)<br>45         print(‘{:2} {:5} averaging {:.2f}{}’.format(<br>46             result.count, group, result.average, unit<br>47         ))<br>48<br>49 data = {<br>50     ‘girls;kg’:<br>51         [40.9, 38.5, 44.3, 42.2, 45.2, 41.7, 44.5, 38.0, 40.6, 44.5],<br>52     ‘girls;m’:<br>53         [1.6, 1.51, 1.4, 1.3, 1.41, 1.39, 1.33, 1.46, 1.45, 1.43],<br>54     ‘boys;kg’:<br>55         [39.0, 40.8, 43.2, 40.8, 43.1, 38.6, 41.4, 40.6, 36.3],<br>56     ‘boys;m’:<br>57         [1.38, 1.5, 1.32, 1.25, 1.37, 1.48, 1.25, 1.49, 1.46],<br>58 }<br>59<br>60<br>61 if <strong>name</strong> == ‘<strong>main</strong>‘:<br>62     main(data)</p>
+<p>关于上述代码着重解释一下关于委派生成器部分，这里的循环每次迭代时会新建一个averager实例，每个实例都是作为协程使用的生成器对象。</p>
+<p>grouper发送的每个值都会经由yield from处理，通过管道传给averager实例。grouper会在yield from表达式处暂停，等待averager实例处理客户端发来的值。averager实例运行完毕后，返回的值会绑定到results[key]上，while 循环会不断创建averager实例，处理更多的值</p>
+<p>并且上述代码中的子生成器可以使用return 返回一个值，而返回的值会成为yield from表达式的值。</p>
+<h3 id="关于yield-from的意义"><a href="#关于yield-from的意义" class="headerlink" title="关于yield from的意义"></a>关于yield from的意义</h3><p>关于yield from 六点重要的说明：</p>
+<p>子生成器产出的值都直接传给委派生成器的调用方(即客户端代码)<br>使用send()方法发送给委派生成器的值都直接传给子生成器。如果发送的值为None,那么会给委派调用子生成器的<strong>next</strong>()方法。如果发送的值不是None,那么会调用子生成器的send方法，如果调用的方法抛出StopIteration异常，那么委派生成器恢复运行，任何其他异常都会向上冒泡，传给委派生成器<br>生成器退出时，生成器(或子生成器)中的return expr表达式会出发StopIteration(expr)异常抛出<br>yield from表达式的值是子生成器终止时传给StopIteration异常的第一个参数。yield from 结构的另外两个特性与异常和终止有关。<br>传入委派生成器的异常，除了GeneratorExit之外都传给子生成器的throw()方法。如果调用throw()方法时抛出StopIteration异常，委派生成器恢复运行。StopIteration之外的异常会向上冒泡，传给委派生成器<br>如果把GeneratorExit异常传入委派生成器，或者在委派生成器上调用close()方法，那么在子生成器上调用clsoe()方法，如果它有的话。如果调用close()方法导致异常抛出，那么异常会向上冒泡，传给委派生成器，否则委派生成器抛出GeneratorExit异常</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/20/关于python协程中aiorwlock 使用问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/20/关于python协程中aiorwlock 使用问题/" itemprop="url">关于python协程中aiorwlock 使用问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-20T00:21:57+08:00">
+                2017-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近工作中多个项目都开始用asyncio aiohttp aiomysql aioredis ,其实也是更好的用python的协程，但是使用的过程中也是遇到了很多问题，最近遇到的就是</p>
+<p>关于aiorwlock 的问题，在使用中碰到了当多个协程同时来请求锁的时候 在其中一个还没释放锁的时候，另外一个协程也获取到锁，这里进行整理，也希望知道问题你解决方法的，一起讨论一下，正好最近经常用到协程的东西，所以准备建一个群，也欢迎大家一起进来讨论python协程的内容，群号：692953542</p>
+<h3 id="关于场景描述"><a href="#关于场景描述" class="headerlink" title="关于场景描述"></a>关于场景描述</h3><p><img src="https://img2018.cnblogs.com/blog/997599/201811/997599-20181118101258227-1668360197.png" alt="avatar"><br>数据库的要操作的表的信息为：</p>
+<p>id    name    nickname    count    flag    crdate<br>1    800100    aa    100    1    2018-11-18 10:07:22<br>2    800101    bb    200    1    2018-11-18 10:07:23</p>
+<p>当多个请求都到数据库操作接口程序的时候，针对同一个name的count进行增加或者减少，就要保证操作的同一个时刻只有一个可以去获取count的值并进行update操作，所以我是在这一步增加了锁，因为使用aiohttp写的，所以想要在这里也用了aiorwlock，但是在我测试的过程中发现了，当一个协程获取锁还没释放锁的时候，另外一个协程也获取到锁，下面我是具体的代码</p>
+<p>程序代码<br>核心的处理类：</p>
+<p>class CntHandler(object):</p>
+<pre><code>def __init__(self, db, loop):
+    self.db = db
+    self.loop = loop
+    self.company_lock = {}
+
+def response(self, request, msg):
+    peer = request.transport.get_extra_info(&apos;peername&apos;)
+    logging.info(&quot;request url[%s] from[%s]: %s&quot;, request.raw_path, peer, msg)
+    origin = request.headers.get(&quot;Origin&quot;)
+    if origin is not None:
+        headers = {&quot;Access-Control-Allow-Origin&quot;: origin, &quot;Access-Control-Allow-Credentials&quot;: &quot;true&quot;}
+        resp = web.Response(text=util.dictToJson(msg), content_type=&apos;application/json&apos;, headers=headers)
+    else:
+        resp = web.Response(text=util.dictToJson(msg), content_type=&apos;application/json&apos;)
+    return resp
+
+async def cnt_set(self, request):
+    &quot;&quot;&quot;
+    用于设置company表中的count值
+    :param request: 
+    :return: 
+    &quot;&quot;&quot;
+    post = await request.post()
+    logging.info(&apos;post %s&apos;, post)
+    company_name = post.get(&quot;company&quot;)
+    cnt = post.get(&quot;cnt&quot;)
+    sql = &quot;update shield.company set count=%s where name=%s&quot;
+    args_values = [cnt, company_name]
+    rwlock = self.company_lock.get(company_name, &quot;&quot;)
+    if not rwlock:
+        rwlock = aiorwlock.RWLock(loop=self.loop)
+        self.company_lock[company_name] = rwlock
+    async with rwlock.writer:
+        msg = dict()
+        po_sql = &quot;select * from shield.company where name=%s&quot;
+        po = await self.db.get(po_sql, company_name)
+        if not po:  # 找不到企业
+            logging.error(&quot;not found company name [%s]&quot;, company_name)
+            msg[&quot;code&quot;] = 404
+            msg[&quot;code&quot;] = &quot;not found company&quot;
+            return self.response(request, msg)
+        res = await self.db.execute(sql, args_values)
+        if not isinstance(res, int):
+            logging.error(&quot;sql update is err:&quot;, res)
+            msg[&quot;code&quot;] = 403
+            msg[&quot;reason&quot;] = &quot;set fail&quot;
+            return self.response(request, msg)
+        logging.info(&quot;company [%s] set cnt [%s] is success&quot;, company_name, cnt)
+        msg[&quot;code&quot;] = 200
+        msg[&quot;reason&quot;] = &quot;ok&quot;
+        return self.response(request, msg)
+
+async def cnt_inc(self, request):
+    &quot;&quot;&quot;
+    用于增加company表中的count值
+    :param request: 
+    :return: 
+    &quot;&quot;&quot;
+    post = await request.post()
+    logging.info(&apos;post %s&apos;, post)
+    company_name = post.get(&quot;company&quot;)
+    cnt = int(post.get(&quot;cnt&quot;, 0))
+    rwlock = self.company_lock.get(company_name, &quot;&quot;)
+    if not rwlock:
+        rwlock = aiorwlock.RWLock(loop=self.loop)
+        self.company_lock[company_name] = rwlock
+    async with rwlock.writer:
+        uuid_s = uuid.uuid1().hex
+        logging.debug(&quot;[%s]---[%s]&quot;, uuid_s, id(rwlock))
+        msg = dict()
+        sql = &quot;select * from shield.company where name=%s&quot;
+        po = await self.db.get(sql, company_name)
+        if not po:  # 找不到企业
+            logging.error(&quot;not found company name [%s]&quot;, company_name)
+            msg[&quot;code&quot;] = 404
+            msg[&quot;code&quot;] = &quot;not found company&quot;
+            return self.response(request, msg)
+        old_cnt = po.get(&quot;count&quot;)
+        po_cnt = int(po.get(&quot;count&quot;))
+        res = po_cnt + cnt
+        update_sql = &quot;update shield.company set count=%s where name=%s&quot;
+        args_values = [res, company_name]
+        update_res = await self.db.execute(update_sql, args_values)
+        if not isinstance(update_res, int):  # 数据库update失败
+            logging.error(&quot;sql update is err:&quot;, update_res)
+            msg[&quot;code&quot;] = 403
+            msg[&quot;reason&quot;] = &quot;inc fail&quot;
+            return self.response(request, msg)
+        logging.info(&quot;uuid [%s] lock [%s] company [%s] inc cnt [%s] old cnt [%s]  true will is [%s] success&quot;, uuid_s,id(rwlock), company_name, cnt, old_cnt, res)
+        msg[&quot;code&quot;] = 200
+        msg[&quot;reason&quot;] = &quot;ok&quot;
+        return self.response(request, msg)
+
+async def cnt_dec(self, request):
+    &quot;&quot;&quot;
+    用于减少company表中count的值
+    :param request: 
+    :return: 
+    &quot;&quot;&quot;
+    post = await request.post()
+    logging.info(&apos;post %s&apos;, post)
+    company_name = post.get(&quot;company&quot;)
+    cnt = int(post.get(&quot;cnt&quot;, 0))
+    rwlock = self.company_lock.get(company_name, &quot;&quot;)
+    if not rwlock:
+        rwlock = aiorwlock.RWLock(loop=self.loop)
+        self.company_lock[company_name] = rwlock
+    async with rwlock.writer:
+        uuid_s = uuid.uuid1().hex
+        logging.debug(&quot;[%s]---[%s]&quot;, uuid_s, id(rwlock))
+        msg = dict()
+        sql = &quot;select * from shield.company where name=%s&quot;
+        po = await self.db.get(sql, company_name)
+        if not po:      # 找不到企业
+            logging.error(&quot;not found company name [%s]&quot;, company_name)
+            msg[&quot;code&quot;] = 404
+            msg[&quot;code&quot;] = &quot;not found company&quot;
+            return self.response(request, msg)
+        po_cnt = int(po.get(&quot;count&quot;))
+        old_cnt = po.get(&quot;count&quot;)
+        if po_cnt == 0:
+            logging.error(&quot;company [%s] cnt is 0&quot;, company_name)
+            msg[&quot;code&quot;] = 400
+            msg[&quot;reason&quot;] = &quot;cnt is 0&quot;
+            return self.response(request, msg)
+        if po_cnt &lt; cnt:  # 数据库余额不足
+            logging.error(&quot;company [%s] count is not enough&quot;, company_name)
+            msg[&quot;code&quot;] = 405
+            msg[&quot;reason&quot;] = &quot;count is not enough&quot;
+            return self.response(request, msg)
+        res = po_cnt - cnt
+        update_sql = &quot;update shield.company set count=%s where name=%s&quot;
+        args_values = [res, company_name]
+        update_res = await self.db.execute(update_sql, args_values)
+        if not isinstance(update_res, int): # 执行update 失败
+            logging.error(&quot;sql update is err:&quot;, update_res)
+            msg[&quot;code&quot;] = 403
+            msg[&quot;reason&quot;] = &quot;inc fail&quot;
+            return self.response(request, msg)
+        logging.info(&quot;uuid [%s] lock [%s] company [%s] dec cnt [%s] old cnt [%s] true will is [%s] success&quot;,uuid_s,id(rwlock), company_name, cnt, old_cnt, res)
+
+        msg[&quot;code&quot;] = 200
+        msg[&quot;reason&quot;] = &quot;ok&quot;
+        return self.response(request, msg)</code></pre><p>上面代码出问题的代码是在增加和减少的时候：</p>
+<p>async with rwlock.writer:<br>在一个协程还没有释放锁的时候，另外一个操作也就进来了，到之后我在测试并发的时候，对同一个name的count进行操作导致最后的count值不符合的问题</p>
+<p>可能是我本身代码的问题，或者我哪里处理的不对，欢迎大家一起讨论</p>
+<p>这个完整的代码地址：<a href="https://github.com/pythonsite/test_aiorwlock" target="_blank" rel="noopener">https://github.com/pythonsite/test_aiorwlock</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/一篇文章让你明白python的装饰器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/12/一篇文章让你明白python的装饰器/" itemprop="url">一篇文章让你明白python的装饰器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T00:21:57+08:00">
+                2017-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在看闭包问题之前先来看看关于python中作用域的问题</p>
+<h3 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h3><p><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235130656-2113167992.png" alt="avatar"></p>
+<p>对于上述代码中出现错误，肯定没什么疑问了，毕竟b并没有定义和赋值，当我们把代码更改如下后：</p>
+<p><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235155171-616265314.png" alt="avatar"></p>
+<p>再看一个例子：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235221140-1604711026.png" alt="avatar"></p>
+<p>首先这个错误已经非常明显：说在赋值之前引用了局部变量b</p>
+<p>可能很多人觉得会打印10然后打印6，其实这里就是涉及到变量作用域的问题<br>当Python编译函数的的定义体的时候，它判断b是局部变量，毕竟在函数中有b = 9表示给b赋值了，所以python会从本地环境获取b，当我们调用方法执行的时候，定义体会获取并打印变量a的值，但是当尝试获取b的值的时候发现b没有绑定值，所以要想让上述代码运行还可以把b设置为全局变量，或者把b赋值放到调用之前<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235237171-1039665902.png" alt="avatar"><br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235246093-1929143137.png" alt="avatar"></p>
+<h3 id="函数对象的作用域"><a href="#函数对象的作用域" class="headerlink" title="函数对象的作用域"></a>函数对象的作用域</h3><p>python中一切皆对象，同其他对象一样,函数对象也有其使用的范围即函数对象的作用域。<br>在python中我们通过def定义函数，函数对象的作用域与def所在的层级相同，<br>通过下面代码进行理解：</p>
+<p>def func1():<br>    def func2(x):<br>        return 2*x<br>    print(func2(5))</p>
+<p>func1()<br>print(func2(5))</p>
+<p>这个例子中我们在def func1函数内可以调用fun2,但是我们在外面是无法调用到func2的，所以结果为看到如下：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235325171-1684348962.png" alt="avatar"></p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>关于闭包主要有下面两种说法：</p>
+<p>闭包是符合一定条件的函数，定义为：闭包是在其词法上下文中引用了自由变量的函数<br>闭包是由函数与其相关的引用环境组合而成的实体。定义为：在实现绑定时，需要创建一个能显示表示引用环境的东西，并将它与相关的子程序捆绑在一起，这样捆绑起来的整体称为闭包<br>个人觉得第二种说法更准确，闭包只是在形式上表现像函数，实际不是函数。<br>我们对函数的定义是：一些可执行的代码，这些代码在函数定义后就确定了，不会在执行时发生变化，所以一个函数只有一个实例。</p>
+<p>闭包在运行的时候可以有多个实例，不同的引用环境和相同的环境组合可以产生不同的实例。</p>
+<p>这里有一个词：引用环境，其实引用环境就是在执行运行的某个时间点，所有处于活跃状态的变量所组成的集合，这里的变量是指变量的名字和其所代表的对象之间的联系。</p>
+<p>可以使用闭包语言的特点：</p>
+<p>函数可以作为另外一个函数的返回值或者参数，还可以作为一个变量的值。<br>函数可以嵌套使用<br>而认为闭包是函数的有一句话是：<br>闭包是指延伸了作用域的函数，其中包含函数定义体中引用。但是不在定义体中定义的非全局变量。</p>
+<p>上面这种说法个人觉得也是一种理解方式</p>
+<p>相信看了这些概念也还是不好理解，还是通过下面例子更好理解：</p>
+<p>先实现一种计算平均值的方法：</p>
+<p><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235344171-334543737.png" alt="avatar"></p>
+<p>从结果我们可以看出这里保存了每次的历史值<br>换一种方法实现：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235401781-68287159.png" alt="avatar"></p>
+<p>实现了第一种相同的效果，对这种方法分析：<br>通常我们会认为我们调用avg(10)的时候make_averager函数已经返回了，而它的本地作用域也一去不复返，但这里其实series是自由变量，是指未在本地作用域绑定的变量<br>我们可以通过print(dir(avg)),看到如下结果：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235422906-1761709340.png" alt="avatar"><br>其实这里面保存着均布变量和自由变量的名称，我们可以通过下面方法查看：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235445984-1622618193.png" alt="avatar"></p>
+<p>eries的绑定在返回的avg函数的<strong>closure</strong>属性中这或许就是有的人会认为闭包一种函数。闭包会保留定义函数时存在的自由变量的绑定，这样调用函数时虽然定义作用域不能用了，但是仍能使用那些绑定</p>
+<p>关于nonlocal<br>刚开始了解闭包之后，如果尝试使用这种编程方式容易出现以下错误使用例子：</p>
+<p>def make_averager():<br>    count = 0<br>    total = 0</p>
+<pre><code>def averager(new_value):
+    count += 1
+    total += new_value
+    return total / count
+return averager</code></pre><p>先来看一下错误提示：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235522906-1371806326.png" alt="avatar"></p>
+<p>这个例子中和我们上面使用的不同之处是：这里的count和total是数字，是不可变类型，而之前的例子中series是一个列表是可变类型<br>所以这里重新回到了最开始说的作用域问题了，当我们在averager中使用<br>count += 1的时候其实就是count = count + 1,这样就是在averager函数定义体中对count进行赋值，count就变成了局部变量。</p>
+<p>问题小结：当时数字，字符串，元组等不可变类型时，只能读取不能更新，如果使用类似count += 1就会隐式的把count变成局部变量，所以开始例子中使用series，我们后面的操作是append并且列表还是可变对象</p>
+<p>不过python3引入了一个新的关键词nonlocal，通过它把变量标记为自由变量，这样我们把上面这个错误的例子简单更改：</p>
+<p>def make_averager():<br>    count = 0<br>    total = 0</p>
+<pre><code>def averager(new_value):
+    nonlocal count,total
+    count += 1
+    total += new_value
+    return total / count
+return averager</code></pre><p>到这里装饰器的前奏就说完了，下面就是装饰器，我个人觉得装饰器只是闭包的一种应用，闭包在很多情况下都是一种非常好的变成技巧</p>
+<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><p>关于装饰器本来是想重新整理一下，看了自己之前整理的博客，已经挺详细的，就把连接直接放这里了<br><a href="http://www.pythonsite.com/?p=113" target="_blank" rel="noopener">http://www.pythonsite.com/?p=113</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/python爬虫从入门到放弃（二）之爬虫的原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/25/python爬虫从入门到放弃（二）之爬虫的原理/" itemprop="url">python爬虫从入门到放弃（二）之爬虫的原理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T00:21:57+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在上文中我们说了：爬虫就是请求网站并提取数据的自动化程序。其中请求，提取，自动化是爬虫的关键！下面我们分析爬虫的基本流程</p>
+<h3 id="爬虫的基本流程"><a href="#爬虫的基本流程" class="headerlink" title="爬虫的基本流程"></a>爬虫的基本流程</h3><p>发起请求<br>通过HTTP库向目标站点发起请求，也就是发送一个Request，请求可以包含额外的header等信息，等待服务器响应</p>
+<p>获取响应内容<br>如果服务器能正常响应，会得到一个Response，Response的内容便是所要获取的页面内容，类型可能是HTML,Json字符串，二进制数据（图片或者视频）等类型</p>
+<p>解析内容<br>得到的内容可能是HTML,可以用正则表达式，页面解析库进行解析，可能是Json,可以直接转换为Json对象解析，可能是二进制数据，可以做保存或者进一步的处理</p>
+<p>保存数据<br>保存形式多样，可以存为文本，也可以保存到数据库，或者保存特定格式的文件</p>
+<h3 id="什么是Request-Response"><a href="#什么是Request-Response" class="headerlink" title="什么是Request,Response"></a>什么是Request,Response</h3><p>浏览器发送消息给网址所在的服务器，这个过程就叫做HTPP Request</p>
+<p>服务器收到浏览器发送的消息后，能够根据浏览器发送消息的内容，做相应的处理，然后把消息回传给浏览器，这个过程就是HTTP Response</p>
+<p>浏览器收到服务器的Response信息后，会对信息进行相应的处理，然后展示</p>
+<p>Request中包含什么？<br>请求方式</p>
+<p>主要有：GET/POST两种类型常用，另外还有HEAD/PUT/DELETE/OPTIONS<br>GET和POST的区别就是：请求的数据GET是在url中，POST则是存放在头部</p>
+<p>GET:向指定的资源发出“显示”请求。使用GET方法应该只用在读取数据，而不应当被用于产生“副作用”的操作中，例如在Web Application中。其中一个原因是GET可能会被网络蜘蛛等随意访问</p>
+<p>POST:向指定资源提交数据，请求服务器进行处理（例如提交表单或者上传文件）。数据被包含在请求本文中。这个请求可能会创建新的资源或修改现有资源，或二者皆有。</p>
+<p>HEAD：与GET方法一样，都是向服务器发出指定资源的请求。只不过服务器将不传回资源的本文部分。它的好处在于，使用这个方法可以在不必传输全部内容的情况下，就可以获取其中“关于该资源的信息”（元信息或称元数据）。</p>
+<p>PUT：向指定资源位置上传其最新内容。</p>
+<p>OPTIONS：这个方法可使服务器传回该资源所支持的所有HTTP请求方法。用’*’来代替资源名称，向Web服务器发送OPTIONS请求，可以测试服务器功能是否正常运作。</p>
+<p>DELETE：请求服务器删除Request-URI所标识的资源。</p>
+<p>请求URL</p>
+<p>URL，即统一资源定位符，也就是我们说的网址，统一资源定位符是对可以从互联网上得到的资源的位置和访问方法的一种简洁的表示，是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的URL，它包含的信息指出文件的位置以及浏览器应该怎么处理它。</p>
+<p>URL的格式由三个部分组成：<br>第一部分是协议(或称为服务方式)。<br>第二部分是存有该资源的主机IP地址(有时也包括端口号)。<br>第三部分是主机资源的具体地址，如目录和文件名等。</p>
+<p>爬虫爬取数据时必须要有一个目标的URL才可以获取数据，因此，它是爬虫获取数据的基本依据。</p>
+<p>请求头</p>
+<p>包含请求时的头部信息，如User-Agent,Host,Cookies等信息，下图是请求请求百度时，所有的请求头部信息参数<br><img src="https://images2015.cnblogs.com/blog/997599/201705/997599-20170524114125357-155405725.png" alt="avatar"></p>
+<p>请求体<br>请求是携带的数据，如提交表单数据时候的表单数据（POST）</p>
+<p>Response中包含了什么<br>所有HTTP响应的第一行都是状态行，依次是当前HTTP版本号，3位数字组成的状态代码，以及描述状态的短语，彼此由空格分隔。</p>
+<p>响应状态</p>
+<p>有多种响应状态，如：200代表成功，301跳转，404找不到页面，502服务器错误</p>
+<p>1xx消息——请求已被服务器接收，继续处理<br>2xx成功——请求已成功被服务器接收、理解、并接受<br>3xx重定向——需要后续操作才能完成这一请求<br>4xx请求错误——请求含有词法错误或者无法被执行<br>5xx服务器错误——服务器在处理某个正确请求时发生错误 常见代码： 200 OK 请求成功 400 Bad Request 客户端请求有语法错误，不能被服务器所理解 401 Unauthorized 请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用 403 Forbidden 服务器收到请求，但是拒绝提供服务 404 Not Found 请求资源不存在，eg：输入了错误的URL 500 Internal Server Error 服务器发生不可预期的错误 503 Server Unavailable 服务器当前不能处理客户端的请求，一段时间后可能恢复正常 301 目标永久性转移 302 目标暂时性转移<br>响应头</p>
+<p>如内容类型，类型的长度，服务器信息，设置Cookie,如下图<br><img src="https://images2015.cnblogs.com/blog/997599/201705/997599-20170524114314513-1022567785.png" alt="avatar"></p>
+<p>响应体</p>
+<p>最主要的部分，包含请求资源的内容，如网页HTMl,图片，二进制数据等</p>
+<h3 id="能爬取什么样的数据"><a href="#能爬取什么样的数据" class="headerlink" title="能爬取什么样的数据"></a>能爬取什么样的数据</h3><p>网页文本：如HTML文档，Json格式化文本等<br>图片：获取到的是二进制文件，保存为图片格式<br>视频:同样是二进制文件<br>其他：只要请求到的，都可以获取</p>
+<h3 id="如何解析数据"><a href="#如何解析数据" class="headerlink" title="如何解析数据"></a>如何解析数据</h3><p>直接处理<br>Json解析<br>正则表达式处理<br>BeautifulSoup解析处理<br>PyQuery解析处理<br>XPath解析处理</p>
+<h3 id="关于抓取的页面数据和浏览器里看到的不一样的问题"><a href="#关于抓取的页面数据和浏览器里看到的不一样的问题" class="headerlink" title="关于抓取的页面数据和浏览器里看到的不一样的问题"></a>关于抓取的页面数据和浏览器里看到的不一样的问题</h3><p>出现这种情况是因为，很多网站中的数据都是通过js，ajax动态加载的，所以直接通过get请求获取的页面和浏览器显示的不同。</p>
+<p>如何解决js渲染的问题？</p>
+<p>分析ajax<br>Selenium/webdriver<br>Splash<br>PyV8,Ghost.py</p>
+<h3 id="怎样保存数据"><a href="#怎样保存数据" class="headerlink" title="怎样保存数据"></a>怎样保存数据</h3><p>文本：纯文本，Json,Xml等</p>
+<p>关系型数据库：如mysql,oracle,sql server等结构化数据库</p>
+<p>非关系型数据库：MongoDB,Redis等key-value形式存储</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

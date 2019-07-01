@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="最近工作中多个项目都开始用asyncio aiohttp aiomysql aioredis ,其实也是更好的用python的协程，但是使用的过程中也是遇到了很多问题，最近遇到的就是 关于aiorwlock 的问题，在使用中碰到了当多个协程同时来请求锁的时候 在其中一个还没释放锁的时候，另外一个协程也获取到锁，这里进行整理，也希望知道问题你解决方法的，一起讨论一下，正好最近经常用到协程的东西，所以">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于python协程中aiorwlock 使用问题">
+<meta property="og:url" content="http://yoursite.com/2017/11/20/关于python协程中aiorwlock 使用问题/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="最近工作中多个项目都开始用asyncio aiohttp aiomysql aioredis ,其实也是更好的用python的协程，但是使用的过程中也是遇到了很多问题，最近遇到的就是 关于aiorwlock 的问题，在使用中碰到了当多个协程同时来请求锁的时候 在其中一个还没释放锁的时候，另外一个协程也获取到锁，这里进行整理，也希望知道问题你解决方法的，一起讨论一下，正好最近经常用到协程的东西，所以">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/997599/201811/997599-20181118101258227-1668360197.png">
+<meta property="og:updated_time" content="2019-06-29T15:54:42.001Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于python协程中aiorwlock 使用问题">
+<meta name="twitter:description" content="最近工作中多个项目都开始用asyncio aiohttp aiomysql aioredis ,其实也是更好的用python的协程，但是使用的过程中也是遇到了很多问题，最近遇到的就是 关于aiorwlock 的问题，在使用中碰到了当多个协程同时来请求锁的时候 在其中一个还没释放锁的时候，另外一个协程也获取到锁，这里进行整理，也希望知道问题你解决方法的，一起讨论一下，正好最近经常用到协程的东西，所以">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/997599/201811/997599-20181118101258227-1668360197.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/20/关于python协程中aiorwlock 使用问题/">
+
+
+
+
+
+  <title>关于python协程中aiorwlock 使用问题 | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/20/关于python协程中aiorwlock 使用问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于python协程中aiorwlock 使用问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-20T00:21:57+08:00">
+                2017-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近工作中多个项目都开始用asyncio aiohttp aiomysql aioredis ,其实也是更好的用python的协程，但是使用的过程中也是遇到了很多问题，最近遇到的就是</p>
+<p>关于aiorwlock 的问题，在使用中碰到了当多个协程同时来请求锁的时候 在其中一个还没释放锁的时候，另外一个协程也获取到锁，这里进行整理，也希望知道问题你解决方法的，一起讨论一下，正好最近经常用到协程的东西，所以准备建一个群，也欢迎大家一起进来讨论python协程的内容，群号：692953542</p>
+<h3 id="关于场景描述"><a href="#关于场景描述" class="headerlink" title="关于场景描述"></a>关于场景描述</h3><p><img src="https://img2018.cnblogs.com/blog/997599/201811/997599-20181118101258227-1668360197.png" alt="avatar"><br>数据库的要操作的表的信息为：</p>
+<p>id    name    nickname    count    flag    crdate<br>1    800100    aa    100    1    2018-11-18 10:07:22<br>2    800101    bb    200    1    2018-11-18 10:07:23</p>
+<p>当多个请求都到数据库操作接口程序的时候，针对同一个name的count进行增加或者减少，就要保证操作的同一个时刻只有一个可以去获取count的值并进行update操作，所以我是在这一步增加了锁，因为使用aiohttp写的，所以想要在这里也用了aiorwlock，但是在我测试的过程中发现了，当一个协程获取锁还没释放锁的时候，另外一个协程也获取到锁，下面我是具体的代码</p>
+<p>程序代码<br>核心的处理类：</p>
+<p>class CntHandler(object):</p>
+<pre><code>def __init__(self, db, loop):
+    self.db = db
+    self.loop = loop
+    self.company_lock = {}
+
+def response(self, request, msg):
+    peer = request.transport.get_extra_info(&apos;peername&apos;)
+    logging.info(&quot;request url[%s] from[%s]: %s&quot;, request.raw_path, peer, msg)
+    origin = request.headers.get(&quot;Origin&quot;)
+    if origin is not None:
+        headers = {&quot;Access-Control-Allow-Origin&quot;: origin, &quot;Access-Control-Allow-Credentials&quot;: &quot;true&quot;}
+        resp = web.Response(text=util.dictToJson(msg), content_type=&apos;application/json&apos;, headers=headers)
+    else:
+        resp = web.Response(text=util.dictToJson(msg), content_type=&apos;application/json&apos;)
+    return resp
+
+async def cnt_set(self, request):
+    &quot;&quot;&quot;
+    用于设置company表中的count值
+    :param request: 
+    :return: 
+    &quot;&quot;&quot;
+    post = await request.post()
+    logging.info(&apos;post %s&apos;, post)
+    company_name = post.get(&quot;company&quot;)
+    cnt = post.get(&quot;cnt&quot;)
+    sql = &quot;update shield.company set count=%s where name=%s&quot;
+    args_values = [cnt, company_name]
+    rwlock = self.company_lock.get(company_name, &quot;&quot;)
+    if not rwlock:
+        rwlock = aiorwlock.RWLock(loop=self.loop)
+        self.company_lock[company_name] = rwlock
+    async with rwlock.writer:
+        msg = dict()
+        po_sql = &quot;select * from shield.company where name=%s&quot;
+        po = await self.db.get(po_sql, company_name)
+        if not po:  # 找不到企业
+            logging.error(&quot;not found company name [%s]&quot;, company_name)
+            msg[&quot;code&quot;] = 404
+            msg[&quot;code&quot;] = &quot;not found company&quot;
+            return self.response(request, msg)
+        res = await self.db.execute(sql, args_values)
+        if not isinstance(res, int):
+            logging.error(&quot;sql update is err:&quot;, res)
+            msg[&quot;code&quot;] = 403
+            msg[&quot;reason&quot;] = &quot;set fail&quot;
+            return self.response(request, msg)
+        logging.info(&quot;company [%s] set cnt [%s] is success&quot;, company_name, cnt)
+        msg[&quot;code&quot;] = 200
+        msg[&quot;reason&quot;] = &quot;ok&quot;
+        return self.response(request, msg)
+
+async def cnt_inc(self, request):
+    &quot;&quot;&quot;
+    用于增加company表中的count值
+    :param request: 
+    :return: 
+    &quot;&quot;&quot;
+    post = await request.post()
+    logging.info(&apos;post %s&apos;, post)
+    company_name = post.get(&quot;company&quot;)
+    cnt = int(post.get(&quot;cnt&quot;, 0))
+    rwlock = self.company_lock.get(company_name, &quot;&quot;)
+    if not rwlock:
+        rwlock = aiorwlock.RWLock(loop=self.loop)
+        self.company_lock[company_name] = rwlock
+    async with rwlock.writer:
+        uuid_s = uuid.uuid1().hex
+        logging.debug(&quot;[%s]---[%s]&quot;, uuid_s, id(rwlock))
+        msg = dict()
+        sql = &quot;select * from shield.company where name=%s&quot;
+        po = await self.db.get(sql, company_name)
+        if not po:  # 找不到企业
+            logging.error(&quot;not found company name [%s]&quot;, company_name)
+            msg[&quot;code&quot;] = 404
+            msg[&quot;code&quot;] = &quot;not found company&quot;
+            return self.response(request, msg)
+        old_cnt = po.get(&quot;count&quot;)
+        po_cnt = int(po.get(&quot;count&quot;))
+        res = po_cnt + cnt
+        update_sql = &quot;update shield.company set count=%s where name=%s&quot;
+        args_values = [res, company_name]
+        update_res = await self.db.execute(update_sql, args_values)
+        if not isinstance(update_res, int):  # 数据库update失败
+            logging.error(&quot;sql update is err:&quot;, update_res)
+            msg[&quot;code&quot;] = 403
+            msg[&quot;reason&quot;] = &quot;inc fail&quot;
+            return self.response(request, msg)
+        logging.info(&quot;uuid [%s] lock [%s] company [%s] inc cnt [%s] old cnt [%s]  true will is [%s] success&quot;, uuid_s,id(rwlock), company_name, cnt, old_cnt, res)
+        msg[&quot;code&quot;] = 200
+        msg[&quot;reason&quot;] = &quot;ok&quot;
+        return self.response(request, msg)
+
+async def cnt_dec(self, request):
+    &quot;&quot;&quot;
+    用于减少company表中count的值
+    :param request: 
+    :return: 
+    &quot;&quot;&quot;
+    post = await request.post()
+    logging.info(&apos;post %s&apos;, post)
+    company_name = post.get(&quot;company&quot;)
+    cnt = int(post.get(&quot;cnt&quot;, 0))
+    rwlock = self.company_lock.get(company_name, &quot;&quot;)
+    if not rwlock:
+        rwlock = aiorwlock.RWLock(loop=self.loop)
+        self.company_lock[company_name] = rwlock
+    async with rwlock.writer:
+        uuid_s = uuid.uuid1().hex
+        logging.debug(&quot;[%s]---[%s]&quot;, uuid_s, id(rwlock))
+        msg = dict()
+        sql = &quot;select * from shield.company where name=%s&quot;
+        po = await self.db.get(sql, company_name)
+        if not po:      # 找不到企业
+            logging.error(&quot;not found company name [%s]&quot;, company_name)
+            msg[&quot;code&quot;] = 404
+            msg[&quot;code&quot;] = &quot;not found company&quot;
+            return self.response(request, msg)
+        po_cnt = int(po.get(&quot;count&quot;))
+        old_cnt = po.get(&quot;count&quot;)
+        if po_cnt == 0:
+            logging.error(&quot;company [%s] cnt is 0&quot;, company_name)
+            msg[&quot;code&quot;] = 400
+            msg[&quot;reason&quot;] = &quot;cnt is 0&quot;
+            return self.response(request, msg)
+        if po_cnt &lt; cnt:  # 数据库余额不足
+            logging.error(&quot;company [%s] count is not enough&quot;, company_name)
+            msg[&quot;code&quot;] = 405
+            msg[&quot;reason&quot;] = &quot;count is not enough&quot;
+            return self.response(request, msg)
+        res = po_cnt - cnt
+        update_sql = &quot;update shield.company set count=%s where name=%s&quot;
+        args_values = [res, company_name]
+        update_res = await self.db.execute(update_sql, args_values)
+        if not isinstance(update_res, int): # 执行update 失败
+            logging.error(&quot;sql update is err:&quot;, update_res)
+            msg[&quot;code&quot;] = 403
+            msg[&quot;reason&quot;] = &quot;inc fail&quot;
+            return self.response(request, msg)
+        logging.info(&quot;uuid [%s] lock [%s] company [%s] dec cnt [%s] old cnt [%s] true will is [%s] success&quot;,uuid_s,id(rwlock), company_name, cnt, old_cnt, res)
+
+        msg[&quot;code&quot;] = 200
+        msg[&quot;reason&quot;] = &quot;ok&quot;
+        return self.response(request, msg)</code></pre><p>上面代码出问题的代码是在增加和减少的时候：</p>
+<p>async with rwlock.writer:<br>在一个协程还没有释放锁的时候，另外一个操作也就进来了，到之后我在测试并发的时候，对同一个name的count进行操作导致最后的count值不符合的问题</p>
+<p>可能是我本身代码的问题，或者我哪里处理的不对，欢迎大家一起讨论</p>
+<p>这个完整的代码地址：<a href="https://github.com/pythonsite/test_aiorwlock" target="_blank" rel="noopener">https://github.com/pythonsite/test_aiorwlock</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/12/一篇文章让你明白python的装饰器/" rel="next" title="一篇文章让你明白python的装饰器">
+                <i class="fa fa-chevron-left"></i> 一篇文章让你明白python的装饰器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/10/Python协程深入理解/" rel="prev" title="Python协程深入理解">
+                Python协程深入理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于场景描述"><span class="nav-number">1.</span> <span class="nav-text">关于场景描述</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

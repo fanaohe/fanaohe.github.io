@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="在看闭包问题之前先来看看关于python中作用域的问题 变量作用域 对于上述代码中出现错误，肯定没什么疑问了，毕竟b并没有定义和赋值，当我们把代码更改如下后：  再看一个例子： 首先这个错误已经非常明显：说在赋值之前引用了局部变量b 可能很多人觉得会打印10然后打印6，其实这里就是涉及到变量作用域的问题当Python编译函数的的定义体的时候，它判断b是局部变量，毕竟在函数中有b = 9表示给b赋值">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一篇文章让你明白python的装饰器">
+<meta property="og:url" content="http://yoursite.com/2017/11/12/一篇文章让你明白python的装饰器/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="在看闭包问题之前先来看看关于python中作用域的问题 变量作用域 对于上述代码中出现错误，肯定没什么疑问了，毕竟b并没有定义和赋值，当我们把代码更改如下后：  再看一个例子： 首先这个错误已经非常明显：说在赋值之前引用了局部变量b 可能很多人觉得会打印10然后打印6，其实这里就是涉及到变量作用域的问题当Python编译函数的的定义体的时候，它判断b是局部变量，毕竟在函数中有b = 9表示给b赋值">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235130656-2113167992.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235155171-616265314.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235221140-1604711026.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235237171-1039665902.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235246093-1929143137.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235325171-1684348962.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235344171-334543737.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235401781-68287159.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235422906-1761709340.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235445984-1622618193.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235522906-1371806326.png">
+<meta property="og:updated_time" content="2019-06-29T15:51:58.083Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一篇文章让你明白python的装饰器">
+<meta name="twitter:description" content="在看闭包问题之前先来看看关于python中作用域的问题 变量作用域 对于上述代码中出现错误，肯定没什么疑问了，毕竟b并没有定义和赋值，当我们把代码更改如下后：  再看一个例子： 首先这个错误已经非常明显：说在赋值之前引用了局部变量b 可能很多人觉得会打印10然后打印6，其实这里就是涉及到变量作用域的问题当Python编译函数的的定义体的时候，它判断b是局部变量，毕竟在函数中有b = 9表示给b赋值">
+<meta name="twitter:image" content="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235130656-2113167992.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/12/一篇文章让你明白python的装饰器/">
+
+
+
+
+
+  <title>一篇文章让你明白python的装饰器 | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/一篇文章让你明白python的装饰器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一篇文章让你明白python的装饰器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T00:21:57+08:00">
+                2017-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在看闭包问题之前先来看看关于python中作用域的问题</p>
+<h3 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h3><p><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235130656-2113167992.png" alt="avatar"></p>
+<p>对于上述代码中出现错误，肯定没什么疑问了，毕竟b并没有定义和赋值，当我们把代码更改如下后：</p>
+<p><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235155171-616265314.png" alt="avatar"></p>
+<p>再看一个例子：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235221140-1604711026.png" alt="avatar"></p>
+<p>首先这个错误已经非常明显：说在赋值之前引用了局部变量b</p>
+<p>可能很多人觉得会打印10然后打印6，其实这里就是涉及到变量作用域的问题<br>当Python编译函数的的定义体的时候，它判断b是局部变量，毕竟在函数中有b = 9表示给b赋值了，所以python会从本地环境获取b，当我们调用方法执行的时候，定义体会获取并打印变量a的值，但是当尝试获取b的值的时候发现b没有绑定值，所以要想让上述代码运行还可以把b设置为全局变量，或者把b赋值放到调用之前<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235237171-1039665902.png" alt="avatar"><br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235246093-1929143137.png" alt="avatar"></p>
+<h3 id="函数对象的作用域"><a href="#函数对象的作用域" class="headerlink" title="函数对象的作用域"></a>函数对象的作用域</h3><p>python中一切皆对象，同其他对象一样,函数对象也有其使用的范围即函数对象的作用域。<br>在python中我们通过def定义函数，函数对象的作用域与def所在的层级相同，<br>通过下面代码进行理解：</p>
+<p>def func1():<br>    def func2(x):<br>        return 2*x<br>    print(func2(5))</p>
+<p>func1()<br>print(func2(5))</p>
+<p>这个例子中我们在def func1函数内可以调用fun2,但是我们在外面是无法调用到func2的，所以结果为看到如下：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235325171-1684348962.png" alt="avatar"></p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>关于闭包主要有下面两种说法：</p>
+<p>闭包是符合一定条件的函数，定义为：闭包是在其词法上下文中引用了自由变量的函数<br>闭包是由函数与其相关的引用环境组合而成的实体。定义为：在实现绑定时，需要创建一个能显示表示引用环境的东西，并将它与相关的子程序捆绑在一起，这样捆绑起来的整体称为闭包<br>个人觉得第二种说法更准确，闭包只是在形式上表现像函数，实际不是函数。<br>我们对函数的定义是：一些可执行的代码，这些代码在函数定义后就确定了，不会在执行时发生变化，所以一个函数只有一个实例。</p>
+<p>闭包在运行的时候可以有多个实例，不同的引用环境和相同的环境组合可以产生不同的实例。</p>
+<p>这里有一个词：引用环境，其实引用环境就是在执行运行的某个时间点，所有处于活跃状态的变量所组成的集合，这里的变量是指变量的名字和其所代表的对象之间的联系。</p>
+<p>可以使用闭包语言的特点：</p>
+<p>函数可以作为另外一个函数的返回值或者参数，还可以作为一个变量的值。<br>函数可以嵌套使用<br>而认为闭包是函数的有一句话是：<br>闭包是指延伸了作用域的函数，其中包含函数定义体中引用。但是不在定义体中定义的非全局变量。</p>
+<p>上面这种说法个人觉得也是一种理解方式</p>
+<p>相信看了这些概念也还是不好理解，还是通过下面例子更好理解：</p>
+<p>先实现一种计算平均值的方法：</p>
+<p><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235344171-334543737.png" alt="avatar"></p>
+<p>从结果我们可以看出这里保存了每次的历史值<br>换一种方法实现：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235401781-68287159.png" alt="avatar"></p>
+<p>实现了第一种相同的效果，对这种方法分析：<br>通常我们会认为我们调用avg(10)的时候make_averager函数已经返回了，而它的本地作用域也一去不复返，但这里其实series是自由变量，是指未在本地作用域绑定的变量<br>我们可以通过print(dir(avg)),看到如下结果：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235422906-1761709340.png" alt="avatar"><br>其实这里面保存着均布变量和自由变量的名称，我们可以通过下面方法查看：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235445984-1622618193.png" alt="avatar"></p>
+<p>eries的绑定在返回的avg函数的<strong>closure</strong>属性中这或许就是有的人会认为闭包一种函数。闭包会保留定义函数时存在的自由变量的绑定，这样调用函数时虽然定义作用域不能用了，但是仍能使用那些绑定</p>
+<p>关于nonlocal<br>刚开始了解闭包之后，如果尝试使用这种编程方式容易出现以下错误使用例子：</p>
+<p>def make_averager():<br>    count = 0<br>    total = 0</p>
+<pre><code>def averager(new_value):
+    count += 1
+    total += new_value
+    return total / count
+return averager</code></pre><p>先来看一下错误提示：<br><img src="https://images2017.cnblogs.com/blog/997599/201711/997599-20171117235522906-1371806326.png" alt="avatar"></p>
+<p>这个例子中和我们上面使用的不同之处是：这里的count和total是数字，是不可变类型，而之前的例子中series是一个列表是可变类型<br>所以这里重新回到了最开始说的作用域问题了，当我们在averager中使用<br>count += 1的时候其实就是count = count + 1,这样就是在averager函数定义体中对count进行赋值，count就变成了局部变量。</p>
+<p>问题小结：当时数字，字符串，元组等不可变类型时，只能读取不能更新，如果使用类似count += 1就会隐式的把count变成局部变量，所以开始例子中使用series，我们后面的操作是append并且列表还是可变对象</p>
+<p>不过python3引入了一个新的关键词nonlocal，通过它把变量标记为自由变量，这样我们把上面这个错误的例子简单更改：</p>
+<p>def make_averager():<br>    count = 0<br>    total = 0</p>
+<pre><code>def averager(new_value):
+    nonlocal count,total
+    count += 1
+    total += new_value
+    return total / count
+return averager</code></pre><p>到这里装饰器的前奏就说完了，下面就是装饰器，我个人觉得装饰器只是闭包的一种应用，闭包在很多情况下都是一种非常好的变成技巧</p>
+<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><p>关于装饰器本来是想重新整理一下，看了自己之前整理的博客，已经挺详细的，就把连接直接放这里了<br><a href="http://www.pythonsite.com/?p=113" target="_blank" rel="noopener">http://www.pythonsite.com/?p=113</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/25/python爬虫从入门到放弃（二）之爬虫的原理/" rel="next" title="python爬虫从入门到放弃（二）之爬虫的原理">
+                <i class="fa fa-chevron-left"></i> python爬虫从入门到放弃（二）之爬虫的原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/20/关于python协程中aiorwlock 使用问题/" rel="prev" title="关于python协程中aiorwlock 使用问题">
+                关于python协程中aiorwlock 使用问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量作用域"><span class="nav-number">1.</span> <span class="nav-text">变量作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数对象的作用域"><span class="nav-number">2.</span> <span class="nav-text">函数对象的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包"><span class="nav-number">3.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰器"><span class="nav-number">4.</span> <span class="nav-text">装饰器</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

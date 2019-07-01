@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="从语法上来看，协程和生成器类似，都是定义体中包含yield关键字的函数。yield在协程中的用法： 在协程中yield通常出现在表达式的右边，例如：datum = yield,可以产出值，也可以不产出–如果yield关键字后面没有表达式，那么生成器产出None.协程可能从调用方接受数据，调用方是通过send(datum)的方式把数据提供给协程使用，而不是next(…)函数，通常调用方会把值推送给协">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python协程深入理解">
+<meta property="og:url" content="http://yoursite.com/2017/12/10/Python协程深入理解/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="从语法上来看，协程和生成器类似，都是定义体中包含yield关键字的函数。yield在协程中的用法： 在协程中yield通常出现在表达式的右边，例如：datum = yield,可以产出值，也可以不产出–如果yield关键字后面没有表达式，那么生成器产出None.协程可能从调用方接受数据，调用方是通过send(datum)的方式把数据提供给协程使用，而不是next(…)函数，通常调用方会把值推送给协">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172548865-1417507638.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172631302-1319856611.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172658302-1155116402.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172714036-1315642655.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172816302-1637394538.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172838505-562465879.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172917802-1554422378.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006173010568-170929297.png">
+<meta property="og:updated_time" content="2019-06-29T16:04:37.174Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python协程深入理解">
+<meta name="twitter:description" content="从语法上来看，协程和生成器类似，都是定义体中包含yield关键字的函数。yield在协程中的用法： 在协程中yield通常出现在表达式的右边，例如：datum = yield,可以产出值，也可以不产出–如果yield关键字后面没有表达式，那么生成器产出None.协程可能从调用方接受数据，调用方是通过send(datum)的方式把数据提供给协程使用，而不是next(…)函数，通常调用方会把值推送给协">
+<meta name="twitter:image" content="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172548865-1417507638.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/10/Python协程深入理解/">
+
+
+
+
+
+  <title>Python协程深入理解 | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/10/Python协程深入理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python协程深入理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T00:21:57+08:00">
+                2017-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>从语法上来看，协程和生成器类似，都是定义体中包含yield关键字的函数。<br>yield在协程中的用法：</p>
+<p>在协程中yield通常出现在表达式的右边，例如：datum = yield,可以产出值，也可以不产出–如果yield关键字后面没有表达式，那么生成器产出None.<br>协程可能从调用方接受数据，调用方是通过send(datum)的方式把数据提供给协程使用，而不是next(…)函数，通常调用方会把值推送给协程。<br>协程可以把控制器让给中心调度程序，从而激活其他的协程<br>所以总体上在协程中把yield看做是控制流程的方式。</p>
+<h3 id="了解协程的过程"><a href="#了解协程的过程" class="headerlink" title="了解协程的过程"></a>了解协程的过程</h3><p>先通过一个简单的协程的例子理解：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172548865-1417507638.png" alt="avatar"></p>
+<p>对上述例子的分析：<br>yield 的右边没有表达式，所以这里默认产出的值是None<br>刚开始先调用了next(…)是因为这个时候生成器还没有启动，没有停在yield那里，这个时候也是无法通过send发送数据。所以当我们通过next(…)激活协程后，程序就会运行到x = yield，这里有个问题我们需要注意，x = yield这个表达式的计算过程是先计算等号右边的内容，然后在进行赋值，所以当激活生成器后，程序会停在yield这里，但并没有给x赋值。<br>当我们调用send方法后yield会收到这个值并赋值给x,而当程序运行到协程定义体的末尾时和用生成器的时候一样会抛出StopIteration异常</p>
+<p>如果协程没有通过next(…)激活(同样我们可以通过send(None)的方式激活)，但是我们直接send，会提示如下错误：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172631302-1319856611.png" alt="avatar"></p>
+<p>关于调用next(…)函数这一步通常称为”预激(prime)“协程，即让协程向前执行到第一个yield表达式，准备好作为活跃的协程使用</p>
+<p>协程在运行过程中有四个状态：</p>
+<p>GEN_CREATE:等待开始执行<br>GEN_RUNNING:解释器正在执行，这个状态一般看不到<br>GEN_SUSPENDED:在yield表达式处暂停<br>GEN_CLOSED:执行结束<br>通过下面例子来查看协程的状态：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172658302-1155116402.png" alt="avatar"></p>
+<p>接着再通过一个计算平均值的例子来继续理解：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172714036-1315642655.png" alt="avatar"></p>
+<p>这里是一个死循环，只要不停send值给协程，可以一直计算下去。<br>通过上面的几个例子我们发现，我们如果想要开始使用协程的时候必须通过next(…)方式激活协程，如果不预激，这个协程就无法使用，如果哪天在代码中遗忘了那么就出问题了，所以有一种预激协程的装饰器，可以帮助我们干这件事</p>
+<h3 id="预激协程的装饰器"><a href="#预激协程的装饰器" class="headerlink" title="预激协程的装饰器"></a>预激协程的装饰器</h3><p>下面是预激装饰器的演示例子：</p>
+<p> 1 from functools import wraps<br> 2<br> 3<br> 4 def coroutine(func):<br> 5     @wraps(func)<br> 6     def primer(<em>args,**kwargs):<br> 7         gen = func(</em>args,**kwargs)<br> 8         next(gen)<br> 9         return gen<br>10     return primer<br>11<br>12<br>13 @coroutine<br>14 def averager():<br>15     total = 0.0<br>16     count = 0<br>17     average = None<br>18     while True:<br>19         term = yield average<br>20         total += term<br>21         count += 1<br>22         average = total/count<br>23<br>24<br>25 coro_avg = averager()<br>26 from inspect import getgeneratorstate<br>27 print(getgeneratorstate(coro_avg))<br>28 print(coro_avg.send(10))<br>29 print(coro_avg.send(30))<br>30 print(coro_avg.send(5))</p>
+<p>关于预激，在使用yield from句法调用协程的时候，会自动预激活，这样其实与我们上面定义的coroutine装饰器是不兼容的，在python3.4里面的asyncio.coroutine装饰器不会预激协程，因此兼容yield from</p>
+<h3 id="终止协程和异常处理"><a href="#终止协程和异常处理" class="headerlink" title="终止协程和异常处理"></a>终止协程和异常处理</h3><p>协程中为处理的异常会向上冒泡,传给next函数或send函数的调用方(即触发协程的对象)<br>拿上面的代码举例子，如果我们发送了一个字符串而不是一个整数的时候就会报错，并且这个时候协程是被终止了<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172816302-1637394538.png" alt="avatar"></p>
+<p>从python2.5开始客户端代码在生成器对象上调用两个方法，显示的把异常发送给协程<br>分别为：throw和close<br>generator.throw:会让生成器在暂停的yield表达式处抛出指定的异常，如果生成器处理了抛出的异常，代码会向前执行到下一个yield表达式，而产出的值会成为调用generator.throw方法代码的返回值。如果生成器没有处理抛出的异常，异常会向上冒泡，传到调用方的上下文中。<br>generator.close:会让生成器在暂停的yield表达式处抛出GeneratorExit异常。如果生成器没有处理这个异常，或者抛出了StopIteration异常，调用方不会报错，如果收到GeneratorExit异常，生成器一定不能产出值，否则解释器会抛出RuntimeError异常。生成器抛出的异常会向上冒泡，传给调用方。<br>下面是一个例子：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172838505-562465879.png" alt="avatar"></p>
+<p>当传入我们定义的异常时不会影响协程，协程不会停止，可以继续send,但是如果是没有处理的异常的时候，就会报错，并且协程会被终止</p>
+<h3 id="让协程返回值"><a href="#让协程返回值" class="headerlink" title="让协程返回值"></a>让协程返回值</h3><p>通过下面的例子进行演示如何获取协程的返回值：</p>
+<p> 1 from collections import namedtuple<br> 2<br> 3<br> 4 Result = namedtuple(“Result”,”colunt average”)<br> 5<br> 6<br> 7 def averager():<br> 8     total = 0.0<br> 9     count = 0<br>10     average = None<br>11     while True:<br>12         term = yield<br>13         if term is None:<br>14             break<br>15         total += term<br>16         count+=1<br>17         average = total/count<br>18     return Result(count,average)<br>19<br>20 coro_avg = averager()<br>21 next(coro_avg)<br>22 coro_avg.send(10)<br>23 coro_avg.send(30)<br>24 coro_avg.send(5)<br>25 try:<br>26     coro_avg.send(None)<br>27 except StopIteration as e:<br>28     result = e.value<br>29     print(result)</p>
+<p>这样就可以获取到最后的结果：<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006172917802-1554422378.png" alt="avatar"></p>
+<p>其实相对来说上面这种方式获取返回值比较麻烦，而yield from 结构会自动捕获StopIteration异常，这种处理方式与for循环处理StopIteration异常的方式一样，循环机制使我们更容易理解处理异常，对于yield from来说，解释器不仅会捕获StopIteration异常，还会把value属性的值变成yield from表达式的值</p>
+<h3 id="关于yield-from"><a href="#关于yield-from" class="headerlink" title="关于yield from"></a>关于yield from</h3><p>在生成器gen中使用yield from subgen()时，subgen会获得控制权，把产出的值传给gen的调用方，即调用方可以直接控制subgen,同时，gen会阻塞，等待subgen终止</p>
+<p>yield from x表达式对x对象所做的第一件事是，调用iter(x),从中获取迭代器，因此x可以是任何可迭代的对象</p>
+<p>下面是yield from可以简化yield表达式的例子：</p>
+<p> 1 def gen():<br> 2     for c in “AB”:<br> 3         yield c<br> 4     for i in range(1,3):<br> 5         yield i<br> 6<br> 7 print(list(gen()))<br> 8<br> 9 def gen2():<br>10     yield from “AB”<br>11     yield from range(1,3)<br>12<br>13 print(list(gen2()))</p>
+<p>这两种的方式的结果是一样的，但是这样看来yield from更加简洁，但是yield from的作用可不仅仅是替代产出值的嵌套for循环。<br>yield from的主要功能是打开双向通道，把最外层的调用方与最内层的子生成器连接起来，这样二者可以直接发送和产出值，还可以直接传入异常，而不用再像之前那样在位于中间的协程中添加大量处理异常的代码</p>
+<p>通过yield from还可以链接可迭代对象<br><img src="https://images2017.cnblogs.com/blog/997599/201710/997599-20171006173010568-170929297.png" alt="avatar"><br>委派生成器在yield from 表达式处暂停时，调用方可以直接把数据发给子生成器，子生成器再把产出产出值发给调用方，子生成器返回之后，解释器会抛出StopIteration异常，并把返回值附加到异常对象上，此时委派生成器会恢复。</p>
+<p>下面是一个完整的例子代码</p>
+<p> 1 from collections import namedtuple<br> 2<br> 3<br> 4 Result = namedtuple(‘Result’, ‘count average’)<br> 5<br> 6<br> 7 # 子生成器<br> 8 def averager():<br> 9     total = 0.0<br>10     count = 0<br>11     average = None<br>12     while True:<br>13         term = yield<br>14         if term is None:<br>15             break<br>16         total += term<br>17         count += 1<br>18         average = total/count<br>19     return Result(count, average)<br>20<br>21<br>22 # 委派生成器<br>23 def grouper(result, key):<br>24     while True:<br>25         result[key] = yield from averager()<br>26<br>27<br>28 # 客户端代码，即调用方<br>29 def main(data):<br>30     results = {}<br>31     for key,values in data.items():<br>32         group = grouper(results,key)<br>33         next(group)<br>34         for value in values:<br>35             group.send(value)<br>36         group.send(None) #这里表示要终止了<br>37<br>38     report(results)<br>39<br>40<br>41 # 输出报告<br>42 def report(results):<br>43     for key, result in sorted(results.items()):<br>44         group, unit = key.split(‘;’)<br>45         print(‘{:2} {:5} averaging {:.2f}{}’.format(<br>46             result.count, group, result.average, unit<br>47         ))<br>48<br>49 data = {<br>50     ‘girls;kg’:<br>51         [40.9, 38.5, 44.3, 42.2, 45.2, 41.7, 44.5, 38.0, 40.6, 44.5],<br>52     ‘girls;m’:<br>53         [1.6, 1.51, 1.4, 1.3, 1.41, 1.39, 1.33, 1.46, 1.45, 1.43],<br>54     ‘boys;kg’:<br>55         [39.0, 40.8, 43.2, 40.8, 43.1, 38.6, 41.4, 40.6, 36.3],<br>56     ‘boys;m’:<br>57         [1.38, 1.5, 1.32, 1.25, 1.37, 1.48, 1.25, 1.49, 1.46],<br>58 }<br>59<br>60<br>61 if <strong>name</strong> == ‘<strong>main</strong>‘:<br>62     main(data)</p>
+<p>关于上述代码着重解释一下关于委派生成器部分，这里的循环每次迭代时会新建一个averager实例，每个实例都是作为协程使用的生成器对象。</p>
+<p>grouper发送的每个值都会经由yield from处理，通过管道传给averager实例。grouper会在yield from表达式处暂停，等待averager实例处理客户端发来的值。averager实例运行完毕后，返回的值会绑定到results[key]上，while 循环会不断创建averager实例，处理更多的值</p>
+<p>并且上述代码中的子生成器可以使用return 返回一个值，而返回的值会成为yield from表达式的值。</p>
+<h3 id="关于yield-from的意义"><a href="#关于yield-from的意义" class="headerlink" title="关于yield from的意义"></a>关于yield from的意义</h3><p>关于yield from 六点重要的说明：</p>
+<p>子生成器产出的值都直接传给委派生成器的调用方(即客户端代码)<br>使用send()方法发送给委派生成器的值都直接传给子生成器。如果发送的值为None,那么会给委派调用子生成器的<strong>next</strong>()方法。如果发送的值不是None,那么会调用子生成器的send方法，如果调用的方法抛出StopIteration异常，那么委派生成器恢复运行，任何其他异常都会向上冒泡，传给委派生成器<br>生成器退出时，生成器(或子生成器)中的return expr表达式会出发StopIteration(expr)异常抛出<br>yield from表达式的值是子生成器终止时传给StopIteration异常的第一个参数。yield from 结构的另外两个特性与异常和终止有关。<br>传入委派生成器的异常，除了GeneratorExit之外都传给子生成器的throw()方法。如果调用throw()方法时抛出StopIteration异常，委派生成器恢复运行。StopIteration之外的异常会向上冒泡，传给委派生成器<br>如果把GeneratorExit异常传入委派生成器，或者在委派生成器上调用close()方法，那么在子生成器上调用clsoe()方法，如果它有的话。如果调用close()方法导致异常抛出，那么异常会向上冒泡，传给委派生成器，否则委派生成器抛出GeneratorExit异常</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/20/关于python协程中aiorwlock 使用问题/" rel="next" title="关于python协程中aiorwlock 使用问题">
+                <i class="fa fa-chevron-left"></i> 关于python协程中aiorwlock 使用问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/20/Python通过future处理并发/" rel="prev" title="Python通过future处理并发">
+                Python通过future处理并发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#了解协程的过程"><span class="nav-number">1.</span> <span class="nav-text">了解协程的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预激协程的装饰器"><span class="nav-number">2.</span> <span class="nav-text">预激协程的装饰器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终止协程和异常处理"><span class="nav-number">3.</span> <span class="nav-text">终止协程和异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让协程返回值"><span class="nav-number">4.</span> <span class="nav-text">让协程返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于yield-from"><span class="nav-number">5.</span> <span class="nav-text">关于yield from</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于yield-from的意义"><span class="nav-number">6.</span> <span class="nav-text">关于yield from的意义</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

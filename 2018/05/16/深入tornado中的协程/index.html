@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="深入tornado中的协程tornado使用了单进程(当然也可以多进程) + 协程 + I/O多路复用的机制，解决了C10K中因为过多的线程(进程)的上下文切换 而导致的cpu资源的浪费。 tornado中的I/O多路复用前面已经讲过了。本文不做详细解释。 来看一下tornado中的协程模块：tornado.gen： tornado.gen是根据生成器(generator)实现的，用来更加简单的实">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入tornado中的协程">
+<meta property="og:url" content="http://yoursite.com/2018/05/16/深入tornado中的协程/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="深入tornado中的协程tornado使用了单进程(当然也可以多进程) + 协程 + I/O多路复用的机制，解决了C10K中因为过多的线程(进程)的上下文切换 而导致的cpu资源的浪费。 tornado中的I/O多路复用前面已经讲过了。本文不做详细解释。 来看一下tornado中的协程模块：tornado.gen： tornado.gen是根据生成器(generator)实现的，用来更加简单的实">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-30T12:48:50.792Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入tornado中的协程">
+<meta name="twitter:description" content="深入tornado中的协程tornado使用了单进程(当然也可以多进程) + 协程 + I/O多路复用的机制，解决了C10K中因为过多的线程(进程)的上下文切换 而导致的cpu资源的浪费。 tornado中的I/O多路复用前面已经讲过了。本文不做详细解释。 来看一下tornado中的协程模块：tornado.gen： tornado.gen是根据生成器(generator)实现的，用来更加简单的实">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/16/深入tornado中的协程/">
+
+
+
+
+
+  <title>深入tornado中的协程 | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/深入tornado中的协程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入tornado中的协程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T00:21:57+08:00">
+                2018-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="深入tornado中的协程"><a href="#深入tornado中的协程" class="headerlink" title="深入tornado中的协程"></a>深入tornado中的协程</h3><p>tornado使用了单进程(当然也可以多进程) + 协程 + I/O多路复用的机制，解决了C10K中因为过多的线程(进程)的上下文切换 而导致的cpu资源的浪费。</p>
+<p>tornado中的I/O多路复用前面已经讲过了。本文不做详细解释。</p>
+<p>来看一下tornado中的协程模块：tornado.gen：</p>
+<p>tornado.gen是根据生成器(generator)实现的，用来更加简单的实现异步。</p>
+<p>先来说一下tornado.gen.coroutine的实现思路：</p>
+<p>　　我们知道generator中的yield语句可以使函数暂停执行，而send()方法则可以恢复函数的执行。</p>
+<p>　　tornado将那些异步操作放置到yield语句后，当这些异步操作完成后，tornado会将结果send()至generator中恢复函数执行。</p>
+<p>在tornado的官方文档中有这么一句话：</p>
+<p>Most asynchronous functions in Tornado return a Future; yielding this object returns its result.</p>
+<p>就是说：</p>
+<p>　　在tornado中大多数的异步操作返回一个Future对象</p>
+<p>　　yield Future对象 会返回该异步操作的结果，这句话的意思就是说 假如 ret = yield some_future_obj 当some_future_obj所对应的异步操作完成后会自动的将该异步操作的结果赋值给 ret</p>
+<p>那么，Future对象到底是什么？</p>
+<p>一  Future对象<br>先来说说Future对象：</p>
+<p>Future对象可以概括为： 一个异步操作的占位符，当然这个占位符有些特殊，它特殊在：</p>
+<p>　　1 这个占位符是一个对象</p>
+<p>　　2 这个对象包含了很多属性，包括_result 以及 _callbacks，分别用来存储异步操作的结果以及回调函数</p>
+<p>　　3 这个对象包含了很多方法，比如添加回调函数，设置异步操作结果等。</p>
+<p>　　4 当这个对象对应的异步操作完成后，该对象会被set_done，然后遍历并运行_callbacks中的回调函数</p>
+<p>来看一下Future的简化版：</p>
+<p>class Future(object):<br>    ‘’’<br>        Future对象主要保存一个回调函数列表<em>callbacks与一个执行结果<em>result，当我们set_result时，就会执行_callbacks中的函数<br>        如果set_result或者set_done，就会遍历_callbacks列表并执行callback(self)函数<br>    ‘’’<br>    def __init</em></em>(self):<br>        self._result = None    # 执行的结果<br>        self._callbacks = []    # 用来保存该future对象的回调函数</p>
+<pre><code>def result(self, timeout=None):
+    # 如果操作成功，返回结果。如果失败则抛出异常
+    self._clear_tb_log()
+    if self._result is not None:
+        return self._result
+    if self._exc_info is not None:
+        raise_exc_info(self._exc_info)
+    self._check_done()
+    return self._result
+
+def add_done_callback(self, fn):
+    if self._done:
+        fn(self)
+    else:
+        self._callbacks.append(fn)
+
+def set_result(self, result):
+    self._result = result
+    self._set_done()
+
+def _set_done(self):
+    # 执行结束(成功)后的操作。
+    self._done = True
+    for cb in self._callbacks:
+        try:
+            cb(self)
+        except Exception:
+            app_log.exception(&apos;Exception in callback %r for %r&apos;, cb, self)
+    self._callbacks = None</code></pre><p>完整源码：</p>
+<p> Future源码</p>
+<p>二  gen.coroutine装饰器<br>tornado中的协程是通过tornado.gen中的coroutine装饰器实现的：</p>
+<p>def coroutine(func, replace_callback=True):<br>    return _make_coroutine_wrapper(func, replace_callback=True)<br>_make_coroutine_wrapper ：</p>
+<p>def _make_coroutine_wrapper(func, replace_callback):<br>    @functools.wraps(func)<br>    def wrapper(<em>args, **kwargs):<br>        ‘’’<br>            大体过程：<br>            future = TracebackFuture()<br>            result = func(</em>args, **kwargs)<br>            if isinstance(result, GeneratorType):<br>                yielded = next(result)<br>                Runner(result, future, yielded)<br>            return future<br>        ‘’’<br>        future = TracebackFuture()                   # TracebackFuture = Future</p>
+<pre><code>    if replace_callback and &apos;callback&apos; in kwargs:
+        callback = kwargs.pop(&apos;callback&apos;)
+        IOLoop.current().add_future(future, lambda future: callback(future.result()))
+
+    try:
+        result = func(*args, **kwargs)           # 执行func，若func中包含yield，则返回一个generator对象
+    except (Return, StopIteration) as e:
+        result = _value_from_stopiteration(e)
+    except Exception:
+        future.set_exc_info(sys.exc_info())
+        return future
+    else:
+        if isinstance(result, GeneratorType):      # 判断其是否为generator对象
+            try:
+                orig_stack_contexts = stack_context._state.contexts
+                yielded = next(result)            # 第一次执行
+                if stack_context._state.contexts is not orig_stack_contexts:
+                    yielded = TracebackFuture()
+                    yielded.set_exception(
+                        stack_context.StackContextInconsistentError(
+                            &apos;stack_context inconsistency (probably caused &apos;
+                            &apos;by yield within a &quot;with StackContext&quot; block)&apos;))
+            except (StopIteration, Return) as e:
+                future.set_result(_value_from_stopiteration(e))
+            except Exception:
+                future.set_exc_info(sys.exc_info())
+            else:
+                Runner(result, future, yielded)　　# Runner(result, future, yield)
+            try:
+                return future　　　　　　　　　　　　
+            finally:
+                future = None
+    future.set_result(result)
+    return future
+return wrapper</code></pre><p>先来看一下大体过程：</p>
+<p>　　1  首先生成一个Future对象</p>
+<p>　　2  运行该被装饰函数并将结果赋值给result。 在这里因为tornado的’异步’实现是基于generator的，所以一般情况下 result是一个generator对象</p>
+<p>　　3  yielded = next(result)  执行到被装饰函数的第一次yield，将结果赋值给yielded。一般情况下，yielded很大情况下是一个Future对象。</p>
+<p>　　4  Runner(result, future, yielded)</p>
+<p>　　5  return future</p>
+<p>除了第4步以外其他都很好理解，所以来了解一下第四步Runner()干了些啥：</p>
+<p>三  Runner()类<br>1 为什么要有Runner()？或者说Runner()的作用是什么？</p>
+<p>Runner()可以自动的将异步操作的结果send()至生成器中止的地方</p>
+<p>tornado的协程或者说异步是基于generator实现的，generator较为常用的有两个方法：send() next() ，关于这两个方法的流程分析在这。</p>
+<p>很多情况下会有generator的嵌套。比如说经常会yield 一个generator。当A生成器yield B生成器时，分两步：</p>
+<p>　　1 我们首先中止A的执行转而执行B</p>
+<p>　　2 当B执行完成后，我们需要将B的结果send()至A中止的地方，继续执行A</p>
+<p>Runner()主要就是来做这些的，也就是控制生成器的执行与中止，并在合适的情况下使用send()方法同时传入B生成器的结果唤醒A生成器。</p>
+<p>来看一个简单例子：</p>
+<p>def run():<br>    print(‘start running’)<br>    yield 2     # 跑步用时2小时</p>
+<p>def eat():<br>    print(‘start eating’)<br>    yield 1     # 吃饭用时1小时</p>
+<p>def time():<br>    run_time = yield run()<br>    eat_time = yield eat()<br>    print(run_time+eat_time)</p>
+<p>def Runner(gen):<br>    r = next(gen)<br>    return r</p>
+<p>t = time()<br>try:<br>    action = t.send(Runner(next(t)))<br>    t.send(Runner(action))<br>except StopIteration:<br>    pass</p>
+<p>上例中的Runner()仅仅完成了第一步，我们还需要手动的执行第二步，而tornado的gen的Runner()则做了全套奥！</p>
+<p>2 剖析Runner()</p>
+<p>在Runner()中主要有三个方法<strong>init</strong>  handle_yield  run：</p>
+<p>class Runner(object):<br>    def <strong>init</strong>(self, gen, result_future, first_yielded):<br>        self.gen = gen                        # 一个generator对象<br>        self.result_future = result_future    # 一个Future对象<br>        self.future = _null_future            # 一个刚初始化的Future对象  _null_future = Future(); _null_future.set_result(None)<br>        self.yield_point = None<br>        self.pending_callbacks = None<br>        self.results = None<br>        self.running = False<br>        self.finished = False<br>        self.had_exception = False<br>        self.io_loop = IOLoop.current()<br>        self.stack_context_deactivate = None<br>        if self.handle_yield(first_yielded):<br>            self.run()</p>
+<pre><code>………… 部分方法省略
+def run(self):
+    &quot;&quot;&quot;Starts or resumes the generator, running until it reaches a
+    yield point that is not ready.
+    &quot;&quot;&quot;
+    if self.running or self.finished:
+        return
+    try:
+        self.running = True
+        while True:
+            future = self.future
+            if not future.done():
+                return
+            self.future = None
+            try:
+                orig_stack_contexts = stack_context._state.contexts
+                exc_info = None
+
+                try:
+                    value = future.result()
+                except Exception:
+                    self.had_exception = True
+                    exc_info = sys.exc_info()
+
+                if exc_info is not None:
+                    yielded = self.gen.throw(*exc_info)
+                    exc_info = None
+                else:
+                    yielded = self.gen.send(value)
+
+                if stack_context._state.contexts is not orig_stack_contexts:
+                    self.gen.throw(
+                        stack_context.StackContextInconsistentError(
+                            &apos;stack_context inconsistency (probably caused &apos;
+                            &apos;by yield within a &quot;with StackContext&quot; block)&apos;))
+            except (StopIteration, Return) as e:
+                self.finished = True
+                self.future = _null_future
+                if self.pending_callbacks and not self.had_exception:
+                    # If we ran cleanly without waiting on all callbacks
+                    # raise an error (really more of a warning).  If we
+                    # had an exception then some callbacks may have been
+                    # orphaned, so skip the check in that case.
+                    raise LeakedCallbackError(
+                        &quot;finished without waiting for callbacks %r&quot; %
+                        self.pending_callbacks)
+                self.result_future.set_result(_value_from_stopiteration(e))
+                self.result_future = None
+                self._deactivate_stack_context()
+                return
+            except Exception:
+                self.finished = True
+                self.future = _null_future
+                self.result_future.set_exc_info(sys.exc_info())
+                self.result_future = None
+                self._deactivate_stack_context()
+                return
+            if not self.handle_yield(yielded):
+                return
+    finally:
+        self.running = False
+
+def handle_yield(self, yielded):
+    if _contains_yieldpoint(yielded):    # 检查其中是否包含YieldPoint
+        yielded = multi(yielded)
+
+    if isinstance(yielded, YieldPoint):        # Base class for objects that may be yielded from the generator
+        self.future = TracebackFuture()        # 一个刚刚初始化的Future对象
+
+        def start_yield_point():
+            try:
+                yielded.start(self)
+                if yielded.is_ready():
+                    self.future.set_result(yielded.get_result())
+                else:
+                    self.yield_point = yielded
+            except Exception:
+                self.future = TracebackFuture()
+                self.future.set_exc_info(sys.exc_info())
+
+        if self.stack_context_deactivate is None:
+            with stack_context.ExceptionStackContext(self.handle_exception) as deactivate:
+                self.stack_context_deactivate = deactivate
+
+                def cb():
+                    start_yield_point()
+                    self.run()
+                self.io_loop.add_callback(cb)
+                return False
+        else:
+            start_yield_point()
+    else:
+        try:
+            self.future = convert_yielded(yielded)
+        except BadYieldError:
+            self.future = TracebackFuture()
+            self.future.set_exc_info(sys.exc_info())
+
+    if not self.future.done() or self.future is moment:  # moment = Future()
+        self.io_loop.add_future(self.future, lambda f: self.run()) # 为该future添加callback
+        return False
+    return True</code></pre><p>2.1 <strong>init</strong>方法</p>
+<p><strong>init</strong> 里面执行了一些初始化的操作，最主要是最后两句：</p>
+<p>if self.handle_yield(first_yielded): # 运行<br>    self.run()<br>2.2 handle_yield方法</p>
+<p>handle_yield(self, yielded) 函数，这个函数顾名思义，就是用来处理yield返回的对象的。</p>
+<p>首先我们假设yielded是一个Future对象(因为这是最常用的情况)，这样的话代码就缩减了很多</p>
+<p>def handle_yield(self, yielded):<br>        self.future = convert_yielded(yielded)                         # 如果yielded是Future对象则原样返回<br>        if not self.future.done() or self.future is moment:            # moment是tornado初始化时就建立的一个Future对象，且被set_result(None)<br>            self.io_loop.add_future(self.future, lambda f: self.run()) # 为该future添加callback<br>            return False<br>        return True<br>也就是干了三步：</p>
+<p>　　首先解析出self.future  </p>
+<p>　　然后判断self.future对象是否已经被done(完成)，如果没有的话为其添加回调函数，这个回调函数会执行self.run()</p>
+<p>　　返回self.future对象是否被done</p>
+<p>总体来说，handle_yield返回yielded对象是否被set_done，如果没有则为yielded对象添加回调函数，这个回调函数执行self.run()</p>
+<p>还有一个有趣的地方，就是上面代码的第四行：  self.io_loop.add_future(self.future, lambda f: self.run()) </p>
+<p>def add_future(self, future, callback):</p>
+<pre><code># 为future添加一个回调函数，这个回调函数的作用是：将参数callback添加至self._callbacks中
+# 大家思考一个问题： 如果某个Future对象被set_done,那么他的回调函数应该在什么时候执行？ 
+# 是立即执行亦或者是将回调函数添加到IOLoop实例的_callbacks中进行统一执行？ 
+# 虽然前者更简单，但导致回调函数的执行过于混乱，我们应该让所有满足执行条件的回调函数统一执行。显然后者更合理
+# 而add_future()的作用就是这样
+future.add_done_callback(lambda future: self.add_callback(callback, future))</code></pre><p>def add_callback(self, callback, <em>args, *</em>kwargs):</p>
+<pre><code># 将callback添加至_callbacks列表中
+self._callbacks.append(functools.partial(callback, *args, **kwargs))</code></pre><p>2.3 run方法</p>
+<p>再来看self.run()方法。这个方法实际上就是一个循环，不停的执行generator的send()方法，发送的值就是yielded的result。</p>
+<p>我们可以将run()方法简化一下：</p>
+<pre><code>def run(self):
+    &quot;&quot;&quot;Starts or resumes the generator, running until it reaches a
+    yield point that is not ready. 循环向generator中传递值，直到某个yield返回的yielded还没有被done
+    &quot;&quot;&quot;
+    try:
+        self.running = True 
+        while True:
+            future = self.future　　
+            if not future.done():
+                return
+            self.future = None　　　　　　# 清空self.future
+            value = future.result()　　　# 获取future对象的结果
+            try:    
+                yielded = self.gen.send(value)　　# send该结果，并将self.gen返回的值赋值给yielded(一般情况下这也是个future对象)
+            except (StopIteration, Return) as e:
+                self.finished = True
+                self.future = _null_future
+                self.result_future.set_result(_value_from_stopiteration(e))
+                self.result_future = None
+                self._deactivate_stack_context()
+                return
+            if not self.handle_yield(yielded):　　# 运行self.handler_yield(yielded)，如果yielded对象没有被done，则直接返回；否则继续循环
+                return
+    finally:
+        self.running = False</code></pre><p>总结：<br>　　1 每一个Future对应一个异步操作</p>
+<p>　　2 该Future对象可以添加回调函数，当该异步操作完成后，需要对该Future对象设置set_done或者set_result，然后执行其所有的回调函数</p>
+<p>　　3 凡是使用了coroutine装饰器的generator函数都会返回一个Future对象，同时会不断为该generator，该generator每一次运行send()或者next()的返回结果yielded以及future对象运行Runner()</p>
+<p>　　4 Runner()会对generator不断进行send()或者next()操作。具体步骤是：上一个next()或者send()操作返回的yielded(一般是一个Future对象)被set_done后，将该yielded对象的结果send()至generator中，不断循环该操作，直到产生StopIteration或者Return异常(这表示该generator执行结束)，这时会为该generator对应的Future对象set_result。</p>
+<pre><code>我们可以看到tornado的协程是基于generator的，generator可以通过yield关键字暂停执行，也可以通过next()或者send()恢复执行，同时send()可以向generator中传递值。
+
+而将协程连接起来的纽带则是Future对象，每一个Future对象都对应着一个异步操作，我们可以为该对象添加许多回调函数，当异步操作完成后通过对Future对象进行set_done或者set_result就可以执行相关的回调函数。
+
+提供动力的则是Runner()，他不停的将generator所yield的每一个future对象的结果send()至generator，当generator运行结束，他会进行最后的包装工作，对该generator所对应的Future对象执行set_result操作。</code></pre><p>参考：<br>　　<a href="http://blog.csdn.net/wyx819/article/details/45420017" target="_blank" rel="noopener">http://blog.csdn.net/wyx819/article/details/45420017</a></p>
+<p>　　<a href="http://www.cnblogs.com/apexchu/p/4226784.html" target="_blank" rel="noopener">http://www.cnblogs.com/apexchu/p/4226784.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/28/什么是web框架？/" rel="next" title="什么是web框架？">
+                <i class="fa fa-chevron-left"></i> 什么是web框架？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/19/深入tornado中的IOStream/" rel="prev" title="深入tornado中的IOStream">
+                深入tornado中的IOStream <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#深入tornado中的协程"><span class="nav-number">1.</span> <span class="nav-text">深入tornado中的协程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

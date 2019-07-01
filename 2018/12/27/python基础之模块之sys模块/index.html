@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="python基础之模块之sys模块sys模块的功能 sys是python中较为常用的一个模块，他提供了对python脚本运行时的环境的操作。 sys功能： 1  sys.argv     #将python脚本运行时的脚本名以及参数作为一个list，并输出。 test_py.py文件#/usr/bin/python3import sys print(‘the script name is:’,sys">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python基础之模块之sys模块">
+<meta property="og:url" content="http://yoursite.com/2018/12/27/python基础之模块之sys模块/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="python基础之模块之sys模块sys模块的功能 sys是python中较为常用的一个模块，他提供了对python脚本运行时的环境的操作。 sys功能： 1  sys.argv     #将python脚本运行时的脚本名以及参数作为一个list，并输出。 test_py.py文件#/usr/bin/python3import sys print(‘the script name is:’,sys">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-01T00:27:02.587Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python基础之模块之sys模块">
+<meta name="twitter:description" content="python基础之模块之sys模块sys模块的功能 sys是python中较为常用的一个模块，他提供了对python脚本运行时的环境的操作。 sys功能： 1  sys.argv     #将python脚本运行时的脚本名以及参数作为一个list，并输出。 test_py.py文件#/usr/bin/python3import sys print(‘the script name is:’,sys">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/27/python基础之模块之sys模块/">
+
+
+
+
+
+  <title>python基础之模块之sys模块 | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/27/python基础之模块之sys模块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python基础之模块之sys模块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-27T00:21:57+08:00">
+                2018-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="python基础之模块之sys模块"><a href="#python基础之模块之sys模块" class="headerlink" title="python基础之模块之sys模块"></a>python基础之模块之sys模块</h3><p>sys模块的功能</p>
+<p>sys是python中较为常用的一个模块，他提供了对python脚本运行时的环境的操作。</p>
+<p>sys功能：</p>
+<p>1  sys.argv     #将python脚本运行时的脚本名以及参数作为一个list，并输出。</p>
+<h1 id="test-py-py文件"><a href="#test-py-py文件" class="headerlink" title="test_py.py文件"></a>test_py.py文件</h1><p>#/usr/bin/python3<br>import sys</p>
+<p>print(‘the script name is:’,sys.argv[0])<br>if len(sys.argv) &gt; 1:<br>    print(“there are”, len(sys.argv)-1, “arguments:”)  # 使用len(sys.argv)-1采集参数个数-1为减去[0]脚本名称<br>    for arg in sys.argv[1:]:            #输出除了[0]外所有参数<br>        print(arg)<br>else:<br>    print(“there are no arguments!”)</p>
+<p>[root@slyoyo ~]# python3 test_py.py haha<br>the script name is: test_py.py<br>there are 1 arguments:<br>haha</p>
+<p>2  sys.path    #返回一个list，该list为当前脚本的path环境变量（PYTHONPATH）</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>sys.path<br>[‘’, ‘/usr/local/python/lib/python34.zip’, ‘/usr/local/python/lib/python3.4’, ‘/usr/local/python/lib/python3.4/plat-linux’, ‘/usr/local/python/lib/python3.4/lib-dynload’, ‘/usr/local/python/lib/python3.4/site-packages’]<br>　　如果我们要增加或者删除pythonpath的话，使用list的insert或者pop功能即可。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>import os,sys<br>print(sys.path)<br>new_path=os.path.dirname(os.path.dirname(os.path.abspath(<strong>file</strong>)))<br>print(new_path)<br>sys.path.insert(0,new_path)<br>print(sys.path)</p>
+<p>#结果：<br>[‘C:\Users\Capital-D\PycharmProjects\untitled\test\atm\fun’, ‘C:\Users\Capital-D\PycharmProjects\untitled’, ‘C:\windows\SYSTEM32\python34.zip’, ‘C:\Python34\DLLs’, ‘C:\Python34\lib’, ‘C:\Python34’, ‘C:\Python34\lib\site-packages’]<br>C:\Users\Capital-D\PycharmProjects\untitled\test\atm<br>[‘C:\Users\Capital-D\PycharmProjects\untitled\test\atm’, ‘C:\Users\Capital-D\PycharmProjects\untitled\test\atm\fun’, ‘C:\Users\Capital-D\PycharmProjects\untitled’, ‘C:\windows\SYSTEM32\python34.zip’, ‘C:\Python34\DLLs’, ‘C:\Python34\lib’, ‘C:\Python34’, ‘C:\Python34\lib\site-packages’]</p>
+<p>3  sys.platform   #返回当前平台</p>
+<p>import sys,os<br>print(sys.platform)</p>
+<p>#结果：<br>win32<br>4  sys.stdout   sys.stdin   #标准输出/输入</p>
+<p>print ‘Dive in’        # 标准输出<br>saveout = sys.stdout        # 终在重定向前保存stdout，这样的话之后你还可以将其设回正常<br>fsock = open(‘out.log’, ‘w’)      # 打开一个新文件用于写入。如果文件不存在，将会被创建。如果文件存在，将被覆盖。<br>sys.stdout = fsock                 # 所有后续的输出都会被重定向到刚才打开的新文件上。</p>
+<p>print  ‘This message will be logged instead of displayed’    # 这样只会将输出结果“打印”到日志文件中；屏幕上不会看到输出</p>
+<p>sys.stdout = saveout   # 在我们将 stdout 搞乱之前，让我们把它设回原来的方式。    </p>
+<p>fsock.close()     # 关闭日志文件。</p>
+<p> 5  sys.stderr   #错误输出</p>
+<p>使用方法同上</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/27/django中models field详解/" rel="next" title="django中models field详解">
+                <i class="fa fa-chevron-left"></i> django中models field详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/17/(转)Node.js module.exports与exports/" rel="prev" title="(转)Node.js module.exports与exports">
+                (转)Node.js module.exports与exports <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python基础之模块之sys模块"><span class="nav-number">1.</span> <span class="nav-text">python基础之模块之sys模块</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#test-py-py文件"><span class="nav-number"></span> <span class="nav-text">test_py.py文件</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="python2中的ascii code can’t encode准备知识： 　　1 字符集，字符集实际上就是字符与数字之间的相互映射， 比如unicode字符集  ASCII字符集  GB2312字符集等等， 　　2 字符编码，仅仅有字符集是不够的，因为实际工作中我们需要将某些字保存在计算机上，计算机上保存的数据只能是0以及1的排列，还是拿字符集unicode来说，如果我们要将字符保存在计算机上那">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python2中的ascii code can&#39;t encode">
+<meta property="og:url" content="http://yoursite.com/2018/07/08/python2中的ascii code can't encode/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="python2中的ascii code can’t encode准备知识： 　　1 字符集，字符集实际上就是字符与数字之间的相互映射， 比如unicode字符集  ASCII字符集  GB2312字符集等等， 　　2 字符编码，仅仅有字符集是不够的，因为实际工作中我们需要将某些字保存在计算机上，计算机上保存的数据只能是0以及1的排列，还是拿字符集unicode来说，如果我们要将字符保存在计算机上那">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-30T13:57:33.892Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python2中的ascii code can&#39;t encode">
+<meta name="twitter:description" content="python2中的ascii code can’t encode准备知识： 　　1 字符集，字符集实际上就是字符与数字之间的相互映射， 比如unicode字符集  ASCII字符集  GB2312字符集等等， 　　2 字符编码，仅仅有字符集是不够的，因为实际工作中我们需要将某些字保存在计算机上，计算机上保存的数据只能是0以及1的排列，还是拿字符集unicode来说，如果我们要将字符保存在计算机上那">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/08/python2中的ascii code can't encode/">
+
+
+
+
+
+  <title>python2中的ascii code can't encode | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/python2中的ascii code can't encode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python2中的ascii code can't encode</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-08T16:12:22+08:00">
+                2018-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="python2中的ascii-code-can’t-encode"><a href="#python2中的ascii-code-can’t-encode" class="headerlink" title="python2中的ascii code can’t encode"></a>python2中的ascii code can’t encode</h3><p>准备知识：</p>
+<p>　　1 字符集，字符集实际上就是字符与数字之间的相互映射， 比如unicode字符集  ASCII字符集  GB2312字符集等等，</p>
+<p>　　2 字符编码，仅仅有字符集是不够的，因为实际工作中我们需要将某些字保存在计算机上，计算机上保存的数据只能是0以及1的排列，还是拿字符集unicode来说，如果我们要将字符保存在计算机上那么就必须有某种规则将unicode字符转换为0以及1，同时这种规则还能让计算机区分出相邻字符的分隔位置，utf32就是一种规则，简单粗暴的用4个字节表示一个字符，以为unicode中最大的数远远小于2的32次方，所以这个规则保证了转码的可靠性，但是对于那些只使用英文的国家来说一个字符就要4字节有点浪费空间啊有木有！于是出现了utf8，可变长的且适用于unicode的一种编码方式，这种方式有效的降低了空间浪费。</p>
+<p>用Python 2.x会经常碰到一个错误:</p>
+<p>UnicodeEncodeError: ‘ascii’ codec can’t encode character … : ordinal not in range(128)</p>
+<p>搞清这个问题之前要先理解三个知识点:</p>
+<p>UTF-8 vs Unicode<br>Encoding vs Decoding<br>Python 2.7里的 str 和 unicode</p>
+<ol>
+<li>UTF-8 vs Unicode<br>这一点已经在[之前的博文]里解释过了(<a href="http://cheng.logdown.com/posts/2015/01/14/utf-8-vs-unicode:)，这里我来总结一下" target="_blank" rel="noopener">http://cheng.logdown.com/posts/2015/01/14/utf-8-vs-unicode:)，这里我来总结一下</a></li>
+</ol>
+<p>Unicode 只是一个文字与数字之间的映射。比如，’汉’ 这个字在Unicode里的代码是 ‘6C49’，想对应的数字就是 27721。地球上每种语言里的每一个文字都有这样一个相对应的数字标识。这个文字与数字的映射表就是 Unicode。<br>当我们把这个映射后的数字存储在计算机上时，需要把它转换成 0 和 1. 我们可以简单的把 27721 转换成二进制代码 ’01101100 01001001‘ 来存储。但问题是计算机怎么能够知道这个两个字节是代表一个文字而不是两个文字? 这个时候就需要再有一种编码形式来告诉计算机将这个字节视为一个文字。这个编码就是UTF-8 (当然，UTF-8只是众多编码中的一种)<br>可以用这个顺序来理解：</p>
+<p>屏幕上看到的文字     Unicode代码     根据UTF-8规范存在计算机内存或者硬盘里的模样<br>       汉      -&gt;     6C49     -&gt;       11100110 10110001 10001001</p>
+<ol start="2">
+<li>Encoding vs Decoding<br>在Python2中把一个Unicode类转化为 0 和 1 的过程叫做Encoding。 把 0 和 1 反转为Unicode类的过程叫做Decoding。Python3已经没有unicode和str的区别了，取而代之的是byte和str</li>
+</ol>
+<p>在Python 2.7版本里，ASCII是默认的Encoding和Decoding的方法。</p>
+<ol start="3">
+<li>Python 2.7里的 str 和 unicode<br>当你把一个字符(不管该字符是英文字母还是ASCII里不能包含的字符)赋值给一个变量时:</li>
+</ol>
+<p>han = ‘汉’<br>这个变量的类型都会是str:</p>
+<p>In [113]:han = ‘汉’<br>         type(han)<br>Out[113]:str<br>但这里有很重要的一点需要理解：</p>
+<p>In [124]:han = ‘汉’<br>         bin_han = ‘\xe6\xb1\x89’<br>         han == bin_han # 虽然在界面里我们看到的是’汉’这个字，但其实它是一堆字符，并不是我们看到的文字</p>
+<p>Out[124]:True<br>str这个类的本质其实就是原始字符数据（raw byte data）。它并不是我们所看到的’汉’！</p>
+<p>那么Unicode类也是这样吗？</p>
+<p>In [114]:uni_han= u’汉’<br>         type(uni_han)<br>Out[114]:unicode</p>
+<p>In [131]:uni_han= u’汉’<br>         u_han = u’\u6c49’<br>         uni_han == u_han # 在Unicode中存储的是u’\u6c49’而不是你所看到的u’汉’</p>
+<p>Out[131]:True<br>理解了以上三个知识点，我们就可以很容易的解释 ‘ascii’ codec can’t encode character 这个错误的缘由了。</p>
+<p>用示例来解释 ‘ascii’ codec can’t encode character<br>In [117]:han = ‘汉’<br>         print type(han)<br>         print len(han)<br>         str(han) </p>
+<p>Out[117]:&lt;type ‘str’&gt;<br>         3              &lt;- ‘汉’的长度是3，明明是一个字，为什么长度是3?<br>         ‘\xe6\xb1\x89’ &lt;- 答案在这里<br>当’汉’这个字被存储在内存中时，它会被转为三个字符’\xe6\xb1\x89’。所以len()给出的长度是3，而不是1. 那么为了让’汉’变成一个真正的字，我们就需要对它进行Decoding。（参看2. 把 0 和 1 转换为Unicode的过程叫Decoding）</p>
+<h2 id="In-125-str-decode-han"><a href="#In-125-str-decode-han" class="headerlink" title="In [125]:str.decode(han)"></a>In [125]:str.decode(han)</h2><p>UnicodeDecodeError                        Traceback (most recent call last)<br><ipython-input-125-3ff96a3a19da> in <module>()<br>—-&gt; 1 str.encode(han)</module></ipython-input-125-3ff96a3a19da></p>
+<p>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe6 in position 0: ordinal not in range(128)<br>这里Python抛出了异常。因为默认的ASCII编码无法Decode这个文字。因为这个文字的数值已经超过了0 - 127这个范围。所以我们需要使用UTF-8编码来Decode：</p>
+<p>In [127]:str.decode(han, ‘utf8’)<br>Out[127]:u’\u6c49’<br>这里han这个变量被成功Decode为 u’\u6c49</p>
+<p>In [142]:uni_han = u’\u6c49’<br>         len(uni_han)<br>Out[142]:1              &lt;- 长度变为了正确的1<br>再来个示例作为结尾<br>猜猜这段代码的输出是什么：</p>
+<p>uni_han = u’\u6c49’<br>print ‘&#39;{0}&#39;的长度是{1}’.format(uni_han, len(uni_han))<br>结果是:</p>
+<hr>
+<p>UnicodeEncodeError                        Traceback (most recent call last)<br><ipython-input-143-9bec6fa25583> in <module>()<br>      1 uni_han = u’\u6c49’<br>—-&gt; 2 print ‘&#39;{0}&#39;的长度是{1}’.format(uni_han, len(uni_han))</module></ipython-input-143-9bec6fa25583></p>
+<p>UnicodeEncodeError: ‘ascii’ codec can’t encode character u’\u6c49’ in position 0: ordinal not in range(128)<br>好伤心啊，本以为再也不会碰到这个问题了。那么问题出在哪呢？这部分代码’&#39;{0}&#39;的长度是{1}’是str，也就是原始的字符数据。我们想把一个Unicode （uni_han）混到它们里一起打印。这时，Python信心满满的用了默认的ASCII编码来Encode uni_han。结果可想而知，又是再次超出0 - 127的范围，无法Encode。这时，我们就需要告诉Python放弃ASCII吧，请使用UTF-8：</p>
+<p>In [145]:uni_han = u’\u6c49’<br>         print ‘&#39;{0}&#39;的长度是{1}’.format(unicode.encode(uni_han,’utf8’), len(uni_han))<br>         ‘汉’的长度是1<br>另一种方法是让前半部分的str变为Unicode：</p>
+<p>In [150]:uni_han = u’\u6c49’<br>         print u’&#39;{0}&#39;的长度是{1}’.format(uni_han, len(uni_han))<br>         ‘汉’的长度是1<br>总结<br>在Python 2.x里str就是原始的010101， Unicode是Unicode，这两个东西不能混着用。当一个文字被写到硬盘上时，或者打印到屏幕上时，需要使用正确的Encoding编码。Python默认使用ASCII，但其实应该用UTF-8。这个问题以后还会经常碰到。关键是要理解ASCII，UTF8，Unicode, Encoding和Decoding的定义和关系。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/08/深入flask中的request/" rel="next" title="深入flask中的request">
+                <i class="fa fa-chevron-left"></i> 深入flask中的request
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/21/(转)flask的context机制/" rel="prev" title="(转)flask的context机制">
+                (转)flask的context机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python2中的ascii-code-can’t-encode"><span class="nav-number">1.</span> <span class="nav-text">python2中的ascii code can’t encode</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#In-125-str-decode-han"><span class="nav-number"></span> <span class="nav-text">In [125]:str.decode(han)</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

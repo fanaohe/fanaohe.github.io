@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="jquery,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="深入jQuery中的data()引入　　data函数在jQuery中看起来很不起眼, 就像沙滩上一颗平凡的沙子, 但仔细一瞅, 却惊讶的发现data是jQuery中无比重要的一环, 甚至jQuery中各种事件都基于此。 data有什么作用？　　在我们平时js编码过程中，我们经常会向DOM元素中添加各种自定义属性，这样有一个弊端。 　　1  假设我们在DOM元素中添加了一个属性，这个属性指向了某个j">
+<meta name="keywords" content="jquery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入jQuery中的data()">
+<meta property="og:url" content="http://yoursite.com/2019/02/07/深入jQuery中的data()/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="深入jQuery中的data()引入　　data函数在jQuery中看起来很不起眼, 就像沙滩上一颗平凡的沙子, 但仔细一瞅, 却惊讶的发现data是jQuery中无比重要的一环, 甚至jQuery中各种事件都基于此。 data有什么作用？　　在我们平时js编码过程中，我们经常会向DOM元素中添加各种自定义属性，这样有一个弊端。 　　1  假设我们在DOM元素中添加了一个属性，这个属性指向了某个j">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-01T00:27:02.658Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入jQuery中的data()">
+<meta name="twitter:description" content="深入jQuery中的data()引入　　data函数在jQuery中看起来很不起眼, 就像沙滩上一颗平凡的沙子, 但仔细一瞅, 却惊讶的发现data是jQuery中无比重要的一环, 甚至jQuery中各种事件都基于此。 data有什么作用？　　在我们平时js编码过程中，我们经常会向DOM元素中添加各种自定义属性，这样有一个弊端。 　　1  假设我们在DOM元素中添加了一个属性，这个属性指向了某个j">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/07/深入jQuery中的data()/">
+
+
+
+
+
+  <title>深入jQuery中的data() | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/07/深入jQuery中的data()/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入jQuery中的data()</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-07T16:12:22+08:00">
+                2019-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/" itemprop="url" rel="index">
+                    <span itemprop="name">jquery</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="深入jQuery中的data"><a href="#深入jQuery中的data" class="headerlink" title="深入jQuery中的data()"></a>深入jQuery中的data()</h3><p>引入<br>　　data函数在jQuery中看起来很不起眼, 就像沙滩上一颗平凡的沙子, 但仔细一瞅, 却惊讶的发现data是jQuery中无比重要的一环, 甚至jQuery中各种事件都基于此。</p>
+<p>data有什么作用？<br>　　在我们平时js编码过程中，我们经常会向DOM元素中添加各种自定义属性，这样有一个弊端。</p>
+<p>　　1  假设我们在DOM元素中添加了一个属性，这个属性指向了某个js对象。 dom1.ele = jsObj</p>
+<p>　　2  当这个js对象发挥完作用后，我们已经用不到他了。这时候按理说应该把这个js变量清空，释放内存。大家都知道，如果一个js对象不存在任何外在引用的话，解释器会自动将其在内存中删除，这也是javascript相对于c++等手动管理内存的程序的优点。</p>
+<p>　　3  但是这时候问题来了，因为DOM元素引用了这个js对象，尽管这个js对象已经没有存在的意义了，但是解释器是不会把他删除的。如果想要把其删除，我们可能需要将DOM元素的这个属性设置为null。</p>
+<p>　　4  我们编写了这么多的代码，哪里能把 每个js对象是不是被DOM元素引用了都记住啊？</p>
+<p>　　5  而且，假如DOM元素与js对象之间相互循环引用，根本就无法删除！ 这就是内存泄漏</p>
+<p>　　6  所以，为了避免这种情况的发生，我们要尽量避免 引用数据(这里的引用数据可以说是javascript对象) 直接依附在DOM对象上。</p>
+<p>　　7  data就是用来搞定以上问题的方法。</p>
+<p>data是如何搞定以上问题的？<br>首先来说一说jQuery中Data实现的大体思路：<br>　　1  首先我们创建一个数据缓存池，这个缓存池专门用来存储  向 DOM对象或者jQuery对象附加的额外数据。</p>
+<p>　　2  当我们要向DOM对象或者jQuery对象附加额外数据的时候，我们附加的数据其实是保存于这个缓存池中</p>
+<p>　　3  DOM对象或者jQuery对象生成一个额外属性，这个属性保存了 附加数据在缓存池中的‘门牌号’(位置或者索引)</p>
+<p>　　4  当我们访问DOM对象或者jQuery对象的附加数据时，实际上是先取得其附加数据的门牌号，然后找到缓存池中对应门牌号的数据，进行操作。</p>
+<p>大体思路讲完，那么来分析一下具体思路：<br>在jQuery中，有一个Data构造函数，每当运行这个构造函数时，就会生成一个实例。jQuery默认会自动生成两个Data实例：</p>
+<p>　　var dataPriv = new Data()   jQuery私有的，我们尽量不要对这个实例进行操作。</p>
+<p>　　var dataUser = new Data()   这个就是服务于用户了，我们使用data()方法都是对这个实例进行操作。</p>
+<p>所有的Data实例都有以下属性：</p>
+<p>　　expando：  值为字符串类型，每个Data实例的expando属性的值都不相同，用来区分不同的Data实例，类似于id的作用，expando的值就是上文中的额外属性。</p>
+<p>　　uid:   这就是上文中的门牌号，初始为1，随着不同对象的附加数据的加入，自增长。</p>
+<p>　　cache ： 一个对象 {} ，这就是缓存池了。</p>
+<p>来个实例：</p>
+<p>$(document.body).data(‘aaa’, ‘value-aaa’)<br>console.dir(document.body)</p>
+<p>body对象有一个名为jquer210023……的额外属性，</p>
+<p>　　这个属性的名称就是dataUser的expando的值</p>
+<p>　　这个属性的值就是门牌号。</p>
+<p>总结： data实际上就是对js对象或者DOM对象的额外属性做了一个集中的管理。对于那些不会产生内存泄漏的额外数据，我们也可以直接向js对象或者DOM对象附加。</p>
+<p>好，理清楚上面的关系后，我们再来看一下源码：</p>
+<p> Data构造函数源码解析</p>
+<p>可能会有同学问道：如果我想对dataPriv进行操作该如何？</p>
+<p>请看源码：</p>
+<p>jQuery.extend({<br>    hasData: function( elem ) {<br>        return dataUser.hasData( elem ) || dataPriv.hasData( elem );<br>    },</p>
+<pre><code>data: function( elem, name, data ) {
+    return dataUser.access( elem, name, data );
+},
+
+removeData: function( elem, name ) {
+    dataUser.remove( elem, name );
+},
+
+// TODO: Now that all calls to _data and _removeData have been replaced
+// with direct calls to dataPriv methods, these can be deprecated.
+_data: function( elem, name, data ) {
+    return dataPriv.access( elem, name, data );
+},
+
+_removeData: function( elem, name ) {
+    dataPriv.remove( elem, name );
+}</code></pre><p>});</p>
+<p>通过源码，我们可以看出：</p>
+<p>　　jQuery.data() jQuery.remove()都是对dataUser进行操作，而jQuery._data() jQuery._remove()都是对dataPriv进行操作。</p>
+<p>理解jQuery.data(ele,name,data) 与 jQuery().data(key,value)的不同。<br>　　通过上面的源码，我们可以看到jQuery.data(ele,name,data)是对ele元素附加数据。</p>
+<p>　　而jQuery().data(key,value)则会为jQuery对象中的所有DOM对象分别附加数据</p>
+<p>来看源码(删减了部分)：</p>
+<pre><code>jQuery.fn.extend({
+data: function( key, value ) {
+    var i, name, data,
+        elem = this[ 0 ],
+        attrs = elem &amp;&amp; elem.attributes;return access( this, function( value ) {
+        var data,
+            camelKey = jQuery.camelCase( key );</code></pre><p>// 从这里可以看出，为jQuery对象中的每个DOM元素分别附加数据<br>            this.each(function() {<br>                // First, attempt to store a copy or reference of any<br>                // data that might’ve been store with a camelCased key.<br>                var data = dataUser.get( this, camelKey );</p>
+<pre><code>            // For HTML5 data-* attribute interop, we have to
+            // store property names with dashes in a camelCase form.
+            // This might not apply to all properties...*
+            dataUser.set( this, camelKey, value );
+
+            // *... In the case of properties that might _actually_
+            // have dashes, we need to also store a copy of that
+            // unchanged property.
+            if ( key.indexOf(&quot;-&quot;) !== -1 &amp;&amp; data !== undefined ) {
+                dataUser.set( this, key, value );
+            }
+        });
+    }, null, value, arguments.length &gt; 1, null, true );
+},
+
+removeData: function( key ) {
+    return this.each(function() {
+        dataUser.remove( this, key );
+    });
+}</code></pre><p>});</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jquery/" rel="tag"># jquery</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/17/(转)Node.js module.exports与exports/" rel="next" title="(转)Node.js module.exports与exports">
+                <i class="fa fa-chevron-left"></i> (转)Node.js module.exports与exports
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/08/(转)深入理解javascript连续赋值表达式/" rel="prev" title="(转)深入理解javascript连续赋值表达式">
+                (转)深入理解javascript连续赋值表达式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#深入jQuery中的data"><span class="nav-number">1.</span> <span class="nav-text">深入jQuery中的data()</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

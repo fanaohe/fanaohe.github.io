@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="linux,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="centos7配置iscsiiSCSI stands for  Internet Small Computer Systems Interface, an IP-based storage, works on top of internet protocol by carrying SCSI commands over IP network. iSCSI transports block-leve">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos7配置iscsi">
+<meta property="og:url" content="http://yoursite.com/2019/03/19/centos7配置iscsi/index.html">
+<meta property="og:site_name" content="范澳河技术博客">
+<meta property="og:description" content="centos7配置iscsiiSCSI stands for  Internet Small Computer Systems Interface, an IP-based storage, works on top of internet protocol by carrying SCSI commands over IP network. iSCSI transports block-leve">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-30T13:52:49.047Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos7配置iscsi">
+<meta name="twitter:description" content="centos7配置iscsiiSCSI stands for  Internet Small Computer Systems Interface, an IP-based storage, works on top of internet protocol by carrying SCSI commands over IP network. iSCSI transports block-leve">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/19/centos7配置iscsi/">
+
+
+
+
+
+  <title>centos7配置iscsi | 范澳河技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范澳河技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/centos7配置iscsi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="范澳河">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/微信图片_20190628155231.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范澳河技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">centos7配置iscsi</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-19T16:12:22+08:00">
+                2019-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="centos7配置iscsi"><a href="#centos7配置iscsi" class="headerlink" title="centos7配置iscsi"></a>centos7配置iscsi</h3><p>iSCSI stands for  Internet Small Computer Systems Interface, an IP-based storage, works on top of internet protocol by carrying SCSI commands over IP network. iSCSI transports block-level data between an iSCSI initiator on a client machine and an iSCSI target on a storage device (server).</p>
+<p>Environment:<br>Server: server.itzgeek.local<br>IP Address: 192.168.12.20<br>Client: node1.itzgeek.local<br>IP Address: 192.168.12.11<br>Storage Configuration:<br>Here, we will create 5GB of LVM disk on the target server to use as a shared storage for clients. Let’s list the available disks attached to the target server using below command. If you want to use the whole disk for LVM, skip the below step.</p>
+<p>[root@server ~]# fdisk -l | grep -i sd<br> Disk /dev/sda: 107.4 GB, 107374182400 bytes, 209715200 sectors<br> /dev/sda1   *        2048     1026047      512000   83  Linux<br> /dev/sda2         1026048   209715199   104344576   8e  Linux LVM<br> Disk /dev/sdb: 10.7 GB, 10737418240 bytes, 20971520 sectors<br>From the above output, you can see that my system has a 10GB of disk (/dev/sdb). We will create a 5GB partition on the above disk and will use it for LVM.</p>
+<p>[root@server ~]# fdisk /dev/sdb<br> Welcome to fdisk (util-linux 2.23.2).<br> Changes will remain in memory only, until you decide to write them.<br> Be careful before using the write command.<br> Device does not contain a recognized partition table<br> Building a new DOS disklabel with disk identifier 0x173dfa4d.<br> Command (m for help): n  –&gt; New partition<br> Partition type:<br>   p   primary (0 primary, 0 extended, 4 free)<br>   e   extended<br> Select (default p): p –&gt; Pimary partition<br> Partition number (1-4, default 1): 1 - -&gt; Partition number<br> First sector (2048-20971519, default 2048): –&gt; Just enter<br> Using default value 2048<br> Last sector, +sectors or +size{K,M,G} (2048-20971519, default 20971519): +5G  –&gt; Enter the size<br> Partition 1 of type Linux and of size 5 GiB is set<br> Command (m for help): t  –&gt; Change label<br> Selected partition 1<br> Hex code (type L to list all codes): 8e –&gt; Change it as LVM label<br> Changed type of partition ‘Linux’ to ‘Linux LVM’<br> Command (m for help): w –&gt; Save<br> The partition table has been altered!
+ Calling ioctl() to re-read partition table.<br> Syncing disks.<br>Create a LVM with /dev/sdb1 partition (replace /dev/sdb1 with your disk name)</p>
+<p>[root@server ~]# pvcreate /dev/sdb1<br>[root@server ~]# vgcreate vg_iscsi /dev/sdb1<br>[root@server ~]# lvcreate -l 100%FREE -n lv_iscsi vg_iscsi<br>Creating iSCSI target:<br>Now you have an option of creating target either with authentication or without authentication. In this article, you can find steps for both scenarios. It is up to you to decide which one is suitable for your environment.</p>
+<p>Configuring iSCSI Targets with CHAP authentication:<br>Install the targetcli package on the server.</p>
+<p>[root@server ~]# yum install targetcli -y<br>Once you installed the package, enter below command to get a iSCSI CLI for an interactive prompt.</p>
+<p>[root@server ~]# targetcli<br>Warning: Could not load preferences file /root/.targetcli/prefs.bin.<br>targetcli shell version 2.1.fb41<br>Copyright 2011-2013 by Datera, Inc and others.<br>For help on commands, type ‘help’.</p>
+<blockquote>
+</blockquote>
+<p>Now use an existing logical volume (/dev/vg_iscsi/lv_iscsi) as a block-type backing store for storage object “scsi_disk1_server“.</p>
+<p>/&gt; cd backstores/block<br>/backstores/block&gt; create scsi_disk1_server /dev/vg_iscsi/lv_iscsi<br>Created block storage object scsi_disk1_server using /dev/vg_iscsi/lv_iscsi.<br>Create a target.</p>
+<p>/backstores/block&gt; cd /iscsi<br>/iscsi&gt; create iqn.2016-02.local.itzgeek.server:disk1<br>Created target iqn.2016-02.local.itzgeek.server:disk1.<br>Created TPG 1.<br>Global pref auto_add_default_portal=true<br>Created default portal listening on all IPs (0.0.0.0), port 3260.<br>/iscsi&gt;<br>Create ACL for client machine (It’s the IQN which clients use to connect).</p>
+<p>/iscsi&gt; cd /iscsi/iqn.2016-02.local.itzgeek.server:disk1/tpg1/acls<br>/iscsi/iqn.20…sk1/tpg1/acls&gt; create iqn.2016-02.local.itzgeek.server:node1node2<br>Created Node ACL for iqn.2016-02.local.itzgeek.server:node1node2<br>Set CHAP authentication.</p>
+<p>/iscsi/iqn.20…sk1/tpg1/acls&gt; cd iqn.2016-02.local.itzgeek.server:node1node2<br>/iscsi/iqn.20…er:node1node2&gt; set auth userid=user<br>Parameter userid is now ‘user’.<br>/iscsi/iqn.20…er:node1node2&gt;  set auth password=password<br>Parameter password is now ‘password’.<br>Create a LUN under the target, The LUN should use the previously mentioned backing storage object named “scsi_disk1_server”</p>
+<p>/iscsi/iqn.20…er:node1node2&gt; cd /iscsi/iqn.2016-02.local.itzgeek.server:disk1/tpg1/luns<br>/iscsi/iqn.20…sk1/tpg1/luns&gt; create /backstores/block/scsi_disk1_server<br>Created LUN 0.<br>Created LUN 0-&gt;0 mapping in node ACL iqn.2016-02.local.itzgeek.server:node1node2<br>Verify the target server configuration.</p>
+<p>/iscsi/iqn.20…/tpg1/portals&gt; cd /<br>/&gt; ls<br>o- / …………………………………………………………………………………………………………. […]<br>  o- backstores ……………………………………………………………………………………………….. […]<br>  | o- block …………………………………………………………………………………….. [Storage Objects: 1]<br>  | | o- scsi_disk1_server ………………………………………….. [/dev/vg_iscsi/lv_iscsi (5.0GiB) write-thru activated]<br>  | o- fileio ……………………………………………………………………………………. [Storage Objects: 0]<br>  | o- pscsi …………………………………………………………………………………….. [Storage Objects: 0]<br>  | o- ramdisk …………………………………………………………………………………… [Storage Objects: 0]<br>  o- iscsi ……………………………………………………………………………………………… [Targets: 1]<br>  | o- iqn.2016-02.local.itzgeek.server:disk1 …………………………………………………………………. [TPGs: 1]<br>  |   o- tpg1 ………………………………………………………………………………….. [no-gen-acls, no-auth]<br>  |     o- acls ……………………………………………………………………………………………. [ACLs: 1]<br>  |     | o- iqn.2016-02.local.itzgeek.server:node1node2 …………………………………………………. [Mapped LUNs: 1]<br>  |     |   o- mapped_lun0 …………………………………………………………… [lun0 block/scsi_disk1_server (rw)]<br>  |     o- luns ……………………………………………………………………………………………. [LUNs: 1]<br>  |     | o- lun0 ……………………………………………………… [block/scsi_disk1_server (/dev/vg_iscsi/lv_iscsi)]<br>  |     o- portals ………………………………………………………………………………………. [Portals: 1]<br>  |       o- 0.0.0.0:3260 ……………………………………………………………………………………….. [OK]<br>  o- loopback …………………………………………………………………………………………… [Targets: 0]<br>Save and exit from target CLI.</p>
+<p>/&gt; saveconfig<br>Last 10 configs saved in /etc/target/backup.<br>Configuration saved to /etc/target/saveconfig.json<br>/&gt; exit<br>Global pref auto_save_on_exit=true<br>Last 10 configs saved in /etc/target/backup.<br>Configuration saved to /etc/target/saveconfig.json<br>Enable and restart the target service.</p>
+<p>[root@server ~]# systemctl enable target.service<br>[root@server ~]# systemctl restart target.service<br>Configure the firewall to allow iSCSI traffic.</p>
+<p>[root@server ~]# firewall-cmd –permanent –add-port=3260/tcp<br>[root@server ~]# firewall-cmd –reload<br>Configure Initiator with CHAP authentication:<br>Now it’s the time to configure a client machine to use this target as a storage, install below package on the client machine (node1).</p>
+<p>[root@node1 ~]# yum install iscsi-initiator-utils -y<br>Edit below file and add iscsi initiator name.</p>
+<p>[root@node1 ~]# vi /etc/iscsi/initiatorname.iscsi<br>InitiatorName=iqn.2016-02.local.itzgeek.server:node1node2<br>Discover the target using below command.</p>
+<p>[root@node1 ~]# iscsiadm -m discovery -t st -p 192.168.12.20<br> 192.168.12.20:3260,1 iqn.2016-02.local.itzgeek.server:disk1<br>Enable CHAP authentication in iscsid.conf file, uncomment and modify the green colored lines as per your environment.</p>
+<p>[root@node1 ~]# vi /etc/iscsi/iscsid.conf</p>
+<h1 id="To-enable-CHAP-authentication-set-node-session-auth-authmethod"><a href="#To-enable-CHAP-authentication-set-node-session-auth-authmethod" class="headerlink" title="To enable CHAP authentication set node.session.auth.authmethod"></a>To enable CHAP authentication set node.session.auth.authmethod</h1><h1 id="to-CHAP-The-default-is-None"><a href="#to-CHAP-The-default-is-None" class="headerlink" title="to CHAP. The default is None."></a>to CHAP. The default is None.</h1><p>node.session.auth.authmethod = CHAP</p>
+<h1 id="To-set-a-CHAP-username-and-password-for-initiator"><a href="#To-set-a-CHAP-username-and-password-for-initiator" class="headerlink" title="To set a CHAP username and password for initiator"></a>To set a CHAP username and password for initiator</h1><h1 id="authentication-by-the-target-s-uncomment-the-following-lines"><a href="#authentication-by-the-target-s-uncomment-the-following-lines" class="headerlink" title="authentication by the target(s), uncomment the following lines:"></a>authentication by the target(s), uncomment the following lines:</h1><p>node.session.auth.username = user<br>node.session.auth.password = password<br>Restart and enable the initiator service.</p>
+<p>[root@node1 ~]# systemctl restart iscsid.service<br>[root@node1 ~]# systemctl enable iscsid.service<br>Login to the discovered target.</p>
+<p>[root@node1 ~]# iscsiadm -m node -T iqn.2016-02.local.itzgeek.server:disk1 -p 192.168.12.20 -l<br>Logging in to [iface: default, target: iqn.2016-02.local.itzgeek.server:disk1, portal: 192.168.12.20,3260] (multiple)<br>Login to [iface: default, target: iqn.2016-02.local.itzgeek.server:disk1, portal: 192.168.12.20,3260] successful.<br>Skip to creating File System.</p>
+<p>Configuring iSCSI Targets without CHAP Authentication:<br>Install the targetcli package on the server.</p>
+<p>[root@server ~]# yum install targetcli -y<br>Once you installed the package, enter below command to get a iSCSI CLI for an interactive prompt.</p>
+<p>[root@server ~]# targetcli<br>Warning: Could not load preferences file /root/.targetcli/prefs.bin.<br>targetcli shell version 2.1.fb41<br>Copyright 2011-2013 by Datera, Inc and others.<br>For help on commands, type ‘help’.</p>
+<blockquote>
+</blockquote>
+<p>Now use an existing logical volume (/dev/vg_iscsi/lv_iscsi) as a block-type backing store for storage object “scsi_disk1_server“.</p>
+<p>/&gt; cd backstores/block<br>/backstores/block&gt; create scsi_disk1_server /dev/vg_iscsi/lv_iscsi<br>Created block storage object scsi_disk1_server using /dev/vg_iscsi/lv_iscsi.<br>Create a target.</p>
+<p>/backstores/block&gt; cd /iscsi<br>/iscsi&gt; create iqn.2016-02.local.itzgeek.server:disk1<br>Created target iqn.2016-02.local.itzgeek.server:disk1.<br>Created TPG 1.<br>Global pref auto_add_default_portal=true<br>Created default portal listening on all IPs (0.0.0.0), port 3260.<br>/iscsi&gt;<br>Create ACL for client machine (It’s the IQN which clients use to connect).</p>
+<p>/iscsi&gt; cd /iscsi/iqn.2016-02.local.itzgeek.server:disk1/tpg1/acls<br>/iscsi/iqn.20…sk1/tpg1/acls&gt; create iqn.2016-02.local.itzgeek.server:node1node2<br>Created Node ACL for iqn.2016-02.local.itzgeek.server:node1node2<br>By default authentication is enabled, disable it.</p>
+<p>/iscsi/iqn.20…sk1/tpg1/acls&gt; cd /iscsi/iqn.2016-02.local.itzgeek.server:disk1/tpg1/<br>/iscsi/iqn.20…er:disk1/tpg1&gt; set attribute authentication=0<br>Parameter authentication is now ‘0’.<br>/iscsi/iqn.20…er:disk1/tpg1&gt; set attribute generate_node_acls=1<br>Parameter generate_node_acls is now ‘1’.<br>Create a LUN under the target, The LUN should use the previously mentioned backing storage object named “scsi_disk1_server”</p>
+<p>/iscsi/iqn.20…er:disk1/tpg1&gt; cd /iscsi/iqn.2016-02.local.itzgeek.server:disk1/tpg1/luns<br>/iscsi/iqn.20…sk1/tpg1/luns&gt; create /backstores/block/scsi_disk1_server<br>Created LUN 0.<br>Created LUN 0-&gt;0 mapping in node ACL iqn.2016-02.local.itzgeek.server:node1node2<br>Verify the target server configuration.</p>
+<p>/iscsi/iqn.20…/tpg1/portals&gt; cd /<br>/&gt; ls<br>o- / …………………………………………………………………………………………………………. […]<br>  o- backstores ……………………………………………………………………………………………….. […]<br>  | o- block …………………………………………………………………………………….. [Storage Objects: 1]<br>  | | o- scsi_disk1_server ………………………………………….. [/dev/vg_iscsi/lv_iscsi (5.0GiB) write-thru activated]<br>  | o- fileio ……………………………………………………………………………………. [Storage Objects: 0]<br>  | o- pscsi …………………………………………………………………………………….. [Storage Objects: 0]<br>  | o- ramdisk …………………………………………………………………………………… [Storage Objects: 0]<br>  o- iscsi ……………………………………………………………………………………………… [Targets: 1]<br>  | o- iqn.2016-02.local.itzgeek.server:disk1 …………………………………………………………………. [TPGs: 1]<br>  |   o- tpg1 …………………………………………………………………………………….. [gen-acls, no-auth]<br>  |     o- acls ……………………………………………………………………………………………. [ACLs: 1]<br>  |     | o- iqn.2016-02.local.itzgeek.server:node1node2 …………………………………………………. [Mapped LUNs: 1]<br>  |     |   o- mapped_lun0 …………………………………………………………… [lun0 block/scsi_disk1_server (rw)]<br>  |     o- luns ……………………………………………………………………………………………. [LUNs: 1]<br>  |     | o- lun0 ……………………………………………………… [block/scsi_disk1_server (/dev/vg_iscsi/lv_iscsi)]<br>  |     o- portals ………………………………………………………………………………………. [Portals: 1]<br>  |       o- 0.0.0.0:3260 ……………………………………………………………………………………….. [OK]<br>  o- loopback …………………………………………………………………………………………… [Targets: 0]Save and exit from target CLI.<br>/&gt; saveconfig<br>Last 10 configs saved in /etc/target/backup.<br>Configuration saved to /etc/target/saveconfig.json<br>/&gt; exit<br>Global pref auto_save_on_exit=true<br>Last 10 configs saved in /etc/target/backup.<br>Configuration saved to /etc/target/saveconfig.json<br>Enable and restart the target service.</p>
+<p>[root@server ~]# systemctl enable target.service<br>[root@server ~]# systemctl restart target.service<br>Configure the firewall to allow iSCSI traffic.</p>
+<p>[root@server ~]# firewall-cmd –permanent –add-port=3260/tcp<br>[root@server ~]# firewall-cmd –reload<br>Configure Initiator without CHAP authentication:<br>Now it’s the time to configure a client machine to use this target as a storage, install below package on the client machine (node1).</p>
+<p>[root@node1 ~]# yum install iscsi-initiator-utils -y<br>Edit below file and add iscsi initiator name.</p>
+<p>[root@node1 ~]# vi /etc/iscsi/initiatorname.iscsi<br>InitiatorName=iqn.2016-02.local.itzgeek.server:node1node2<br>Discover the target using below command.</p>
+<p>[root@node1 ~]# iscsiadm -m discovery -t st -p 192.168.12.20<br> 192.168.12.20:3260,1 iqn.2016-02.local.itzgeek.server:disk1<br>Restart and enable the initiator service.</p>
+<p>[root@node1 ~]# systemctl restart iscsid.service<br>[root@node1 ~]# systemctl enable iscsid.service<br>Login to the discovered target.</p>
+<p>[root@node1 ~]# iscsiadm -m node -T iqn.2016-02.local.itzgeek.server:disk1 -p 192.168.12.20 -l<br>Logging in to [iface: default, target: iqn.2016-02.local.itzgeek.server:disk1, portal: 192.168.12.20,3260] (multiple)<br>Login to [iface: default, target: iqn.2016-02.local.itzgeek.server:disk1, portal: 192.168.12.20,3260] successful.<br>Creating File System:<br>After login (connecting) to discovered target, have a look at messages file. You would find similar output like below, from where you can find a name of the disk.</p>
+<p>[root@node1 ~]# cat /var/log/messages<br>Feb 23 14:54:47 node2 kernel: sd 34:0:0:0: [sdb] 10477568 512-byte logical blocks: (5.36 GB/4.99 GiB)<br>Feb 23 14:54:47 node2 kernel: sd 34:0:0:0: [sdb] Write Protect is off<br>Feb 23 14:54:47 node2 kernel: sd 34:0:0:0: [sdb] Write cache: disabled, read cache: enabled, doesn’t support DPO or FUA<br>Feb 23 14:54:48 node2 kernel: sdb: unknown partition table<br>Feb 23 14:54:48 node2 kernel: sd 34:0:0:0: [sdb] Attached SCSI disk<br>Feb 23 14:54:48 node2 iscsid: Could not set session2 priority. READ/WRITE throughout and latency could be affected.<br>Feb 23 14:54:48 node2 iscsid: Connection2:0 to [target: iqn.2016-02.local.itzgeek.server:disk1, portal: 192.168.12.20,3260] through [iface: default] is operational now</p>
+<p>List down the attached disks.</p>
+<p>[root@node1 ~]# cat /proc/partitions<br>major minor  #blocks  name</p>
+<p>   8        0  104857600 sda<br>   8        1     512000 sda1<br>   8        2  104344576 sda2<br>  11        0    1048575 sr0<br> 253        0    2113536 dm-0<br> 253        1   52428800 dm-1<br> 253        2   49799168 dm-2<br>   8       16    5238784 sdb<br>Format the new disk (for sake of article, I have formated whole disk instead of creating partition)</p>
+<p>root@node1 ~]# mkfs.xfs /dev/sdb<br>meta-data=/dev/sdb               isize=256    agcount=8, agsize=163712 blks<br>         =                       sectsz=512   attr=2, projid32bit=1<br>         =                       crc=0<br>data     =                       bsize=4096   blocks=1309696, imaxpct=25<br>         =                       sunit=0      swidth=0 blks<br>naming   =version 2              bsize=4096   ascii-ci=0 ftype=0<br>log      =internal log           bsize=4096   blocks=2560, version=2<br>         =                       sectsz=512   sunit=0 blks, lazy-count=1<br>realtime =none                   extsz=4096   blocks=0, rtextents=0</p>
+<p>Mount the disk.</p>
+<p>[root@node1 ~]# mount /dev/sdb /mnt<br>verify the disk is mounted using below command.</p>
+<p>[root@node1 ~]# df -hT<br>Filesystem              Type      Size  Used Avail Use% Mounted on<br>/dev/mapper/centos-root xfs        50G  955M   50G   2% /<br>devtmpfs                devtmpfs  908M     0  908M   0% /dev<br>tmpfs                   tmpfs     914M   54M  861M   6% /dev/shm<br>tmpfs                   tmpfs     914M  8.5M  905M   1% /run<br>tmpfs                   tmpfs     914M     0  914M   0% /sys/fs/cgroup<br>/dev/mapper/centos-home xfs        48G   33M   48G   1% /home<br>/dev/sda1               xfs       497M   97M  401M  20% /boot<br>/dev/sdb                xfs       5.0G   33M  5.0G   1% /mnt<br>In case you want to de-attach the added disk, please follow the procedure (unmount and logout).</p>
+<p>[root@node1 ~]# umount /mnt/<br>[root@node1 ~]# iscsiadm -m node -T iqn.2016-02.local.itzgeek.server:disk1 -p 192.168.12.20 -u<br>Logging out of session [sid: 1, target: iqn.2016-02.local.itzgeek.server:disk1, portal: 192.168.12.20,3260]<br>Logout of [sid: 1, target: iqn.2016-02.local.itzgeek.server:disk1, portal: 192.168.12.20,3260] successful.<br>That’s All.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/28/centos7+mysql5.7.11实现主从复制/" rel="next" title="centos7+mysql5.7.11实现主从复制">
+                <i class="fa fa-chevron-left"></i> centos7+mysql5.7.11实现主从复制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/09/golang开发环境/" rel="prev" title="golang开发环境">
+                golang开发环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/微信图片_20190628155231.jpg" alt="范澳河">
+          <p class="site-author-name" itemprop="name">范澳河</p>
+           
+              <p class="site-description motion-element" itemprop="description">Python全栈开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#centos7配置iscsi"><span class="nav-number">1.</span> <span class="nav-text">centos7配置iscsi</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#To-enable-CHAP-authentication-set-node-session-auth-authmethod"><span class="nav-number"></span> <span class="nav-text">To enable CHAP authentication set node.session.auth.authmethod</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#to-CHAP-The-default-is-None"><span class="nav-number"></span> <span class="nav-text">to CHAP. The default is None.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#To-set-a-CHAP-username-and-password-for-initiator"><span class="nav-number"></span> <span class="nav-text">To set a CHAP username and password for initiator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#authentication-by-the-target-s-uncomment-the-following-lines"><span class="nav-number"></span> <span class="nav-text">authentication by the target(s), uncomment the following lines:</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">范澳河</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
